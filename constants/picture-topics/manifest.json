@@ -1,0 +1,1892 @@
+{
+  "flags/af": {
+    "topic": "Guess the Flag",
+    "answer": "Afghanistan",
+    "difficulty": "Easy",
+    "code": "af"
+  },
+  "flags/al": {
+    "topic": "Guess the Flag",
+    "answer": "Albania",
+    "difficulty": "Easy",
+    "code": "al"
+  },
+  "flags/dz": {
+    "topic": "Guess the Flag",
+    "answer": "Algeria",
+    "difficulty": "Easy",
+    "code": "dz"
+  },
+  "flags/ar": {
+    "topic": "Guess the Flag",
+    "answer": "Argentina",
+    "difficulty": "Easy",
+    "code": "ar"
+  },
+  "flags/au": {
+    "topic": "Guess the Flag",
+    "answer": "Australia",
+    "difficulty": "Easy",
+    "code": "au"
+  },
+  "flags/at": {
+    "topic": "Guess the Flag",
+    "answer": "Austria",
+    "difficulty": "Easy",
+    "code": "at"
+  },
+  "flags/bd": {
+    "topic": "Guess the Flag",
+    "answer": "Bangladesh",
+    "difficulty": "Easy",
+    "code": "bd"
+  },
+  "flags/be": {
+    "topic": "Guess the Flag",
+    "answer": "Belgium",
+    "difficulty": "Easy",
+    "code": "be"
+  },
+  "flags/bt": {
+    "topic": "Guess the Flag",
+    "answer": "Bhutan",
+    "difficulty": "Easy",
+    "code": "bt"
+  },
+  "flags/br": {
+    "topic": "Guess the Flag",
+    "answer": "Brazil",
+    "difficulty": "Easy",
+    "code": "br"
+  },
+  "flags/bg": {
+    "topic": "Guess the Flag",
+    "answer": "Bulgaria",
+    "difficulty": "Easy",
+    "code": "bg"
+  },
+  "flags/ca": {
+    "topic": "Guess the Flag",
+    "answer": "Canada",
+    "difficulty": "Easy",
+    "code": "ca"
+  },
+  "flags/cl": {
+    "topic": "Guess the Flag",
+    "answer": "Chile",
+    "difficulty": "Easy",
+    "code": "cl"
+  },
+  "flags/cn": {
+    "topic": "Guess the Flag",
+    "answer": "China",
+    "difficulty": "Easy",
+    "code": "cn"
+  },
+  "flags/co": {
+    "topic": "Guess the Flag",
+    "answer": "Colombia",
+    "difficulty": "Easy",
+    "code": "co"
+  },
+  "flags/cu": {
+    "topic": "Guess the Flag",
+    "answer": "Cuba",
+    "difficulty": "Easy",
+    "code": "cu"
+  },
+  "flags/cy": {
+    "topic": "Guess the Flag",
+    "answer": "Cyprus",
+    "difficulty": "Easy",
+    "code": "cy"
+  },
+  "flags/dk": {
+    "topic": "Guess the Flag",
+    "answer": "Denmark",
+    "difficulty": "Easy",
+    "code": "dk"
+  },
+  "flags/eg": {
+    "topic": "Guess the Flag",
+    "answer": "Egypt",
+    "difficulty": "Easy",
+    "code": "eg"
+  },
+  "flags/fi": {
+    "topic": "Guess the Flag",
+    "answer": "Finland",
+    "difficulty": "Easy",
+    "code": "fi"
+  },
+  "flags/fr": {
+    "topic": "Guess the Flag",
+    "answer": "France",
+    "difficulty": "Easy",
+    "code": "fr"
+  },
+  "flags/de": {
+    "topic": "Guess the Flag",
+    "answer": "Germany",
+    "difficulty": "Easy",
+    "code": "de"
+  },
+  "flags/gr": {
+    "topic": "Guess the Flag",
+    "answer": "Greece",
+    "difficulty": "Easy",
+    "code": "gr"
+  },
+  "flags/hu": {
+    "topic": "Guess the Flag",
+    "answer": "Hungary",
+    "difficulty": "Easy",
+    "code": "hu"
+  },
+  "flags/is": {
+    "topic": "Guess the Flag",
+    "answer": "Iceland",
+    "difficulty": "Easy",
+    "code": "is"
+  },
+  "flags/in": {
+    "topic": "Guess the Flag",
+    "answer": "India",
+    "difficulty": "Easy",
+    "code": "in"
+  },
+  "flags/id": {
+    "topic": "Guess the Flag",
+    "answer": "Indonesia",
+    "difficulty": "Easy",
+    "code": "id"
+  },
+  "flags/ir": {
+    "topic": "Guess the Flag",
+    "answer": "Iran",
+    "difficulty": "Easy",
+    "code": "ir"
+  },
+  "flags/iq": {
+    "topic": "Guess the Flag",
+    "answer": "Iraq",
+    "difficulty": "Easy",
+    "code": "iq"
+  },
+  "flags/ie": {
+    "topic": "Guess the Flag",
+    "answer": "Ireland",
+    "difficulty": "Easy",
+    "code": "ie"
+  },
+  "flags/it": {
+    "topic": "Guess the Flag",
+    "answer": "Italy",
+    "difficulty": "Easy",
+    "code": "it"
+  },
+  "flags/jm": {
+    "topic": "Guess the Flag",
+    "answer": "Jamaica",
+    "difficulty": "Easy",
+    "code": "jm"
+  },
+  "flags/jp": {
+    "topic": "Guess the Flag",
+    "answer": "Japan",
+    "difficulty": "Easy",
+    "code": "jp"
+  },
+  "flags/ke": {
+    "topic": "Guess the Flag",
+    "answer": "Kenya",
+    "difficulty": "Easy",
+    "code": "ke"
+  },
+  "flags/lb": {
+    "topic": "Guess the Flag",
+    "answer": "Lebanon",
+    "difficulty": "Easy",
+    "code": "lb"
+  },
+  "flags/ly": {
+    "topic": "Guess the Flag",
+    "answer": "Libya",
+    "difficulty": "Easy",
+    "code": "ly"
+  },
+  "flags/my": {
+    "topic": "Guess the Flag",
+    "answer": "Malaysia",
+    "difficulty": "Easy",
+    "code": "my"
+  },
+  "flags/mx": {
+    "topic": "Guess the Flag",
+    "answer": "Mexico",
+    "difficulty": "Easy",
+    "code": "mx"
+  },
+  "flags/ma": {
+    "topic": "Guess the Flag",
+    "answer": "Morocco",
+    "difficulty": "Easy",
+    "code": "ma"
+  },
+  "flags/np": {
+    "topic": "Guess the Flag",
+    "answer": "Nepal",
+    "difficulty": "Easy",
+    "code": "np"
+  },
+  "flags/nl": {
+    "topic": "Guess the Flag",
+    "answer": "Netherlands",
+    "difficulty": "Easy",
+    "code": "nl"
+  },
+  "flags/nz": {
+    "topic": "Guess the Flag",
+    "answer": "New Zealand",
+    "difficulty": "Easy",
+    "code": "nz"
+  },
+  "flags/ng": {
+    "topic": "Guess the Flag",
+    "answer": "Nigeria",
+    "difficulty": "Easy",
+    "code": "ng"
+  },
+  "flags/kp": {
+    "topic": "Guess the Flag",
+    "answer": "North Korea",
+    "difficulty": "Easy",
+    "code": "kp"
+  },
+  "flags/no": {
+    "topic": "Guess the Flag",
+    "answer": "Norway",
+    "difficulty": "Easy",
+    "code": "no"
+  },
+  "flags/pk": {
+    "topic": "Guess the Flag",
+    "answer": "Pakistan",
+    "difficulty": "Easy",
+    "code": "pk"
+  },
+  "flags/ps": {
+    "topic": "Guess the Flag",
+    "answer": "Palestine",
+    "difficulty": "Easy",
+    "code": "ps"
+  },
+  "flags/pa": {
+    "topic": "Guess the Flag",
+    "answer": "Panama",
+    "difficulty": "Easy",
+    "code": "pa"
+  },
+  "flags/pe": {
+    "topic": "Guess the Flag",
+    "answer": "Peru",
+    "difficulty": "Easy",
+    "code": "pe"
+  },
+  "flags/ph": {
+    "topic": "Guess the Flag",
+    "answer": "Philippines",
+    "difficulty": "Easy",
+    "code": "ph"
+  },
+  "flags/pl": {
+    "topic": "Guess the Flag",
+    "answer": "Poland",
+    "difficulty": "Easy",
+    "code": "pl"
+  },
+  "flags/pt": {
+    "topic": "Guess the Flag",
+    "answer": "Portugal",
+    "difficulty": "Easy",
+    "code": "pt"
+  },
+  "flags/qa": {
+    "topic": "Guess the Flag",
+    "answer": "Qatar",
+    "difficulty": "Easy",
+    "code": "qa"
+  },
+  "flags/ru": {
+    "topic": "Guess the Flag",
+    "answer": "Russia",
+    "difficulty": "Easy",
+    "code": "ru"
+  },
+  "flags/sa": {
+    "topic": "Guess the Flag",
+    "answer": "Saudi Arabia",
+    "difficulty": "Easy",
+    "code": "sa"
+  },
+  "flags/sg": {
+    "topic": "Guess the Flag",
+    "answer": "Singapore",
+    "difficulty": "Easy",
+    "code": "sg"
+  },
+  "flags/za": {
+    "topic": "Guess the Flag",
+    "answer": "South Africa",
+    "difficulty": "Easy",
+    "code": "za"
+  },
+  "flags/kr": {
+    "topic": "Guess the Flag",
+    "answer": "South Korea",
+    "difficulty": "Easy",
+    "code": "kr"
+  },
+  "flags/es": {
+    "topic": "Guess the Flag",
+    "answer": "Spain",
+    "difficulty": "Easy",
+    "code": "es"
+  },
+  "flags/lk": {
+    "topic": "Guess the Flag",
+    "answer": "Sri Lanka",
+    "difficulty": "Easy",
+    "code": "lk"
+  },
+  "flags/se": {
+    "topic": "Guess the Flag",
+    "answer": "Sweden",
+    "difficulty": "Easy",
+    "code": "se"
+  },
+  "flags/ch": {
+    "topic": "Guess the Flag",
+    "answer": "Switzerland",
+    "difficulty": "Easy",
+    "code": "ch"
+  },
+  "flags/tr": {
+    "topic": "Guess the Flag",
+    "answer": "Türkiye",
+    "difficulty": "Easy",
+    "code": "tr"
+  },
+  "flags/ua": {
+    "topic": "Guess the Flag",
+    "answer": "Ukraine",
+    "difficulty": "Easy",
+    "code": "ua"
+  },
+  "flags/gb": {
+    "topic": "Guess the Flag",
+    "answer": "United Kingdom",
+    "difficulty": "Easy",
+    "code": "gb"
+  },
+  "flags/us": {
+    "topic": "Guess the Flag",
+    "answer": "United States",
+    "difficulty": "Easy",
+    "code": "us"
+  },
+  "flags/uy": {
+    "topic": "Guess the Flag",
+    "answer": "Uruguay",
+    "difficulty": "Easy",
+    "code": "uy"
+  },
+  "flags/vn": {
+    "topic": "Guess the Flag",
+    "answer": "Vietnam",
+    "difficulty": "Easy",
+    "code": "vn"
+  },
+  "flags/ad": {
+    "topic": "Guess the Flag",
+    "answer": "Andorra",
+    "difficulty": "Medium",
+    "code": "ad"
+  },
+  "flags/ao": {
+    "topic": "Guess the Flag",
+    "answer": "Angola",
+    "difficulty": "Medium",
+    "code": "ao"
+  },
+  "flags/am": {
+    "topic": "Guess the Flag",
+    "answer": "Armenia",
+    "difficulty": "Medium",
+    "code": "am"
+  },
+  "flags/az": {
+    "topic": "Guess the Flag",
+    "answer": "Azerbaijan",
+    "difficulty": "Medium",
+    "code": "az"
+  },
+  "flags/bh": {
+    "topic": "Guess the Flag",
+    "answer": "Bahrain",
+    "difficulty": "Medium",
+    "code": "bh"
+  },
+  "flags/bb": {
+    "topic": "Guess the Flag",
+    "answer": "Barbados",
+    "difficulty": "Medium",
+    "code": "bb"
+  },
+  "flags/by": {
+    "topic": "Guess the Flag",
+    "answer": "Belarus",
+    "difficulty": "Medium",
+    "code": "by"
+  },
+  "flags/ba": {
+    "topic": "Guess the Flag",
+    "answer": "Bosnia and Herzegovina",
+    "difficulty": "Medium",
+    "code": "ba"
+  },
+  "flags/bw": {
+    "topic": "Guess the Flag",
+    "answer": "Botswana",
+    "difficulty": "Medium",
+    "code": "bw"
+  },
+  "flags/bn": {
+    "topic": "Guess the Flag",
+    "answer": "Brunei",
+    "difficulty": "Medium",
+    "code": "bn"
+  },
+  "flags/cm": {
+    "topic": "Guess the Flag",
+    "answer": "Cameroon",
+    "difficulty": "Medium",
+    "code": "cm"
+  },
+  "flags/td": {
+    "topic": "Guess the Flag",
+    "answer": "Chad",
+    "difficulty": "Medium",
+    "code": "td"
+  },
+  "flags/cr": {
+    "topic": "Guess the Flag",
+    "answer": "Costa Rica",
+    "difficulty": "Medium",
+    "code": "cr"
+  },
+  "flags/ci": {
+    "topic": "Guess the Flag",
+    "answer": "Côte d’Ivoire",
+    "difficulty": "Medium",
+    "code": "ci"
+  },
+  "flags/hr": {
+    "topic": "Guess the Flag",
+    "answer": "Croatia",
+    "difficulty": "Medium",
+    "code": "hr"
+  },
+  "flags/cz": {
+    "topic": "Guess the Flag",
+    "answer": "Czechia",
+    "difficulty": "Medium",
+    "code": "cz"
+  },
+  "flags/cd": {
+    "topic": "Guess the Flag",
+    "answer": "Democratic Republic of the Congo",
+    "difficulty": "Medium",
+    "code": "cd"
+  },
+  "flags/do": {
+    "topic": "Guess the Flag",
+    "answer": "Dominican Republic",
+    "difficulty": "Medium",
+    "code": "do"
+  },
+  "flags/ec": {
+    "topic": "Guess the Flag",
+    "answer": "Ecuador",
+    "difficulty": "Medium",
+    "code": "ec"
+  },
+  "flags/sv": {
+    "topic": "Guess the Flag",
+    "answer": "El Salvador",
+    "difficulty": "Medium",
+    "code": "sv"
+  },
+  "flags/ee": {
+    "topic": "Guess the Flag",
+    "answer": "Estonia",
+    "difficulty": "Medium",
+    "code": "ee"
+  },
+  "flags/et": {
+    "topic": "Guess the Flag",
+    "answer": "Ethiopia",
+    "difficulty": "Medium",
+    "code": "et"
+  },
+  "flags/ge": {
+    "topic": "Guess the Flag",
+    "answer": "Georgia",
+    "difficulty": "Medium",
+    "code": "ge"
+  },
+  "flags/gh": {
+    "topic": "Guess the Flag",
+    "answer": "Ghana",
+    "difficulty": "Medium",
+    "code": "gh"
+  },
+  "flags/gt": {
+    "topic": "Guess the Flag",
+    "answer": "Guatemala",
+    "difficulty": "Medium",
+    "code": "gt"
+  },
+  "flags/hn": {
+    "topic": "Guess the Flag",
+    "answer": "Honduras",
+    "difficulty": "Medium",
+    "code": "hn"
+  },
+  "flags/jo": {
+    "topic": "Guess the Flag",
+    "answer": "Jordan",
+    "difficulty": "Medium",
+    "code": "jo"
+  },
+  "flags/kz": {
+    "topic": "Guess the Flag",
+    "answer": "Kazakhstan",
+    "difficulty": "Medium",
+    "code": "kz"
+  },
+  "flags/xk": {
+    "topic": "Guess the Flag",
+    "answer": "Kosovo",
+    "difficulty": "Medium",
+    "code": "xk"
+  },
+  "flags/kw": {
+    "topic": "Guess the Flag",
+    "answer": "Kuwait",
+    "difficulty": "Medium",
+    "code": "kw"
+  },
+  "flags/kg": {
+    "topic": "Guess the Flag",
+    "answer": "Kyrgyzstan",
+    "difficulty": "Medium",
+    "code": "kg"
+  },
+  "flags/lv": {
+    "topic": "Guess the Flag",
+    "answer": "Latvia",
+    "difficulty": "Medium",
+    "code": "lv"
+  },
+  "flags/lr": {
+    "topic": "Guess the Flag",
+    "answer": "Liberia",
+    "difficulty": "Medium",
+    "code": "lr"
+  },
+  "flags/lt": {
+    "topic": "Guess the Flag",
+    "answer": "Lithuania",
+    "difficulty": "Medium",
+    "code": "lt"
+  },
+  "flags/lu": {
+    "topic": "Guess the Flag",
+    "answer": "Luxembourg",
+    "difficulty": "Medium",
+    "code": "lu"
+  },
+  "flags/mg": {
+    "topic": "Guess the Flag",
+    "answer": "Madagascar",
+    "difficulty": "Medium",
+    "code": "mg"
+  },
+  "flags/ml": {
+    "topic": "Guess the Flag",
+    "answer": "Mali",
+    "difficulty": "Medium",
+    "code": "ml"
+  },
+  "flags/mt": {
+    "topic": "Guess the Flag",
+    "answer": "Malta",
+    "difficulty": "Medium",
+    "code": "mt"
+  },
+  "flags/mr": {
+    "topic": "Guess the Flag",
+    "answer": "Mauritania",
+    "difficulty": "Medium",
+    "code": "mr"
+  },
+  "flags/mc": {
+    "topic": "Guess the Flag",
+    "answer": "Monaco",
+    "difficulty": "Medium",
+    "code": "mc"
+  },
+  "flags/mn": {
+    "topic": "Guess the Flag",
+    "answer": "Mongolia",
+    "difficulty": "Medium",
+    "code": "mn"
+  },
+  "flags/me": {
+    "topic": "Guess the Flag",
+    "answer": "Montenegro",
+    "difficulty": "Medium",
+    "code": "me"
+  },
+  "flags/mz": {
+    "topic": "Guess the Flag",
+    "answer": "Mozambique",
+    "difficulty": "Medium",
+    "code": "mz"
+  },
+  "flags/mm": {
+    "topic": "Guess the Flag",
+    "answer": "Myanmar",
+    "difficulty": "Medium",
+    "code": "mm"
+  },
+  "flags/ni": {
+    "topic": "Guess the Flag",
+    "answer": "Nicaragua",
+    "difficulty": "Medium",
+    "code": "ni"
+  },
+  "flags/ne": {
+    "topic": "Guess the Flag",
+    "answer": "Niger",
+    "difficulty": "Medium",
+    "code": "ne"
+  },
+  "flags/mk": {
+    "topic": "Guess the Flag",
+    "answer": "North Macedonia",
+    "difficulty": "Medium",
+    "code": "mk"
+  },
+  "flags/py": {
+    "topic": "Guess the Flag",
+    "answer": "Paraguay",
+    "difficulty": "Medium",
+    "code": "py"
+  },
+  "flags/ro": {
+    "topic": "Guess the Flag",
+    "answer": "Romania",
+    "difficulty": "Medium",
+    "code": "ro"
+  },
+  "flags/rw": {
+    "topic": "Guess the Flag",
+    "answer": "Rwanda",
+    "difficulty": "Medium",
+    "code": "rw"
+  },
+  "flags/sn": {
+    "topic": "Guess the Flag",
+    "answer": "Senegal",
+    "difficulty": "Medium",
+    "code": "sn"
+  },
+  "flags/sc": {
+    "topic": "Guess the Flag",
+    "answer": "Seychelles",
+    "difficulty": "Medium",
+    "code": "sc"
+  },
+  "flags/sk": {
+    "topic": "Guess the Flag",
+    "answer": "Slovakia",
+    "difficulty": "Medium",
+    "code": "sk"
+  },
+  "flags/si": {
+    "topic": "Guess the Flag",
+    "answer": "Slovenia",
+    "difficulty": "Medium",
+    "code": "si"
+  },
+  "flags/so": {
+    "topic": "Guess the Flag",
+    "answer": "Somalia",
+    "difficulty": "Medium",
+    "code": "so"
+  },
+  "flags/ss": {
+    "topic": "Guess the Flag",
+    "answer": "South Sudan",
+    "difficulty": "Medium",
+    "code": "ss"
+  },
+  "flags/sd": {
+    "topic": "Guess the Flag",
+    "answer": "Sudan",
+    "difficulty": "Medium",
+    "code": "sd"
+  },
+  "flags/sy": {
+    "topic": "Guess the Flag",
+    "answer": "Syria",
+    "difficulty": "Medium",
+    "code": "sy"
+  },
+  "flags/tw": {
+    "topic": "Guess the Flag",
+    "answer": "Taiwan",
+    "difficulty": "Medium",
+    "code": "tw"
+  },
+  "flags/th": {
+    "topic": "Guess the Flag",
+    "answer": "Thailand",
+    "difficulty": "Medium",
+    "code": "th"
+  },
+  "flags/tn": {
+    "topic": "Guess the Flag",
+    "answer": "Tunisia",
+    "difficulty": "Medium",
+    "code": "tn"
+  },
+  "flags/ug": {
+    "topic": "Guess the Flag",
+    "answer": "Uganda",
+    "difficulty": "Medium",
+    "code": "ug"
+  },
+  "flags/uz": {
+    "topic": "Guess the Flag",
+    "answer": "Uzbekistan",
+    "difficulty": "Medium",
+    "code": "uz"
+  },
+  "flags/va": {
+    "topic": "Guess the Flag",
+    "answer": "Vatican City",
+    "difficulty": "Medium",
+    "code": "va"
+  },
+  "flags/ve": {
+    "topic": "Guess the Flag",
+    "answer": "Venezuela",
+    "difficulty": "Medium",
+    "code": "ve"
+  },
+  "flags/ye": {
+    "topic": "Guess the Flag",
+    "answer": "Yemen",
+    "difficulty": "Medium",
+    "code": "ye"
+  },
+  "flags/zw": {
+    "topic": "Guess the Flag",
+    "answer": "Zimbabwe",
+    "difficulty": "Medium",
+    "code": "zw"
+  },
+  "flags/ag": {
+    "topic": "Guess the Flag",
+    "answer": "Antigua and Barbuda",
+    "difficulty": "Hard",
+    "code": "ag"
+  },
+  "flags/bs": {
+    "topic": "Guess the Flag",
+    "answer": "Bahamas",
+    "difficulty": "Hard",
+    "code": "bs"
+  },
+  "flags/bz": {
+    "topic": "Guess the Flag",
+    "answer": "Belize",
+    "difficulty": "Hard",
+    "code": "bz"
+  },
+  "flags/bj": {
+    "topic": "Guess the Flag",
+    "answer": "Benin",
+    "difficulty": "Hard",
+    "code": "bj"
+  },
+  "flags/bo": {
+    "topic": "Guess the Flag",
+    "answer": "Bolivia",
+    "difficulty": "Hard",
+    "code": "bo"
+  },
+  "flags/bf": {
+    "topic": "Guess the Flag",
+    "answer": "Burkina Faso",
+    "difficulty": "Hard",
+    "code": "bf"
+  },
+  "flags/bi": {
+    "topic": "Guess the Flag",
+    "answer": "Burundi",
+    "difficulty": "Hard",
+    "code": "bi"
+  },
+  "flags/cv": {
+    "topic": "Guess the Flag",
+    "answer": "Cabo Verde",
+    "difficulty": "Hard",
+    "code": "cv"
+  },
+  "flags/kh": {
+    "topic": "Guess the Flag",
+    "answer": "Cambodia",
+    "difficulty": "Hard",
+    "code": "kh"
+  },
+  "flags/cf": {
+    "topic": "Guess the Flag",
+    "answer": "Central African Republic",
+    "difficulty": "Hard",
+    "code": "cf"
+  },
+  "flags/km": {
+    "topic": "Guess the Flag",
+    "answer": "Comoros",
+    "difficulty": "Hard",
+    "code": "km"
+  },
+  "flags/dj": {
+    "topic": "Guess the Flag",
+    "answer": "Djibouti",
+    "difficulty": "Hard",
+    "code": "dj"
+  },
+  "flags/dm": {
+    "topic": "Guess the Flag",
+    "answer": "Dominica",
+    "difficulty": "Hard",
+    "code": "dm"
+  },
+  "flags/gq": {
+    "topic": "Guess the Flag",
+    "answer": "Equatorial Guinea",
+    "difficulty": "Hard",
+    "code": "gq"
+  },
+  "flags/er": {
+    "topic": "Guess the Flag",
+    "answer": "Eritrea",
+    "difficulty": "Hard",
+    "code": "er"
+  },
+  "flags/sz": {
+    "topic": "Guess the Flag",
+    "answer": "Eswatini",
+    "difficulty": "Hard",
+    "code": "sz"
+  },
+  "flags/fj": {
+    "topic": "Guess the Flag",
+    "answer": "Fiji",
+    "difficulty": "Hard",
+    "code": "fj"
+  },
+  "flags/ga": {
+    "topic": "Guess the Flag",
+    "answer": "Gabon",
+    "difficulty": "Hard",
+    "code": "ga"
+  },
+  "flags/gm": {
+    "topic": "Guess the Flag",
+    "answer": "Gambia",
+    "difficulty": "Hard",
+    "code": "gm"
+  },
+  "flags/gd": {
+    "topic": "Guess the Flag",
+    "answer": "Grenada",
+    "difficulty": "Hard",
+    "code": "gd"
+  },
+  "flags/gn": {
+    "topic": "Guess the Flag",
+    "answer": "Guinea",
+    "difficulty": "Hard",
+    "code": "gn"
+  },
+  "flags/gw": {
+    "topic": "Guess the Flag",
+    "answer": "Guinea-Bissau",
+    "difficulty": "Hard",
+    "code": "gw"
+  },
+  "flags/gy": {
+    "topic": "Guess the Flag",
+    "answer": "Guyana",
+    "difficulty": "Hard",
+    "code": "gy"
+  },
+  "flags/ht": {
+    "topic": "Guess the Flag",
+    "answer": "Haiti",
+    "difficulty": "Hard",
+    "code": "ht"
+  },
+  "flags/ki": {
+    "topic": "Guess the Flag",
+    "answer": "Kiribati",
+    "difficulty": "Hard",
+    "code": "ki"
+  },
+  "flags/la": {
+    "topic": "Guess the Flag",
+    "answer": "Laos",
+    "difficulty": "Hard",
+    "code": "la"
+  },
+  "flags/ls": {
+    "topic": "Guess the Flag",
+    "answer": "Lesotho",
+    "difficulty": "Hard",
+    "code": "ls"
+  },
+  "flags/li": {
+    "topic": "Guess the Flag",
+    "answer": "Liechtenstein",
+    "difficulty": "Hard",
+    "code": "li"
+  },
+  "flags/mw": {
+    "topic": "Guess the Flag",
+    "answer": "Malawi",
+    "difficulty": "Hard",
+    "code": "mw"
+  },
+  "flags/mv": {
+    "topic": "Guess the Flag",
+    "answer": "Maldives",
+    "difficulty": "Hard",
+    "code": "mv"
+  },
+  "flags/mh": {
+    "topic": "Guess the Flag",
+    "answer": "Marshall Islands",
+    "difficulty": "Hard",
+    "code": "mh"
+  },
+  "flags/mu": {
+    "topic": "Guess the Flag",
+    "answer": "Mauritius",
+    "difficulty": "Hard",
+    "code": "mu"
+  },
+  "flags/fm": {
+    "topic": "Guess the Flag",
+    "answer": "Micronesia",
+    "difficulty": "Hard",
+    "code": "fm"
+  },
+  "flags/md": {
+    "topic": "Guess the Flag",
+    "answer": "Moldova",
+    "difficulty": "Hard",
+    "code": "md"
+  },
+  "flags/na": {
+    "topic": "Guess the Flag",
+    "answer": "Namibia",
+    "difficulty": "Hard",
+    "code": "na"
+  },
+  "flags/nr": {
+    "topic": "Guess the Flag",
+    "answer": "Nauru",
+    "difficulty": "Hard",
+    "code": "nr"
+  },
+  "flags/om": {
+    "topic": "Guess the Flag",
+    "answer": "Oman",
+    "difficulty": "Hard",
+    "code": "om"
+  },
+  "flags/pw": {
+    "topic": "Guess the Flag",
+    "answer": "Palau",
+    "difficulty": "Hard",
+    "code": "pw"
+  },
+  "flags/pg": {
+    "topic": "Guess the Flag",
+    "answer": "Papua New Guinea",
+    "difficulty": "Hard",
+    "code": "pg"
+  },
+  "flags/cg": {
+    "topic": "Guess the Flag",
+    "answer": "Republic of the Congo",
+    "difficulty": "Hard",
+    "code": "cg"
+  },
+  "flags/kn": {
+    "topic": "Guess the Flag",
+    "answer": "Saint Kitts and Nevis",
+    "difficulty": "Hard",
+    "code": "kn"
+  },
+  "flags/lc": {
+    "topic": "Guess the Flag",
+    "answer": "Saint Lucia",
+    "difficulty": "Hard",
+    "code": "lc"
+  },
+  "flags/vc": {
+    "topic": "Guess the Flag",
+    "answer": "Saint Vincent and the Grenadines",
+    "difficulty": "Hard",
+    "code": "vc"
+  },
+  "flags/ws": {
+    "topic": "Guess the Flag",
+    "answer": "Samoa",
+    "difficulty": "Hard",
+    "code": "ws"
+  },
+  "flags/sm": {
+    "topic": "Guess the Flag",
+    "answer": "San Marino",
+    "difficulty": "Hard",
+    "code": "sm"
+  },
+  "flags/st": {
+    "topic": "Guess the Flag",
+    "answer": "São Tomé and Príncipe",
+    "difficulty": "Hard",
+    "code": "st"
+  },
+  "flags/rs": {
+    "topic": "Guess the Flag",
+    "answer": "Serbia",
+    "difficulty": "Hard",
+    "code": "rs"
+  },
+  "flags/sl": {
+    "topic": "Guess the Flag",
+    "answer": "Sierra Leone",
+    "difficulty": "Hard",
+    "code": "sl"
+  },
+  "flags/sb": {
+    "topic": "Guess the Flag",
+    "answer": "Solomon Islands",
+    "difficulty": "Hard",
+    "code": "sb"
+  },
+  "flags/sr": {
+    "topic": "Guess the Flag",
+    "answer": "Suriname",
+    "difficulty": "Hard",
+    "code": "sr"
+  },
+  "flags/tj": {
+    "topic": "Guess the Flag",
+    "answer": "Tajikistan",
+    "difficulty": "Hard",
+    "code": "tj"
+  },
+  "flags/tz": {
+    "topic": "Guess the Flag",
+    "answer": "Tanzania",
+    "difficulty": "Hard",
+    "code": "tz"
+  },
+  "flags/tl": {
+    "topic": "Guess the Flag",
+    "answer": "Timor-Leste",
+    "difficulty": "Hard",
+    "code": "tl"
+  },
+  "flags/tg": {
+    "topic": "Guess the Flag",
+    "answer": "Togo",
+    "difficulty": "Hard",
+    "code": "tg"
+  },
+  "flags/to": {
+    "topic": "Guess the Flag",
+    "answer": "Tonga",
+    "difficulty": "Hard",
+    "code": "to"
+  },
+  "flags/tt": {
+    "topic": "Guess the Flag",
+    "answer": "Trinidad and Tobago",
+    "difficulty": "Hard",
+    "code": "tt"
+  },
+  "flags/tm": {
+    "topic": "Guess the Flag",
+    "answer": "Turkmenistan",
+    "difficulty": "Hard",
+    "code": "tm"
+  },
+  "flags/tv": {
+    "topic": "Guess the Flag",
+    "answer": "Tuvalu",
+    "difficulty": "Hard",
+    "code": "tv"
+  },
+  "flags/vu": {
+    "topic": "Guess the Flag",
+    "answer": "Vanuatu",
+    "difficulty": "Hard",
+    "code": "vu"
+  },
+  "flags/zm": {
+    "topic": "Guess the Flag",
+    "answer": "Zambia",
+    "difficulty": "Hard",
+    "code": "zm"
+  },
+  "jerseys/newcastle-united-and-9-1996-2006": {
+    "topic": "Guess the Jersey",
+    "answer": "Alan Shearer",
+    "difficulty": "Easy",
+    "clue": "Newcastle United #9, 1996-2006"
+  },
+  "jerseys/barcelona-and-8-2007-2018": {
+    "topic": "Guess the Jersey",
+    "answer": "Andrés Iniesta",
+    "difficulty": "Easy",
+    "clue": "Barcelona #8, 2007-2018"
+  },
+  "jerseys/atletico-madrid-and-7-2015-2019": {
+    "topic": "Guess the Jersey",
+    "answer": "Antoine Griezmann",
+    "difficulty": "Easy",
+    "clue": "Atlético Madrid #7, 2015-2019"
+  },
+  "jerseys/bayern-munich-and-10-2009-2019": {
+    "topic": "Guess the Jersey",
+    "answer": "Arjen Robben",
+    "difficulty": "Easy",
+    "clue": "Bayern Munich #10, 2009-2019"
+  },
+  "jerseys/chelsea-and-2-2008-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Branislav Ivanović",
+    "difficulty": "Easy",
+    "clue": "Chelsea #2, 2008-2017"
+  },
+  "jerseys/real-madrid-and-7-2010-2018": {
+    "topic": "Guess the Jersey",
+    "answer": "Cristiano Ronaldo",
+    "difficulty": "Easy",
+    "clue": "Real Madrid #7, 2010-2018"
+  },
+  "jerseys/manchester-united-and-7-1997-2003": {
+    "topic": "Guess the Jersey",
+    "answer": "David Beckham",
+    "difficulty": "Easy",
+    "clue": "Manchester United #7, 1997-2003"
+  },
+  "jerseys/arsenal-and-10-1995-2006": {
+    "topic": "Guess the Jersey",
+    "answer": "Dennis Bergkamp",
+    "difficulty": "Easy",
+    "clue": "Arsenal #10, 1995-2006"
+  },
+  "jerseys/chelsea-and-11-2004-2012": {
+    "topic": "Guess the Jersey",
+    "answer": "Didier Drogba",
+    "difficulty": "Easy",
+    "clue": "Chelsea #11, 2004-2012"
+  },
+  "jerseys/napoli-and-10-1984-1991": {
+    "topic": "Guess the Jersey",
+    "answer": "Diego Maradona",
+    "difficulty": "Easy",
+    "clue": "Napoli #10, 1984-1991"
+  },
+  "jerseys/chelsea-and-10-2014-2019": {
+    "topic": "Guess the Jersey",
+    "answer": "Eden Hazard",
+    "difficulty": "Easy",
+    "clue": "Chelsea #10, 2014-2019"
+  },
+  "jerseys/paris-saint-germain-and-9-2013-2020": {
+    "topic": "Guess the Jersey",
+    "answer": "Edinson Cavani",
+    "difficulty": "Easy",
+    "clue": "Paris Saint-Germain #9, 2013-2020"
+  },
+  "jerseys/molde-and-30-2017-2019": {
+    "topic": "Guess the Jersey",
+    "answer": "Erling Haaland",
+    "difficulty": "Easy",
+    "clue": "Molde #30, 2017-2019"
+  },
+  "jerseys/roma-and-10-1997-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Francesco Totti",
+    "difficulty": "Easy",
+    "clue": "Roma #10, 1997-2017"
+  },
+  "jerseys/chelsea-and-8-2001-2014": {
+    "topic": "Guess the Jersey",
+    "answer": "Frank Lampard",
+    "difficulty": "Easy",
+    "clue": "Chelsea #8, 2001-2014"
+  },
+  "jerseys/real-madrid-and-11-2013-2022": {
+    "topic": "Guess the Jersey",
+    "answer": "Gareth Bale",
+    "difficulty": "Easy",
+    "clue": "Real Madrid #11, 2013-2022"
+  },
+  "jerseys/juventus-and-1-2001-2018": {
+    "topic": "Guess the Jersey",
+    "answer": "Gianluigi Buffon",
+    "difficulty": "Easy",
+    "clue": "Juventus #1, 2001-2018"
+  },
+  "jerseys/tottenham-hotspur-and-10-2015-2023": {
+    "topic": "Guess the Jersey",
+    "answer": "Harry Kane",
+    "difficulty": "Easy",
+    "clue": "Tottenham Hotspur #10, 2015-2023"
+  },
+  "jerseys/real-madrid-and-1-1999-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Iker Casillas",
+    "difficulty": "Easy",
+    "clue": "Real Madrid #1, 1999-2015"
+  },
+  "jerseys/borussia-dortmund-and-7-2017-2021": {
+    "topic": "Guess the Jersey",
+    "answer": "Jadon Sancho",
+    "difficulty": "Easy",
+    "clue": "Borussia Dortmund #7, 2017-2021"
+  },
+  "jerseys/chelsea-and-26-1998-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "John Terry",
+    "difficulty": "Easy",
+    "clue": "Chelsea #26, 1998-2017"
+  },
+  "jerseys/real-madrid-and-9-2010-2023": {
+    "topic": "Guess the Jersey",
+    "answer": "Karim Benzema",
+    "difficulty": "Easy",
+    "clue": "Real Madrid #9, 2010-2023"
+  },
+  "jerseys/barcelona-and-10-2008-2021": {
+    "topic": "Guess the Jersey",
+    "answer": "Lionel Messi",
+    "difficulty": "Easy",
+    "clue": "Barcelona #10, 2008-2021"
+  },
+  "jerseys/barcelona-and-9-2014-2020": {
+    "topic": "Guess the Jersey",
+    "answer": "Luis Suárez",
+    "difficulty": "Easy",
+    "clue": "Barcelona #9, 2014-2020"
+  },
+  "jerseys/tottenham-hotspur-and-14-2008-2012": {
+    "topic": "Guess the Jersey",
+    "answer": "Luka Modrić",
+    "difficulty": "Easy",
+    "clue": "Tottenham Hotspur #14, 2008-2012"
+  },
+  "jerseys/borussia-dortmund-and-11-2012-2024": {
+    "topic": "Guess the Jersey",
+    "answer": "Marco Reus",
+    "difficulty": "Easy",
+    "clue": "Borussia Dortmund #11, 2012-2024"
+  },
+  "jerseys/barcelona-and-11-2013-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Neymar",
+    "difficulty": "Easy",
+    "clue": "Barcelona #11, 2013-2017"
+  },
+  "jerseys/milan-and-3-1995-2009": {
+    "topic": "Guess the Jersey",
+    "answer": "Paolo Maldini",
+    "difficulty": "Easy",
+    "clue": "Milan #3, 1995-2009"
+  },
+  "jerseys/arsenal-and-4-1996-2005": {
+    "topic": "Guess the Jersey",
+    "answer": "Patrick Vieira",
+    "difficulty": "Easy",
+    "clue": "Arsenal #4, 1996-2005"
+  },
+  "jerseys/real-madrid-and-7-1996-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Raúl",
+    "difficulty": "Easy",
+    "clue": "Real Madrid #7, 1996-2010"
+  },
+  "jerseys/bayern-munich-and-9-2014-2022": {
+    "topic": "Guess the Jersey",
+    "answer": "Robert Lewandowski",
+    "difficulty": "Easy",
+    "clue": "Bayern Munich #9, 2014-2022"
+  },
+  "jerseys/manchester-united-and-20-2012-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Robin van Persie",
+    "difficulty": "Easy",
+    "clue": "Manchester United #20, 2012-2015"
+  },
+  "jerseys/barcelona-and-9-2004-2009": {
+    "topic": "Guess the Jersey",
+    "answer": "Samuel Eto’o",
+    "difficulty": "Easy",
+    "clue": "Barcelona #9, 2004-2009"
+  },
+  "jerseys/inter-miami-and-5-2023-2025": {
+    "topic": "Guess the Jersey",
+    "answer": "Sergio Busquets",
+    "difficulty": "Easy",
+    "clue": "Inter Miami #5, 2023-2025"
+  },
+  "jerseys/real-madrid-and-4-2005-2021": {
+    "topic": "Guess the Jersey",
+    "answer": "Sergio Ramos",
+    "difficulty": "Easy",
+    "clue": "Real Madrid #4, 2005-2021"
+  },
+  "jerseys/liverpool-and-8-2004-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Steven Gerrard",
+    "difficulty": "Easy",
+    "clue": "Liverpool #8, 2004-2015"
+  },
+  "jerseys/arsenal-and-14-1999-2007": {
+    "topic": "Guess the Jersey",
+    "answer": "Thierry Henry",
+    "difficulty": "Easy",
+    "clue": "Arsenal #14, 1999-2007"
+  },
+  "jerseys/bayern-munich-and-25-2008-2025": {
+    "topic": "Guess the Jersey",
+    "answer": "Thomas Müller",
+    "difficulty": "Easy",
+    "clue": "Bayern Munich #25, 2008-2025"
+  },
+  "jerseys/manchester-city-and-4-2008-2019": {
+    "topic": "Guess the Jersey",
+    "answer": "Vincent Kompany",
+    "difficulty": "Easy",
+    "clue": "Manchester City #4, 2008-2019"
+  },
+  "jerseys/manchester-united-and-10-2007-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Wayne Rooney",
+    "difficulty": "Easy",
+    "clue": "Manchester United #10, 2007-2017"
+  },
+  "jerseys/barcelona-and-6-2001-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Xavi",
+    "difficulty": "Easy",
+    "clue": "Barcelona #6, 2001-2015"
+  },
+  "jerseys/manchester-city-and-42-2010-2018": {
+    "topic": "Guess the Jersey",
+    "answer": "Yaya Touré",
+    "difficulty": "Easy",
+    "clue": "Manchester City #42, 2010-2018"
+  },
+  "jerseys/barcelona-and-9-2009-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Zlatan Ibrahimović",
+    "difficulty": "Easy",
+    "clue": "Barcelona #9, 2009-2010"
+  },
+  "jerseys/milan-and-21-2001-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Andrea Pirlo",
+    "difficulty": "Medium",
+    "clue": "Milan #21, 2001-2011"
+  },
+  "jerseys/milan-and-7-1999-2006": {
+    "topic": "Guess the Jersey",
+    "answer": "Andriy Shevchenko",
+    "difficulty": "Medium",
+    "clue": "Milan #7, 1999-2006"
+  },
+  "jerseys/manchester-united-and-31-2015-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Bastian Schweinsteiger",
+    "difficulty": "Medium",
+    "clue": "Manchester United #31, 2015-2017"
+  },
+  "jerseys/monaco-and-10-2015-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Bernardo Silva",
+    "difficulty": "Medium",
+    "clue": "Monaco #10, 2015-2017"
+  },
+  "jerseys/sporting-cp-and-8-2017-2020": {
+    "topic": "Guess the Jersey",
+    "answer": "Bruno Fernandes",
+    "difficulty": "Medium",
+    "clue": "Sporting CP #8, 2017-2020"
+  },
+  "jerseys/barcelona-and-5-2000-2014": {
+    "topic": "Guess the Jersey",
+    "answer": "Carles Puyol",
+    "difficulty": "Medium",
+    "clue": "Barcelona #5, 2000-2014"
+  },
+  "jerseys/manchester-united-and-32-2007-2009": {
+    "topic": "Guess the Jersey",
+    "answer": "Carlos Tevez",
+    "difficulty": "Medium",
+    "clue": "Manchester United #32, 2007-2009"
+  },
+  "jerseys/chelsea-and-4-2014-2019": {
+    "topic": "Guess the Jersey",
+    "answer": "Cesc Fàbregas",
+    "difficulty": "Medium",
+    "clue": "Chelsea #4, 2014-2019"
+  },
+  "jerseys/paris-saint-germain-and-32-2014-2016": {
+    "topic": "Guess the Jersey",
+    "answer": "David Luiz",
+    "difficulty": "Medium",
+    "clue": "Paris Saint-Germain #32, 2014-2016"
+  },
+  "jerseys/valencia-and-21-2006-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "David Silva",
+    "difficulty": "Medium",
+    "clue": "Valencia #21, 2006-2010"
+  },
+  "jerseys/valencia-and-7-2005-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "David Villa",
+    "difficulty": "Medium",
+    "clue": "Valencia #7, 2005-2010"
+  },
+  "jerseys/tottenham-hotspur-and-9-2006-2008": {
+    "topic": "Guess the Jersey",
+    "answer": "Dimitar Berbatov",
+    "difficulty": "Medium",
+    "clue": "Tottenham Hotspur #9, 2006-2008"
+  },
+  "jerseys/wolfsburg-and-9-2007-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Edin Džeko",
+    "difficulty": "Medium",
+    "clue": "Wolfsburg #9, 2007-2011"
+  },
+  "jerseys/liverpool-and-9-2007-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Fernando Torres",
+    "difficulty": "Medium",
+    "clue": "Liverpool #9, 2007-2011"
+  },
+  "jerseys/porto-and-10-2012-2013": {
+    "topic": "Guess the Jersey",
+    "answer": "James Rodríguez",
+    "difficulty": "Medium",
+    "clue": "Porto #10, 2012-2013"
+  },
+  "jerseys/paris-saint-germain-and-10-1998-2002": {
+    "topic": "Guess the Jersey",
+    "answer": "Jay-Jay Okocha",
+    "difficulty": "Medium",
+    "clue": "Paris Saint-Germain #10, 1998-2002"
+  },
+  "jerseys/birmingham-city-and-22-2019-2020": {
+    "topic": "Guess the Jersey",
+    "answer": "Jude Bellingham",
+    "difficulty": "Medium",
+    "clue": "Birmingham City #22, 2019-2020"
+  },
+  "jerseys/milan-and-22-2003-2009": {
+    "topic": "Guess the Jersey",
+    "answer": "Kaká",
+    "difficulty": "Medium",
+    "clue": "Milan #22, 2003-2009"
+  },
+  "jerseys/genk-and-14-2009-2012": {
+    "topic": "Guess the Jersey",
+    "answer": "Kevin De Bruyne",
+    "difficulty": "Medium",
+    "clue": "Genk #14, 2009-2012"
+  },
+  "jerseys/monaco-and-29-2016-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Kylian Mbappé",
+    "difficulty": "Medium",
+    "clue": "Monaco #29, 2016-2017"
+  },
+  "jerseys/barcelona-and-7-1995-2000": {
+    "topic": "Guess the Jersey",
+    "answer": "Luís Figo",
+    "difficulty": "Medium",
+    "clue": "Barcelona #7, 1995-2000"
+  },
+  "jerseys/real-madrid-and-12-2007-2022": {
+    "topic": "Guess the Jersey",
+    "answer": "Marcelo",
+    "difficulty": "Medium",
+    "clue": "Real Madrid #12, 2007-2022"
+  },
+  "jerseys/liverpool-and-45-2014-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Mario Balotelli",
+    "difficulty": "Medium",
+    "clue": "Liverpool #45, 2014-2015"
+  },
+  "jerseys/werder-bremen-and-11-2008-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Mesut Özil",
+    "difficulty": "Medium",
+    "clue": "Werder Bremen #11, 2008-2010"
+  },
+  "jerseys/manchester-united-and-16-2006-2018": {
+    "topic": "Guess the Jersey",
+    "answer": "Michael Carrick",
+    "difficulty": "Medium",
+    "clue": "Manchester United #16, 2006-2018"
+  },
+  "jerseys/basel-and-22-2012-2014": {
+    "topic": "Guess the Jersey",
+    "answer": "Mohamed Salah",
+    "difficulty": "Medium",
+    "clue": "Basel #22, 2012-2014"
+  },
+  "jerseys/leicester-city-and-14-2015-2016": {
+    "topic": "Guess the Jersey",
+    "answer": "N'Golo Kanté",
+    "difficulty": "Medium",
+    "clue": "Leicester City #14, 2015-2016"
+  },
+  "jerseys/borussia-dortmund-and-17-2013-2018": {
+    "topic": "Guess the Jersey",
+    "answer": "Pierre-Emerick Aubameyang",
+    "difficulty": "Medium",
+    "clue": "Borussia Dortmund #17, 2013-2018"
+  },
+  "jerseys/chelsea-and-9-2015-2016": {
+    "topic": "Guess the Jersey",
+    "answer": "Radamel Falcao",
+    "difficulty": "Medium",
+    "clue": "Chelsea #9, 2015-2016"
+  },
+  "jerseys/liverpool-and-31-2012-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Raheem Sterling",
+    "difficulty": "Medium",
+    "clue": "Liverpool #31, 2012-2015"
+  },
+  "jerseys/leicester-city-and-26-2014-2018": {
+    "topic": "Guess the Jersey",
+    "answer": "Riyad Mahrez",
+    "difficulty": "Medium",
+    "clue": "Leicester City #26, 2014-2018"
+  },
+  "jerseys/manchester-city-and-10-2008-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Robinho",
+    "difficulty": "Medium",
+    "clue": "Manchester City #10, 2008-2010"
+  },
+  "jerseys/everton-and-10-2014-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Romelu Lukaku",
+    "difficulty": "Medium",
+    "clue": "Everton #10, 2014-2017"
+  },
+  "jerseys/real-madrid-and-9-2003-2007": {
+    "topic": "Guess the Jersey",
+    "answer": "Ronaldo Nazário",
+    "difficulty": "Medium",
+    "clue": "Real Madrid #9, 2003-2007"
+  },
+  "jerseys/manchester-united-and-11-1991-2014": {
+    "topic": "Guess the Jersey",
+    "answer": "Ryan Giggs",
+    "difficulty": "Medium",
+    "clue": "Manchester United #11, 1991-2014"
+  },
+  "jerseys/atletico-madrid-and-10-2007-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Sergio Agüero",
+    "difficulty": "Medium",
+    "clue": "Atlético Madrid #10, 2007-2011"
+  },
+  "jerseys/inter-and-10-2009-2013": {
+    "topic": "Guess the Jersey",
+    "answer": "Wesley Sneijder",
+    "difficulty": "Medium",
+    "clue": "Inter #10, 2009-2013"
+  },
+  "jerseys/liverpool-and-14-2004-2009": {
+    "topic": "Guess the Jersey",
+    "answer": "Xabi Alonso",
+    "difficulty": "Medium",
+    "clue": "Liverpool #14, 2004-2009"
+  },
+  "jerseys/real-madrid-and-5-2001-2006": {
+    "topic": "Guess the Jersey",
+    "answer": "Zinedine Zidane",
+    "difficulty": "Medium",
+    "clue": "Real Madrid #5, 2001-2006"
+  },
+  "jerseys/parma-and-9-2002-2004": {
+    "topic": "Guess the Jersey",
+    "answer": "Adriano",
+    "difficulty": "Hard",
+    "clue": "Parma #9, 2002-2004"
+  },
+  "jerseys/udinese-and-7-2010-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Alexis Sánchez",
+    "difficulty": "Hard",
+    "clue": "Udinese #7, 2010-2011"
+  },
+  "jerseys/internacional-and-1-2015-2016": {
+    "topic": "Guess the Jersey",
+    "answer": "Alisson Becker",
+    "difficulty": "Hard",
+    "clue": "Internacional #1, 2015-2016"
+  },
+  "jerseys/benfica-and-20-2007-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Ángel Di María",
+    "difficulty": "Hard",
+    "clue": "Benfica #20, 2007-2010"
+  },
+  "jerseys/roma-and-3-2014-2016": {
+    "topic": "Guess the Jersey",
+    "answer": "Ashley Cole",
+    "difficulty": "Hard",
+    "clue": "Roma #3, 2014-2016"
+  },
+  "jerseys/porto-and-6-2014-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Casemiro",
+    "difficulty": "Hard",
+    "clue": "Porto #6, 2014-2015"
+  },
+  "jerseys/juventus-and-23-2016-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "Dani Alves",
+    "difficulty": "Hard",
+    "clue": "Juventus #23, 2016-2017"
+  },
+  "jerseys/chelsea-and-20-2008-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Deco",
+    "difficulty": "Hard",
+    "clue": "Chelsea #20, 2008-2010"
+  },
+  "jerseys/real-valladolid-and-22-2009-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Diego Costa",
+    "difficulty": "Hard",
+    "clue": "Real Valladolid #22, 2009-2010"
+  },
+  "jerseys/manchester-united-and-21-2002-2004": {
+    "topic": "Guess the Jersey",
+    "answer": "Diego Forlán",
+    "difficulty": "Hard",
+    "clue": "Manchester United #21, 2002-2004"
+  },
+  "jerseys/barcelona-and-3-2004": {
+    "topic": "Guess the Jersey",
+    "answer": "Edgar Davids",
+    "difficulty": "Hard",
+    "clue": "Barcelona #3, 2004"
+  },
+  "jerseys/real-madrid-and-6-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Emmanuel Adebayor",
+    "difficulty": "Hard",
+    "clue": "Real Madrid #6, 2011"
+  },
+  "jerseys/monaco-and-10-2003-2004": {
+    "topic": "Guess the Jersey",
+    "answer": "Fernando Morientes",
+    "difficulty": "Hard",
+    "clue": "Monaco #10, 2003-2004"
+  },
+  "jerseys/rangers-and-7-1997-1998": {
+    "topic": "Guess the Jersey",
+    "answer": "Gennaro Gattuso",
+    "difficulty": "Hard",
+    "clue": "Rangers #7, 1997-1998"
+  },
+  "jerseys/manchester-united-and-28-2004-2006": {
+    "topic": "Guess the Jersey",
+    "answer": "Gerard Piqué",
+    "difficulty": "Hard",
+    "clue": "Manchester United #28, 2004-2006"
+  },
+  "jerseys/manchester-united-and-17-2007": {
+    "topic": "Guess the Jersey",
+    "answer": "Henrik Larsson",
+    "difficulty": "Hard",
+    "clue": "Manchester United #17, 2007"
+  },
+  "jerseys/nurnberg-and-22-2008-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "İlkay Gündoğan",
+    "difficulty": "Hard",
+    "clue": "Nürnberg #22, 2008-2011"
+  },
+  "jerseys/schalke-04-and-10-2007-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Ivan Rakitić",
+    "difficulty": "Hard",
+    "clue": "Schalke 04 #10, 2007-2011"
+  },
+  "jerseys/real-madrid-and-14-2014-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Javier Hernández",
+    "difficulty": "Hard",
+    "clue": "Real Madrid #14, 2014-2015"
+  },
+  "jerseys/valencia-and-2-2014-2017": {
+    "topic": "Guess the Jersey",
+    "answer": "João Cancelo",
+    "difficulty": "Hard",
+    "clue": "Valencia #2, 2014-2017"
+  },
+  "jerseys/valencia-and-10-2010-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Juan Mata",
+    "difficulty": "Hard",
+    "clue": "Valencia #10, 2010-2011"
+  },
+  "jerseys/atletico-madrid-and-9-2014-2015": {
+    "topic": "Guess the Jersey",
+    "answer": "Mario Mandžukić",
+    "difficulty": "Hard",
+    "clue": "Atlético Madrid #9, 2014-2015"
+  },
+  "jerseys/heerenveen-and-10-2017-2018": {
+    "topic": "Guess the Jersey",
+    "answer": "Martin Ødegaard",
+    "difficulty": "Hard",
+    "clue": "Heerenveen #10, 2017-2018"
+  },
+  "jerseys/real-madrid-and-11-2004-2005": {
+    "topic": "Guess the Jersey",
+    "answer": "Michael Owen",
+    "difficulty": "Hard",
+    "clue": "Real Madrid #11, 2004-2005"
+  },
+  "jerseys/real-madrid-and-19-1999-2000": {
+    "topic": "Guess the Jersey",
+    "answer": "Nicolas Anelka",
+    "difficulty": "Hard",
+    "clue": "Real Madrid #19, 1999-2000"
+  },
+  "jerseys/manchester-united-and-20-1996-2007": {
+    "topic": "Guess the Jersey",
+    "answer": "Ole Gunnar Solskjær",
+    "difficulty": "Hard",
+    "clue": "Manchester United #20, 1996-2007"
+  },
+  "jerseys/manchester-united-and-13-2005-2012": {
+    "topic": "Guess the Jersey",
+    "answer": "Park Ji-sung",
+    "difficulty": "Hard",
+    "clue": "Manchester United #13, 2005-2012"
+  },
+  "jerseys/newcastle-united-and-9-2004-2005": {
+    "topic": "Guess the Jersey",
+    "answer": "Patrick Kluivert",
+    "difficulty": "Hard",
+    "clue": "Newcastle United #9, 2004-2005"
+  },
+  "jerseys/arsenal-and-33-2015-2019": {
+    "topic": "Guess the Jersey",
+    "answer": "Petr Čech",
+    "difficulty": "Hard",
+    "clue": "Arsenal #33, 2015-2019"
+  },
+  "jerseys/stuttgart-and-21-2003-2005": {
+    "topic": "Guess the Jersey",
+    "answer": "Philipp Lahm",
+    "difficulty": "Hard",
+    "clue": "Stuttgart #21, 2003-2005"
+  },
+  "jerseys/olympiacos-and-10-2005-2007": {
+    "topic": "Guess the Jersey",
+    "answer": "Rivaldo",
+    "difficulty": "Hard",
+    "clue": "Olympiacos #10, 2005-2007"
+  },
+  "jerseys/paris-saint-germain-and-21-2001-2002": {
+    "topic": "Guess the Jersey",
+    "answer": "Ronaldinho",
+    "difficulty": "Hard",
+    "clue": "Paris Saint-Germain #21, 2001-2002"
+  },
+  "jerseys/real-madrid-and-17-2006-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Ruud van Nistelrooy",
+    "difficulty": "Hard",
+    "clue": "Real Madrid #17, 2006-2010"
+  },
+  "jerseys/red-bull-salzburg-and-10-2013-2014": {
+    "topic": "Guess the Jersey",
+    "answer": "Sadio Mané",
+    "difficulty": "Hard",
+    "clue": "Red Bull Salzburg #10, 2013-2014"
+  },
+  "jerseys/hamburg-and-40-2010-2011": {
+    "topic": "Guess the Jersey",
+    "answer": "Son Heung-min",
+    "difficulty": "Hard",
+    "clue": "Hamburg #40, 2010-2011"
+  },
+  "jerseys/atletico-madrid-and-13-2011-2014": {
+    "topic": "Guess the Jersey",
+    "answer": "Thibaut Courtois",
+    "difficulty": "Hard",
+    "clue": "Atlético Madrid #13, 2011-2014"
+  },
+  "jerseys/bayer-leverkusen-and-39-2009-2010": {
+    "topic": "Guess the Jersey",
+    "answer": "Toni Kroos",
+    "difficulty": "Hard",
+    "clue": "Bayer Leverkusen #39, 2009-2010"
+  },
+  "jerseys/lille-and-7-2019-2020": {
+    "topic": "Guess the Jersey",
+    "answer": "Victor Osimhen",
+    "difficulty": "Hard",
+    "clue": "Lille #7, 2019-2020"
+  }
+}

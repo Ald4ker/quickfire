@@ -1045,7 +1045,8 @@ const styles = StyleSheet.create({
   nativePromoCtaButtonText: {
     fontFamily: FONTS.uiBold,
     fontSize: 13,
-    letterSpacing: 0.8,
+    // No letterSpacing: Android clips the trailing "M" on PLAYBACKFIRE.COM.
+    paddingEnd: 2,
   },
   redeemCard: {
     flexDirection: 'row',

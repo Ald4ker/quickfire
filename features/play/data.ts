@@ -8,6 +8,7 @@ import { normalizeQuickPlayTopicCount } from '@/features/play/tokenCosts';
 interface SourceQA {
   text: string;
   answer: string;
+  imageKey?: string;
 }
 
 interface SourceGroup {
@@ -226,6 +227,7 @@ export function buildBoard(
           categoryName: categoryTranslation.title,
           prompt: resolvedQuestion.prompt,
           answer: resolvedQuestion.answer,
+          promptImageKey: qa.imageKey,
           pointValue: group.points,
           locale: resolvedQuestion.locale,
           resolvedFromFallback: resolvedQuestion.resolvedFromFallback,
@@ -275,6 +277,7 @@ export function getBonusQuestion(
         categoryName: categoryTranslation.title,
         prompt: resolvedQuestion.prompt,
         answer: resolvedQuestion.answer,
+        promptImageKey: qa.imageKey,
         pointValue: group.points + 100,
         locale: resolvedQuestion.locale,
         resolvedFromFallback: resolvedQuestion.resolvedFromFallback,
@@ -295,7 +298,14 @@ export function defaultTopicCountForMode(mode: GameMode): number {
 export function getModeCategoryCount(mode: GameMode, topicCount?: number): number {
   if (mode === 'quickPlay') return normalizeQuickPlayTopicCount(topicCount);
   if (mode === 'random') {
-    if (topicCount === 1 || topicCount === 2 || topicCount === 3 || topicCount === 4 || topicCount === 5) {
+    if (
+      topicCount === 1 ||
+      topicCount === 2 ||
+      topicCount === 3 ||
+      topicCount === 4 ||
+      topicCount === 5 ||
+      topicCount === 6
+    ) {
       return topicCount;
     }
     return 6;

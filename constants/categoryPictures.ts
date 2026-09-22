@@ -88,6 +88,8 @@ const LOCAL: Record<string, ImageSource> = {
   gen24: require('../assets/topics/famous_quotes.webp'),
   gen26: require('../assets/topics/before_they_were_famous.webp'),
   gen27: require('../assets/topics/two_truths_and_a_lie.webp'),
+  gen28: require('../assets/topics/guess_the_flag.webp'),
+  gen29: require('../assets/topics/guess_the_jersey.webp'),
   h16: require('../assets/topics/european_christendom.webp'),
   h17: require('../assets/topics/ertugral.webp'),
   h18: require('../assets/topics/kurulus_osman.webp'),

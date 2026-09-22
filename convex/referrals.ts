@@ -6,26 +6,29 @@ import { requireUser } from './lib/auth';
 import { ensureWalletDoc } from './lib/ensureWallet';
 import { ensureCanonicalPurchaserAccountForUser } from './lib/purchaserAccounts';
 import {
+  REFERRAL_NEW_ACCOUNT_MAX_GAMES,
   REFERRAL_REWARD_TOKENS,
   buildReferralCodeFromSeed,
   evaluateReferralApply,
   normalizeReferralCode,
 } from './lib/referralRules';
 
-async function userHasPlayed(ctx: MutationCtx, userId: Id<'users'>): Promise<boolean> {
+/** Classic sessions + rapid-fire runs; stop once past the new-account cap. */
+async function countUserGames(ctx: MutationCtx, userId: Id<'users'>): Promise<number> {
+  const need = REFERRAL_NEW_ACCOUNT_MAX_GAMES + 1;
   const sessions = await ctx.db
     .query('game_sessions')
     .withIndex('by_user', (q) => q.eq('userId', userId))
-    .take(1);
-  if (sessions.length > 0) {
-    return true;
+    .take(need);
+  if (sessions.length >= need) {
+    return sessions.length;
   }
 
   const rapid = await ctx.db
     .query('rapid_fire_runs')
     .withIndex('by_user', (q) => q.eq('userId', userId))
-    .take(1);
-  return rapid.length > 0;
+    .take(need - sessions.length);
+  return sessions.length + rapid.length;
 }
 
 async function allocateUniqueReferralCode(
@@ -102,7 +105,8 @@ export const ensureMyCode = mutation({
 
 /**
  * Apply someone else's referral code.
- * Both parties get REFERRAL_REWARD_TOKENS when the invitee is a new (unplayed) account.
+ * Both parties get REFERRAL_REWARD_TOKENS when the invitee is still a new account
+ * (fewer than 3 classic/rapid-fire games played).
  */
 export const applyCode = mutation({
   args: {
@@ -119,13 +123,13 @@ export const applyCode = mutation({
           .unique()
       : null;
 
-    const hasPlayed = await userHasPlayed(ctx, user._id);
+    const gamesPlayed = await countUserGames(ctx, user._id);
     const check = evaluateReferralApply({
       normalizedCode: normalized,
       inviterFound: inviter != null,
       isSelf: inviter?._id === user._id,
       alreadyRedeemed: user.referredByUserId != null,
-      hasPlayed,
+      gamesPlayed,
     });
 
     if (!check.ok) {

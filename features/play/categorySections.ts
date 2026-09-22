@@ -11,7 +11,7 @@ export interface CategorySection {
 const TOPICS = {
   general: [
     'Corporations', 'Capital Cities', 'Famous Firsts',
-    'General Knowledge', 'Geography', 'Guess the Decade', 'In between:', 'Initials',
+    'General Knowledge', 'Geography', 'Guess the Decade', 'Guess the Flag', 'In between:', 'Initials',
     'Invented Where?', 'Match the Nickname', 'National Icons',
     'Odd One Out', 'Science', 'Trump Quotes', 'Two Truths and a Lie', 'UK', 'USA',
     'What year?', 'What’s the Connection?', 'Which Country?',
@@ -31,7 +31,7 @@ const TOPICS = {
     'Stranger Things', 'Suits', 'The Big Bang Theory', 'The Office US',
   ],
   sports: [
-    'Cricket', 'FIFA World Cup', 'Formula 1', 'NBA', 'Premier League', 'UFC',
+    'Cricket', 'FIFA World Cup', 'Formula 1', 'Guess the Jersey', 'NBA', 'Premier League', 'UFC',
     'UEFA Champions League', 'Which Player?',
   ],
   gaming: [

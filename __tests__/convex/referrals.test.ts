@@ -20,7 +20,10 @@ const applyHandler = getConvexHandler<
   { success: boolean; error?: string; tokensGranted?: number; duplicate?: boolean }
 >(applyCode);
 
-function twoUserCtx(opts?: { inviteeHasPlayed?: boolean; alreadyRedeemed?: boolean }) {
+function twoUserCtx(opts?: {
+  inviteeGamesPlayed?: number;
+  alreadyRedeemed?: boolean;
+}) {
   const inviter = userDoc({
     id: 'users_inviter',
     clerkId: 'clerk_inviter',
@@ -62,18 +65,15 @@ function twoUserCtx(opts?: { inviteeHasPlayed?: boolean; alreadyRedeemed?: boole
     balance: 3,
   });
 
-  const gameSessions = opts?.inviteeHasPlayed
-    ? [
-        {
-          _id: 'session_1',
-          userId: 'users_invitee',
-          mode: 'classic',
-          configSnapshot: {},
-          seed: 's',
-          startedAt: Date.now(),
-        },
-      ]
-    : [];
+  const gamesPlayed = opts?.inviteeGamesPlayed ?? 0;
+  const gameSessions = Array.from({ length: gamesPlayed }, (_, index) => ({
+    _id: `session_${index + 1}`,
+    userId: 'users_invitee',
+    mode: 'classic',
+    configSnapshot: {},
+    seed: `s${index + 1}`,
+    startedAt: Date.now() - index,
+  }));
 
   return createConvexTestCtx({
     identity: { subject: 'clerk_invitee', email: 'invitee@example.com' },
@@ -133,8 +133,16 @@ describe('referrals.applyCode', () => {
     );
   });
 
-  it('rejects played accounts with not_new_account', async () => {
-    const ctx = twoUserCtx({ inviteeHasPlayed: true });
+  it('allows accounts with fewer than 3 games', async () => {
+    const ctx = twoUserCtx({ inviteeGamesPlayed: 2 });
+    await expect(applyHandler(ctx, { code: 'INVITE01' })).resolves.toMatchObject({
+      success: true,
+      tokensGranted: 10,
+    });
+  });
+
+  it('rejects accounts with 3+ games as not_new_account', async () => {
+    const ctx = twoUserCtx({ inviteeGamesPlayed: 3 });
     await expect(applyHandler(ctx, { code: 'INVITE01' })).resolves.toEqual({
       success: false,
       error: 'not_new_account',

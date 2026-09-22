@@ -14,6 +14,7 @@ import { Image } from 'expo-image';
 import { Pressable } from '@/components/ui/Pressable';
 import { HeaderBackButton } from '@/components/HeaderBackButton';
 import { BORDER_RADIUS, SPACING, FONTS, getChromeTopPaddingWithInsets } from '@/constants';
+import { getQuestionImageSource } from '@/constants/questionImages';
 import { SHOW_HOT_SEAT_UI } from '@/constants/featureFlags';
 import { SOFT_SURFACE_STYLES } from '@/features/play/styles/softSurface';
 import {
@@ -400,6 +401,9 @@ export default function PlayQuestionScreen() {
   }
 
   const q = session.currentQuestion;
+  const promptImageSource =
+    (q.promptImageKey ? getQuestionImageSource(q.promptImageKey) : null) ??
+    (q.promptImageUrl ? { uri: q.promptImageUrl } : null);
   const hotSeatChallenge = SHOW_HOT_SEAT_UI ? session.hotSeat?.activeChallenge : undefined;
   const displaySeconds = Math.min(elapsedSeconds, QUESTION_MAX_SECONDS);
   const hasTimedOut = session.timedOutQuestionId === q.id;
@@ -610,10 +614,10 @@ export default function PlayQuestionScreen() {
 
   const promptBlock = (
     <View style={styles.revealPromptBlock}>
-      {q.promptImageUrl ? (
+      {promptImageSource ? (
         <Image
           testID="question-prompt-image"
-          source={{ uri: q.promptImageUrl }}
+          source={promptImageSource}
           style={styles.promptImageReveal}
           contentFit="contain"
         />
@@ -967,10 +971,10 @@ export default function PlayQuestionScreen() {
                   },
                 ]}
               >
-                {q.promptImageUrl ? (
+                {promptImageSource ? (
                   <Image
                     testID="question-prompt-image"
-                    source={{ uri: q.promptImageUrl }}
+                    source={promptImageSource}
                     style={[
                       styles.promptImage,
                       { height: Math.round(200 * questionViewportScale) },

@@ -150,6 +150,8 @@ export function ReferralModal({ visible, onClose }: ReferralModalProps) {
     }
   }, [applying, pasteInput, applyCode, t]);
 
+  const actionButtonBg = T.accentGlow;
+
   return (
     <WebAwareModal visible={visible} onRequestClose={onClose}>
       <View
@@ -157,8 +159,10 @@ export function ReferralModal({ visible, onClose }: ReferralModalProps) {
         style={[styles.overlay, { padding: scaled(SPACING.md) }]}
         testID="referral-modal"
       >
+        {/* Full-screen scrim on the backdrop itself. Parent bg alone can
+            paint as a mid-screen rectangle on some Android Modals. */}
         <Pressable
-          style={StyleSheet.absoluteFill}
+          style={[styles.backdrop, { backgroundColor: COLORS.overlay }]}
           onPress={onClose}
           accessibilityLabel={t('common.close')}
           accessibilityRole="button"
@@ -261,6 +265,7 @@ export function ReferralModal({ visible, onClose }: ReferralModalProps) {
               style={({ pressed }) => [
                 styles.copyButton,
                 {
+                  backgroundColor: actionButtonBg,
                   opacity: !code ? 0.5 : pressed ? 0.85 : 1,
                   borderRadius: scaled(10),
                   paddingVertical: scaled(8),
@@ -293,83 +298,81 @@ export function ReferralModal({ visible, onClose }: ReferralModalProps) {
             <Text
               style={[
                 styles.hint,
-                { color: T.textMuted, fontSize: scaled(13) },
+                {
+                  color: success ? '#388E3C' : T.textMuted,
+                  fontSize: scaled(13),
+                },
               ]}
+              testID={success ? 'referral-success' : 'referral-already-applied'}
             >
-              {t('store.referral.alreadyApplied')}
+              {success ?? t('store.referral.alreadyApplied')}
             </Text>
           ) : (
-            <View style={[styles.applyRow, { gap: scaled(SPACING.sm) }]}>
-              <TextInput
-                value={pasteInput}
-                onChangeText={(text) => {
-                  setPasteInput(text);
-                  if (error) setError(null);
-                  if (success) setSuccess(null);
-                }}
-                placeholder={t('store.referral.pastePlaceholder')}
-                placeholderTextColor={T.textMuted}
-                autoCapitalize="characters"
-                autoCorrect={false}
-                editable={!applying}
-                style={[
-                  styles.pasteInput,
-                  {
-                    color: T.textPrimary,
-                    backgroundColor: T.canvas,
-                    borderColor: error ? '#D32F2F' : 'rgba(15,23,42,0.16)',
-                    borderRadius: scaled(12),
-                    height: scaled(44),
-                    paddingHorizontal: scaled(SPACING.md),
-                    fontSize: scaled(14),
-                  },
-                ]}
-                testID="referral-paste-input"
-              />
-              <Pressable
-                onPress={() => {
-                  void onApply();
-                }}
-                disabled={applying}
-                accessibilityRole="button"
-                accessibilityLabel={t('store.referral.apply')}
-                style={({ pressed }) => [
-                  styles.applyButton,
-                  {
-                    height: scaled(44),
-                    borderRadius: scaled(12),
-                    paddingHorizontal: scaled(SPACING.md),
-                    opacity: applying ? 0.65 : pressed ? 0.9 : 1,
-                  },
-                ]}
-              >
-                {applying ? (
-                  <ActivityIndicator color="#FFFFFF" />
-                ) : (
-                  <Text style={[styles.applyButtonText, { fontSize: scaled(12) }]}>
-                    {t('store.referral.apply')}
-                  </Text>
-                )}
-              </Pressable>
-            </View>
+            <>
+              <View style={[styles.applyRow, { gap: scaled(SPACING.sm) }]}>
+                <TextInput
+                  value={pasteInput}
+                  onChangeText={(text) => {
+                    setPasteInput(text);
+                    if (error) setError(null);
+                    if (success) setSuccess(null);
+                  }}
+                  placeholder={t('store.referral.pastePlaceholder')}
+                  placeholderTextColor={T.textMuted}
+                  autoCapitalize="characters"
+                  autoCorrect={false}
+                  editable={!applying}
+                  style={[
+                    styles.pasteInput,
+                    {
+                      color: T.textPrimary,
+                      backgroundColor: T.canvas,
+                      borderColor: error ? '#D32F2F' : 'rgba(15,23,42,0.16)',
+                      borderRadius: scaled(12),
+                      height: scaled(44),
+                      paddingHorizontal: scaled(SPACING.md),
+                      fontSize: scaled(14),
+                    },
+                  ]}
+                  testID="referral-paste-input"
+                />
+                <Pressable
+                  onPress={() => {
+                    void onApply();
+                  }}
+                  disabled={applying}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('store.referral.apply')}
+                  style={({ pressed }) => [
+                    styles.applyButton,
+                    {
+                      backgroundColor: actionButtonBg,
+                      height: scaled(44),
+                      borderRadius: scaled(12),
+                      paddingHorizontal: scaled(SPACING.md),
+                      opacity: applying ? 0.65 : pressed ? 0.9 : 1,
+                    },
+                  ]}
+                >
+                  {applying ? (
+                    <ActivityIndicator color="#FFFFFF" />
+                  ) : (
+                    <Text style={[styles.applyButtonText, { fontSize: scaled(12) }]}>
+                      {t('store.referral.apply')}
+                    </Text>
+                  )}
+                </Pressable>
+              </View>
+              {error ? (
+                <Text
+                  style={[styles.hint, { color: '#D32F2F', fontSize: scaled(12) }]}
+                  testID="referral-error"
+                >
+                  {error}
+                </Text>
+              ) : null}
+            </>
           )}
-
-          {error ? (
-            <Text
-              style={[styles.hint, { color: '#D32F2F', fontSize: scaled(12) }]}
-              testID="referral-error"
-            >
-              {error}
-            </Text>
-          ) : null}
-          {success ? (
-            <Text
-              style={[styles.hint, { color: '#388E3C', fontSize: scaled(12) }]}
-              testID="referral-success"
-            >
-              {success}
-            </Text>
-          ) : null}
         </View>
       </View>
     </WebAwareModal>
@@ -378,16 +381,23 @@ export function ReferralModal({ visible, onClose }: ReferralModalProps) {
 
 const styles = StyleSheet.create({
   overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: COLORS.overlay,
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    minWidth: '100%',
+    minHeight: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 50,
     elevation: 50,
   },
+  backdrop: {
+    ...StyleSheet.absoluteFillObject,
+  },
   card: {
     width: '100%',
     maxWidth: 420,
+    zIndex: 1,
   },
   headerRow: {
     flexDirection: 'row',
@@ -423,12 +433,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    backgroundColor: COLORS.primary,
   },
   copyButtonText: {
     fontFamily: FONTS.uiBold,
     color: '#FFFFFF',
-    letterSpacing: 0.4,
   },
   divider: {
     height: StyleSheet.hairlineWidth,
@@ -448,13 +456,11 @@ const styles = StyleSheet.create({
   applyButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.primary,
     minWidth: 88,
   },
   applyButtonText: {
     fontFamily: FONTS.uiBold,
     color: '#FFFFFF',
-    letterSpacing: 0.5,
   },
   hint: {
     fontFamily: FONTS.ui,

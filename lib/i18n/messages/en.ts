@@ -336,7 +336,8 @@ const enBase = {
   'store.referral.errorInvalid': 'That invite code is not valid.',
   'store.referral.errorSelf': 'You cannot use your own invite code.',
   'store.referral.errorAlready': 'You already used an invite code on this account.',
-  'store.referral.errorNotNew': 'Apologies, offer is only valid for new accounts.',
+  'store.referral.errorNotNew':
+    'This account is no longer new. Three games or more played.',
   'store.referral.errorGeneric': 'Unable to apply that code. Please try again.',
   'store.referral.signIn': 'Sign in to invite friends and claim free tokens.',
 
@@ -377,8 +378,11 @@ const enBase = {
   'play.quickLength.option4Copy': 'Longer Quick Play while staying lightweight.',
   'play.quickLength.option5': '5 Topics',
   'play.quickLength.option5Copy': 'Almost the full board with one fewer topic.',
-  'play.randomizerQuickPlay': 'Randomizer Quick Play',
-  'play.randomizerQuickPlayChoose': 'Choose from one to five topics',
+  'play.randomizerQuickPlay': 'Number of Topics',
+  'play.randomizerQuickPlayChoose': 'Number of topics',
+  'play.numberOfTopics': 'Number of Topics',
+  'play.numberOfTopicsA11y': 'Number of topics, {count}, {cost} tokens. Double tap to change.',
+  'play.topicCountOptionA11y': '{count} topics, {cost} tokens',
   'play.rumbleTopicCount.3': 'Three topics',
   'play.rumbleTopicCount.4': 'Four topics',
   'play.rumbleTopicCount.6': 'Six topics',

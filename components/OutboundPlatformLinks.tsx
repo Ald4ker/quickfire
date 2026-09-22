@@ -71,7 +71,17 @@ export function OutboundPlatformLinks({ color, style }: OutboundPlatformLinksPro
         hitSlop={10}
         style={({ pressed }) => [styles.nativeLink, pressed && styles.pressed]}
       >
-        <Text style={[styles.nativeLinkText, { color }]}>{PUBLIC_SITE_HOST_LABEL}</Text>
+            {/*
+              Trailing figure-space: Android custom fonts often paint the last glyph
+              past the measured width (playbackfire.com becomes playbackfire.co).
+              Avoid single-line ellipsis on this label.
+            */}
+        <Text
+          style={[styles.nativeLinkText, { color }]}
+          allowFontScaling={false}
+        >
+          {`${PUBLIC_SITE_HOST_LABEL}\u2007`}
+        </Text>
       </Pressable>
     </View>
   );
@@ -111,17 +121,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: SPACING.sm,
+    overflow: 'visible',
   },
   nativeLink: {
+    flexShrink: 0,
+    alignSelf: 'center',
     paddingVertical: 6,
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
+    overflow: 'visible',
   },
   nativeLinkText: {
     fontFamily: FONTS.ui,
     fontSize: 12,
     lineHeight: 16,
-    letterSpacing: 0.3,
+    flexShrink: 0,
+    // No letterSpacing: Android under-measures width and clips the final glyph.
     opacity: 0.72,
+    paddingEnd: 4,
   },
   pressed: {
     opacity: 0.55,

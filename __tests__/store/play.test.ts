@@ -350,6 +350,18 @@ describe('usePlayStore', () => {
     expect(usePlayStore.getState().session?.step).toBe('team-setup');
   });
 
+  it('lets random mode pick any topic count from 1 to 6', () => {
+    usePlayStore.getState().setMode('random');
+
+    for (const count of [1, 2, 3, 4, 5, 6] as const) {
+      usePlayStore.getState().setTopicCount(count);
+      expect(usePlayStore.getState().session?.config.quickPlayTopicCount).toBe(count);
+    }
+
+    usePlayStore.getState().setTopicCount(9);
+    expect(usePlayStore.getState().session?.config.quickPlayTopicCount).toBe(6);
+  });
+
   it('snaps rumble teams when the topic count makes the current count invalid', () => {
     usePlayStore.getState().setMode('rumble');
     usePlayStore.getState().setTeamCount(3);

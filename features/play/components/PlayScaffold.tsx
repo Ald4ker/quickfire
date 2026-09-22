@@ -39,7 +39,7 @@ interface PlayScaffoldProps {
   onBack?: () => void;
   /** Defaults to labeled play pill; use `icon` for settings/store squircle. */
   backVariant?: HeaderBackButtonVariant;
-  /** Extra control after the back button (e.g. Randomizer Quick Play). */
+  /** Extra control after the back button (e.g. leading mode chrome). */
   headerLeading?: ReactNode;
   showHud?: boolean;
   /** Tighter score strip (e.g. question board). */

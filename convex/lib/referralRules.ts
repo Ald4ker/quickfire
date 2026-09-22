@@ -4,6 +4,9 @@
 
 export const REFERRAL_REWARD_TOKENS = 10;
 
+/** Invitees stay "new" through 0–2 games; 3+ games blocks redemption. */
+export const REFERRAL_NEW_ACCOUNT_MAX_GAMES = 2;
+
 /** Ambiguous chars dropped so codes are easy to read aloud / type. */
 const CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
@@ -29,6 +32,10 @@ export function buildReferralCodeFromSeed(seedParts: number[]): string {
   return out;
 }
 
+export function isReferralNewAccount(gamesPlayed: number): boolean {
+  return gamesPlayed <= REFERRAL_NEW_ACCOUNT_MAX_GAMES;
+}
+
 export type ReferralApplyFailureReason =
   | 'empty_code'
   | 'invalid_code'
@@ -45,7 +52,7 @@ export function evaluateReferralApply(input: {
   inviterFound: boolean;
   isSelf: boolean;
   alreadyRedeemed: boolean;
-  hasPlayed: boolean;
+  gamesPlayed: number;
 }): ReferralApplyCheck {
   if (!input.normalizedCode) {
     return { ok: false, reason: 'empty_code' };
@@ -59,7 +66,7 @@ export function evaluateReferralApply(input: {
   if (input.alreadyRedeemed) {
     return { ok: false, reason: 'already_redeemed' };
   }
-  if (input.hasPlayed) {
+  if (!isReferralNewAccount(input.gamesPlayed)) {
     return { ok: false, reason: 'not_new_account' };
   }
   return { ok: true };

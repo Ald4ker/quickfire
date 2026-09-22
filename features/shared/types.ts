@@ -82,6 +82,8 @@ export interface QuestionCard {
   prompt: string;
   answer: string;
   promptImageUrl?: string;
+  /** Bundled asset key from constants/questionImages.ts (picture topics). */
+  promptImageKey?: string;
   answerImageUrl?: string;
   pointValue: number;
   locale: SupportedLocale;

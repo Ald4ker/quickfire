@@ -1,6 +1,6 @@
 {
   "name": "backfire",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "Competitive multiplayer trivia \u2014 pick categories, split into teams, and outscore your rivals on a shared board.",
   "main": "expo-router/entry",
   "scripts": {
@@ -20,8 +20,10 @@
     "test:coverage": "jest --coverage",
     "eas-build-post-install": "node scripts/patch-standalone-debug-bundle.mjs && bun run guard:clerk-sso",
     "lint": "eslint . && oxlint -c oxlint.config.mjs .",
-    "seed:import": "tsx scripts/import-questions-from-csv.ts && tsx scripts/normalize-questions.ts",
+    "seed:import": "tsx scripts/import-questions-from-csv.ts && tsx scripts/merge-picture-topics.ts && tsx scripts/normalize-questions.ts",
     "seed:normalize": "tsx scripts/normalize-questions.ts",
+    "topics:picture:prepare": "python3 scripts/prepare-picture-topic-assets.py",
+    "topics:picture:merge": "tsx scripts/merge-picture-topics.ts && tsx scripts/normalize-questions.ts",
     "seed:push": "tsx scripts/push-seed-to-convex.ts",
     "seed:push:prod": "tsx scripts/push-seed-to-convex.ts --prod",
     "topics:transparent": "python3 scripts/transparency-topic-images.py",

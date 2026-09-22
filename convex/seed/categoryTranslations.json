@@ -120,6 +120,16 @@
     "title": "Two Truths and a Lie"
   },
   {
+    "categorySlug": "guess-the-flag",
+    "locale": "en",
+    "title": "Guess the Flag"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "locale": "en",
+    "title": "Guess the Jersey"
+  },
+  {
     "categorySlug": "science",
     "locale": "en",
     "title": "Science"

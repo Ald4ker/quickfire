@@ -11,6 +11,7 @@ import * as path from 'path';
 interface SourceQA {
   text: string;
   answer: string;
+  imageKey?: string;
 }
 
 interface SourceGroup {
@@ -42,6 +43,7 @@ interface NormalizedQuestion {
   pointValue: number;
   locale: string;
   status: string;
+  promptImageKey?: string;
 }
 
 function slugify(name: string): string {
@@ -94,7 +96,7 @@ function main() {
     }
 
     for (const [index, qa] of g.questionAndanswer.entries()) {
-      questions.push({
+      const row: NormalizedQuestion = {
         categorySlug: slug,
         canonicalKey: `${slug}:${g.points}:${index}`,
         prompt: qa.text,
@@ -102,7 +104,11 @@ function main() {
         pointValue: g.points,
         locale: 'en',
         status: 'active',
-      });
+      };
+      if (qa.imageKey) {
+        row.promptImageKey = qa.imageKey;
+      }
+      questions.push(row);
     }
   }
 

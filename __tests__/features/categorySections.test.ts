@@ -25,8 +25,10 @@ describe('category sections', () => {
 
   it('finds every requested topic in the shipped question data', () => {
     const sections = groupCategoriesBySection(getPlayableCategories());
-    expect(sections.map((section) => section.categories.length)).toEqual([20, 14, 28, 8, 8]);
-    expect(sections.flatMap((section) => section.categories).map((category) => category.title)).not.toContain('Guess the Flag');
+    expect(sections.map((section) => section.categories.length)).toEqual([21, 14, 28, 9, 8]);
+    const titles = sections.flatMap((section) => section.categories).map((category) => category.title);
+    expect(titles).toContain('Guess the Flag');
+    expect(titles).toContain('Guess the Jersey');
   });
 
   // SAFETY: Test fixture / double boundary cast justified by controlled test setup.

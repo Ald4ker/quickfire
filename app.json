@@ -3,7 +3,7 @@
     "name": "BackFire",
     "slug": "backfire",
     "scheme": "backfire",
-    "version": "1.0.2",
+    "version": "1.0.7",
     "orientation": "landscape",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -29,11 +29,11 @@
       "hidden": true
     },
     "android": {
-      "versionCode": 37,
+      "versionCode": 38,
       "package": "com.playbackfire.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#F1C84A"
+        "backgroundColor": "#F0EBE3"
       },
       "predictiveBackGestureEnabled": false,
       "intentFilters": [

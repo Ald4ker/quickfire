@@ -18,6 +18,7 @@ import { COLORS, FONT_SIZES, FONTS, SPACING, getStandardChromeTopPadding } from 
 import { SHOW_HOT_SEAT_UI } from '@/constants/featureFlags';
 import { PlayScaffold } from '@/features/play/components/PlayScaffold';
 import { WagerInfoModal } from '@/features/play/components/WagerInfoModal';
+import { WebAwareModal } from '@/components/WebAwareModal';
 import { isActiveMatchStep, routeForPlayStep } from '@/features/play/sessionRouting';
 import {
   RUMBLE_TEAM_COUNT_OPTIONS,
@@ -28,6 +29,7 @@ import {
 } from '@/features/play/rumble';
 import { getModeCategoryCount } from '@/features/play/data';
 import { SOFT_SURFACE_FACE, softSurfaceLift } from '@/features/play/styles/softSurface';
+import { getGameTokenCost } from '@/features/play/tokenCosts';
 import { useI18n } from '@/lib/i18n/useI18n';
 import { useDarkModeFlatTop } from '@/lib/hooks/useTheme';
 import { useViewportLayout } from '@/lib/hooks/useViewportLayout';
@@ -36,7 +38,6 @@ import {
   getWebTeamCardMinHeight,
 } from '@/lib/layout/teamSetupLayout';
 import { goBackOrReplace } from '@/lib/navigation/goBackOrReplace';
-import { getWebViewportScale } from '@/lib/layout/webViewportScale';
 import { usePlayStore } from '@/store/play';
 import { useThemeStore } from '@/store/theme';
 import type { GameSessionState } from '@/features/shared';
@@ -143,6 +144,7 @@ export default function TeamSetupScreen() {
   const darkModeFlatTop = useDarkModeFlatTop();
   const [wagerInfoOpen, setWagerInfoOpen] = useState(false);
   const [hotSeatInfoOpen, setHotSeatInfoOpen] = useState(false);
+  const [topicPickerOpen, setTopicPickerOpen] = useState(false);
 
   const session = usePlayStore((state) => state.session);
   const ensureDraft = usePlayStore((state) => state.ensureDraft);
@@ -192,10 +194,51 @@ export default function TeamSetupScreen() {
   const rumbleTopicCount = rumbleMode
     ? normalizeRumbleTopicCount(session?.config.quickPlayTopicCount)
     : 6;
-  const randomizerQpActive =
-    Boolean(randomMode && session) &&
-    getModeCategoryCount('random', session?.config.quickPlayTopicCount) < 6;
+  const randomTopicCount = randomMode
+    ? getModeCategoryCount('random', session?.config.quickPlayTopicCount)
+    : 6;
+  const randomTokenCost = randomMode ? getGameTokenCost('random', randomTopicCount) : 0;
+  const tokensLabel = t('common.tokens').toUpperCase();
   const hotSeatRounds = session ? hotSeatRoundsFromConfig(session.config) : 0;
+
+  const topicPickerLayout = useMemo(() => {
+    const shortSide = Math.min(windowWidth, windowHeight);
+    const tight = shortSide < 400;
+    const micro = shortSide < 360;
+    const overlayPad = Math.max(SPACING.sm, Math.round((micro ? 8 : tight ? 12 : 16) * viewportScale));
+    // Prefer filling the viewport width so six tiles stay as wide as possible.
+    const sheetMaxWidth = Math.min(
+      windowWidth - overlayPad * 2,
+      landscape ? Math.min(720, Math.round(windowWidth * 0.9)) : Math.min(480, Math.round(windowWidth * 0.96))
+    );
+    const sheetPad = Math.round((micro ? SPACING.sm : tight ? SPACING.md : SPACING.md + 4) * viewportScale);
+    const gap = Math.max(4, Math.round((micro ? 4 : tight ? 6 : 8) * viewportScale));
+    const optionWidth = Math.max(
+      48,
+      Math.floor((sheetMaxWidth - sheetPad * 2 - gap * 5) / 6)
+    );
+    const optionHeight = Math.max(
+      Math.round(optionWidth * (landscape ? 1.35 : 1.45)),
+      Math.round((micro ? 72 : tight ? 82 : 92) * viewportScale)
+    );
+    return {
+      overlayPad,
+      sheetMaxWidth,
+      sheetPad,
+      gap,
+      optionWidth,
+      optionHeight,
+      titleSize: Math.round((micro ? 14 : tight ? 16 : 18) * viewportScale),
+      optionFontSize: Math.round((micro ? 22 : tight ? 26 : 30) * viewportScale),
+      tokenCostSize: Math.round((micro ? 11 : tight ? 12 : 13) * viewportScale),
+      tokenWordSize: Math.round((micro ? 7 : tight ? 8 : 9) * viewportScale),
+      tokenIconSize: Math.round((micro ? 10 : tight ? 11 : 12) * viewportScale),
+      sheetRadius: Math.round((tight ? 28 : 36) * viewportScale),
+      optionRadius: Math.round(Math.min(optionWidth * 0.36, tight ? 18 : 22)),
+      maxSheetHeight: Math.round(windowHeight * (landscape ? 0.92 : 0.76)),
+      titleMargin: Math.round((tight ? 4 : 8) * viewportScale),
+    };
+  }, [landscape, viewportScale, windowHeight, windowWidth]);
 
   useLayoutEffect(() => {
     ensureDraft();
@@ -205,6 +248,7 @@ export default function TeamSetupScreen() {
   const inputFontSize = Math.round((shortScreen ? FONT_SIZES.xs : compact ? FONT_SIZES.sm : FONT_SIZES.md) * viewportScale);
   const stepperBtn = Math.round((shortScreen ? 34 : compact ? 38 : 42) * viewportScale);
   const stepperValueSize = Math.round((shortScreen ? 18 : compact ? 20 : 24) * viewportScale);
+  const topicCountBoxSize = Math.round((shortScreen ? 52 : compact ? 56 : 64) * viewportScale);
   const cardPad = Math.round((shortScreen ? SPACING.sm : SPACING.md) * viewportScale);
   const centerTitleSize = Math.round((shortScreen ? 14 : FONT_SIZES.lg) * viewportScale);
   const centerIconSize = Math.round((shortScreen ? 40 : 64) * viewportScale);
@@ -213,65 +257,6 @@ export default function TeamSetupScreen() {
     () => getRumbleTeamSetupDensity(windowWidth, windowHeight),
     [windowWidth, windowHeight]
   );
-
-  const randomizerQuickPlayButton = useMemo(() => {
-    if (!randomMode) return null;
-    const chromeScale = Platform.OS === 'web' ? getWebViewportScale(windowWidth, windowHeight) : 1;
-    const chromeSize = Math.round(44 * chromeScale);
-    return (
-      <Pressable
-        testID="randomizer-quick-play"
-        onPress={() => router.push('/play/quick-length')}
-        style={({ pressed }) => [
-          styles.randomizerQpButton,
-          SOFT_SURFACE_FACE,
-          darkModeFlatTop,
-          softSurfaceLift(),
-          {
-            height: chromeSize,
-            borderRadius: Math.round(14 * chromeScale),
-            backgroundColor: randomizerQpActive ? T.textPrimary : T.surface,
-          },
-          {
-            opacity: pressed ? 0.9 : 1,
-            transform: pressed ? [{ scale: 0.98 }] : [{ scale: 1 }],
-          },
-        ]}
-        accessibilityRole="button"
-        accessibilityLabel={t('play.randomizerQuickPlay')}
-        accessibilityState={{
-          selected: randomizerQpActive,
-        }}
-      >
-        <Text
-          style={[
-            styles.randomizerQpButtonText,
-            {
-              color: randomizerQpActive ? T.surface : T.textPrimary,
-              fontSize: shortScreen ? 18 : compact ? 20 : 22,
-            },
-            getTextStyle(undefined, 'display', 'center'),
-          ]}
-          numberOfLines={1}
-          adjustsFontSizeToFit
-          minimumFontScale={0.7}
-        >
-          {t('play.randomizerQuickPlay')}
-        </Text>
-      </Pressable>
-    );
-  }, [
-    darkModeFlatTop,
-    compact,
-    getTextStyle,
-    randomMode,
-    randomizerQpActive,
-    router,
-    shortScreen,
-    t,
-    windowHeight,
-    windowWidth,
-  ]);
 
   const renderStepper = useCallback(
     (value: number, onMinus: () => void, onPlus: () => void, minusDisabled: boolean, plusDisabled: boolean) => (
@@ -663,6 +648,97 @@ export default function TeamSetupScreen() {
             </Pressable>
           </View>
         ) : null}
+
+        {randomMode ? (
+          <View
+            style={[
+              styles.centerCard,
+              themedStyles.centerCard,
+              shortScreen && styles.centerCardTight,
+              { padding: cardPad },
+            ]}
+            testID="random-topic-count-card"
+          >
+            <Text
+              style={[
+                styles.centerCardTitle,
+                themedStyles.centerCardTitle,
+                { fontSize: centerTitleSize },
+                getTextStyle(undefined, 'display', 'center'),
+              ]}
+            >
+              {t('play.numberOfTopics')}
+            </Text>
+            <Pressable
+              testID="random-topic-count-box"
+              onPress={() => setTopicPickerOpen(true)}
+              accessibilityRole="button"
+              accessibilityLabel={t('play.numberOfTopicsA11y', {
+                count: randomTopicCount,
+                cost: randomTokenCost,
+              })}
+              style={({ pressed }) => [
+                styles.topicCountTile,
+                SOFT_SURFACE_FACE,
+                darkModeFlatTop,
+                {
+                  marginTop: SPACING.sm,
+                  minWidth: Math.round(topicCountBoxSize * 1.55),
+                  paddingHorizontal: Math.round((SPACING.md + 2) * viewportScale),
+                  paddingTop: Math.round((SPACING.md + 2) * viewportScale),
+                  paddingBottom: Math.round((SPACING.md + 2) * viewportScale),
+                  borderRadius: Math.round(topicCountBoxSize * 0.34),
+                  backgroundColor: T.canvas,
+                  opacity: pressed ? 0.94 : 1,
+                  transform: pressed ? [{ scale: 0.97 }] : [{ scale: 1 }],
+                },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.topicCountBoxValue,
+                  {
+                    fontSize: Math.round(stepperValueSize * 1.15),
+                    lineHeight: Math.round(stepperValueSize * 1.15),
+                    color: T.textPrimary,
+                    includeFontPadding: false,
+                  },
+                  getTextStyle(undefined, 'displayBold', 'center'),
+                ]}
+                numberOfLines={1}
+              >
+                {randomTopicCount}
+              </Text>
+              <View
+                style={styles.topicTokenCostRow}
+                testID="random-topic-token-cost"
+                accessibilityElementsHidden
+                importantForAccessibility="no-hide-descendants"
+              >
+                <Ionicons
+                  name="diamond"
+                  size={Math.max(11, Math.round(stepperValueSize * 0.48))}
+                  color={T.textPrimary}
+                />
+                <Text
+                  style={[
+                    styles.topicTokenCostText,
+                    {
+                      color: T.textPrimary,
+                      fontSize: Math.max(10, Math.round(centerTitleSize * 0.68)),
+                      lineHeight: Math.max(12, Math.round(centerTitleSize * 0.68)),
+                      includeFontPadding: false,
+                    },
+                    getTextStyle(undefined, 'bodySemibold', 'center'),
+                  ]}
+                  numberOfLines={1}
+                >
+                  {`${randomTokenCost} ${tokensLabel}`}
+                </Text>
+              </View>
+            </Pressable>
+          </View>
+        ) : null}
       </View>
     );
   }, [
@@ -670,6 +746,10 @@ export default function TeamSetupScreen() {
     wagerEnabled,
     hotSeatAvailable,
     hotSeatRounds,
+    randomMode,
+    randomTopicCount,
+    randomTokenCost,
+    tokensLabel,
     renderStepper,
     setHotSeatRounds,
     setWagersPerTeam,
@@ -678,8 +758,12 @@ export default function TeamSetupScreen() {
     landscape,
     shortScreen,
     cardPad,
-    centerTitleSize,
     centerIconSize,
+    centerTitleSize,
+    topicCountBoxSize,
+    stepperValueSize,
+    viewportScale,
+    darkModeFlatTop,
     themedStyles,
   ]);
 
@@ -826,7 +910,7 @@ export default function TeamSetupScreen() {
       title={t('play.teamSetupTitle')}
       onBack={handleBack}
       backVariant="icon"
-      headerLeading={randomizerQuickPlayButton}
+      headerLeading={undefined}
       bodyScrollEnabled={false}
       bodyFrame={false}
       backgroundColor={T.canvas}
@@ -838,6 +922,144 @@ export default function TeamSetupScreen() {
       contentMaxWidth={isWebLayout ? setupRowMaxWidth : undefined}
     >
       <WagerInfoModal visible={wagerInfoOpen} onClose={() => setWagerInfoOpen(false)} />
+
+      <WebAwareModal visible={topicPickerOpen} onRequestClose={() => setTopicPickerOpen(false)}>
+        <View
+          accessibilityViewIsModal
+          style={[styles.topicPickerOverlay, { padding: topicPickerLayout.overlayPad }]}
+          testID="random-topic-picker"
+        >
+          <Pressable
+            style={[styles.topicPickerBackdrop, { backgroundColor: COLORS.overlay }]}
+            onPress={() => setTopicPickerOpen(false)}
+            accessibilityRole="button"
+            accessibilityLabel={t('common.close')}
+          />
+          <View
+            style={[
+              styles.topicPickerSheet,
+              SOFT_SURFACE_FACE,
+              darkModeFlatTop,
+              {
+                backgroundColor: T.canvas,
+                width: topicPickerLayout.sheetMaxWidth,
+                maxWidth: topicPickerLayout.sheetMaxWidth,
+                maxHeight: topicPickerLayout.maxSheetHeight,
+                padding: topicPickerLayout.sheetPad,
+                borderRadius: topicPickerLayout.sheetRadius,
+                gap: topicPickerLayout.gap,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.topicPickerTitle,
+                {
+                  color: T.textPrimary,
+                  fontSize: topicPickerLayout.titleSize,
+                  marginBottom: topicPickerLayout.titleMargin,
+                },
+                getTextStyle(undefined, 'displayBold', 'center'),
+              ]}
+            >
+              {t('play.numberOfTopics').toUpperCase()}
+            </Text>
+            <View style={[styles.topicPickerRow, { gap: topicPickerLayout.gap }]}>
+              {([1, 2, 3, 4, 5, 6] as const).map((count) => {
+                const selected = count === randomTopicCount;
+                const optionCost = getGameTokenCost('random', count);
+                const faceColor = selected ? T.textPrimary : T.surface;
+                const labelColor = selected ? T.surface : T.textPrimary;
+                const mutedColor = selected ? 'rgba(255,255,255,0.82)' : T.textMuted;
+                return (
+                  <Pressable
+                    key={count}
+                    testID={`random-topic-option-${count}`}
+                    onPress={() => {
+                      setTopicCount(count);
+                      setTopicPickerOpen(false);
+                    }}
+                    accessibilityRole="button"
+                    accessibilityLabel={t('play.topicCountOptionA11y', {
+                      count,
+                      cost: optionCost,
+                    })}
+                    accessibilityState={{ selected }}
+                    style={({ pressed }) => [
+                      styles.topicPickerOption,
+                      SOFT_SURFACE_FACE,
+                      darkModeFlatTop,
+                      {
+                        width: topicPickerLayout.optionWidth,
+                        height: topicPickerLayout.optionHeight,
+                        borderRadius: topicPickerLayout.optionRadius,
+                        backgroundColor: faceColor,
+                        opacity: pressed ? 0.94 : 1,
+                        transform: pressed ? [{ scale: 0.97 }] : [{ scale: 1 }],
+                      },
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.topicPickerOptionText,
+                        {
+                          color: labelColor,
+                          fontSize: topicPickerLayout.optionFontSize,
+                          lineHeight: Math.round(topicPickerLayout.optionFontSize * 1.05),
+                        },
+                        getTextStyle(undefined, 'displayBold', 'center'),
+                      ]}
+                      numberOfLines={1}
+                      adjustsFontSizeToFit
+                      minimumFontScale={0.75}
+                    >
+                      {count}
+                    </Text>
+                    <View style={styles.topicPickerOptionCostBlock}>
+                      <View style={styles.topicPickerOptionCostRow}>
+                        <Ionicons
+                          name="diamond"
+                          size={topicPickerLayout.tokenIconSize}
+                          color={labelColor}
+                        />
+                        <Text
+                          testID={`random-topic-option-cost-${count}`}
+                          style={[
+                            styles.topicPickerOptionCostText,
+                            {
+                              color: labelColor,
+                              fontSize: topicPickerLayout.tokenCostSize,
+                              lineHeight: Math.round(topicPickerLayout.tokenCostSize * 1.15),
+                            },
+                            getTextStyle(undefined, 'bodySemibold', 'center'),
+                          ]}
+                          numberOfLines={1}
+                        >
+                          {optionCost}
+                        </Text>
+                      </View>
+                      <Text
+                        style={[
+                          styles.topicPickerOptionTokensWord,
+                          {
+                            color: mutedColor,
+                            fontSize: topicPickerLayout.tokenWordSize,
+                            lineHeight: Math.round(topicPickerLayout.tokenWordSize * 1.15),
+                          },
+                          getTextStyle(undefined, 'bodySemibold', 'center'),
+                        ]}
+                        numberOfLines={1}
+                      >
+                        {tokensLabel}
+                      </Text>
+                    </View>
+                  </Pressable>
+                );
+              })}
+            </View>
+          </View>
+        </View>
+      </WebAwareModal>
 
       {SHOW_HOT_SEAT_UI && hotSeatInfoOpen ? (
         <View accessibilityViewIsModal style={styles.modalOverlay} testID="hot-seat-info-overlay">
@@ -1113,16 +1335,100 @@ const styles = StyleSheet.create({
     color: T.textPrimary,
     textAlign: 'center',
   },
-  randomizerQpButton: {
+  topicCountTile: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    overflow: 'visible',
+  },
+  topicCountBoxValue: {
+    fontFamily: FONTS.displayBold,
+    textAlign: 'center',
+    letterSpacing: -0.5,
+  },
+  topicTokenCostRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+    flexShrink: 0,
+  },
+  topicTokenCostText: {
+    fontFamily: FONTS.uiBold,
+    textAlign: 'center',
+    letterSpacing: 0.4,
+    flexShrink: 0,
+  },
+  topicPickerOverlay: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    minWidth: '100%',
+    minHeight: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: SPACING.md,
   },
-  randomizerQpButtonText: {
+  topicPickerBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  topicPickerSheet: {
+    zIndex: 1,
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  topicPickerTitle: {
     fontFamily: FONTS.displayBold,
-    letterSpacing: 0.5,
+    letterSpacing: 0.6,
     textAlign: 'center',
-    color: T.textPrimary,
+    width: '100%',
+  },
+  topicPickerRow: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    width: '100%',
+  },
+  topicPickerOption: {
+    flexGrow: 0,
+    flexShrink: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+    paddingHorizontal: 2,
+    paddingVertical: 6,
+    overflow: 'visible',
+  },
+  topicPickerOptionText: {
+    fontFamily: FONTS.displayBold,
+    textAlign: 'center',
+    letterSpacing: -0.6,
+  },
+  topicPickerOptionCostBlock: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 1,
+    width: '100%',
+    paddingHorizontal: 2,
+  },
+  topicPickerOptionCostRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 3,
+    width: '100%',
+  },
+  topicPickerOptionCostText: {
+    fontFamily: FONTS.uiBold,
+    textAlign: 'center',
+    letterSpacing: 0.2,
+  },
+  topicPickerOptionTokensWord: {
+    fontFamily: FONTS.uiBold,
+    textAlign: 'center',
+    letterSpacing: 0.5,
+    width: '100%',
   },
   rumbleScrollContent: {
     gap: SPACING.md,

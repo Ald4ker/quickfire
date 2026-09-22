@@ -97,6 +97,7 @@ export const seedQuestions = internalMutation({
         pointValue: v.number(),
         locale: v.string(),
         status: v.string(),
+        promptImageKey: v.optional(v.string()),
       })
     ),
   },
@@ -129,6 +130,7 @@ export const seedQuestions = internalMutation({
           answer: q.answer,
           pointValue: q.pointValue,
           status: q.status,
+          promptImageKey: q.promptImageKey,
         });
         updated += 1;
         continue;
@@ -142,6 +144,7 @@ export const seedQuestions = internalMutation({
         pointValue: q.pointValue,
         locale: q.locale,
         status: q.status,
+        promptImageKey: q.promptImageKey,
       });
       inserted += 1;
     }

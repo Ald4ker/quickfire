@@ -65,4 +65,12 @@ describe('English mode copy', () => {
       'Choose how many topics Quick Play should use before team setup.'
     );
   });
+
+  it('labels random topic count as Number of Topics and keeps British randomiser spelling', () => {
+    expect(en['play.numberOfTopics']).toBe('Number of Topics');
+    expect(en['play.randomBoardSubtitle']).toContain('Randomiser');
+    expect(en['play.wagerInfoParagraph2']).toContain('randomiser');
+    expect(Object.values(en).join('\n')).not.toMatch(/\bRandomize\b/);
+    expect(Object.values(en).join('\n')).not.toMatch(/\brandomize\b/);
+  });
 });

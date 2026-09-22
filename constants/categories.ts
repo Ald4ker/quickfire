@@ -37,6 +37,8 @@ const RAW_CATEGORIES: { id: string; name: string }[] = [
   { id: 'gen22', name: "What's the connection?" },
   { id: 'gen23', name: "Which Country" },
   { id: 'gen27', name: "Two Truths and a Lie" },
+  { id: 'gen28', name: "Guess the Flag" },
+  { id: 'gen29', name: "Guess the Jersey" },
   { id: 'gen3', name: "Science" },
   { id: 'gen4', name: "UK" },
   { id: 'gen5', name: "USA" },

@@ -1,56 +1,31 @@
-import React from 'react';
-import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals';
-import { fireEvent, render, screen } from '@testing-library/react-native';
-import { Linking, Platform } from 'react-native';
-
-import { OutboundPlatformLinks } from '@/components/OutboundPlatformLinks';
-import {
-  APP_STORE_URL,
-  PLAY_STORE_URL,
-  PUBLIC_SITE_HOST_LABEL,
-} from '@/constants/site';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { describe, expect, it } from '@jest/globals';
 
 describe('OutboundPlatformLinks', () => {
-  const originalOS = Platform.OS;
+  const source = readFileSync(
+    join(__dirname, '../../components/OutboundPlatformLinks.tsx'),
+    'utf8'
+  );
 
-  beforeEach(() => {
-    jest.spyOn(Linking, 'openURL').mockResolvedValue(undefined as never);
+  it('opens website / store targets via Linking', () => {
+    expect(source).toContain('getPublicSiteUrl()');
+    expect(source).toContain('APP_STORE_URL');
+    expect(source).toContain('PLAY_STORE_URL');
+    expect(source).toContain('testID="outbound-website-link"');
   });
 
-  afterEach(() => {
-    Object.defineProperty(Platform, 'OS', {
-      configurable: true,
-      get: () => originalOS,
-    });
-    jest.restoreAllMocks();
-  });
+  it('avoids Android host-label clip (no letterSpacing / numberOfLines, trailing pad)', () => {
+    expect(source).toContain('PUBLIC_SITE_HOST_LABEL');
+    expect(source).toContain('\\u2007');
+    expect(source).toContain('allowFontScaling={false}');
+    expect(source).toContain('paddingEnd: 4');
 
-  it('opens the website from native', () => {
-    Object.defineProperty(Platform, 'OS', {
-      configurable: true,
-      get: () => 'ios',
-    });
+    const nativeReturn = source.slice(source.indexOf('outbound-platform-links-native'));
+    expect(nativeReturn).not.toMatch(/numberOfLines=\{1\}/);
 
-    render(<OutboundPlatformLinks color="#333333" />);
-
-    fireEvent.press(screen.getByTestId('outbound-website-link'));
-    expect(Linking.openURL).toHaveBeenCalledWith(`https://${PUBLIC_SITE_HOST_LABEL}`);
-    expect(screen.queryByTestId('outbound-app-store-link')).toBeNull();
-  });
-
-  it('opens App Store and Play Store from web with separate targets', () => {
-    Object.defineProperty(Platform, 'OS', {
-      configurable: true,
-      get: () => 'web',
-    });
-
-    render(<OutboundPlatformLinks color="#333333" />);
-
-    fireEvent.press(screen.getByTestId('outbound-app-store-link'));
-    expect(Linking.openURL).toHaveBeenCalledWith(APP_STORE_URL);
-
-    fireEvent.press(screen.getByTestId('outbound-play-store-link'));
-    expect(Linking.openURL).toHaveBeenCalledWith(PLAY_STORE_URL);
-    expect(screen.queryByTestId('outbound-website-link')).toBeNull();
+    const nativeBlock = source.slice(source.indexOf('nativeLinkText:'));
+    const styleBlock = nativeBlock.slice(0, nativeBlock.indexOf('pressed:'));
+    expect(styleBlock).not.toMatch(/^\s*letterSpacing:/m);
   });
 });

@@ -23634,6 +23634,3156 @@
     "status": "active"
   },
   {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:0",
+    "prompt": "Which country is this?",
+    "answer": "Afghanistan",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/af"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:1",
+    "prompt": "Which country is this?",
+    "answer": "Albania",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/al"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:2",
+    "prompt": "Which country is this?",
+    "answer": "Algeria",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/dz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:3",
+    "prompt": "Which country is this?",
+    "answer": "Argentina",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ar"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:4",
+    "prompt": "Which country is this?",
+    "answer": "Australia",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/au"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:5",
+    "prompt": "Which country is this?",
+    "answer": "Austria",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/at"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:6",
+    "prompt": "Which country is this?",
+    "answer": "Bangladesh",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bd"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:7",
+    "prompt": "Which country is this?",
+    "answer": "Belgium",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/be"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:8",
+    "prompt": "Which country is this?",
+    "answer": "Bhutan",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bt"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:9",
+    "prompt": "Which country is this?",
+    "answer": "Brazil",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/br"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:10",
+    "prompt": "Which country is this?",
+    "answer": "Bulgaria",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bg"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:11",
+    "prompt": "Which country is this?",
+    "answer": "Canada",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ca"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:12",
+    "prompt": "Which country is this?",
+    "answer": "Chile",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cl"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:13",
+    "prompt": "Which country is this?",
+    "answer": "China",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:14",
+    "prompt": "Which country is this?",
+    "answer": "Colombia",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/co"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:15",
+    "prompt": "Which country is this?",
+    "answer": "Cuba",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cu"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:16",
+    "prompt": "Which country is this?",
+    "answer": "Cyprus",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cy"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:17",
+    "prompt": "Which country is this?",
+    "answer": "Denmark",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/dk"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:18",
+    "prompt": "Which country is this?",
+    "answer": "Egypt",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/eg"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:19",
+    "prompt": "Which country is this?",
+    "answer": "Finland",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/fi"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:20",
+    "prompt": "Which country is this?",
+    "answer": "France",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/fr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:21",
+    "prompt": "Which country is this?",
+    "answer": "Germany",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/de"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:22",
+    "prompt": "Which country is this?",
+    "answer": "Greece",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:23",
+    "prompt": "Which country is this?",
+    "answer": "Hungary",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/hu"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:24",
+    "prompt": "Which country is this?",
+    "answer": "Iceland",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/is"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:25",
+    "prompt": "Which country is this?",
+    "answer": "India",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/in"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:26",
+    "prompt": "Which country is this?",
+    "answer": "Indonesia",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/id"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:27",
+    "prompt": "Which country is this?",
+    "answer": "Iran",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ir"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:28",
+    "prompt": "Which country is this?",
+    "answer": "Iraq",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/iq"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:29",
+    "prompt": "Which country is this?",
+    "answer": "Ireland",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ie"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:30",
+    "prompt": "Which country is this?",
+    "answer": "Italy",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/it"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:31",
+    "prompt": "Which country is this?",
+    "answer": "Jamaica",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/jm"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:32",
+    "prompt": "Which country is this?",
+    "answer": "Japan",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/jp"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:33",
+    "prompt": "Which country is this?",
+    "answer": "Kenya",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ke"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:34",
+    "prompt": "Which country is this?",
+    "answer": "Lebanon",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/lb"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:35",
+    "prompt": "Which country is this?",
+    "answer": "Libya",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ly"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:36",
+    "prompt": "Which country is this?",
+    "answer": "Malaysia",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/my"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:37",
+    "prompt": "Which country is this?",
+    "answer": "Mexico",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mx"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:38",
+    "prompt": "Which country is this?",
+    "answer": "Morocco",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ma"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:39",
+    "prompt": "Which country is this?",
+    "answer": "Nepal",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/np"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:40",
+    "prompt": "Which country is this?",
+    "answer": "Netherlands",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/nl"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:41",
+    "prompt": "Which country is this?",
+    "answer": "New Zealand",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/nz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:42",
+    "prompt": "Which country is this?",
+    "answer": "Nigeria",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ng"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:43",
+    "prompt": "Which country is this?",
+    "answer": "North Korea",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/kp"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:44",
+    "prompt": "Which country is this?",
+    "answer": "Norway",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/no"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:45",
+    "prompt": "Which country is this?",
+    "answer": "Pakistan",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/pk"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:46",
+    "prompt": "Which country is this?",
+    "answer": "Palestine",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ps"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:47",
+    "prompt": "Which country is this?",
+    "answer": "Panama",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/pa"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:48",
+    "prompt": "Which country is this?",
+    "answer": "Peru",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/pe"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:49",
+    "prompt": "Which country is this?",
+    "answer": "Philippines",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ph"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:50",
+    "prompt": "Which country is this?",
+    "answer": "Poland",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/pl"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:51",
+    "prompt": "Which country is this?",
+    "answer": "Portugal",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/pt"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:52",
+    "prompt": "Which country is this?",
+    "answer": "Qatar",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/qa"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:53",
+    "prompt": "Which country is this?",
+    "answer": "Russia",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ru"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:54",
+    "prompt": "Which country is this?",
+    "answer": "Saudi Arabia",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sa"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:55",
+    "prompt": "Which country is this?",
+    "answer": "Singapore",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sg"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:56",
+    "prompt": "Which country is this?",
+    "answer": "South Africa",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/za"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:57",
+    "prompt": "Which country is this?",
+    "answer": "South Korea",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/kr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:58",
+    "prompt": "Which country is this?",
+    "answer": "Spain",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/es"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:59",
+    "prompt": "Which country is this?",
+    "answer": "Sri Lanka",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/lk"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:60",
+    "prompt": "Which country is this?",
+    "answer": "Sweden",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/se"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:61",
+    "prompt": "Which country is this?",
+    "answer": "Switzerland",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ch"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:62",
+    "prompt": "Which country is this?",
+    "answer": "Türkiye",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:63",
+    "prompt": "Which country is this?",
+    "answer": "Ukraine",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ua"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:64",
+    "prompt": "Which country is this?",
+    "answer": "United Kingdom",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gb"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:65",
+    "prompt": "Which country is this?",
+    "answer": "United States",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/us"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:66",
+    "prompt": "Which country is this?",
+    "answer": "Uruguay",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/uy"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:100:67",
+    "prompt": "Which country is this?",
+    "answer": "Vietnam",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/vn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:0",
+    "prompt": "Which country is this?",
+    "answer": "Andorra",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ad"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:1",
+    "prompt": "Which country is this?",
+    "answer": "Angola",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ao"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:2",
+    "prompt": "Which country is this?",
+    "answer": "Armenia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/am"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:3",
+    "prompt": "Which country is this?",
+    "answer": "Azerbaijan",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/az"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:4",
+    "prompt": "Which country is this?",
+    "answer": "Bahrain",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bh"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:5",
+    "prompt": "Which country is this?",
+    "answer": "Barbados",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bb"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:6",
+    "prompt": "Which country is this?",
+    "answer": "Belarus",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/by"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:7",
+    "prompt": "Which country is this?",
+    "answer": "Bosnia and Herzegovina",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ba"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:8",
+    "prompt": "Which country is this?",
+    "answer": "Botswana",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bw"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:9",
+    "prompt": "Which country is this?",
+    "answer": "Brunei",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:10",
+    "prompt": "Which country is this?",
+    "answer": "Cameroon",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cm"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:11",
+    "prompt": "Which country is this?",
+    "answer": "Chad",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/td"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:12",
+    "prompt": "Which country is this?",
+    "answer": "Costa Rica",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:13",
+    "prompt": "Which country is this?",
+    "answer": "Côte d’Ivoire",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ci"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:14",
+    "prompt": "Which country is this?",
+    "answer": "Croatia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/hr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:15",
+    "prompt": "Which country is this?",
+    "answer": "Czechia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:16",
+    "prompt": "Which country is this?",
+    "answer": "Democratic Republic of the Congo",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cd"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:17",
+    "prompt": "Which country is this?",
+    "answer": "Dominican Republic",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/do"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:18",
+    "prompt": "Which country is this?",
+    "answer": "Ecuador",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ec"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:19",
+    "prompt": "Which country is this?",
+    "answer": "El Salvador",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sv"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:20",
+    "prompt": "Which country is this?",
+    "answer": "Estonia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ee"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:21",
+    "prompt": "Which country is this?",
+    "answer": "Ethiopia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/et"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:22",
+    "prompt": "Which country is this?",
+    "answer": "Georgia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ge"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:23",
+    "prompt": "Which country is this?",
+    "answer": "Ghana",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gh"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:24",
+    "prompt": "Which country is this?",
+    "answer": "Guatemala",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gt"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:25",
+    "prompt": "Which country is this?",
+    "answer": "Honduras",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/hn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:26",
+    "prompt": "Which country is this?",
+    "answer": "Jordan",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/jo"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:27",
+    "prompt": "Which country is this?",
+    "answer": "Kazakhstan",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/kz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:28",
+    "prompt": "Which country is this?",
+    "answer": "Kosovo",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/xk"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:29",
+    "prompt": "Which country is this?",
+    "answer": "Kuwait",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/kw"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:30",
+    "prompt": "Which country is this?",
+    "answer": "Kyrgyzstan",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/kg"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:31",
+    "prompt": "Which country is this?",
+    "answer": "Latvia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/lv"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:32",
+    "prompt": "Which country is this?",
+    "answer": "Liberia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/lr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:33",
+    "prompt": "Which country is this?",
+    "answer": "Lithuania",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/lt"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:34",
+    "prompt": "Which country is this?",
+    "answer": "Luxembourg",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/lu"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:35",
+    "prompt": "Which country is this?",
+    "answer": "Madagascar",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mg"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:36",
+    "prompt": "Which country is this?",
+    "answer": "Mali",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ml"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:37",
+    "prompt": "Which country is this?",
+    "answer": "Malta",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mt"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:38",
+    "prompt": "Which country is this?",
+    "answer": "Mauritania",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:39",
+    "prompt": "Which country is this?",
+    "answer": "Monaco",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mc"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:40",
+    "prompt": "Which country is this?",
+    "answer": "Mongolia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:41",
+    "prompt": "Which country is this?",
+    "answer": "Montenegro",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/me"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:42",
+    "prompt": "Which country is this?",
+    "answer": "Mozambique",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:43",
+    "prompt": "Which country is this?",
+    "answer": "Myanmar",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mm"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:44",
+    "prompt": "Which country is this?",
+    "answer": "Nicaragua",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ni"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:45",
+    "prompt": "Which country is this?",
+    "answer": "Niger",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ne"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:46",
+    "prompt": "Which country is this?",
+    "answer": "North Macedonia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mk"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:47",
+    "prompt": "Which country is this?",
+    "answer": "Paraguay",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/py"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:48",
+    "prompt": "Which country is this?",
+    "answer": "Romania",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ro"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:49",
+    "prompt": "Which country is this?",
+    "answer": "Rwanda",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/rw"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:50",
+    "prompt": "Which country is this?",
+    "answer": "Senegal",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:51",
+    "prompt": "Which country is this?",
+    "answer": "Seychelles",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sc"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:52",
+    "prompt": "Which country is this?",
+    "answer": "Slovakia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sk"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:53",
+    "prompt": "Which country is this?",
+    "answer": "Slovenia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/si"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:54",
+    "prompt": "Which country is this?",
+    "answer": "Somalia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/so"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:55",
+    "prompt": "Which country is this?",
+    "answer": "South Sudan",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ss"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:56",
+    "prompt": "Which country is this?",
+    "answer": "Sudan",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sd"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:57",
+    "prompt": "Which country is this?",
+    "answer": "Syria",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sy"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:58",
+    "prompt": "Which country is this?",
+    "answer": "Taiwan",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tw"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:59",
+    "prompt": "Which country is this?",
+    "answer": "Thailand",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/th"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:60",
+    "prompt": "Which country is this?",
+    "answer": "Tunisia",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:61",
+    "prompt": "Which country is this?",
+    "answer": "Uganda",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ug"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:62",
+    "prompt": "Which country is this?",
+    "answer": "Uzbekistan",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/uz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:63",
+    "prompt": "Which country is this?",
+    "answer": "Vatican City",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/va"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:64",
+    "prompt": "Which country is this?",
+    "answer": "Venezuela",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ve"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:65",
+    "prompt": "Which country is this?",
+    "answer": "Yemen",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ye"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:200:66",
+    "prompt": "Which country is this?",
+    "answer": "Zimbabwe",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/zw"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:0",
+    "prompt": "Which country is this?",
+    "answer": "Antigua and Barbuda",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ag"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:1",
+    "prompt": "Which country is this?",
+    "answer": "Bahamas",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bs"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:2",
+    "prompt": "Which country is this?",
+    "answer": "Belize",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:3",
+    "prompt": "Which country is this?",
+    "answer": "Benin",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bj"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:4",
+    "prompt": "Which country is this?",
+    "answer": "Bolivia",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bo"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:5",
+    "prompt": "Which country is this?",
+    "answer": "Burkina Faso",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bf"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:6",
+    "prompt": "Which country is this?",
+    "answer": "Burundi",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/bi"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:7",
+    "prompt": "Which country is this?",
+    "answer": "Cabo Verde",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cv"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:8",
+    "prompt": "Which country is this?",
+    "answer": "Cambodia",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/kh"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:9",
+    "prompt": "Which country is this?",
+    "answer": "Central African Republic",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cf"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:10",
+    "prompt": "Which country is this?",
+    "answer": "Comoros",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/km"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:11",
+    "prompt": "Which country is this?",
+    "answer": "Djibouti",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/dj"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:12",
+    "prompt": "Which country is this?",
+    "answer": "Dominica",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/dm"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:13",
+    "prompt": "Which country is this?",
+    "answer": "Equatorial Guinea",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gq"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:14",
+    "prompt": "Which country is this?",
+    "answer": "Eritrea",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/er"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:15",
+    "prompt": "Which country is this?",
+    "answer": "Eswatini",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:16",
+    "prompt": "Which country is this?",
+    "answer": "Fiji",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/fj"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:17",
+    "prompt": "Which country is this?",
+    "answer": "Gabon",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ga"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:18",
+    "prompt": "Which country is this?",
+    "answer": "Gambia",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gm"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:19",
+    "prompt": "Which country is this?",
+    "answer": "Grenada",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gd"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:20",
+    "prompt": "Which country is this?",
+    "answer": "Guinea",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:21",
+    "prompt": "Which country is this?",
+    "answer": "Guinea-Bissau",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gw"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:22",
+    "prompt": "Which country is this?",
+    "answer": "Guyana",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/gy"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:23",
+    "prompt": "Which country is this?",
+    "answer": "Haiti",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ht"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:24",
+    "prompt": "Which country is this?",
+    "answer": "Kiribati",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ki"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:25",
+    "prompt": "Which country is this?",
+    "answer": "Laos",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/la"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:26",
+    "prompt": "Which country is this?",
+    "answer": "Lesotho",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ls"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:27",
+    "prompt": "Which country is this?",
+    "answer": "Liechtenstein",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/li"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:28",
+    "prompt": "Which country is this?",
+    "answer": "Malawi",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mw"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:29",
+    "prompt": "Which country is this?",
+    "answer": "Maldives",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mv"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:30",
+    "prompt": "Which country is this?",
+    "answer": "Marshall Islands",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mh"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:31",
+    "prompt": "Which country is this?",
+    "answer": "Mauritius",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/mu"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:32",
+    "prompt": "Which country is this?",
+    "answer": "Micronesia",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/fm"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:33",
+    "prompt": "Which country is this?",
+    "answer": "Moldova",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/md"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:34",
+    "prompt": "Which country is this?",
+    "answer": "Namibia",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/na"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:35",
+    "prompt": "Which country is this?",
+    "answer": "Nauru",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/nr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:36",
+    "prompt": "Which country is this?",
+    "answer": "Oman",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/om"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:37",
+    "prompt": "Which country is this?",
+    "answer": "Palau",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/pw"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:38",
+    "prompt": "Which country is this?",
+    "answer": "Papua New Guinea",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/pg"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:39",
+    "prompt": "Which country is this?",
+    "answer": "Republic of the Congo",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/cg"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:40",
+    "prompt": "Which country is this?",
+    "answer": "Saint Kitts and Nevis",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/kn"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:41",
+    "prompt": "Which country is this?",
+    "answer": "Saint Lucia",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/lc"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:42",
+    "prompt": "Which country is this?",
+    "answer": "Saint Vincent and the Grenadines",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/vc"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:43",
+    "prompt": "Which country is this?",
+    "answer": "Samoa",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/ws"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:44",
+    "prompt": "Which country is this?",
+    "answer": "San Marino",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sm"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:45",
+    "prompt": "Which country is this?",
+    "answer": "São Tomé and Príncipe",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/st"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:46",
+    "prompt": "Which country is this?",
+    "answer": "Serbia",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/rs"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:47",
+    "prompt": "Which country is this?",
+    "answer": "Sierra Leone",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sl"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:48",
+    "prompt": "Which country is this?",
+    "answer": "Solomon Islands",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sb"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:49",
+    "prompt": "Which country is this?",
+    "answer": "Suriname",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/sr"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:50",
+    "prompt": "Which country is this?",
+    "answer": "Tajikistan",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tj"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:51",
+    "prompt": "Which country is this?",
+    "answer": "Tanzania",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tz"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:52",
+    "prompt": "Which country is this?",
+    "answer": "Timor-Leste",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tl"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:53",
+    "prompt": "Which country is this?",
+    "answer": "Togo",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tg"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:54",
+    "prompt": "Which country is this?",
+    "answer": "Tonga",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/to"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:55",
+    "prompt": "Which country is this?",
+    "answer": "Trinidad and Tobago",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tt"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:56",
+    "prompt": "Which country is this?",
+    "answer": "Turkmenistan",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tm"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:57",
+    "prompt": "Which country is this?",
+    "answer": "Tuvalu",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/tv"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:58",
+    "prompt": "Which country is this?",
+    "answer": "Vanuatu",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/vu"
+  },
+  {
+    "categorySlug": "guess-the-flag",
+    "canonicalKey": "guess-the-flag:300:59",
+    "prompt": "Which country is this?",
+    "answer": "Zambia",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "flags/zm"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:0",
+    "prompt": "Whose shirt is this?",
+    "answer": "Alan Shearer",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/newcastle-united-and-9-1996-2006"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:1",
+    "prompt": "Whose shirt is this?",
+    "answer": "Andrés Iniesta",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-8-2007-2018"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:2",
+    "prompt": "Whose shirt is this?",
+    "answer": "Antoine Griezmann",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/atletico-madrid-and-7-2015-2019"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:3",
+    "prompt": "Whose shirt is this?",
+    "answer": "Arjen Robben",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/bayern-munich-and-10-2009-2019"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:4",
+    "prompt": "Whose shirt is this?",
+    "answer": "Branislav Ivanović",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/chelsea-and-2-2008-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:5",
+    "prompt": "Whose shirt is this?",
+    "answer": "Cristiano Ronaldo",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-7-2010-2018"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:6",
+    "prompt": "Whose shirt is this?",
+    "answer": "David Beckham",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-7-1997-2003"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:7",
+    "prompt": "Whose shirt is this?",
+    "answer": "Dennis Bergkamp",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/arsenal-and-10-1995-2006"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:8",
+    "prompt": "Whose shirt is this?",
+    "answer": "Didier Drogba",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/chelsea-and-11-2004-2012"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:9",
+    "prompt": "Whose shirt is this?",
+    "answer": "Diego Maradona",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/napoli-and-10-1984-1991"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:10",
+    "prompt": "Whose shirt is this?",
+    "answer": "Eden Hazard",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/chelsea-and-10-2014-2019"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:11",
+    "prompt": "Whose shirt is this?",
+    "answer": "Edinson Cavani",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/paris-saint-germain-and-9-2013-2020"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:12",
+    "prompt": "Whose shirt is this?",
+    "answer": "Erling Haaland",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/molde-and-30-2017-2019"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:13",
+    "prompt": "Whose shirt is this?",
+    "answer": "Francesco Totti",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/roma-and-10-1997-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:14",
+    "prompt": "Whose shirt is this?",
+    "answer": "Frank Lampard",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/chelsea-and-8-2001-2014"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:15",
+    "prompt": "Whose shirt is this?",
+    "answer": "Gareth Bale",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-11-2013-2022"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:16",
+    "prompt": "Whose shirt is this?",
+    "answer": "Gianluigi Buffon",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/juventus-and-1-2001-2018"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:17",
+    "prompt": "Whose shirt is this?",
+    "answer": "Harry Kane",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/tottenham-hotspur-and-10-2015-2023"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:18",
+    "prompt": "Whose shirt is this?",
+    "answer": "Iker Casillas",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-1-1999-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:19",
+    "prompt": "Whose shirt is this?",
+    "answer": "Jadon Sancho",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/borussia-dortmund-and-7-2017-2021"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:20",
+    "prompt": "Whose shirt is this?",
+    "answer": "John Terry",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/chelsea-and-26-1998-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:21",
+    "prompt": "Whose shirt is this?",
+    "answer": "Karim Benzema",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-9-2010-2023"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:22",
+    "prompt": "Whose shirt is this?",
+    "answer": "Lionel Messi",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-10-2008-2021"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:23",
+    "prompt": "Whose shirt is this?",
+    "answer": "Luis Suárez",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-9-2014-2020"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:24",
+    "prompt": "Whose shirt is this?",
+    "answer": "Luka Modrić",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/tottenham-hotspur-and-14-2008-2012"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:25",
+    "prompt": "Whose shirt is this?",
+    "answer": "Marco Reus",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/borussia-dortmund-and-11-2012-2024"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:26",
+    "prompt": "Whose shirt is this?",
+    "answer": "Neymar",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-11-2013-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:27",
+    "prompt": "Whose shirt is this?",
+    "answer": "Paolo Maldini",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/milan-and-3-1995-2009"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:28",
+    "prompt": "Whose shirt is this?",
+    "answer": "Patrick Vieira",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/arsenal-and-4-1996-2005"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:29",
+    "prompt": "Whose shirt is this?",
+    "answer": "Raúl",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-7-1996-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:30",
+    "prompt": "Whose shirt is this?",
+    "answer": "Robert Lewandowski",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/bayern-munich-and-9-2014-2022"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:31",
+    "prompt": "Whose shirt is this?",
+    "answer": "Robin van Persie",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-20-2012-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:32",
+    "prompt": "Whose shirt is this?",
+    "answer": "Samuel Eto’o",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-9-2004-2009"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:33",
+    "prompt": "Whose shirt is this?",
+    "answer": "Sergio Busquets",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/inter-miami-and-5-2023-2025"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:34",
+    "prompt": "Whose shirt is this?",
+    "answer": "Sergio Ramos",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-4-2005-2021"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:35",
+    "prompt": "Whose shirt is this?",
+    "answer": "Steven Gerrard",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/liverpool-and-8-2004-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:36",
+    "prompt": "Whose shirt is this?",
+    "answer": "Thierry Henry",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/arsenal-and-14-1999-2007"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:37",
+    "prompt": "Whose shirt is this?",
+    "answer": "Thomas Müller",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/bayern-munich-and-25-2008-2025"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:38",
+    "prompt": "Whose shirt is this?",
+    "answer": "Vincent Kompany",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-city-and-4-2008-2019"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:39",
+    "prompt": "Whose shirt is this?",
+    "answer": "Wayne Rooney",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-10-2007-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:40",
+    "prompt": "Whose shirt is this?",
+    "answer": "Xavi",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-6-2001-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:41",
+    "prompt": "Whose shirt is this?",
+    "answer": "Yaya Touré",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-city-and-42-2010-2018"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:100:42",
+    "prompt": "Whose shirt is this?",
+    "answer": "Zlatan Ibrahimović",
+    "pointValue": 100,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-9-2009-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:0",
+    "prompt": "Whose shirt is this?",
+    "answer": "Andrea Pirlo",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/milan-and-21-2001-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:1",
+    "prompt": "Whose shirt is this?",
+    "answer": "Andriy Shevchenko",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/milan-and-7-1999-2006"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:2",
+    "prompt": "Whose shirt is this?",
+    "answer": "Bastian Schweinsteiger",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-31-2015-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:3",
+    "prompt": "Whose shirt is this?",
+    "answer": "Bernardo Silva",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/monaco-and-10-2015-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:4",
+    "prompt": "Whose shirt is this?",
+    "answer": "Bruno Fernandes",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/sporting-cp-and-8-2017-2020"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:5",
+    "prompt": "Whose shirt is this?",
+    "answer": "Carles Puyol",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-5-2000-2014"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:6",
+    "prompt": "Whose shirt is this?",
+    "answer": "Carlos Tevez",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-32-2007-2009"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:7",
+    "prompt": "Whose shirt is this?",
+    "answer": "Cesc Fàbregas",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/chelsea-and-4-2014-2019"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:8",
+    "prompt": "Whose shirt is this?",
+    "answer": "David Luiz",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/paris-saint-germain-and-32-2014-2016"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:9",
+    "prompt": "Whose shirt is this?",
+    "answer": "David Silva",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/valencia-and-21-2006-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:10",
+    "prompt": "Whose shirt is this?",
+    "answer": "David Villa",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/valencia-and-7-2005-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:11",
+    "prompt": "Whose shirt is this?",
+    "answer": "Dimitar Berbatov",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/tottenham-hotspur-and-9-2006-2008"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:12",
+    "prompt": "Whose shirt is this?",
+    "answer": "Edin Džeko",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/wolfsburg-and-9-2007-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:13",
+    "prompt": "Whose shirt is this?",
+    "answer": "Fernando Torres",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/liverpool-and-9-2007-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:14",
+    "prompt": "Whose shirt is this?",
+    "answer": "James Rodríguez",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/porto-and-10-2012-2013"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:15",
+    "prompt": "Whose shirt is this?",
+    "answer": "Jay-Jay Okocha",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/paris-saint-germain-and-10-1998-2002"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:16",
+    "prompt": "Whose shirt is this?",
+    "answer": "Jude Bellingham",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/birmingham-city-and-22-2019-2020"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:17",
+    "prompt": "Whose shirt is this?",
+    "answer": "Kaká",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/milan-and-22-2003-2009"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:18",
+    "prompt": "Whose shirt is this?",
+    "answer": "Kevin De Bruyne",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/genk-and-14-2009-2012"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:19",
+    "prompt": "Whose shirt is this?",
+    "answer": "Kylian Mbappé",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/monaco-and-29-2016-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:20",
+    "prompt": "Whose shirt is this?",
+    "answer": "Luís Figo",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-7-1995-2000"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:21",
+    "prompt": "Whose shirt is this?",
+    "answer": "Marcelo",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-12-2007-2022"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:22",
+    "prompt": "Whose shirt is this?",
+    "answer": "Mario Balotelli",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/liverpool-and-45-2014-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:23",
+    "prompt": "Whose shirt is this?",
+    "answer": "Mesut Özil",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/werder-bremen-and-11-2008-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:24",
+    "prompt": "Whose shirt is this?",
+    "answer": "Michael Carrick",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-16-2006-2018"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:25",
+    "prompt": "Whose shirt is this?",
+    "answer": "Mohamed Salah",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/basel-and-22-2012-2014"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:26",
+    "prompt": "Whose shirt is this?",
+    "answer": "N'Golo Kanté",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/leicester-city-and-14-2015-2016"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:27",
+    "prompt": "Whose shirt is this?",
+    "answer": "Pierre-Emerick Aubameyang",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/borussia-dortmund-and-17-2013-2018"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:28",
+    "prompt": "Whose shirt is this?",
+    "answer": "Radamel Falcao",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/chelsea-and-9-2015-2016"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:29",
+    "prompt": "Whose shirt is this?",
+    "answer": "Raheem Sterling",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/liverpool-and-31-2012-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:30",
+    "prompt": "Whose shirt is this?",
+    "answer": "Riyad Mahrez",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/leicester-city-and-26-2014-2018"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:31",
+    "prompt": "Whose shirt is this?",
+    "answer": "Robinho",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-city-and-10-2008-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:32",
+    "prompt": "Whose shirt is this?",
+    "answer": "Romelu Lukaku",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/everton-and-10-2014-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:33",
+    "prompt": "Whose shirt is this?",
+    "answer": "Ronaldo Nazário",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-9-2003-2007"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:34",
+    "prompt": "Whose shirt is this?",
+    "answer": "Ryan Giggs",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-11-1991-2014"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:35",
+    "prompt": "Whose shirt is this?",
+    "answer": "Sergio Agüero",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/atletico-madrid-and-10-2007-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:36",
+    "prompt": "Whose shirt is this?",
+    "answer": "Wesley Sneijder",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/inter-and-10-2009-2013"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:37",
+    "prompt": "Whose shirt is this?",
+    "answer": "Xabi Alonso",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/liverpool-and-14-2004-2009"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:200:38",
+    "prompt": "Whose shirt is this?",
+    "answer": "Zinedine Zidane",
+    "pointValue": 200,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-5-2001-2006"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:0",
+    "prompt": "Whose shirt is this?",
+    "answer": "Adriano",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/parma-and-9-2002-2004"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:1",
+    "prompt": "Whose shirt is this?",
+    "answer": "Alexis Sánchez",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/udinese-and-7-2010-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:2",
+    "prompt": "Whose shirt is this?",
+    "answer": "Alisson Becker",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/internacional-and-1-2015-2016"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:3",
+    "prompt": "Whose shirt is this?",
+    "answer": "Ángel Di María",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/benfica-and-20-2007-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:4",
+    "prompt": "Whose shirt is this?",
+    "answer": "Ashley Cole",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/roma-and-3-2014-2016"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:5",
+    "prompt": "Whose shirt is this?",
+    "answer": "Casemiro",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/porto-and-6-2014-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:6",
+    "prompt": "Whose shirt is this?",
+    "answer": "Dani Alves",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/juventus-and-23-2016-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:7",
+    "prompt": "Whose shirt is this?",
+    "answer": "Deco",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/chelsea-and-20-2008-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:8",
+    "prompt": "Whose shirt is this?",
+    "answer": "Diego Costa",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-valladolid-and-22-2009-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:9",
+    "prompt": "Whose shirt is this?",
+    "answer": "Diego Forlán",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-21-2002-2004"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:10",
+    "prompt": "Whose shirt is this?",
+    "answer": "Edgar Davids",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/barcelona-and-3-2004"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:11",
+    "prompt": "Whose shirt is this?",
+    "answer": "Emmanuel Adebayor",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-6-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:12",
+    "prompt": "Whose shirt is this?",
+    "answer": "Fernando Morientes",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/monaco-and-10-2003-2004"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:13",
+    "prompt": "Whose shirt is this?",
+    "answer": "Gennaro Gattuso",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/rangers-and-7-1997-1998"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:14",
+    "prompt": "Whose shirt is this?",
+    "answer": "Gerard Piqué",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-28-2004-2006"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:15",
+    "prompt": "Whose shirt is this?",
+    "answer": "Henrik Larsson",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-17-2007"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:16",
+    "prompt": "Whose shirt is this?",
+    "answer": "İlkay Gündoğan",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/nurnberg-and-22-2008-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:17",
+    "prompt": "Whose shirt is this?",
+    "answer": "Ivan Rakitić",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/schalke-04-and-10-2007-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:18",
+    "prompt": "Whose shirt is this?",
+    "answer": "Javier Hernández",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-14-2014-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:19",
+    "prompt": "Whose shirt is this?",
+    "answer": "João Cancelo",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/valencia-and-2-2014-2017"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:20",
+    "prompt": "Whose shirt is this?",
+    "answer": "Juan Mata",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/valencia-and-10-2010-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:21",
+    "prompt": "Whose shirt is this?",
+    "answer": "Mario Mandžukić",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/atletico-madrid-and-9-2014-2015"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:22",
+    "prompt": "Whose shirt is this?",
+    "answer": "Martin Ødegaard",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/heerenveen-and-10-2017-2018"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:23",
+    "prompt": "Whose shirt is this?",
+    "answer": "Michael Owen",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-11-2004-2005"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:24",
+    "prompt": "Whose shirt is this?",
+    "answer": "Nicolas Anelka",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-19-1999-2000"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:25",
+    "prompt": "Whose shirt is this?",
+    "answer": "Ole Gunnar Solskjær",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-20-1996-2007"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:26",
+    "prompt": "Whose shirt is this?",
+    "answer": "Park Ji-sung",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/manchester-united-and-13-2005-2012"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:27",
+    "prompt": "Whose shirt is this?",
+    "answer": "Patrick Kluivert",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/newcastle-united-and-9-2004-2005"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:28",
+    "prompt": "Whose shirt is this?",
+    "answer": "Petr Čech",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/arsenal-and-33-2015-2019"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:29",
+    "prompt": "Whose shirt is this?",
+    "answer": "Philipp Lahm",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/stuttgart-and-21-2003-2005"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:30",
+    "prompt": "Whose shirt is this?",
+    "answer": "Rivaldo",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/olympiacos-and-10-2005-2007"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:31",
+    "prompt": "Whose shirt is this?",
+    "answer": "Ronaldinho",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/paris-saint-germain-and-21-2001-2002"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:32",
+    "prompt": "Whose shirt is this?",
+    "answer": "Ruud van Nistelrooy",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/real-madrid-and-17-2006-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:33",
+    "prompt": "Whose shirt is this?",
+    "answer": "Sadio Mané",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/red-bull-salzburg-and-10-2013-2014"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:34",
+    "prompt": "Whose shirt is this?",
+    "answer": "Son Heung-min",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/hamburg-and-40-2010-2011"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:35",
+    "prompt": "Whose shirt is this?",
+    "answer": "Thibaut Courtois",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/atletico-madrid-and-13-2011-2014"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:36",
+    "prompt": "Whose shirt is this?",
+    "answer": "Toni Kroos",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/bayer-leverkusen-and-39-2009-2010"
+  },
+  {
+    "categorySlug": "guess-the-jersey",
+    "canonicalKey": "guess-the-jersey:300:37",
+    "prompt": "Whose shirt is this?",
+    "answer": "Victor Osimhen",
+    "pointValue": 300,
+    "locale": "en",
+    "status": "active",
+    "promptImageKey": "jerseys/lille-and-7-2019-2020"
+  },
+  {
     "categorySlug": "science",
     "canonicalKey": "science:100:0",
     "prompt": "When a passenger lurches forward after a car stops suddenly, which property of matter explains the motion?",

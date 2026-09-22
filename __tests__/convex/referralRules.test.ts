@@ -3,6 +3,7 @@ import {
   REFERRAL_REWARD_TOKENS,
   buildReferralCodeFromSeed,
   evaluateReferralApply,
+  isReferralNewAccount,
   isValidReferralCodeFormat,
   normalizeReferralCode,
 } from '@/convex/lib/referralRules';
@@ -24,14 +25,22 @@ describe('referralRules', () => {
     expect(REFERRAL_REWARD_TOKENS).toBe(10);
   });
 
-  it('rejects empty, self, already redeemed, and played accounts', () => {
+  it('treats 0–2 games as new and 3+ as no longer new', () => {
+    expect(isReferralNewAccount(0)).toBe(true);
+    expect(isReferralNewAccount(1)).toBe(true);
+    expect(isReferralNewAccount(2)).toBe(true);
+    expect(isReferralNewAccount(3)).toBe(false);
+    expect(isReferralNewAccount(10)).toBe(false);
+  });
+
+  it('rejects empty, self, already redeemed, and accounts with 3+ games', () => {
     expect(
       evaluateReferralApply({
         normalizedCode: '',
         inviterFound: false,
         isSelf: false,
         alreadyRedeemed: false,
-        hasPlayed: false,
+        gamesPlayed: 0,
       })
     ).toEqual({ ok: false, reason: 'empty_code' });
 
@@ -41,7 +50,7 @@ describe('referralRules', () => {
         inviterFound: true,
         isSelf: true,
         alreadyRedeemed: false,
-        hasPlayed: false,
+        gamesPlayed: 0,
       })
     ).toEqual({ ok: false, reason: 'self_referral' });
 
@@ -51,7 +60,7 @@ describe('referralRules', () => {
         inviterFound: true,
         isSelf: false,
         alreadyRedeemed: true,
-        hasPlayed: false,
+        gamesPlayed: 0,
       })
     ).toEqual({ ok: false, reason: 'already_redeemed' });
 
@@ -61,19 +70,19 @@ describe('referralRules', () => {
         inviterFound: true,
         isSelf: false,
         alreadyRedeemed: false,
-        hasPlayed: true,
+        gamesPlayed: 3,
       })
     ).toEqual({ ok: false, reason: 'not_new_account' });
   });
 
-  it('accepts a valid new-account apply', () => {
+  it('accepts a valid new-account apply with fewer than 3 games', () => {
     expect(
       evaluateReferralApply({
         normalizedCode: 'ABCDEFGH',
         inviterFound: true,
         isSelf: false,
         alreadyRedeemed: false,
-        hasPlayed: false,
+        gamesPlayed: 2,
       })
     ).toEqual({ ok: true });
   });

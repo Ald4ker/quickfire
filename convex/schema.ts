@@ -69,6 +69,8 @@ export default defineSchema({
     status: v.string(),
     hiddenMultiplier: v.optional(v.number()),
     isOvertimeSurge: v.optional(v.boolean()),
+    /** Bundled asset key in constants/questionImages.ts (picture topics). */
+    promptImageKey: v.optional(v.string()),
   })
     .index('by_category', ['categoryId'])
     .index('by_category_status', ['categoryId', 'status'])

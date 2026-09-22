@@ -56,7 +56,7 @@ describe('AppHubScreen', () => {
 
     expect(screen.getByTestId('home-mode-token-cost-quickPlay')).toHaveTextContent('2-8 TOKENS');
     expect(screen.getByTestId('home-mode-token-cost-classic')).toHaveTextContent('10 TOKENS');
-    expect(screen.getByTestId('home-mode-token-cost-random')).toHaveTextContent('10 TOKENS');
+    expect(screen.getByTestId('home-mode-token-cost-random')).toHaveTextContent('2-10 TOKENS');
     expect(screen.getByTestId('home-mode-token-cost-rumble')).toHaveTextContent('10 TOKENS');
   });
 

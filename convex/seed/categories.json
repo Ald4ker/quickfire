@@ -144,6 +144,18 @@
     "enabled": true
   },
   {
+    "slug": "guess-the-flag",
+    "title": "Guess the Flag",
+    "themeGroup": "gen28",
+    "enabled": true
+  },
+  {
+    "slug": "guess-the-jersey",
+    "title": "Guess the Jersey",
+    "themeGroup": "gen29",
+    "enabled": true
+  },
+  {
     "slug": "science",
     "title": "Science",
     "themeGroup": "gen3",

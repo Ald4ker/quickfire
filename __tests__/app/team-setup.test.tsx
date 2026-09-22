@@ -1,6 +1,8 @@
 import React from 'react';
 import { afterEach, beforeEach, describe, expect, it, jest } from '@jest/globals';
-import { act, fireEvent, render, screen, within } from '@testing-library/react-native';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { Modal, Platform, StyleSheet } from 'react-native';
 
 import TeamSetupScreen from '@/app/(app)/play/team-setup';
@@ -10,6 +12,31 @@ import { useThemeStore } from '@/store/theme';
 import { HOME_SOFT_UI } from '@/themes';
 import { router } from '../doubles/expoRouter';
 import { __setWindowDimensions } from '../doubles/windowDimensions';
+
+describe('TeamSetupScreen random topic-count control (source)', () => {
+  const source = readFileSync(join(__dirname, '../../app/(app)/play/team-setup.tsx'), 'utf8');
+  const enSource = readFileSync(join(__dirname, '../../lib/i18n/messages/en.ts'), 'utf8');
+
+  it('puts Number of Topics in the centre card with a tappable count box and 1–6 picker', () => {
+    expect(source).toContain('testID="random-topic-count-card"');
+    expect(source).toContain('testID="random-topic-count-box"');
+    expect(source).toContain('testID="random-topic-token-cost"');
+    expect(source).toContain('testID="random-topic-picker"');
+    expect(source).toContain("t('play.numberOfTopics')");
+    expect(source).toContain('([1, 2, 3, 4, 5, 6] as const)');
+    expect(source).toContain('setTopicPickerOpen(true)');
+    expect(source).toContain('getGameTokenCost');
+    expect(source).toContain('topicPickerLayout');
+    expect(source).toContain('sheetMaxWidth');
+    expect(source).toContain('topicCountTile');
+    expect(source).toContain('topicPickerOptionCostBlock');
+    expect(source).toContain('topicPickerOptionTokensWord');
+    expect(source).toContain('faceColor = selected ? T.textPrimary');
+    expect(enSource).toContain("'play.numberOfTopics': 'Number of Topics'");
+    expect(enSource).toMatch(/randomiser/i);
+    expect(enSource).not.toMatch(/'[^']*Randomize[^']*'/);
+  });
+});
 
 describe('TeamSetupScreen', () => {
   beforeEach(async () => {
@@ -118,24 +145,6 @@ describe('TeamSetupScreen', () => {
     expect(usePlayStore.getState().session?.teams).toHaveLength(3);
     expect(gridMinHeight()).toBe(sixTopicsHeight);
     expect(screen.getAllByLabelText('Team name')).toHaveLength(3);
-  });
-
-  it('opens randomizer quick play from random team setup', () => {
-    usePlayStore.getState().setMode('random');
-
-    render(<TeamSetupScreen />);
-
-    const header = screen.getByTestId('play-scaffold-header');
-    const qp = within(header).getByLabelText('Randomizer Quick Play');
-    const styleProp = qp.props.style;
-    const resolved =
-      (styleProp instanceof Function) ? styleProp({ pressed: false }) : styleProp;
-    const flat = StyleSheet.flatten(resolved);
-    expect(flat.height).toBe(44);
-    expect(flat.borderRadius).toBe(14);
-    fireEvent.press(qp);
-
-    expect(router.push).toHaveBeenCalledWith('/play/quick-length');
   });
 
   it('shows Continue for rumble setup on wide web (floating CTA is not classic-only)', () => {

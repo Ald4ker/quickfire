@@ -108,6 +108,7 @@ const questionCardSchema = z.object({
   prompt: z.string(),
   answer: z.string(),
   promptImageUrl: z.string().optional(),
+  promptImageKey: z.string().optional(),
   answerImageUrl: z.string().optional(),
   pointValue: z.number(),
   locale: supportedLocaleSchema,

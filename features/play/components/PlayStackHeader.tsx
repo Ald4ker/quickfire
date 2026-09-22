@@ -23,7 +23,7 @@ export type PlayStackHeaderProps = {
   onBackPress?: () => void;
   /** Defaults to labeled play pill; use `icon` for settings/store squircle. */
   backVariant?: HeaderBackButtonVariant;
-  /** Extra control after the back button (e.g. Randomizer Quick Play). */
+  /** Extra control after the back button (e.g. leading mode chrome). */
   leadingExtra?: ReactNode;
   /**
    * Web: constrain header bar max-width so back / token chip edges align with
