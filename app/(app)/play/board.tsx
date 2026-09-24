@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
-import { BORDER_RADIUS, BREAKPOINTS, COLORS, FONT_SIZES, SPACING } from '@/constants';
+import { BORDER_RADIUS, BREAKPOINTS, COLORS, FONT_SIZES, LAYOUT, SPACING } from '@/constants';
 import { SHOW_HOT_SEAT_UI } from '@/constants/featureFlags';
 import { FONTS } from '@/constants/theme';
 import {
@@ -19,12 +19,11 @@ import {
 import {
   computeBoardVerticalLayout,
   getBoardBodyHeight,
+  getBoardContentMaxWidth,
   getBoardPointTileBox,
   getBoardRailWidth,
   getBoardTopicCellBox,
   getBoardTopicGridAlignment,
-  maxRowHeightForFixedRailTiles,
-  maxRowHeightForSquareTiles,
 } from '@/features/play/boardLayout';
 import { getRandomRemainingQuestion } from '@/features/play/data';
 import {
@@ -45,7 +44,6 @@ import { SOFT_SURFACE_FACE, softSurfaceLift } from '@/features/play/styles/softS
 import { hapticSuccess, hapticTick } from '@/lib/haptics';
 import { useI18n } from '@/lib/i18n/useI18n';
 import { useDarkModeFlatTop, useTheme } from '@/lib/hooks/useTheme';
-import { topicCardScreenPadding } from '@/lib/layout/viewportLayout';
 import { usePlayStore } from '@/store/play';
 import { abandonGameEntry } from '@/lib/wallet/gameEntry';
 import { HOME_SOFT_UI } from '@/themes';
@@ -53,6 +51,7 @@ import { scaleFont, useResponsivePlayFontSizes } from '@/utils/responsiveTypogra
 import { usePlayTextScale } from '@/store/display';
 
 const T = HOME_SOFT_UI;
+/** Category card width / height. Kept fixed so scale-up never stretches the design. */
 const CATEGORY_CARD_ASPECT_RATIO = 1.62;
 
 /** Topic art is a portrait tile: same width as the layout cap, extra height for the illustration.
@@ -136,10 +135,30 @@ function chunkColumns<T>(items: T[], chunkSize: number): T[][] {
   return out;
 }
 
-function getGridColumnCount(categoryCount: number): number {
-  if (categoryCount === 4) return 2;
+function getGridColumnCount(mode: string, categoryCount: number): number {
+  if (mode === 'quickPlay' && categoryCount === 4) return 2;
   if (categoryCount <= 2) return Math.max(1, categoryCount);
   return 3;
+}
+
+/** Keeps each topic column wide enough for rails + art + gaps - drops from 3→2→1 cols on narrow widths. */
+function clampGridColumns(
+  preferredCols: number,
+  innerWidth: number,
+  gridGap: number,
+  categoryCount: number
+): number {
+  if (categoryCount <= 0) return 1;
+  const usableRow = Math.max(0, innerWidth);
+  /** Minimum space per topic cell before we reduce column count - must fit long category titles without abandoning the intended 3x2 board too early. */
+  const MIN_CELL = 176;
+  let cols = Math.min(preferredCols, categoryCount);
+  while (cols > 1) {
+    const cell = (usableRow - gridGap * (cols - 1)) / cols;
+    if (cell >= MIN_CELL) break;
+    cols -= 1;
+  }
+  return Math.max(1, cols);
 }
 
 function computeTopicFit(
@@ -160,6 +179,7 @@ function computeTopicFit(
 } {
   const usableRow = Math.max(0, innerWidth);
   const safeCols = Math.max(1, cols);
+  // Cap by uniform scale (aspect lock). Never stretch wider than the design ratio allows.
   const cellWidth = Math.max(
     1,
     Math.min((usableRow - m.gridGap * (safeCols - 1)) / safeCols, maxCellWidth)
@@ -454,90 +474,90 @@ export default function PlayBoardScreen() {
     };
   }, [height, isWebBoard, playTextScale, responsiveFontSizes.scoreValue, width]);
   const topicArtHeightRatio = useMemo(() => getTopicArtHeightRatio(height), [height]);
-  const topicPad = topicCardScreenPadding(width, insets, Platform.OS === 'web');
-  const bodyPadLeft = topicPad.paddingLeft;
-  const bodyPadRight = topicPad.paddingRight;
-  const boardLayoutWidth = topicPad.contentWidth;
-  const centeredContentMaxWidth = boardLayoutWidth;
-  const gridColumnCount = useMemo(
-    () => getGridColumnCount(grouped.length),
-    [grouped.length]
+  // Near full-bleed board width so aspect-locked cards can scale up with the viewport.
+  // Topic-select padding is intentionally not reused here (it caps ~5x320 and leaves dead cream).
+  const bodyPadLeft = Math.max(insets.left, LAYOUT.screenGutter);
+  const bodyPadRight = Math.max(insets.right, LAYOUT.screenGutter);
+  const padX = bodyPadLeft + bodyPadRight;
+  const innerWidth = Math.max(0, width - padX);
+  const centeredContentMaxWidth = getBoardContentMaxWidth({
+    platform: Platform.OS,
+    windowWidth: width,
+    innerWidth,
+    wideBreakpoint: BREAKPOINTS.wide,
+    playMaxWidth: LAYOUT.playMaxWidth,
+    playWideMaxWidth: LAYOUT.playWideMaxWidth,
+  });
+  const boardLayoutWidth = Math.max(0, Math.min(innerWidth, centeredContentMaxWidth));
+  const preferredGridCols = useMemo(
+    () => getGridColumnCount(session?.mode ?? 'classic', grouped.length),
+    [session?.mode, grouped.length]
   );
+  const gridColumnCount = useMemo(() => {
+    if (grouped.length === 0) return preferredGridCols;
+    if (isWebBoard && grouped.length >= 6) {
+      return Math.min(3, grouped.length);
+    }
+    return clampGridColumns(preferredGridCols, boardLayoutWidth, metrics.gridGap, grouped.length);
+  }, [preferredGridCols, boardLayoutWidth, isWebBoard, metrics.gridGap, grouped.length]);
   const gridRows = useMemo(() => chunkColumns(grouped, gridColumnCount), [grouped, gridColumnCount]);
-  // Equal canvas above the first topic row and below the last row.
+  // Equal cream above first topic row and below last row (header chrome uses the same value).
+  // SafeAreaView already clears the home indicator. Do not re-add bottomInset here.
   const gridEdgePadding = SPACING.md;
   const gridTopPadding = gridEdgePadding;
   const gridBottomPadding = gridEdgePadding;
+  /**
+   * Fixed body height under the match header. Prefer window math over onLayout:
+   * the edge-to-edge scaffold often measures content height only, which zeros out
+   * free-space centering and leaves 3-topic boards stuck under the header.
+   * Reserve must match real chrome: equal edge pad + score pill row (not question-screen ~108).
+   */
   const matchHeaderReserve = gridEdgePadding + (height < 420 ? 52 : 64);
   const boardBodyHeight = getBoardBodyHeight({
     windowHeight: height,
     bottomInset: Math.max(insets.bottom, 0),
     headerReserve: matchHeaderReserve,
   });
+  /** Use the scaffold's actual body height when it is smaller than the window estimate. */
   const layoutViewportHeight = gridViewport.height || boardBodyHeight;
-  const estimatedRowGap =
-    gridRows.length > 1
-      ? Math.max(metrics.gridGap, Math.round(metrics.gridGap * 5.1), 16)
-      : 0;
-  const maxCardHeight = Math.max(
+  const gridRowCount = Math.max(1, gridRows.length);
+  // Uniform scale-to-fit: largest card at fixed aspect that still fits the grid.
+  // Width and height move together so the design never stretches.
+  const topicRowGap = metrics.gridGap;
+  const availableGridWidth = Math.max(0, boardLayoutWidth);
+  const availableGridHeight = Math.max(
     1,
-    (layoutViewportHeight - gridTopPadding - gridBottomPadding - estimatedRowGap * Math.max(0, gridRows.length - 1)) /
-      Math.max(1, gridRows.length)
+    layoutViewportHeight - gridTopPadding - gridBottomPadding
   );
+  const maxCellWidthByRow =
+    (availableGridWidth - metrics.gridGap * Math.max(0, gridColumnCount - 1)) /
+    Math.max(1, gridColumnCount);
+  const maxCellHeightByColumn =
+    (availableGridHeight - topicRowGap * Math.max(0, gridRowCount - 1)) / gridRowCount;
+  const scaledCellWidth = Math.max(
+    1,
+    Math.min(maxCellWidthByRow, maxCellHeightByColumn * CATEGORY_CARD_ASPECT_RATIO)
+  );
+  const fittedBoardRowHeight = scaledCellWidth / CATEGORY_CARD_ASPECT_RATIO;
   const topicFit = useMemo(
-    () =>
-      computeTopicFit(
-        boardLayoutWidth,
-        metrics,
-        gridColumnCount,
-        width,
-        maxCardHeight * CATEGORY_CARD_ASPECT_RATIO
-      ),
-    [boardLayoutWidth, gridColumnCount, maxCardHeight, metrics, width]
+    () => computeTopicFit(boardLayoutWidth, metrics, gridColumnCount, width, scaledCellWidth),
+    [boardLayoutWidth, gridColumnCount, metrics, scaledCellWidth, width]
   );
+  // Card padding/border stay inside each cell.
   const cardVerticalChrome = metrics.cardInset * 2 + 8;
   const gridVerticalPadding =
-    gridTopPadding + gridBottomPadding + cardVerticalChrome * Math.max(1, gridRows.length);
+    gridTopPadding + gridBottomPadding + cardVerticalChrome * gridRowCount;
   const maxQuestionRows = Math.max(1, ...grouped.map((column) => column.rows.length));
   /** Matches topicCenterBlock gap so pill rail targets image + title stack. */
   const topicCenterBlockGap = 2;
-  /**
-   * Soft-cap extreme portrait art on ultrawide+tall monitors while still
-   * covering most of the body height. Floor with square-tile geometry so dense
-   * phone boards never shrink below the old square fit.
-   */
-  const railChrome =
-    metrics.pointRailGap * Math.max(0, maxQuestionRows - 1) + metrics.pointRailClipBleed;
-  const squareRowCap = maxRowHeightForSquareTiles({
-    cellWidth: topicFit.cellWidth,
-    artGap: topicFit.artGap,
-    railChrome,
-    maxQuestionRows,
-    titleHeight: topicFit.titleHeight,
-    centerBlockGap: topicCenterBlockGap,
-    topicArtHeightRatio,
-  });
-  const geometryRowCap = Math.max(
-    squareRowCap,
-    maxRowHeightForFixedRailTiles({
-      cellWidth: topicFit.cellWidth,
-      railWidth: topicFit.railWidth,
-      artGap: topicFit.artGap,
-      titleHeight: topicFit.titleHeight,
-      centerBlockGap: topicCenterBlockGap,
-      maxArtAspect: 2.6,
-    })
-  );
-  const maxRowContentHeight = Math.min(
-    geometryRowCap,
-    Math.max(1, topicFit.cellWidth / CATEGORY_CARD_ASPECT_RATIO - cardVerticalChrome)
-  );
+  // Lock inner content to the same aspect box so art/rails scale with the card, not stretch past it.
+  const maxRowContentHeight = Math.max(1, fittedBoardRowHeight - cardVerticalChrome);
   const verticalLayout = useMemo(
     () =>
       computeBoardVerticalLayout({
         viewportHeight: layoutViewportHeight,
         gridVerticalPadding,
-        gridRowCount: Math.max(1, gridRows.length),
+        gridRowCount,
         maxQuestionRows,
         baseGridGap: metrics.gridGap,
         pointRailGap: metrics.pointRailGap,
@@ -552,7 +572,7 @@ export default function PlayBoardScreen() {
       layoutViewportHeight,
       gridVerticalPadding,
       maxRowContentHeight,
-      gridRows.length,
+      gridRowCount,
       maxQuestionRows,
       metrics.gridGap,
       metrics.pointRailClipBleed,
@@ -563,10 +583,11 @@ export default function PlayBoardScreen() {
       topicFit.topicImageSize,
     ]
   );
-  const fittedBoardRowHeight = verticalLayout.boardRowHeight + cardVerticalChrome;
-  const topicRowGap = verticalLayout.topicRowGap;
-  // Multi-row boards fill from the top with equal edge pads; single-row still Y-centers.
-  const topicGridAlignment = getBoardTopicGridAlignment({ gridRowCount: gridRows.length });
+  // Always Y-center leftover cream after uniform scale-to-fit (avoids a dead bottom band).
+  const topicGridAlignment = {
+    ...getBoardTopicGridAlignment({ gridRowCount: gridRows.length }),
+    contentJustifyContent: 'center' as const,
+  };
   const topicCellBox = getBoardTopicCellBox(topicFit.cellWidth, fittedBoardRowHeight);
   /** 100/200/300 control box. Full rail width, height from vertical fill. */
   const pointTileBox = getBoardPointTileBox({
