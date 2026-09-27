@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { isDarkPaletteId } from '@/constants/studio';
+import { isDarkPaletteId, getActiveStudioDirection } from '@/constants/studio';
 import {
   Platform,
   View,
@@ -26,7 +26,6 @@ import {
 } from '@/constants';
 import { ScreenContent } from '@/components/ScreenContent';
 import { StudioBackdrop } from '@/components/studio/StudioBackdrop';
-import { getActiveStudioDirection } from '@/constants/studio';
 import { GameHeader } from '@/components/GameHeader';
 import { HubTokenChip } from '@/components/HubTokenChip';
 import { OutboundPlatformLinks } from '@/components/OutboundPlatformLinks';
@@ -47,7 +46,6 @@ import { isResumableSessionStep, routeForPlayStep } from '@/features/play/sessio
 import { getGameTokenCost, getHomeModeTokenCostLabel } from '@/features/play/tokenCosts';
 import type { GameMode } from '@/features/shared';
 import type { TranslationKey } from '@/lib/i18n/messages/en';
-
 import { markOnce } from '@/lib/startupTiming';
 import { prefetchPlayArtwork } from '@/lib/prefetchPlayArtwork';
 

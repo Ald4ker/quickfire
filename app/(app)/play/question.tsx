@@ -16,7 +16,7 @@ import { HeaderBackButton } from '@/components/HeaderBackButton';
 import { BORDER_RADIUS, SPACING, FONTS, getChromeTopPaddingWithInsets } from '@/constants';
 import { getQuestionImageSource } from '@/constants/questionImages';
 import { SHOW_HOT_SEAT_UI } from '@/constants/featureFlags';
-import { SOFT_SURFACE_STYLES } from '@/features/play/styles/softSurface';
+import { SOFT_SURFACE_STYLES, softSurfaceLift } from '@/features/play/styles/softSurface';
 import {
   RUMBLE_SECOND_TEAM_REVEAL_SECONDS,
   getNextRumbleCheckpointSeconds,
@@ -28,7 +28,6 @@ import { StudioBackdrop } from '@/components/studio/StudioBackdrop';
 import { StudioReveal } from '@/components/studio/StudioReveal';
 import { useStudio } from '@/components/studio/useStudio';
 import { studioRim } from '@/constants/studio';
-import { softSurfaceLift } from '@/features/play/styles/softSurface';
 import { QuestionReportControl } from '@/features/play/components/QuestionReportModal';
 import { WagerInfoModal } from '@/features/play/components/WagerInfoModal';
 import { getRowDirection } from '@/lib/i18n/direction';

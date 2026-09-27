@@ -27,14 +27,13 @@ import { getModeCategoryCount } from '@/features/play/data';
 import type { CategoryOption, GameMode } from '@/features/shared';
 import { PlayScaffold } from '@/features/play/components/PlayScaffold';
 import { isActiveMatchStep, routeForPlayStep } from '@/features/play/sessionRouting';
-import { SOFT_SURFACE_STYLES } from '@/features/play/styles/softSurface';
+import { SOFT_SURFACE_STYLES, softSurfaceLift } from '@/features/play/styles/softSurface';
 import {
   groupCategoriesBySection,
   type CategorySection,
 } from '@/features/play/categorySections';
 import { getPlaySurfaceColors } from '@/features/play/playSurfaceColors';
 import { useStudio } from '@/components/studio/useStudio';
-import { softSurfaceLift } from '@/features/play/styles/softSurface';
 import { showThemedAlert } from '@/store/themedAlert';
 import { getRowDirection } from '@/lib/i18n/direction';
 import { useI18n } from '@/lib/i18n/useI18n';

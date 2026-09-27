@@ -16,7 +16,7 @@ function nameOf(ref: unknown): string {
 }
 
 export class ConvexReactClient {
-  constructor(_url: string) {}
+  readonly url?: string;
   setAuth() {}
   clearAuth() {}
   close() {}
@@ -40,5 +40,5 @@ export function useConvexAuth() {
   return { isLoading: false, isAuthenticated: true };
 }
 export function useConvex() {
-  return new ConvexReactClient('');
+  return new ConvexReactClient();
 }
