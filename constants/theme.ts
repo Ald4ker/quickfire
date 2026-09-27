@@ -19,7 +19,8 @@ const NotoMedium = 'NotoSansArabic_500Medium';
 const NotoSemibold = 'NotoSansArabic_600SemiBold';
 const NotoBold = 'NotoSansArabic_700Bold';
 
-const brandFonts = {
+/** Face names as registered with expo-font (short names on every platform). */
+export const BRAND_FONT_FACES = {
   display: 'ClashDisplay-Semibold',
   displayBold: 'ClashDisplay-Bold',
   ui: 'GeneralSans-Regular',
@@ -27,6 +28,7 @@ const brandFonts = {
   uiSemibold: 'GeneralSans-Semibold',
   uiBold: 'GeneralSans-Bold',
 } as const;
+const brandFonts = BRAND_FONT_FACES;
 
 export const FONTS =
   Platform.OS === 'web'

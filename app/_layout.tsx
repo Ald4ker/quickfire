@@ -20,7 +20,7 @@ import { Providers } from '@/lib/providers';
 import { useThemeStore } from '@/store/theme';
 import { mark, markOnce } from '@/lib/startupTiming';
 import {
-  FONTS,
+  BRAND_FONT_FACES,
   paletteUsesLightStatusBarContent,
 } from '@/constants/theme';
 import { ARABIC_FONTS } from '@/lib/i18n/fonts';
@@ -99,12 +99,12 @@ export default function RootLayout() {
   }, []);
 
   const [fontsLoaded] = useFonts({
-    [FONTS.display]: require('../assets/fonts/ClashDisplay-Semibold.ttf'),
-    [FONTS.displayBold]: require('../assets/fonts/ClashDisplay-Bold.ttf'),
-    [FONTS.ui]: require('../assets/fonts/GeneralSans-Regular.ttf'),
-    [FONTS.uiMedium]: require('../assets/fonts/GeneralSans-Medium.ttf'),
-    [FONTS.uiSemibold]: require('../assets/fonts/GeneralSans-Semibold.ttf'),
-    [FONTS.uiBold]: require('../assets/fonts/GeneralSans-Bold.ttf'),
+    [BRAND_FONT_FACES.display]: require('../assets/fonts/ClashDisplay-Semibold.ttf'),
+    [BRAND_FONT_FACES.displayBold]: require('../assets/fonts/ClashDisplay-Bold.ttf'),
+    [BRAND_FONT_FACES.ui]: require('../assets/fonts/GeneralSans-Regular.ttf'),
+    [BRAND_FONT_FACES.uiMedium]: require('../assets/fonts/GeneralSans-Medium.ttf'),
+    [BRAND_FONT_FACES.uiSemibold]: require('../assets/fonts/GeneralSans-Semibold.ttf'),
+    [BRAND_FONT_FACES.uiBold]: require('../assets/fonts/GeneralSans-Bold.ttf'),
     // Arabic / Urdu UI (Latin brand faces lack Arabic glyphs)
     [ARABIC_FONTS.ui]: NotoSansArabic_400Regular,
     [ARABIC_FONTS.uiMedium]: NotoSansArabic_500Medium,
