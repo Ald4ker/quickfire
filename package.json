@@ -1,7 +1,7 @@
 {
   "name": "backfire",
   "version": "1.0.7",
-  "description": "Competitive multiplayer trivia \u2014 pick categories, split into teams, and outscore your rivals on a shared board.",
+  "description": "Competitive multiplayer trivia — pick categories, split into teams, and outscore your rivals on a shared board.",
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
@@ -22,6 +22,7 @@
     "lint": "eslint . && oxlint -c oxlint.config.mjs .",
     "seed:import": "tsx scripts/import-questions-from-csv.ts && tsx scripts/merge-picture-topics.ts && tsx scripts/normalize-questions.ts",
     "seed:normalize": "tsx scripts/normalize-questions.ts",
+    "seed:translations:check": "tsx scripts/check-translations.ts",
     "topics:picture:prepare": "python3 scripts/prepare-picture-topic-assets.py",
     "topics:picture:merge": "tsx scripts/merge-picture-topics.ts && tsx scripts/normalize-questions.ts",
     "seed:push": "tsx scripts/push-seed-to-convex.ts",

@@ -40,6 +40,8 @@ export default defineSchema({
     .index('by_linked_user', ['linkedUserId']),
 
   categories: defineTable({
+    /** Unique active canonical keys (English). Written at seed time; avoids counting rows per query. */
+    questionCount: v.optional(v.number()),
     slug: v.string(),
     title: v.string(),
     themeGroup: v.optional(v.string()),

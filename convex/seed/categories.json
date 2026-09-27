@@ -3,480 +3,560 @@
     "slug": "ark-survival-evolved",
     "title": "ARK: Survival Evolved",
     "themeGroup": "g1",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 81
   },
   {
     "slug": "super-mario-bros",
     "title": "Super Mario Bros.",
     "themeGroup": "g10",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 106
   },
   {
     "slug": "the-legend-of-zelda",
     "title": "The Legend of Zelda",
     "themeGroup": "g11",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 96
   },
   {
     "slug": "dota",
     "title": "Dota",
     "themeGroup": "g3",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 116
   },
   {
     "slug": "halo",
     "title": "Halo",
     "themeGroup": "g5",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 93
   },
   {
     "slug": "league-of-legends",
     "title": "League of Legends",
     "themeGroup": "g6",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 105
   },
   {
     "slug": "minecraft",
     "title": "Minecraft",
     "themeGroup": "g7",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 111
   },
   {
     "slug": "overwatch",
     "title": "Overwatch",
     "themeGroup": "g8",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 110
   },
   {
     "slug": "red-dead-redemption",
     "title": "Red Dead Redemption",
     "themeGroup": "g9",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 101
   },
   {
     "slug": "corporations",
     "title": "Corporations",
     "themeGroup": "gen1",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 114
   },
   {
     "slug": "guess-the-decade",
     "title": "Guess The Decade",
     "themeGroup": "gen10",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 111
   },
   {
     "slug": "what-year",
     "title": "What year?",
     "themeGroup": "gen12",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 143
   },
   {
     "slug": "in-between",
     "title": "In between:",
     "themeGroup": "gen13",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 109
   },
   {
     "slug": "initials",
     "title": "Initials",
     "themeGroup": "gen14",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 162
   },
   {
     "slug": "invented-where",
     "title": "Invented Where?",
     "themeGroup": "gen15",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 107
   },
   {
     "slug": "match-the-nickname",
     "title": "Match the Nickname",
     "themeGroup": "gen16",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 117
   },
   {
     "slug": "national-icons",
     "title": "National Icons",
     "themeGroup": "gen17",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 114
   },
   {
     "slug": "odd-one-out",
     "title": "Odd One Out",
     "themeGroup": "gen18",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 88
   },
   {
     "slug": "talab-ul-ilm",
     "title": "Talab-ul Ilm",
     "themeGroup": "gen19",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 119
   },
   {
     "slug": "geography",
     "title": "Geography",
     "themeGroup": "gen2",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 110
   },
   {
     "slug": "trump-quotes",
     "title": "Trump Quotes",
     "themeGroup": "gen20",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 89
   },
   {
     "slug": "what-s-the-connection",
     "title": "What's the connection?",
     "themeGroup": "gen22",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 77
   },
   {
     "slug": "which-country",
     "title": "Which Country",
     "themeGroup": "gen23",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 113
   },
   {
     "slug": "two-truths-and-a-lie",
     "title": "Two Truths and a Lie",
     "themeGroup": "gen27",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 134
   },
   {
     "slug": "guess-the-flag",
     "title": "Guess the Flag",
     "themeGroup": "gen28",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 195
   },
   {
     "slug": "guess-the-jersey",
     "title": "Guess the Jersey",
     "themeGroup": "gen29",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 120
   },
   {
     "slug": "science",
     "title": "Science",
     "themeGroup": "gen3",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 120
   },
   {
     "slug": "uk",
     "title": "UK",
     "themeGroup": "gen4",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 82
   },
   {
     "slug": "usa",
     "title": "USA",
     "themeGroup": "gen5",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 110
   },
   {
     "slug": "countries-and-capitals",
     "title": "Capital Cities",
     "themeGroup": "gen6",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 117
   },
   {
     "slug": "famous-firsts",
     "title": "Famous Firsts",
     "themeGroup": "gen7",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 111
   },
   {
     "slug": "general-knowledge",
     "title": "General Knowledge",
     "themeGroup": "gen9",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 292
   },
   {
     "slug": "19th-century",
     "title": "19th Century",
     "themeGroup": "h1",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 115
   },
   {
     "slug": "the-modern-middle-east",
     "title": "The Modern Middle East",
     "themeGroup": "h11",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 114
   },
   {
     "slug": "uk-history",
     "title": "UK History",
     "themeGroup": "h12",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 116
   },
   {
     "slug": "us-history",
     "title": "US History",
     "themeGroup": "h13",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 116
   },
   {
     "slug": "ww1",
     "title": "WW1",
     "themeGroup": "h14",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 113
   },
   {
     "slug": "ww2",
     "title": "WW2",
     "themeGroup": "h15",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 148
   },
   {
     "slug": "european-christendom",
     "title": "European Christendom",
     "themeGroup": "h16",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 115
   },
   {
     "slug": "kurulu-osman",
     "title": "Kuruluş: Osman",
     "themeGroup": "h18",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 97
   },
   {
     "slug": "19th-century-europe",
     "title": "19th Century Europe",
     "themeGroup": "h2",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 118
   },
   {
     "slug": "20th-century",
     "title": "20th Century",
     "themeGroup": "h3",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 114
   },
   {
     "slug": "21st-century",
     "title": "21st Century",
     "themeGroup": "h4",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 107
   },
   {
     "slug": "ancient-civilisations",
     "title": "Ancient Civilisations",
     "themeGroup": "h5",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 120
   },
   {
     "slug": "cold-war",
     "title": "Cold War",
     "themeGroup": "h7",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 119
   },
   {
     "slug": "european-history",
     "title": "European History",
     "themeGroup": "h8",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 119
   },
   {
     "slug": "avatar-the-last-airbender",
     "title": "Avatar: The Last Airbender",
     "themeGroup": "pc1",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 110
   },
   {
     "slug": "how-i-met-your-mother",
     "title": "How I Met Your Mother",
     "themeGroup": "pc10",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 100
   },
   {
     "slug": "james-bond",
     "title": "James Bond",
     "themeGroup": "pc11",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 105
   },
   {
     "slug": "marvel",
     "title": "Marvel",
     "themeGroup": "pc13",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 76
   },
   {
     "slug": "naruto",
     "title": "Naruto",
     "themeGroup": "pc14",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 86
   },
   {
     "slug": "one-piece",
     "title": "One Piece",
     "themeGroup": "pc15",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 107
   },
   {
     "slug": "pirates-of-the-caribbean",
     "title": "Pirates of the Caribbean",
     "themeGroup": "pc16",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 95
   },
   {
     "slug": "pokemon",
     "title": "Pokemon",
     "themeGroup": "pc17",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 105
   },
   {
     "slug": "prison-break",
     "title": "Prison Break",
     "themeGroup": "pc18",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 89
   },
   {
     "slug": "breaking-bad",
     "title": "Breaking Bad",
     "themeGroup": "pc2",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 117
   },
   {
     "slug": "spongebob-squarepants",
     "title": "SpongeBob SquarePants",
     "themeGroup": "pc20",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 112
   },
   {
     "slug": "star-wars",
     "title": "Star Wars",
     "themeGroup": "pc23",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 119
   },
   {
     "slug": "stranger-things",
     "title": "Stranger Things",
     "themeGroup": "pc24",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 79
   },
   {
     "slug": "the-big-bang-theory",
     "title": "The Big Bang Theory",
     "themeGroup": "pc25",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 105
   },
   {
     "slug": "fast-and-furious",
     "title": "Fast and Furious",
     "themeGroup": "pc26",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 118
   },
   {
     "slug": "the-office-us",
     "title": "The Office US",
     "themeGroup": "pc28",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 103
   },
   {
     "slug": "dexter",
     "title": "Dexter",
     "themeGroup": "pc3",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 58
   },
   {
     "slug": "attack-on-titan",
     "title": "Attack on Titan",
     "themeGroup": "pc31",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 180
   },
   {
     "slug": "peaky-blinders",
     "title": "Peaky Blinders",
     "themeGroup": "pc32",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 103
   },
   {
     "slug": "suits",
     "title": "Suits",
     "themeGroup": "pc33",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 105
   },
   {
     "slug": "dc-extended-universe",
     "title": "DC Extended Universe",
     "themeGroup": "pc4",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 111
   },
   {
     "slug": "disney",
     "title": "Disney",
     "themeGroup": "pc5",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 109
   },
   {
     "slug": "dragon-ball",
     "title": "Dragon Ball",
     "themeGroup": "pc6",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 97
   },
   {
     "slug": "friends",
     "title": "Friends",
     "themeGroup": "pc7",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 113
   },
   {
     "slug": "game-of-thrones",
     "title": "Game of Thrones",
     "themeGroup": "pc8",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 69
   },
   {
     "slug": "harry-potter",
     "title": "Harry Potter",
     "themeGroup": "pc9",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 112
   },
   {
     "slug": "ufc",
     "title": "UFC",
     "themeGroup": "s10",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 142
   },
   {
     "slug": "which-player",
     "title": "Which Player?",
     "themeGroup": "s11",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 86
   },
   {
     "slug": "fifa-world-cup",
     "title": "FIFA World Cup",
     "themeGroup": "s12",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 92
   },
   {
     "slug": "cricket",
     "title": "Cricket",
     "themeGroup": "s2",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 110
   },
   {
     "slug": "formula-1",
     "title": "Formula 1",
     "themeGroup": "s3",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 134
   },
   {
     "slug": "nba",
     "title": "NBA",
     "themeGroup": "s5",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 100
   },
   {
     "slug": "premier-league",
     "title": "Premier League",
     "themeGroup": "s7",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 118
   },
   {
     "slug": "uefa-champions-league",
     "title": "UEFA Champions League",
     "themeGroup": "s9",
-    "enabled": true
+    "enabled": true,
+    "questionCount": 44
   }
 ]

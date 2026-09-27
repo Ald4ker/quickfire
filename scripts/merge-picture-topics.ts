@@ -5,11 +5,16 @@
  *   bun run seed:import  (includes this step)
  *
  * Standalone: bun run topics:picture:merge
+ *
+ * Picture rows also exist in the source spreadsheet (same text and answer), so each picture
+ * question is given the spreadsheet `userId` found in the freshly imported catalog. That keeps
+ * the stable `q<UserID>` key for picture questions and lets their translations line up.
  */
 import * as fs from 'fs';
 import * as path from 'path';
 
 interface SourceQA {
+  userId?: string;
   text: string;
   answer: string;
   imageKey?: string;
@@ -73,6 +78,10 @@ export const FALLBACK_CATEGORIES = RAW_CATEGORIES.map((c) => ({
   console.log(`Wrote ${entries.length} categories to ${categoriesPath}`);
 }
 
+function qaLookupKey(topic: string, qa: SourceQA): string {
+  return `${topic}\0${qa.text.trim()}\0${qa.answer.trim()}`;
+}
+
 function main() {
   const questionsPath = path.join(process.cwd(), 'constants', 'questions.json');
   const pictureGroupsPath = path.join(
@@ -92,10 +101,32 @@ function main() {
     fs.readFileSync(pictureGroupsPath, 'utf-8')
   ) as SourceGroup[];
 
+  // userId by (topic, text, answer) from the catalog's own picture rows (imported from the CSV).
+  const userIdByQa = new Map<string, string>();
+  for (const group of existing) {
+    if (!PICTURE_TOPICS.has(group.name)) continue;
+    for (const qa of group.questionAndanswer) {
+      if (qa.userId) {
+        userIdByQa.set(qaLookupKey(group.name, qa), qa.userId);
+      }
+    }
+  }
+
+  let withUserId = 0;
+  let withoutUserId = 0;
   for (const group of pictureGroups) {
     const expectedId = CATEGORY_IDS[group.name];
     if (expectedId && group.categoryId !== expectedId) {
       group.categoryId = expectedId;
+    }
+    for (const qa of group.questionAndanswer) {
+      const userId = qa.userId ?? userIdByQa.get(qaLookupKey(group.name, qa));
+      if (userId) {
+        qa.userId = userId;
+        withUserId += 1;
+      } else {
+        withoutUserId += 1;
+      }
     }
   }
 
@@ -117,6 +148,10 @@ function main() {
   console.log(
     `Merged ${pictureGroups.length} picture groups (${pictureCount} questions) into ${questionsPath}`
   );
+  console.log(`Picture questions with a spreadsheet userId: ${withUserId}; without: ${withoutUserId}`);
+  if (withoutUserId > 0) {
+    console.warn('Picture questions without a userId keep legacy position keys; add them to the spreadsheet.');
+  }
 }
 
 main();

@@ -4,12 +4,45 @@ import type { Doc } from './_generated/dataModel';
 import { requireUser } from './lib/auth';
 import { buildCanonicalPool, selectUnaskedWithFallback } from './lib/contentRules';
 
+/** Unique locales to read, in priority order, always ending with English. */
+function normalizeLocaleChain(localeChain: readonly string[] | undefined): string[] {
+  const chain: string[] = [];
+  for (const locale of localeChain ?? []) {
+    if (locale && !chain.includes(locale)) chain.push(locale);
+  }
+  if (!chain.includes('en')) chain.push('en');
+  return chain;
+}
+
+/**
+ * Active question rows for one category, only in the locales the caller can use.
+ * Reads through `by_category_locale_status`, so 17 seeded locales cost nothing
+ * to a player who plays in one or two of them.
+ */
+async function collectCategoryRows(
+  ctx: { db: { query: (table: 'questions') => any } },
+  categoryId: Doc<'categories'>['_id'],
+  localeChain: readonly string[]
+): Promise<Doc<'questions'>[]> {
+  const rows: Doc<'questions'>[] = [];
+  for (const locale of localeChain) {
+    const localeRows: Doc<'questions'>[] = await ctx.db
+      .query('questions')
+      .withIndex('by_category_locale_status', (q: any) =>
+        q.eq('categoryId', categoryId).eq('locale', locale).eq('status', 'active')
+      )
+      .collect();
+    rows.push(...localeRows);
+  }
+  return rows;
+}
+
 export const listPlayableCategories = query({
   args: {
     localeChain: v.optional(v.array(v.string())),
   },
   handler: async (ctx, args) => {
-    const localeChain = args.localeChain?.length ? args.localeChain : ['en'];
+    const localeChain = normalizeLocaleChain(args.localeChain);
     const categories = await ctx.db
       .query('categories')
       .withIndex('by_enabled', (q) => q.eq('enabled', true))
@@ -17,15 +50,18 @@ export const listPlayableCategories = query({
 
     return await Promise.all(
       categories.map(async (category) => {
-        const questions = await ctx.db
-          .query('questions')
-          .withIndex('by_category_status', (q) =>
-            q.eq('categoryId', category._id).eq('status', 'active')
-          )
-          .collect();
-        const questionCount = new Set(
-          questions.map((question) => question.canonicalKey)
-        ).size;
+        // `questionCount` is written at seed time (unique English keys). Count English rows
+        // only for categories seeded before the field existed.
+        let questionCount = category.questionCount;
+        if (questionCount === undefined) {
+          const englishRows = await ctx.db
+            .query('questions')
+            .withIndex('by_category_locale_status', (q) =>
+              q.eq('categoryId', category._id).eq('locale', 'en').eq('status', 'active')
+            )
+            .collect();
+          questionCount = new Set(englishRows.map((question) => question.canonicalKey)).size;
+        }
 
         for (const locale of localeChain) {
           const translation = await ctx.db
@@ -66,58 +102,42 @@ export const getModeQuestionPool = query({
   },
   handler: async (ctx, args) => {
     const limit = args.limit ?? 36;
-    const localeChain = args.localeChain?.length ? args.localeChain : ['en'];
+    const localeChain = normalizeLocaleChain(args.localeChain);
     const merged = new Map<string, any>();
 
-    if (args.categoryIds && args.categoryIds.length > 0) {
-      const perCategory = Math.ceil(limit / args.categoryIds.length);
+    const categoryIds =
+      args.categoryIds && args.categoryIds.length > 0
+        ? args.categoryIds
+        : (
+            await ctx.db
+              .query('categories')
+              .withIndex('by_enabled', (q) => q.eq('enabled', true))
+              .collect()
+          ).map((category) => category._id);
+    const perCategory = Math.ceil(limit / Math.max(categoryIds.length, 1));
 
-      for (const catId of args.categoryIds) {
-        const categoryQuestions = await ctx.db
-          .query('questions')
-          .withIndex('by_category', (q) => q.eq('categoryId', catId))
-          .collect();
+    for (const catId of categoryIds) {
+      const categoryQuestions = await collectCategoryRows(ctx, catId, localeChain);
 
-        const byCanonical = new Map<string, typeof categoryQuestions>();
-        for (const question of categoryQuestions) {
-          const bucket = byCanonical.get(question.canonicalKey) ?? [];
-          bucket.push(question);
-          byCanonical.set(question.canonicalKey, bucket);
-        }
-
-        for (const variants of byCanonical.values()) {
-          const localized = pickLocalizedQuestion(variants, localeChain);
-          if (!localized || merged.has(localized.canonicalKey)) {
-            continue;
-          }
-          merged.set(localized.canonicalKey, localized);
-          if (merged.size >= perCategory * args.categoryIds.length) {
-            break;
-          }
-        }
+      const byCanonical = new Map<string, typeof categoryQuestions>();
+      for (const question of categoryQuestions) {
+        const bucket = byCanonical.get(question.canonicalKey) ?? [];
+        bucket.push(question);
+        byCanonical.set(question.canonicalKey, bucket);
       }
 
-      return Array.from(merged.values()).slice(0, limit);
-    }
-
-    const questions = await ctx.db
-      .query('questions')
-      .filter((q) => q.eq(q.field('status'), 'active'))
-      .collect();
-
-    const byCanonical = new Map<string, typeof questions>();
-    for (const question of questions) {
-      const bucket = byCanonical.get(question.canonicalKey) ?? [];
-      bucket.push(question);
-      byCanonical.set(question.canonicalKey, bucket);
-    }
-
-    for (const variants of byCanonical.values()) {
-      const localized = pickLocalizedQuestion(variants, localeChain);
-      if (!localized || merged.has(localized.canonicalKey)) {
-        continue;
+      let takenFromCategory = 0;
+      for (const variants of byCanonical.values()) {
+        const localized = pickLocalizedQuestion(variants, localeChain);
+        if (!localized || merged.has(localized.canonicalKey)) {
+          continue;
+        }
+        merged.set(localized.canonicalKey, localized);
+        takenFromCategory += 1;
+        if (takenFromCategory >= perCategory || merged.size >= limit) {
+          break;
+        }
       }
-      merged.set(localized.canonicalKey, localized);
       if (merged.size >= limit) {
         break;
       }
@@ -156,7 +176,7 @@ export const getUnaskedQuestions = query({
   handler: async (ctx, args) => {
     await requireUser(ctx);
     const limit = args.limit ?? 36;
-    const localeChain = args.localeChain?.length ? args.localeChain : ['en'];
+    const localeChain = normalizeLocaleChain(args.localeChain);
 
     const history = await ctx.db
       .query('device_question_history')
@@ -166,11 +186,7 @@ export const getUnaskedQuestions = query({
 
     const rows: Doc<'questions'>[] = [];
     for (const catId of args.categoryIds) {
-      const qs = await ctx.db
-        .query('questions')
-        .withIndex('by_category_status', (q) => q.eq('categoryId', catId).eq('status', 'active'))
-        .collect();
-      rows.push(...qs);
+      rows.push(...(await collectCategoryRows(ctx, catId, localeChain)));
     }
 
     const pool = buildCanonicalPool(rows, localeChain);

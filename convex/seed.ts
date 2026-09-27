@@ -17,6 +17,7 @@ export const seedCategories = internalMutation({
         themeGroup: v.optional(v.string()),
         artwork: v.optional(v.string()),
         enabled: v.boolean(),
+        questionCount: v.optional(v.number()),
       })
     ),
   },
@@ -33,6 +34,7 @@ export const seedCategories = internalMutation({
           themeGroup: cat.themeGroup,
           artwork: cat.artwork,
           enabled: cat.enabled,
+          questionCount: cat.questionCount,
         });
       } else {
         await ctx.db.patch(existing._id, {
@@ -40,6 +42,7 @@ export const seedCategories = internalMutation({
           themeGroup: cat.themeGroup,
           artwork: cat.artwork,
           enabled: cat.enabled,
+          questionCount: cat.questionCount,
         });
       }
     }

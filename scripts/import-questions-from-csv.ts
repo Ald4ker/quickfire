@@ -1,16 +1,19 @@
 /**
- * Import constants/questions.json from the QF trivia spreadsheet.
+ * Import constants/questions.json from the QF trivia spreadsheet export.
  * Deduplicates exact duplicate rows (same topic, prompt, answer, difficulty).
  * Applies Arabic placeholder restoration from scripts/arabic-placeholder-map.ts.
+ * Carries each row's permanent `UserID` into the catalog as `userId`, which is the
+ * source of the stable canonical key `q<UserID>` (see features/play/canonicalKey.ts).
  *
- * Default CSV: ~/Downloads/QF full - Copy(No dupes).csv
+ * Default CSV: constants/source-questions.csv (committed spreadsheet export).
  *
- * Run: bun run seed:import
+ * Run: bun run seed:import            (import, merge picture topics, normalize)
+ *      tsx scripts/import-questions-from-csv.ts <path-to-csv>
  */
-import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
 import { restoreArabicPlaceholders } from './arabic-placeholder-map';
+import { decodeCsvBuffer, parseCsv } from './lib/csv';
 
 interface CsvRow {
   userId: string;
@@ -21,6 +24,7 @@ interface CsvRow {
 }
 
 interface SourceQA {
+  userId?: string;
   text: string;
   answer: string;
 }
@@ -39,11 +43,7 @@ const DIFFICULTY_POINTS = {
   Hard: 300,
 } as const satisfies Record<CsvRow['difficulty'], number>;
 
-const DEFAULT_CSV = path.join(
-  os.homedir(),
-  'Downloads',
-  'QF full - Copy(No dupes).csv'
-);
+const DEFAULT_CSV = path.join(process.cwd(), 'constants', 'source-questions.csv');
 
 function repairTopicName(topic: string): string {
   return topic.trim().replace(/^Kurulu\?: Osman$/, 'Kuruluş: Osman');
@@ -51,54 +51,6 @@ function repairTopicName(topic: string): string {
 
 function repairText(text: string): string {
   return restoreArabicPlaceholders(text.trim());
-}
-
-/** Minimal RFC-style CSV parser (quoted fields, commas). */
-function parseCsv(content: string): string[][] {
-  const rows: string[][] = [];
-  let row: string[] = [];
-  let field = '';
-  let inQuotes = false;
-
-  for (let i = 0; i < content.length; i += 1) {
-    const ch = content[i];
-    const next = content[i + 1];
-
-    if (inQuotes) {
-      if (ch === '"' && next === '"') {
-        field += '"';
-        i += 1;
-      } else if (ch === '"') {
-        inQuotes = false;
-      } else {
-        field += ch;
-      }
-      continue;
-    }
-
-    if (ch === '"') {
-      inQuotes = true;
-    } else if (ch === ',') {
-      row.push(field);
-      field = '';
-    } else if (ch === '\n') {
-      row.push(field);
-      rows.push(row);
-      row = [];
-      field = '';
-    } else if (ch === '\r') {
-      // skip
-    } else {
-      field += ch;
-    }
-  }
-
-  if (field.length > 0 || row.length > 0) {
-    row.push(field);
-    rows.push(row);
-  }
-
-  return rows;
 }
 
 function loadCategoryMaps(questionsPath: string) {
@@ -198,14 +150,6 @@ export const FALLBACK_CATEGORIES = RAW_CATEGORIES.map((c) => ({
   console.log(`Wrote ${entries.length} categories to ${categoriesPath}`);
 }
 
-function readCsvFile(csvPath: string): string {
-  const buffer = fs.readFileSync(csvPath);
-  if (buffer[0] === 0xef && buffer[1] === 0xbb && buffer[2] === 0xbf) {
-    return buffer.subarray(3).toString('utf8');
-  }
-  return buffer.toString('latin1');
-}
-
 function main() {
   const csvPath = process.argv[2] ?? DEFAULT_CSV;
   const questionsPath = path.join(process.cwd(), 'constants', 'questions.json');
@@ -215,7 +159,7 @@ function main() {
     process.exit(1);
   }
 
-  const raw = readCsvFile(csvPath);
+  const raw = decodeCsvBuffer(fs.readFileSync(csvPath));
   const table = parseCsv(raw);
   const header = table[0];
   if (!header || header[0] !== 'UserID') {
@@ -228,6 +172,7 @@ function main() {
   let groupCounter = nextGroupNum;
 
   const seen = new Set<string>();
+  const seenUserIds = new Set<string>();
   const buckets = new Map<string, SourceQA[]>();
   let skippedDupes = 0;
 
@@ -249,6 +194,17 @@ function main() {
       continue;
     }
 
+    const id = userId?.trim() ?? '';
+    if (!/^\d+$/.test(id)) {
+      console.warn(`Skipping row with invalid UserID "${userId}" (${repairedTopic})`);
+      continue;
+    }
+    if (seenUserIds.has(id)) {
+      console.warn(`Skipping repeated UserID ${id} (${repairedTopic})`);
+      continue;
+    }
+    seenUserIds.add(id);
+
     const prompt = repairText(question);
     const ans = repairText(answer);
     const dedupeKey = `${repairedTopic}\0${prompt}\0${ans}\0${diff}`;
@@ -261,7 +217,7 @@ function main() {
     const points = DIFFICULTY_POINTS[diff];
     const bucketKey = `${repairedTopic}|${points}`;
     const list = buckets.get(bucketKey) ?? [];
-    list.push({ text: prompt, answer: ans });
+    list.push({ userId: id, text: prompt, answer: ans });
     buckets.set(bucketKey, list);
   }
 

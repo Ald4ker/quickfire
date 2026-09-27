@@ -1,14 +1,21 @@
 /**
  * Normalizes constants/questions.json into one-question-per-record format.
- * Output: convex/seed/questions.json and convex/seed/categories.json
+ * Output: convex/seed/questions.json, convex/seed/categories.json, convex/seed/categoryTranslations.json
+ *
+ * Canonical keys are `q<UserID>` (stable across re-imports and locales). Rows without a
+ * userId keep the legacy `<slug>:<points>:<index>` key and are reported, so they can be fixed.
+ * Each category also gets `questionCount` (unique active keys) so Convex never has to count
+ * question rows at query time.
  *
  * Run with: npx tsx scripts/normalize-questions.ts
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { questionCanonicalKey } from '../features/play/canonicalKey';
 
 interface SourceQA {
+  userId?: string;
   text: string;
   answer: string;
   imageKey?: string;
@@ -27,6 +34,7 @@ interface NormalizedCategory {
   title: string;
   themeGroup: string;
   enabled: boolean;
+  questionCount: number;
 }
 
 interface NormalizedCategoryTranslation {
@@ -78,6 +86,9 @@ function main() {
   const categoryMap = new Map<string, NormalizedCategory>();
   const categoryTranslations: NormalizedCategoryTranslation[] = [];
   const questions: NormalizedQuestion[] = [];
+  const keysByCategory = new Map<string, Set<string>>();
+  const seenKeys = new Map<string, string>();
+  let legacyKeys = 0;
 
   for (const g of groups) {
     const slug = SLUG_BY_THEME_GROUP[g.categoryId] ?? slugify(g.name);
@@ -87,6 +98,7 @@ function main() {
         title: g.name,
         themeGroup: g.categoryId,
         enabled: !DISABLED_THEME_GROUPS.has(g.categoryId),
+        questionCount: 0,
       });
       categoryTranslations.push({
         categorySlug: slug,
@@ -96,9 +108,20 @@ function main() {
     }
 
     for (const [index, qa] of g.questionAndanswer.entries()) {
+      const canonicalKey = questionCanonicalKey(qa, slug, g.points, index);
+      if (!qa.userId) {
+        legacyKeys += 1;
+      }
+      const previous = seenKeys.get(canonicalKey);
+      if (previous) {
+        console.warn(`Duplicate canonical key ${canonicalKey} in ${slug} (first seen in ${previous}); skipping`);
+        continue;
+      }
+      seenKeys.set(canonicalKey, slug);
+
       const row: NormalizedQuestion = {
         categorySlug: slug,
-        canonicalKey: `${slug}:${g.points}:${index}`,
+        canonicalKey,
         prompt: qa.text,
         answer: qa.answer,
         pointValue: g.points,
@@ -109,7 +132,15 @@ function main() {
         row.promptImageKey = qa.imageKey;
       }
       questions.push(row);
+
+      const keys = keysByCategory.get(slug) ?? new Set<string>();
+      keys.add(canonicalKey);
+      keysByCategory.set(slug, keys);
     }
+  }
+
+  for (const category of categoryMap.values()) {
+    category.questionCount = keysByCategory.get(category.slug)?.size ?? 0;
   }
 
   const categories = Array.from(categoryMap.values());
@@ -137,6 +168,9 @@ function main() {
   console.log(`Wrote ${categories.length} categories to ${categoriesPath}`);
   console.log(`Wrote ${categoryTranslations.length} category translations to ${categoryTranslationsPath}`);
   console.log(`Wrote ${questions.length} questions to ${questionsPath}`);
+  if (legacyKeys > 0) {
+    console.warn(`${legacyKeys} questions have no userId and use legacy position keys`);
+  }
 }
 
 main();

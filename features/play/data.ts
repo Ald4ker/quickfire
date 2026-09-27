@@ -3,9 +3,12 @@ import rawQuestions from '@/constants/questions.json';
 import { groupRumbleQuestionsByValueBucket, normalizeRumbleTopicCount } from '@/features/play/rumble';
 import type { CategoryOption, GameMode, QuestionCard } from '@/features/shared';
 import type { SupportedLocale } from '@/lib/i18n/config';
+import { questionCanonicalKey } from '@/features/play/canonicalKey';
 import { normalizeQuickPlayTopicCount } from '@/features/play/tokenCosts';
 
 interface SourceQA {
+  /** Permanent spreadsheet UserID; the canonical key is `q<userId>` (see canonicalKey.ts). */
+  userId?: string;
   text: string;
   answer: string;
   imageKey?: string;
@@ -74,8 +77,8 @@ function pickTwoDistinctIndices(length: number): [number, number] {
   return [a, b];
 }
 
-function getCanonicalKey(slug: string, pointValue: number, index: number) {
-  return `${slug}:${pointValue}:${index}`;
+function getCanonicalKey(group: SourceGroup, slug: string, index: number) {
+  return questionCanonicalKey(group.questionAndanswer[index]!, slug, group.points, index);
 }
 
 function resolveCategoryTranslation(
@@ -207,7 +210,7 @@ export function buildBoard(
     for (const group of groupsForBoard) {
       const unaskedIndices = group.questionAndanswer
         .map((_, index) => index)
-        .filter((index) => !askedCanonicalKeys.has(getCanonicalKey(slug, group.points, index)));
+        .filter((index) => !askedCanonicalKeys.has(getCanonicalKey(group, slug, index)));
       const poolIndices = unaskedIndices.length >= 2
         ? unaskedIndices
         : group.questionAndanswer.map((_, index) => index);
@@ -218,7 +221,7 @@ export function buildBoard(
 
       const pushSide = (index: number, side: 'left' | 'right') => {
         const qa = group.questionAndanswer[index]!;
-        const canonicalKey = getCanonicalKey(slug, group.points, index);
+        const canonicalKey = getCanonicalKey(group, slug, index);
         const resolvedQuestion = resolveQuestionTranslation(canonicalKey, qa, localeChain);
         board.push({
           id: `${group.categoryId}:${canonicalKey}:${side}`,
@@ -257,7 +260,7 @@ export function getBonusQuestion(
     if (!categorySlugs.includes(slug)) continue;
     for (let index = 0; index < group.questionAndanswer.length; index += 1) {
       const qa = group.questionAndanswer[index];
-      const canonicalKey = getCanonicalKey(slug, group.points, index);
+      const canonicalKey = getCanonicalKey(group, slug, index);
       const id = `${group.categoryId}:${canonicalKey}:bonus`;
       if (usedQuestionIds.has(id) || askedCanonicalKeys.has(canonicalKey)) continue;
       const resolvedQuestion = resolveQuestionTranslation(
