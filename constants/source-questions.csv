@@ -2980,7 +2980,7 @@ UserID,Question,Answer,Difficulty,Topic
 2979,Which Cypriot team miraculously reached the Champions League quarter-finals in the 2011-12 season?,APOEL Nicosia,Hard,UEFA Champions League
 2980,Who scored the infamous ghost goal for Liverpool against Chelsea in the 2005 Champions League semi-final?,Luis García,Hard,UEFA Champions League
 2981,"As of 2025, which player holds the record for the most appearances in the Champions League without ever winning the trophy?",Gianluigi Buffon,Hard,UEFA Champions League
-2982,"Which Romanian team won the European Cup in 1986, becoming the first Eastern European club to do so?",Steaua Bucure?ti,Hard,UEFA Champions League
+2982,"Which Romanian team won the European Cup in 1986, becoming the first Eastern European club to do so?",Steaua București,Hard,UEFA Champions League
 2983,"As of 2025, who is the only African player to win the Champions League golden boot, doing so in the 1994-95 season?",George Weah,Hard,UEFA Champions League
 2984,Which team won the 1982 European Cup by defeating Bayern Munich in the final?,Aston Villa,Hard,UEFA Champions League
 2985,Who scored a hat-trick on his Champions League debut for Manchester United against Fenerbahçe in 2004?,Wayne Rooney,Hard,UEFA Champions League
@@ -2988,8 +2988,8 @@ UserID,Question,Answer,Difficulty,Topic
 2987,Which player scored the opening goal of the 2014 Champions League final for Atlético Madrid?,Diego Godín,Medium,UEFA Champions League
 2988,"As of 2025, who holds the record for the most goals scored in a single Champions League group stage campaign with netting 11 goals?",Cristiano Ronaldo,Hard,UEFA Champions League
 2989,Who was the only player to miss his penalty for Manchester United in the 2008 Champions League final shootout against Chelsea?,Cristiano Ronaldo,Hard,UEFA Champions League
-2990,Which defender scored a brace for Chelsea against Liverpool in the 2008-09 Champions League quarter-finals?,Branislav Ivanovi?,Hard,UEFA Champions League
-2991,Who scored a halfway line goal for Inter Milan against Schalke in the opening minute in the 2011 Champions League quarter-finals?,Dejan Stankovi?,Hard,UEFA Champions League
+2990,Which defender scored a brace for Chelsea against Liverpool in the 2008-09 Champions League quarter-finals?,Branislav Ivanović,Hard,UEFA Champions League
+2991,Who scored a halfway line goal for Inter Milan against Schalke in the opening minute in the 2011 Champions League quarter-finals?,Dejan Stanković,Hard,UEFA Champions League
 2992,Which nation won the 2022 FIFA World Cup?,Argentina,Easy,FIFA World Cup
 2993,Which Middle Eastern country hosted the 2022 tournament?,Qatar,Easy,FIFA World Cup
 2994,Which German striker set the all-time men's World Cup goalscoring record by netting his 16th goal in 2014?,Miroslav Klose,Easy,FIFA World Cup
@@ -3559,7 +3559,7 @@ UserID,Question,Answer,Difficulty,Topic
 3558,Which Pakistani education activist became the youngest-ever Nobel Peace Prize laureate in 2014?,Malala Yousafzai,Easy,21st Century
 3559,"In 2019, the Event Horizon Telescope published the first image of what astronomical phenomenon?",A black hole,Easy,21st Century
 3560,Which South Korean survival-thriller series became Netflixs biggest-ever series launch at the time in 2021?,Squid Game,Easy,21st Century
-3561,"What was the final score of the 2014 FIFA World Cup semi-final between Germany and Brazil, with Germanys score listed first?",46029,Easy,21st Century
+3561,"What was the final score of the 2014 FIFA World Cup semi-final between Germany and Brazil, with Germanys score listed first?",7-1,Easy,21st Century
 3562,What was the name of the 2016 social-media challenge in which participants remained frozen while a camera moved around them?,The Mannequin Challenge,Easy,21st Century
 3563,In what year did Twitter increase its character limit from 140 to 280 characters?,2017,Medium,21st Century
 3564,Which independent studio created the multiplayer party game Among Us?,Innersloth,Medium,21st Century
@@ -3724,7 +3724,7 @@ UserID,Question,Answer,Difficulty,Topic
 3723,What 1814 gathering of New England Federalists protested the War of 1812 and proposed constitutional reforms?,The Hartford Convention,Hard,US History
 3724,Which Wampanoag leader fought a devastating war against New England colonists from 1675 to 1676?,Metacomet,Hard,US History
 3725,"Which 1919 Supreme Court case established the ""clear and present danger"" test?",Schenck v. United States,Hard,US History
-3726,Which Hawaiian monarch was overthrown by American-backed sugar interests in 1893?,Queen Lili?uokalani,Hard,US History
+3726,Which Hawaiian monarch was overthrown by American-backed sugar interests in 1893?,Queen Liliʻuokalani,Hard,US History
 3727,What was the codename for the 1953 CIA-backed operation that overthrew Iranian Prime Minister Mohammad Mosaddegh?,Operation Ajax,Hard,US History
 3728,"Which ship was seized in an 1839 revolt by enslaved Africans, leading to a Supreme Court case argued by John Quincy Adams?",La Amistad,Hard,US History
 3729,Which 1875 law attempted to guarantee equal treatment in public accommodations before being struck down in 1883?,The Civil Rights Act of 1875,Hard,US History
@@ -3762,7 +3762,7 @@ UserID,Question,Answer,Difficulty,Topic
 3761,Who became the first human to journey into outer space in 1961?,Yuri Gagarin,Easy,20th Century
 3762,Which country was split into North and South along the 38th parallel after World War II?,Korea,Easy,20th Century
 3763,What 1919 treaty formally ended the state of war between Germany and the Allied Powers?,Treaty of Versailles,Easy,20th Century
-3764,Which popular 3D puzzle was invented by Hungarian architect and design professor Ern? Rubik in 1974?,Rubik's Cube,Easy,20th Century
+3764,Which popular 3D puzzle was invented by Hungarian architect and design professor Ernő Rubik in 1974?,Rubik's Cube,Easy,20th Century
 3765,What was Muhammad Ali's birth name?,Cassius Clay,Easy,20th Century
 3766,"Who wrote the first Harry Potter book, published in the UK in 1997?",J.K. Rowling,Easy,20th Century
 3767,"Which iconic band released its debut album, Please Please Me, in 1963?",The Beatles,Easy,20th Century
@@ -3830,9 +3830,9 @@ UserID,Question,Answer,Difficulty,Topic
 3829,What was the codename of the British Admiralty intelligence section that intercepted and decoded the Zimmermann Telegram?,Room 40,Hard,20th Century
 3830,Uruguay defeated which neighboring country in the final of the first FIFA World Cup in 1930?,Argentina,Hard,20th Century
 3831,Which Ugandan president was overthrown by Idi Amin in a 1971 coup?,Milton Obote,Hard,20th Century
-3832,"On what date did East German authorities announce new travel rules, leading crowds to breach the Berlin Wall?",32821,Hard,20th Century
+3832,"On what date did East German authorities announce new travel rules, leading crowds to breach the Berlin Wall?",9 November 1989,Hard,20th Century
 3833,"What was the common name of the CIA-led 1953 covert operation, conducted with British intelligence support, that overthrew Iranian Prime Minister Mohammad Mosaddegh?",Operation Ajax,Hard,20th Century
-3834,"In Ridley Scott's 1982 film Blade Runner, what month and year is the story set in?",43770,Hard,20th Century
+3834,"In Ridley Scott's 1982 film Blade Runner, what month and year is the story set in?",November 2019,Hard,20th Century
 3835,Who became the first official Secretary-General of the United Nations in 1946?,Trygve Lie,Hard,20th Century
 3836,Which European monarch exchanged the Willy-Nicky telegrams with Tsar Nicholas II in an attempt to avert World War I?,Kaiser Wilhelm II,Hard,20th Century
 3837,"What was the name of the first successful active communications satellite, launched in 1962 to relay television signals across the Atlantic?",Telstar 1,Hard,20th Century
@@ -4058,7 +4058,7 @@ UserID,Question,Answer,Difficulty,Topic
 4057,"Between the assassination of Tsar Alexander II and the Russian Revolution of 1905, which war began in 1904 and ended in a Russian defeat?",The Russo-Japanese War,Hard,In between:
 4058,"Between the first and fifth A Song of Ice and Fire books, which prequel novella series began with The Hedge Knight?",Tales of Dunk and Egg,Hard,In between:
 4059,"Between Slipknot's debut album and All Hope Is Gone, which album featured the Grammy-winning single Before I Forget?",Vol. 3: The Subliminal Verses,Hard,In between:
-4060,"Between the Meiji Restoration and the beginning of the Sh?wa era, which short period of Japanese history coincided with Emperor Yoshihito's reign?",The Taish? era,Hard,In between:
+4060,"Between the Meiji Restoration and the beginning of the Shōwa era, which short period of Japanese history coincided with Emperor Yoshihito's reign?",The Taishō era,Hard,In between:
 4061,"Between the Bitcoin genesis block and Ethereum's launch, which cryptocurrency exchange collapsed in 2014 after reporting the loss of hundreds of thousands of bitcoins?",Mt. Gox,Hard,In between:
 4062,"Between Casino Royale and Skyfall, which James Bond film faced production issues because of the 2007 Writers Guild strike?",Quantum of Solace,Hard,In between:
 4063,"Between Singapore's independence and the Asian Financial Crisis, which founding prime minister stepped down in 1990?",Lee Kuan Yew,Hard,In between:
@@ -4245,7 +4245,7 @@ UserID,Question,Answer,Difficulty,Topic
 4244,Who was the first woman to win Nobel Prizes in two different scientific fields?,Marie Curie,Medium,Famous Firsts
 4245,What was the first music video played on MTV when the channel launched in 1981?,Video Killed the Radio Star,Medium,Famous Firsts
 4246,Which company introduced the first commercial compact disc player in 1982?,Sony,Medium,Famous Firsts
-4247,Who was the first gymnast to score a perfect 10 at the Olympic Games?,Nadia Com?neci,Medium,Famous Firsts
+4247,Who was the first gymnast to score a perfect 10 at the Olympic Games?,Nadia Comăneci,Medium,Famous Firsts
 4248,Which film was the first to win the Big Five Academy Awards?,It Happened One Night,Medium,Famous Firsts
 4249,Which country became the first to adopt Bitcoin as legal tender in 2021?,El Salvador,Medium,Famous Firsts
 4250,Who was the first woman to travel into space?,Valentina Tereshkova,Medium,Famous Firsts
@@ -4530,7 +4530,7 @@ UserID,Question,Answer,Difficulty,Topic
 4529,The Matryoshka doll is a traditional symbol of which country?,Russia,Easy,National Icons
 4530,Bagpipes are closely linked to the national identity of which constituent country of the United Kingdom?,Scotland,Easy,National Icons
 4531,"Poutine, made with fries, cheese curds and gravy, originated in which country?",Canada,Easy,National Icons
-4532,The haka is deeply tied to the M?ori culture of which country?,New Zealand,Easy,National Icons
+4532,The haka is deeply tied to the Māori culture of which country?,New Zealand,Easy,National Icons
 4533,The vuvuzela became globally famous during the 2010 FIFA World Cup hosted by which country?,South Africa,Easy,National Icons
 4534,The tartan kilt is the most recognizable traditional dress of which nation?,Scotland,Easy,National Icons
 4535,The cuckoo clock was developed and popularized in the Black Forest region of which country?,Germany,Easy,National Icons
@@ -4586,11 +4586,11 @@ UserID,Question,Answer,Difficulty,Topic
 4585,What is the name of the traditional Scottish pouch worn with a pocketless kilt?,Sporran,Hard,National Icons
 4586,The Mola textile is a cultural icon of the Guna people native to which Central American country?,Panama,Hard,National Icons
 4587,What is the name of the traditional Moroccan men's hooded cloak?,Djellaba,Hard,National Icons
-4588,The P?keko bird and silver fern are natural icons associated with which country?,New Zealand,Hard,National Icons
+4588,The Pūkeko bird and silver fern are natural icons associated with which country?,New Zealand,Hard,National Icons
 4589,"Which European country is represented by Marianne, a female personification often shown wearing a Phrygian cap?",France,Hard,National Icons
 4590,Khachapuri is a cheese-filled bread and national dish of which country?,Georgia,Hard,National Icons
 4591,"The gho and kira are traditional national dresses worn in government offices, schools and on formal occasions in which Himalayan kingdom?",Bhutan,Hard,National Icons
-4592,"What M?ori name is given to New Zealand greenstone, traditionally carved into tools, weapons and ornaments?",Pounamu,Hard,National Icons
+4592,"What Māori name is given to New Zealand greenstone, traditionally carved into tools, weapons and ornaments?",Pounamu,Hard,National Icons
 4593,The Kantele is a traditional instrument embedded in the national epic poetry of which Nordic country?,Finland,Hard,National Icons
 4594,What is the name of the traditional Panamanian hat whose weaving processes are recognized by UNESCO?,Sombrero Pintao,Hard,National Icons
 4595,What is the name of the large traditional knife carried by Argentine gauchos?,Facón,Hard,National Icons
@@ -5541,7 +5541,7 @@ UserID,Question,Answer,Difficulty,Topic
 5540,What misspelling did Trump use for hamburgers in his January 2019 Clemson tweet?,hamberders,Medium,Trump Quotes
 5541,"What title did Trump mistakenly give Prince Charles in a June 13, 2019 tweet?",Prince of Whales,Medium,Trump Quotes
 5542,What two-word misspelling did Trump use instead of smoking gun in a December 2018 tweet?,Smocking Gun,Medium,Trump Quotes
-5543,"What famous comeback did Trump give after Hillary Clinton called him Vladimir Putin's puppet during the October 19, 2016 debate?",No puppet. No puppet. You're the puppet.,Medium,Trump Quotes
+5543,"What famous comeback did Trump give after Hillary Clinton called him Vladimir Putin's puppet during the October 19, 2016 debate?",No puppet. No puppet. You're the puppet,Medium,Trump Quotes
 5544,"During the September 26, 2016 debate, how much did Trump say a hypothetical hacker sitting on a bed might weigh?",400 pounds,Medium,Trump Quotes
 5545,Which group did Trump say he would bomb the shit out of during a November 2015 campaign event?,ISIS,Medium,Trump Quotes
 5546,What subject did Trump say nobody knew could be so complicated?,Health care,Medium,Trump Quotes
@@ -9104,103 +9104,103 @@ UserID,Question,Answer,Difficulty,Topic
 9103,Which club scored only seven away goals during the 2019-20 Premier League season?,Norwich City,Hard,Premier League
 9104,Which club scored only nine home goals during the 2020-21 Premier League season?,Fulham,Hard,Premier League
 9105,Which Leicester City season produced eight own goals by one club?,2003-04,Hard,Premier League
-9106,What specific heirloom does Ertu?rul leave to Osman that visually symbolizes the transfer of leadership within the tribe?,Ertu?rul leaves his ancestral sword to Osman,Easy,Kurulu?: Osman
-9107,"During his prophetic vision at Sheikh Edebali's Dervish lodge, what object does Osman see growing from his own chest to cover the world?",A massive tree,Easy,Kurulu?: Osman
-9108,"Instead of a standard single blade, what unique weapon combination does the veteran warrior Bams? Beyrek use in combat?",Dual swords,Easy,Kurulu?: Osman
-9109,"Before his eventual defeat and execution, which Byzantine Tekfur rules ?negöl and constantly employs Greek Fire against the Turks?",Aya Nikola,Easy,Kurulu?: Osman
-9110,"When Selcan Hatun steps down, what leadership title is bestowed upon Bala Hatun to govern the women of the tribe?",Head of the Bac?yân-? Rûm (or Ba? Hatun),Easy,Kurulu?: Osman
-9111,Through which specific lineage does the Mongol commander Togay claim his authority to torment the Turkmen tribes?,He is the son of Baycu Noyan,Easy,Kurulu?: Osman
-9112,Which major Byzantine city does Osman establish as his new capital and economic center following a prolonged siege?,Yeni?ehir,Easy,Kurulu?: Osman
-9113,Which of Osman's elder brothers temporarily assumes the role of Kay? Bey during his absences?,Gündüz Bey,Easy,Kurulu?: Osman
-9114,"What is the name of Osman and Malhun Hatun's firstborn son, who is destined to succeed him as Bey?",Orhan,Easy,Kurulu?: Osman
-9115,What prominent Islamic brotherhood does Sheikh Edebali lead to provide spiritual and economic support to the Turks?,The Ahi Brotherhood,Easy,Kurulu?: Osman
-9116,"Under Bala Hatun's command, what name is given to the organized guild of female warriors protecting the tribe?",Bac?yân-? Rûm,Easy,Kurulu?: Osman
-9117,"After initially serving the Mongols, which eccentric warrior embraces Islam and becomes one of Osman's most loyal Alps?",Cerkutay,Easy,Kurulu?: Osman
-9118,For what underlying reason does Targun Hatun initially agree to act as a spy for Aya Nikola within the Kay? camp?,"She is trying to save her captive father, ?nal Bey",Easy,Kurulu?: Osman
-9119,"While fiercely defending the sacred trusts left by Ertu?rul, which legendary veteran Alp is martyred by Togay?",Bams? Beyrek,Easy,Kurulu?: Osman
-9120,What incriminating item does Malhun Hatun uncover in Sö?üt that provides the first concrete proof of a traitor in the tribe?,Dündar Bey's ring,Easy,Kurulu?: Osman
-9121,"Despite her aunt Olivia's political machinations, which Byzantine princess does Orhan fall deeply in love with?",Holofira,Easy,Kurulu?: Osman
-9122,"Following her miraculous recovery, what name is given to the son born to Bala Hatun and Osman?",Alaeddin Ali,Easy,Kurulu?: Osman
-9123,"Because of Gündüz Bey's misguided alliance with Vizier Alemshah, which fiercely loyal Alp is tragically executed?",Göktu? Alp,Easy,Kurulu?: Osman
-9124,"Before the capital is moved to Yeni?ehir, which town serves as the resting place of Ertu?rul and the central hub of the Kay??",Sö?üt,Easy,Kurulu?: Osman
-9125,"After surviving severe manipulation and trauma, which female character trains as a warrior and eventually marries Cerkutay?",Aygül Hatun,Easy,Kurulu?: Osman
-9126,"During the first season's conflicts, what dark secret society is revealed to be led by Commander Yannis?",The Margarit Monks,Easy,Kurulu?: Osman
-9127,How does Osman personally execute Dündar Bey for his undeniable treason and collaboration with the enemy?,By shooting him with a bow and arrow,Easy,Kurulu?: Osman
-9128,"Which major Mongol leader, driven by a desire to overthrow his brother Argun, constantly threatens the Kay? tribe with annihilation?",Geyhatu,Easy,Kurulu?: Osman
-9129,"To break the economic monopoly of the Byzantine Tekfurs, in which town does Osman establish a thriving free-trade market?",Sö?üt,Easy,Kurulu?: Osman
-9130,"Following the departure of Abdal, who becomes the primary spiritual dervish and comedic healer for Osman's warriors?",Kumral Abdal,Easy,Kurulu?: Osman
-9131,What political and familial necessity forces Osman to take a second wife despite his profound love for Bala Hatun?,Ertu?rul's will demanding a direct heir to secure the Beylik,Easy,Kurulu?: Osman
-9132,"Throughout the early conquests, who serves as the devoted wife of Gündüz Bey and the mother of Aktemur?",Ay?e Hatun,Easy,Kurulu?: Osman
-9133,"To counter the heavy infantry lines of the Byzantine army, what traditional Turkic battle formation does Osman frequently employ?",The Crescent Tactic (or Turan Tactic),Easy,Kurulu?: Osman
-9134,"During a bloody ambush at the Domaniç Pass orchestrated by Kalanoz, which of Osman's older brothers is martyred?",Savc? Bey,Easy,Kurulu?: Osman
-9135,"Until her peaceful death from old age, who serves as the revered mother figure and fierce protector of the Kay? women?",Selcan Hatun,Easy,Kurulu?: Osman
-9136,During the climactic and victorious siege of which castle does Gündüz Bey achieve martyrdom?,?negöl Castle,Easy,Kurulu?: Osman
-9137,Which loyal Alp is frequently seen playing a kopuz (stringed instrument) and singing to boost morale around the campfire?,Boran Alp,Easy,Kurulu?: Osman
-9138,"During the administrative establishment of Osman's state, who is appointed as the primary Islamic jurist and scholar?",Dursun Fakih,Easy,Kurulu?: Osman
-9139,Which incendiary weapon does Aya Nikola frequently utilize to terrorize Turkmen settlements and breach defenses?,Greek Fire,Easy,Kurulu?: Osman
-9140,Which Turkmen tribe does Muzaffereddin Yavlak Arslan lead before eventually reconciling and fighting alongside Osman?,The Çobano?lu Tribe,Medium,Kurulu?: Osman
-9141,"By utilizing dark shamanic rituals, which Mongol commander temporarily brainwashes Göktu? into becoming a loyal Mankurt?",Balgay,Medium,Kurulu?: Osman
-9142,"Upon arriving at the frontier, what false accusation does Vizier Alemshah use to justify arresting Osman?",He accuses him of rebelling against the Seljuk Sultanate,Medium,Kurulu?: Osman
-9143,"During the violent climax of the first season, who personally strikes the lethal blow that kills the treacherous Sofia?",Osman Bey,Medium,Kurulu?: Osman
-9144,"Fueling his father's relentless quest for vengeance, what is the name of Bams? Beyrek's son who is murdered in an ambush?",Aybars,Medium,Kurulu?: Osman
-9145,"Seeking a ruthless commander to combat the Turks, whom does Aya Nikola specifically free from a Byzantine prison?",Flatyos,Medium,Kurulu?: Osman
-9146,"To prevent a political alliance, who secretly provides the poison to Olivia with strict instructions to assassinate Elçim Hatun?",?mren Tegin,Medium,Kurulu?: Osman
-9147,"Within the family tree of the Kay? leadership, what is the exact familial relationship between Aktemur Bey and Osman?",Aktemur is Osman's nephew (son of Gündüz Bey),Medium,Kurulu?: Osman
-9148,"Which noblewoman, tasked by her father to inspect the western borders, inadvertently becomes entangled in the Kay? tribe's internal conflicts?",Malhun Hatun,Medium,Kurulu?: Osman
-9149,"Throughout his early campaigns and skirmishes, what is the name of the swift black horse Osman famously rides?",Karayel,Medium,Kurulu?: Osman
-9150,What extremist organization does Commander Yannis secretly lead while posing as a humble religious figure in Sö?üt?,The Margarit Monks,Medium,Kurulu?: Osman
-9151,"After discovering the truth about Batur Alp's murder, who personally executes Ali?ar Bey to restore justice to the region?",Osman Bey,Medium,Kurulu?: Osman
-9152,"According to the lore discussed by Sheikh Edebali, what tragedy caused the untimely death of Bala Hatun's mother, Ulduz Hatun?",A severe disease,Medium,Kurulu?: Osman
-9153,"For repeatedly failing to crush the Turkmen threat, which former Tekfur of ?negöl is ruthlessly executed by Aya Nikola?",Tekfur Alexis,Medium,Kurulu?: Osman
-9154,How does Hazal Hatun attempt to manipulate Kay? tribal politics following Ertu?rul's death?,She actively conspires to have her husband Dündar elected as the new Bey,Medium,Kurulu?: Osman
-9155,What devastating personal loss drives Boran Alp to seek relentless vengeance against the Byzantine assassin Julia?,"Julia murders his pregnant wife, Gonca Hatun",Medium,Kurulu?: Osman
-9156,"As the chief scholar of the newly forming state, what specific historical and literary work is Dursun Fakih known for authoring?",Gazavatnâme,Medium,Kurulu?: Osman
-9157,"During a tense diplomatic period in Yeni?ehir, who accidentally consumes the fatal poison that was intended for Elçim Hatun?",Ayça Hatun,Medium,Kurulu?: Osman
-9158,"In recognition of her extensive work establishing trade and administration, what honorary title is bestowed upon Malhun Hatun?",Devlet Ana (Mother of State),Medium,Kurulu?: Osman
-9159,"After renouncing his Byzantine allegiance and embracing Islam, what new name does the former Commander Salvador adopt?",S?dd?k Alp,Medium,Kurulu?: Osman
-9160,"In his brutal duel with Bams? Beyrek, what signature weapon does Togay employ to gain a lethal advantage?",A specialized garrote wire (or Mongol whip),Medium,Kurulu?: Osman
-9161,"To gain political leverage and control over the Kay? tribe, whom does the corrupt Ali?ar Bey manipulate into a forced marriage?",Aygül Hatun,Medium,Kurulu?: Osman
-9162,Where exactly does Osman formally reveal the Kay? tribe's new independent flag following his election as Bey?,Inside the main Tribal Marquee (Bey's Tent),Medium,Kurulu?: Osman
-9163,"Attempting to stop Osman's rapid expansion, which Byzantine Emperor dispatches Kantakouzenos to manage the frontier crisis?",Emperor Andronikos,Medium,Kurulu?: Osman
-9164,What profession does Kumral Abdal pretend to practice while acting as a covert spy in the Byzantine markets?,A traveling dervish and healer,Medium,Kurulu?: Osman
-9165,"In a tragic opening to Season 5, what fate befalls Halime, the young daughter of Osman and Bala Hatun?",She dies from a terrible illness,Medium,Kurulu?: Osman
-9166,"Within the generational lineage of the Kay?, what is the exact relationship between the martyred Bayhoca and Osman?",Bayhoca is Osman's nephew (son of Savc? Bey),Medium,Kurulu?: Osman
-9167,"After Nikola's repeated failures to secure the border, which highly decorated commander is sent by the Emperor to replace him?",Commander Muzalon (George Mouzalon),Medium,Kurulu?: Osman
-9168,"Beyond the physical territory, what specific heirloom does Osman inherit from Ertu?rul that legitimizes his rule over the Alps?",Ertu?rul's ancestral sword,Medium,Kurulu?: Osman
-9169,"To protect Orhan from the political fallout of an inter-faith alliance, what painful sacrifice does Princess Holofira make?",She publicly rejects Orhan and refuses his marriage proposal,Medium,Kurulu?: Osman
-9170,"During a tense standoff in the first season, what shocking revelation is made regarding the Mongol warrior Kongar?","He is actually Göktu?, the long-lost brother of Konur Alp",Medium,Kurulu?: Osman
-9171,"Immediately following the monumental victory at ?negöl, which heavily fortified Byzantine city does Osman capture next?",Yeni?ehir,Medium,Kurulu?: Osman
-9172,"After realizing the error of his treacherous ways, how does Yavlak Arslan attempt to redeem himself in the eyes of the Turks?",He permanently allies with Osman against the encroaching Mongol forces,Medium,Kurulu?: Osman
-9173,"To frame Osman and ignite a civil war within the Kay? tribe, who secretly orchestrates the assassination of Batur Alp?",Ali?ar Bey,Hard,Kurulu?: Osman
-9174,"Despite years of brainwashing, what specific physical trait allows Konur Alp to positively identify Kongar as his brother?",A distinct birthmark on his shoulder,Hard,Kurulu?: Osman
-9175,"Before she married into the Kay? leadership, to which specific Anatolian tribe did the ambitious Hazal Hatun originally belong?",The Çobano?lu Tribe,Hard,Kurulu?: Osman
-9176,"During the perilous initial assault on Kulucahisar Castle walls, which dedicated Alp is tragically martyred by a poisoned arrow?",Ayaz Alp,Hard,Kurulu?: Osman
-9177,What specific disguise does Commander Yannis frequently utilize to move undetected through the Sö?üt marketplace?,He dresses as an old blind beggar or fortune teller,Hard,Kurulu?: Osman
-9178,Who is the ambitious first wife of Dündar Bey and the mother of Batur Alp?,Zöhre Hatun,Hard,Kurulu?: Osman
-9179,"During the celebratory feast for Osman and Bala's wedding, what catastrophic crime does Zöhre Hatun attempt to commit?",She attempts to poison the feast's food to assassinate Osman,Hard,Kurulu?: Osman
-9180,"Interrupting the wedding feast assassination plot, who suddenly executes Zöhre Hatun by slitting her throat?",Hazal Hatun,Hard,Kurulu?: Osman
-9181,"Commanding a fearsome band of dark shamans, which specific son of Baycu Noyan arrives to exact vengeance on the Turks?",Togay,Hard,Kurulu?: Osman
-9182,"Before taking full command of the Byzantine military efforts against Osman, what prestigious diplomatic title does Muzalon hold?",Magister (or Megas Domestikos),Hard,Kurulu?: Osman
-9183,Whom do ?mren Tegin and Olivia manipulate into a bitter feud with Holofira using a poisoned water scheme?,Elçim Hatun,Hard,Kurulu?: Osman
-9184,"To formally legitimize Osman's independence, what three symbolic items are delivered to him by the envoy of Sultan Mesud II?","A personalized decree, a battle standard, and a ceremonial drum",Hard,Kurulu?: Osman
-9185,"Serving as a covert meeting ground for Dündar's treason, which specific artisan's shop in Sö?üt hides the Byzantine spies?",The Potter's Shop,Hard,Kurulu?: Osman
-9186,"Employing a brilliant tactical deception, during the conquest of which castle does Osman disguise his Alps as a wedding procession?",Bilecik Castle,Hard,Kurulu?: Osman
-9187,Who risks his life to escape Geyhatu's encampment and warn Osman of the impending Mongol strike?,Cerkutay,Hard,Kurulu?: Osman
-9188,"Operating under Nikola's command, what specialized military role does the assassin Julia fulfill before her death?",She leads an elite squadron of female Byzantine assassins,Hard,Kurulu?: Osman
-9189,"When counseling Osman through moments of severe moral crisis, from which specific poetic text does Sheikh Edebali frequently recite?",The Masnavi of Rumi,Hard,Kurulu?: Osman
-9190,"By successfully raiding a heavily guarded Byzantine caravan without permission, what official status does young Orhan earn?",He is recognized as a full Alp and granted his own command,Hard,Kurulu?: Osman
-9191,"As a prominent leader who initially opposes the Kay?'s rise, what is the full name of Hazal Hatun's powerful brother?",Muzaffereddin Yavlak Arslan,Hard,Kurulu?: Osman
-9192,"During the assassination plot in Yeni?ehir, who inadvertently consumes the toxic water that Olivia's spy had prepared for Elçim?",Ayça Hatun,Hard,Kurulu?: Osman
-9193,"For blatantly violating the peace treaty brokered by the Seljuk state, which Mongol commander is publicly executed by Osman?",Togay,Hard,Kurulu?: Osman
-9194,Where exactly does Commander Kalanoz orchestrate the tragic ambush that claims Savc? Bey's life?,The Domaniç Pass,Hard,Kurulu?: Osman
-9195,"When Osman is unjustly imprisoned by Vizier Alemshah, who controversially assumes emergency leadership of the Kay? tribe?",Gündüz Bey,Hard,Kurulu?: Osman
-9196,What vital intelligence does Targun Hatun steal from Osman's tent to deliver to Aya Nikola?,The secret maps detailing the Kay? conquest plans,Hard,Kurulu?: Osman
-9197,"What specific affliction caused the untimely death of Sheikh Edebali's wife, Ulduz Hatun?",A severe infectious disease,Hard,Kurulu?: Osman
-9198,"While Ertu?rul is incapacitated in Konya for an extended period, what official title does Dündar Bey use to govern the tribe?",The Substitute Bey (Vekil Bey),Hard,Kurulu?: Osman
-9199,What critical tactical error allows Osman's outnumbered forces to achieve a decisive victory against Tekfur Alexis?,Alexis splits his main forces to attack what turns out to be a decoy caravan,Hard,Kurulu?: Osman
-9200,"Before sacrificing his life to protect the sacred trusts, what highest military rank does Bams? Beyrek hold among the Kay? warriors?",Head Alp (Alpba??),Hard,Kurulu?: Osman
-9201,"Serving as the ruthless right-hand man to Togay, which Mongol assassin specializes in the use of throwing knives?",Camuha,Hard,Kurulu?: Osman
-9202,"To spiritually and culturally solidify Yeni?ehir as the new Islamic capital, what major architectural conversion does Osman complete?",He converts the city's central Byzantine church into a grand Mosque,Hard,Kurulu?: Osman
+9106,What specific heirloom does Ertuğrul leave to Osman that visually symbolizes the transfer of leadership within the tribe?,Ertuğrul leaves his ancestral sword to Osman,Easy,Kuruluş: Osman
+9107,"During his prophetic vision at Sheikh Edebali's Dervish lodge, what object does Osman see growing from his own chest to cover the world?",A massive tree,Easy,Kuruluş: Osman
+9108,"Instead of a standard single blade, what unique weapon combination does the veteran warrior Bamsı Beyrek use in combat?",Dual swords,Easy,Kuruluş: Osman
+9109,"Before his eventual defeat and execution, which Byzantine Tekfur rules İnegöl and constantly employs Greek Fire against the Turks?",Aya Nikola,Easy,Kuruluş: Osman
+9110,"When Selcan Hatun steps down, what leadership title is bestowed upon Bala Hatun to govern the women of the tribe?",Head of the Bacıyân-ı Rûm (or Baş Hatun),Easy,Kuruluş: Osman
+9111,Through which specific lineage does the Mongol commander Togay claim his authority to torment the Turkmen tribes?,He is the son of Baycu Noyan,Easy,Kuruluş: Osman
+9112,Which major Byzantine city does Osman establish as his new capital and economic center following a prolonged siege?,Yenişehir,Easy,Kuruluş: Osman
+9113,Which of Osman's elder brothers temporarily assumes the role of Kayı Bey during his absences?,Gündüz Bey,Easy,Kuruluş: Osman
+9114,"What is the name of Osman and Malhun Hatun's firstborn son, who is destined to succeed him as Bey?",Orhan,Easy,Kuruluş: Osman
+9115,What prominent Islamic brotherhood does Sheikh Edebali lead to provide spiritual and economic support to the Turks?,The Ahi Brotherhood,Easy,Kuruluş: Osman
+9116,"Under Bala Hatun's command, what name is given to the organized guild of female warriors protecting the tribe?",Bacıyân-ı Rûm,Easy,Kuruluş: Osman
+9117,"After initially serving the Mongols, which eccentric warrior embraces Islam and becomes one of Osman's most loyal Alps?",Cerkutay,Easy,Kuruluş: Osman
+9118,For what underlying reason does Targun Hatun initially agree to act as a spy for Aya Nikola within the Kayı camp?,"She is trying to save her captive father, İnal Bey",Easy,Kuruluş: Osman
+9119,"While fiercely defending the sacred trusts left by Ertuğrul, which legendary veteran Alp is martyred by Togay?",Bamsı Beyrek,Easy,Kuruluş: Osman
+9120,What incriminating item does Malhun Hatun uncover in Söğüt that provides the first concrete proof of a traitor in the tribe?,Dündar Bey's ring,Easy,Kuruluş: Osman
+9121,"Despite her aunt Olivia's political machinations, which Byzantine princess does Orhan fall deeply in love with?",Holofira,Easy,Kuruluş: Osman
+9122,"Following her miraculous recovery, what name is given to the son born to Bala Hatun and Osman?",Alaeddin Ali,Easy,Kuruluş: Osman
+9123,"Because of Gündüz Bey's misguided alliance with Vizier Alemshah, which fiercely loyal Alp is tragically executed?",Göktuğ Alp,Easy,Kuruluş: Osman
+9124,"Before the capital is moved to Yenişehir, which town serves as the resting place of Ertuğrul and the central hub of the Kayı?",Söğüt,Easy,Kuruluş: Osman
+9125,"After surviving severe manipulation and trauma, which female character trains as a warrior and eventually marries Cerkutay?",Aygül Hatun,Easy,Kuruluş: Osman
+9126,"During the first season's conflicts, what dark secret society is revealed to be led by Commander Yannis?",The Margarit Monks,Easy,Kuruluş: Osman
+9127,How does Osman personally execute Dündar Bey for his undeniable treason and collaboration with the enemy?,By shooting him with a bow and arrow,Easy,Kuruluş: Osman
+9128,"Which major Mongol leader, driven by a desire to overthrow his brother Argun, constantly threatens the Kayı tribe with annihilation?",Geyhatu,Easy,Kuruluş: Osman
+9129,"To break the economic monopoly of the Byzantine Tekfurs, in which town does Osman establish a thriving free-trade market?",Söğüt,Easy,Kuruluş: Osman
+9130,"Following the departure of Abdal, who becomes the primary spiritual dervish and comedic healer for Osman's warriors?",Kumral Abdal,Easy,Kuruluş: Osman
+9131,What political and familial necessity forces Osman to take a second wife despite his profound love for Bala Hatun?,Ertuğrul's will demanding a direct heir to secure the Beylik,Easy,Kuruluş: Osman
+9132,"Throughout the early conquests, who serves as the devoted wife of Gündüz Bey and the mother of Aktemur?",Ayşe Hatun,Easy,Kuruluş: Osman
+9133,"To counter the heavy infantry lines of the Byzantine army, what traditional Turkic battle formation does Osman frequently employ?",The Crescent Tactic (or Turan Tactic),Easy,Kuruluş: Osman
+9134,"During a bloody ambush at the Domaniç Pass orchestrated by Kalanoz, which of Osman's older brothers is martyred?",Savcı Bey,Easy,Kuruluş: Osman
+9135,"Until her peaceful death from old age, who serves as the revered mother figure and fierce protector of the Kayı women?",Selcan Hatun,Easy,Kuruluş: Osman
+9136,During the climactic and victorious siege of which castle does Gündüz Bey achieve martyrdom?,İnegöl Castle,Easy,Kuruluş: Osman
+9137,Which loyal Alp is frequently seen playing a kopuz (stringed instrument) and singing to boost morale around the campfire?,Boran Alp,Easy,Kuruluş: Osman
+9138,"During the administrative establishment of Osman's state, who is appointed as the primary Islamic jurist and scholar?",Dursun Fakih,Easy,Kuruluş: Osman
+9139,Which incendiary weapon does Aya Nikola frequently utilize to terrorize Turkmen settlements and breach defenses?,Greek Fire,Easy,Kuruluş: Osman
+9140,Which Turkmen tribe does Muzaffereddin Yavlak Arslan lead before eventually reconciling and fighting alongside Osman?,The Çobanoğlu Tribe,Medium,Kuruluş: Osman
+9141,"By utilizing dark shamanic rituals, which Mongol commander temporarily brainwashes Göktuğ into becoming a loyal Mankurt?",Balgay,Medium,Kuruluş: Osman
+9142,"Upon arriving at the frontier, what false accusation does Vizier Alemshah use to justify arresting Osman?",He accuses him of rebelling against the Seljuk Sultanate,Medium,Kuruluş: Osman
+9143,"During the violent climax of the first season, who personally strikes the lethal blow that kills the treacherous Sofia?",Osman Bey,Medium,Kuruluş: Osman
+9144,"Fueling his father's relentless quest for vengeance, what is the name of Bamsı Beyrek's son who is murdered in an ambush?",Aybars,Medium,Kuruluş: Osman
+9145,"Seeking a ruthless commander to combat the Turks, whom does Aya Nikola specifically free from a Byzantine prison?",Flatyos,Medium,Kuruluş: Osman
+9146,"To prevent a political alliance, who secretly provides the poison to Olivia with strict instructions to assassinate Elçim Hatun?",İmren Tegin,Medium,Kuruluş: Osman
+9147,"Within the family tree of the Kayı leadership, what is the exact familial relationship between Aktemur Bey and Osman?",Aktemur is Osman's nephew (son of Gündüz Bey),Medium,Kuruluş: Osman
+9148,"Which noblewoman, tasked by her father to inspect the western borders, inadvertently becomes entangled in the Kayı tribe's internal conflicts?",Malhun Hatun,Medium,Kuruluş: Osman
+9149,"Throughout his early campaigns and skirmishes, what is the name of the swift black horse Osman famously rides?",Karayel,Medium,Kuruluş: Osman
+9150,What extremist organization does Commander Yannis secretly lead while posing as a humble religious figure in Söğüt?,The Margarit Monks,Medium,Kuruluş: Osman
+9151,"After discovering the truth about Batur Alp's murder, who personally executes Alişar Bey to restore justice to the region?",Osman Bey,Medium,Kuruluş: Osman
+9152,"According to the lore discussed by Sheikh Edebali, what tragedy caused the untimely death of Bala Hatun's mother, Ulduz Hatun?",A severe disease,Medium,Kuruluş: Osman
+9153,"For repeatedly failing to crush the Turkmen threat, which former Tekfur of İnegöl is ruthlessly executed by Aya Nikola?",Tekfur Alexis,Medium,Kuruluş: Osman
+9154,How does Hazal Hatun attempt to manipulate Kayı tribal politics following Ertuğrul's death?,She actively conspires to have her husband Dündar elected as the new Bey,Medium,Kuruluş: Osman
+9155,What devastating personal loss drives Boran Alp to seek relentless vengeance against the Byzantine assassin Julia?,"Julia murders his pregnant wife, Gonca Hatun",Medium,Kuruluş: Osman
+9156,"As the chief scholar of the newly forming state, what specific historical and literary work is Dursun Fakih known for authoring?",Gazavatnâme,Medium,Kuruluş: Osman
+9157,"During a tense diplomatic period in Yenişehir, who accidentally consumes the fatal poison that was intended for Elçim Hatun?",Ayça Hatun,Medium,Kuruluş: Osman
+9158,"In recognition of her extensive work establishing trade and administration, what honorary title is bestowed upon Malhun Hatun?",Devlet Ana (Mother of State),Medium,Kuruluş: Osman
+9159,"After renouncing his Byzantine allegiance and embracing Islam, what new name does the former Commander Salvador adopt?",Sıddık Alp,Medium,Kuruluş: Osman
+9160,"In his brutal duel with Bamsı Beyrek, what signature weapon does Togay employ to gain a lethal advantage?",A specialized garrote wire (or Mongol whip),Medium,Kuruluş: Osman
+9161,"To gain political leverage and control over the Kayı tribe, whom does the corrupt Alişar Bey manipulate into a forced marriage?",Aygül Hatun,Medium,Kuruluş: Osman
+9162,Where exactly does Osman formally reveal the Kayı tribe's new independent flag following his election as Bey?,Inside the main Tribal Marquee (Bey's Tent),Medium,Kuruluş: Osman
+9163,"Attempting to stop Osman's rapid expansion, which Byzantine Emperor dispatches Kantakouzenos to manage the frontier crisis?",Emperor Andronikos,Medium,Kuruluş: Osman
+9164,What profession does Kumral Abdal pretend to practice while acting as a covert spy in the Byzantine markets?,A traveling dervish and healer,Medium,Kuruluş: Osman
+9165,"In a tragic opening to Season 5, what fate befalls Halime, the young daughter of Osman and Bala Hatun?",She dies from a terrible illness,Medium,Kuruluş: Osman
+9166,"Within the generational lineage of the Kayı, what is the exact relationship between the martyred Bayhoca and Osman?",Bayhoca is Osman's nephew (son of Savcı Bey),Medium,Kuruluş: Osman
+9167,"After Nikola's repeated failures to secure the border, which highly decorated commander is sent by the Emperor to replace him?",Commander Muzalon (George Mouzalon),Medium,Kuruluş: Osman
+9168,"Beyond the physical territory, what specific heirloom does Osman inherit from Ertuğrul that legitimizes his rule over the Alps?",Ertuğrul's ancestral sword,Medium,Kuruluş: Osman
+9169,"To protect Orhan from the political fallout of an inter-faith alliance, what painful sacrifice does Princess Holofira make?",She publicly rejects Orhan and refuses his marriage proposal,Medium,Kuruluş: Osman
+9170,"During a tense standoff in the first season, what shocking revelation is made regarding the Mongol warrior Kongar?","He is actually Göktuğ, the long-lost brother of Konur Alp",Medium,Kuruluş: Osman
+9171,"Immediately following the monumental victory at İnegöl, which heavily fortified Byzantine city does Osman capture next?",Yenişehir,Medium,Kuruluş: Osman
+9172,"After realizing the error of his treacherous ways, how does Yavlak Arslan attempt to redeem himself in the eyes of the Turks?",He permanently allies with Osman against the encroaching Mongol forces,Medium,Kuruluş: Osman
+9173,"To frame Osman and ignite a civil war within the Kayı tribe, who secretly orchestrates the assassination of Batur Alp?",Alişar Bey,Hard,Kuruluş: Osman
+9174,"Despite years of brainwashing, what specific physical trait allows Konur Alp to positively identify Kongar as his brother?",A distinct birthmark on his shoulder,Hard,Kuruluş: Osman
+9175,"Before she married into the Kayı leadership, to which specific Anatolian tribe did the ambitious Hazal Hatun originally belong?",The Çobanoğlu Tribe,Hard,Kuruluş: Osman
+9176,"During the perilous initial assault on Kulucahisar Castle walls, which dedicated Alp is tragically martyred by a poisoned arrow?",Ayaz Alp,Hard,Kuruluş: Osman
+9177,What specific disguise does Commander Yannis frequently utilize to move undetected through the Söğüt marketplace?,He dresses as an old blind beggar or fortune teller,Hard,Kuruluş: Osman
+9178,Who is the ambitious first wife of Dündar Bey and the mother of Batur Alp?,Zöhre Hatun,Hard,Kuruluş: Osman
+9179,"During the celebratory feast for Osman and Bala's wedding, what catastrophic crime does Zöhre Hatun attempt to commit?",She attempts to poison the feast's food to assassinate Osman,Hard,Kuruluş: Osman
+9180,"Interrupting the wedding feast assassination plot, who suddenly executes Zöhre Hatun by slitting her throat?",Hazal Hatun,Hard,Kuruluş: Osman
+9181,"Commanding a fearsome band of dark shamans, which specific son of Baycu Noyan arrives to exact vengeance on the Turks?",Togay,Hard,Kuruluş: Osman
+9182,"Before taking full command of the Byzantine military efforts against Osman, what prestigious diplomatic title does Muzalon hold?",Magister (or Megas Domestikos),Hard,Kuruluş: Osman
+9183,Whom do İmren Tegin and Olivia manipulate into a bitter feud with Holofira using a poisoned water scheme?,Elçim Hatun,Hard,Kuruluş: Osman
+9184,"To formally legitimize Osman's independence, what three symbolic items are delivered to him by the envoy of Sultan Mesud II?","A personalized decree, a battle standard, and a ceremonial drum",Hard,Kuruluş: Osman
+9185,"Serving as a covert meeting ground for Dündar's treason, which specific artisan's shop in Söğüt hides the Byzantine spies?",The Potter's Shop,Hard,Kuruluş: Osman
+9186,"Employing a brilliant tactical deception, during the conquest of which castle does Osman disguise his Alps as a wedding procession?",Bilecik Castle,Hard,Kuruluş: Osman
+9187,Who risks his life to escape Geyhatu's encampment and warn Osman of the impending Mongol strike?,Cerkutay,Hard,Kuruluş: Osman
+9188,"Operating under Nikola's command, what specialized military role does the assassin Julia fulfill before her death?",She leads an elite squadron of female Byzantine assassins,Hard,Kuruluş: Osman
+9189,"When counseling Osman through moments of severe moral crisis, from which specific poetic text does Sheikh Edebali frequently recite?",The Masnavi of Rumi,Hard,Kuruluş: Osman
+9190,"By successfully raiding a heavily guarded Byzantine caravan without permission, what official status does young Orhan earn?",He is recognized as a full Alp and granted his own command,Hard,Kuruluş: Osman
+9191,"As a prominent leader who initially opposes the Kayı's rise, what is the full name of Hazal Hatun's powerful brother?",Muzaffereddin Yavlak Arslan,Hard,Kuruluş: Osman
+9192,"During the assassination plot in Yenişehir, who inadvertently consumes the toxic water that Olivia's spy had prepared for Elçim?",Ayça Hatun,Hard,Kuruluş: Osman
+9193,"For blatantly violating the peace treaty brokered by the Seljuk state, which Mongol commander is publicly executed by Osman?",Togay,Hard,Kuruluş: Osman
+9194,Where exactly does Commander Kalanoz orchestrate the tragic ambush that claims Savcı Bey's life?,The Domaniç Pass,Hard,Kuruluş: Osman
+9195,"When Osman is unjustly imprisoned by Vizier Alemshah, who controversially assumes emergency leadership of the Kayı tribe?",Gündüz Bey,Hard,Kuruluş: Osman
+9196,What vital intelligence does Targun Hatun steal from Osman's tent to deliver to Aya Nikola?,The secret maps detailing the Kayı conquest plans,Hard,Kuruluş: Osman
+9197,"What specific affliction caused the untimely death of Sheikh Edebali's wife, Ulduz Hatun?",A severe infectious disease,Hard,Kuruluş: Osman
+9198,"While Ertuğrul is incapacitated in Konya for an extended period, what official title does Dündar Bey use to govern the tribe?",The Substitute Bey (Vekil Bey),Hard,Kuruluş: Osman
+9199,What critical tactical error allows Osman's outnumbered forces to achieve a decisive victory against Tekfur Alexis?,Alexis splits his main forces to attack what turns out to be a decoy caravan,Hard,Kuruluş: Osman
+9200,"Before sacrificing his life to protect the sacred trusts, what highest military rank does Bamsı Beyrek hold among the Kayı warriors?",Head Alp (Alpbaşı),Hard,Kuruluş: Osman
+9201,"Serving as the ruthless right-hand man to Togay, which Mongol assassin specializes in the use of throwing knives?",Camuha,Hard,Kuruluş: Osman
+9202,"To spiritually and culturally solidify Yenişehir as the new Islamic capital, what major architectural conversion does Osman complete?",He converts the city's central Byzantine church into a grand Mosque,Hard,Kuruluş: Osman
 9203,Which player became the all-time leading scorer in NBA regular-season history in February 2023?,LeBron James,Easy,NBA
 9204,According to standard NBA rules how many players from one team can be on the court at the same time?,Five,Easy,NBA
 9205,According to standard NBA rules what is the regulation height of the basket?,10 feet,Easy,NBA

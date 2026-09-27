@@ -12431,8 +12431,8 @@
   {
     "categorySlug": "in-between",
     "canonicalKey": "q4060",
-    "prompt": "Between the Meiji Restoration and the beginning of the Sh?wa era, which short period of Japanese history coincided with Emperor Yoshihito's reign?",
-    "answer": "The Taish? era",
+    "prompt": "Between the Meiji Restoration and the beginning of the Shōwa era, which short period of Japanese history coincided with Emperor Yoshihito's reign?",
+    "answer": "The Taishō era",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -16391,7 +16391,7 @@
   {
     "categorySlug": "national-icons",
     "canonicalKey": "q4532",
-    "prompt": "The haka is deeply tied to the M?ori culture of which country?",
+    "prompt": "The haka is deeply tied to the Māori culture of which country?",
     "answer": "New Zealand",
     "pointValue": 100,
     "locale": "en",
@@ -16895,7 +16895,7 @@
   {
     "categorySlug": "national-icons",
     "canonicalKey": "q4588",
-    "prompt": "The P?keko bird and silver fern are natural icons associated with which country?",
+    "prompt": "The Pūkeko bird and silver fern are natural icons associated with which country?",
     "answer": "New Zealand",
     "pointValue": 300,
     "locale": "en",
@@ -16931,7 +16931,7 @@
   {
     "categorySlug": "national-icons",
     "canonicalKey": "q4592",
-    "prompt": "What M?ori name is given to New Zealand greenstone, traditionally carved into tools, weapons and ornaments?",
+    "prompt": "What Māori name is given to New Zealand greenstone, traditionally carved into tools, weapons and ornaments?",
     "answer": "Pounamu",
     "pointValue": 300,
     "locale": "en",
@@ -20253,7 +20253,7 @@
     "categorySlug": "trump-quotes",
     "canonicalKey": "q5543",
     "prompt": "What famous comeback did Trump give after Hillary Clinton called him Vladimir Putin's puppet during the October 19, 2016 debate?",
-    "answer": "No puppet. No puppet. You're the puppet.",
+    "answer": "No puppet. No puppet. You're the puppet",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -31143,7 +31143,7 @@
     "categorySlug": "famous-firsts",
     "canonicalKey": "q4247",
     "prompt": "Who was the first gymnast to score a perfect 10 at the Olympic Games?",
-    "answer": "Nadia Com?neci",
+    "answer": "Nadia Comăneci",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -38334,7 +38334,7 @@
     "categorySlug": "us-history",
     "canonicalKey": "q3726",
     "prompt": "Which Hawaiian monarch was overthrown by American-backed sugar interests in 1893?",
-    "answer": "Queen Lili?uokalani",
+    "answer": "Queen Liliʻuokalani",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -41807,8 +41807,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9106",
-    "prompt": "What specific heirloom does Ertu?rul leave to Osman that visually symbolizes the transfer of leadership within the tribe?",
-    "answer": "Ertu?rul leaves his ancestral sword to Osman",
+    "prompt": "What specific heirloom does Ertuğrul leave to Osman that visually symbolizes the transfer of leadership within the tribe?",
+    "answer": "Ertuğrul leaves his ancestral sword to Osman",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -41825,7 +41825,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9108",
-    "prompt": "Instead of a standard single blade, what unique weapon combination does the veteran warrior Bams? Beyrek use in combat?",
+    "prompt": "Instead of a standard single blade, what unique weapon combination does the veteran warrior Bamsı Beyrek use in combat?",
     "answer": "Dual swords",
     "pointValue": 100,
     "locale": "en",
@@ -41834,7 +41834,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9109",
-    "prompt": "Before his eventual defeat and execution, which Byzantine Tekfur rules ?negöl and constantly employs Greek Fire against the Turks?",
+    "prompt": "Before his eventual defeat and execution, which Byzantine Tekfur rules İnegöl and constantly employs Greek Fire against the Turks?",
     "answer": "Aya Nikola",
     "pointValue": 100,
     "locale": "en",
@@ -41844,7 +41844,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9110",
     "prompt": "When Selcan Hatun steps down, what leadership title is bestowed upon Bala Hatun to govern the women of the tribe?",
-    "answer": "Head of the Bac?yân-? Rûm (or Ba? Hatun)",
+    "answer": "Head of the Bacıyân-ı Rûm (or Baş Hatun)",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -41862,7 +41862,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9112",
     "prompt": "Which major Byzantine city does Osman establish as his new capital and economic center following a prolonged siege?",
-    "answer": "Yeni?ehir",
+    "answer": "Yenişehir",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -41870,7 +41870,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9113",
-    "prompt": "Which of Osman's elder brothers temporarily assumes the role of Kay? Bey during his absences?",
+    "prompt": "Which of Osman's elder brothers temporarily assumes the role of Kayı Bey during his absences?",
     "answer": "Gündüz Bey",
     "pointValue": 100,
     "locale": "en",
@@ -41898,7 +41898,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9116",
     "prompt": "Under Bala Hatun's command, what name is given to the organized guild of female warriors protecting the tribe?",
-    "answer": "Bac?yân-? Rûm",
+    "answer": "Bacıyân-ı Rûm",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -41915,8 +41915,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9118",
-    "prompt": "For what underlying reason does Targun Hatun initially agree to act as a spy for Aya Nikola within the Kay? camp?",
-    "answer": "She is trying to save her captive father, ?nal Bey",
+    "prompt": "For what underlying reason does Targun Hatun initially agree to act as a spy for Aya Nikola within the Kayı camp?",
+    "answer": "She is trying to save her captive father, İnal Bey",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -41924,8 +41924,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9119",
-    "prompt": "While fiercely defending the sacred trusts left by Ertu?rul, which legendary veteran Alp is martyred by Togay?",
-    "answer": "Bams? Beyrek",
+    "prompt": "While fiercely defending the sacred trusts left by Ertuğrul, which legendary veteran Alp is martyred by Togay?",
+    "answer": "Bamsı Beyrek",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -41933,7 +41933,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9120",
-    "prompt": "What incriminating item does Malhun Hatun uncover in Sö?üt that provides the first concrete proof of a traitor in the tribe?",
+    "prompt": "What incriminating item does Malhun Hatun uncover in Söğüt that provides the first concrete proof of a traitor in the tribe?",
     "answer": "Dündar Bey's ring",
     "pointValue": 100,
     "locale": "en",
@@ -41961,7 +41961,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9123",
     "prompt": "Because of Gündüz Bey's misguided alliance with Vizier Alemshah, which fiercely loyal Alp is tragically executed?",
-    "answer": "Göktu? Alp",
+    "answer": "Göktuğ Alp",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -41969,8 +41969,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9124",
-    "prompt": "Before the capital is moved to Yeni?ehir, which town serves as the resting place of Ertu?rul and the central hub of the Kay??",
-    "answer": "Sö?üt",
+    "prompt": "Before the capital is moved to Yenişehir, which town serves as the resting place of Ertuğrul and the central hub of the Kayı?",
+    "answer": "Söğüt",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -42005,7 +42005,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9128",
-    "prompt": "Which major Mongol leader, driven by a desire to overthrow his brother Argun, constantly threatens the Kay? tribe with annihilation?",
+    "prompt": "Which major Mongol leader, driven by a desire to overthrow his brother Argun, constantly threatens the Kayı tribe with annihilation?",
     "answer": "Geyhatu",
     "pointValue": 100,
     "locale": "en",
@@ -42015,7 +42015,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9129",
     "prompt": "To break the economic monopoly of the Byzantine Tekfurs, in which town does Osman establish a thriving free-trade market?",
-    "answer": "Sö?üt",
+    "answer": "Söğüt",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -42033,7 +42033,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9131",
     "prompt": "What political and familial necessity forces Osman to take a second wife despite his profound love for Bala Hatun?",
-    "answer": "Ertu?rul's will demanding a direct heir to secure the Beylik",
+    "answer": "Ertuğrul's will demanding a direct heir to secure the Beylik",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -42042,7 +42042,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9132",
     "prompt": "Throughout the early conquests, who serves as the devoted wife of Gündüz Bey and the mother of Aktemur?",
-    "answer": "Ay?e Hatun",
+    "answer": "Ayşe Hatun",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -42060,7 +42060,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9134",
     "prompt": "During a bloody ambush at the Domaniç Pass orchestrated by Kalanoz, which of Osman's older brothers is martyred?",
-    "answer": "Savc? Bey",
+    "answer": "Savcı Bey",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -42068,7 +42068,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9135",
-    "prompt": "Until her peaceful death from old age, who serves as the revered mother figure and fierce protector of the Kay? women?",
+    "prompt": "Until her peaceful death from old age, who serves as the revered mother figure and fierce protector of the Kayı women?",
     "answer": "Selcan Hatun",
     "pointValue": 100,
     "locale": "en",
@@ -42078,7 +42078,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9136",
     "prompt": "During the climactic and victorious siege of which castle does Gündüz Bey achieve martyrdom?",
-    "answer": "?negöl Castle",
+    "answer": "İnegöl Castle",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -42114,7 +42114,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9140",
     "prompt": "Which Turkmen tribe does Muzaffereddin Yavlak Arslan lead before eventually reconciling and fighting alongside Osman?",
-    "answer": "The Çobano?lu Tribe",
+    "answer": "The Çobanoğlu Tribe",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -42122,7 +42122,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9141",
-    "prompt": "By utilizing dark shamanic rituals, which Mongol commander temporarily brainwashes Göktu? into becoming a loyal Mankurt?",
+    "prompt": "By utilizing dark shamanic rituals, which Mongol commander temporarily brainwashes Göktuğ into becoming a loyal Mankurt?",
     "answer": "Balgay",
     "pointValue": 200,
     "locale": "en",
@@ -42149,7 +42149,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9144",
-    "prompt": "Fueling his father's relentless quest for vengeance, what is the name of Bams? Beyrek's son who is murdered in an ambush?",
+    "prompt": "Fueling his father's relentless quest for vengeance, what is the name of Bamsı Beyrek's son who is murdered in an ambush?",
     "answer": "Aybars",
     "pointValue": 200,
     "locale": "en",
@@ -42168,7 +42168,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9146",
     "prompt": "To prevent a political alliance, who secretly provides the poison to Olivia with strict instructions to assassinate Elçim Hatun?",
-    "answer": "?mren Tegin",
+    "answer": "İmren Tegin",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -42176,7 +42176,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9147",
-    "prompt": "Within the family tree of the Kay? leadership, what is the exact familial relationship between Aktemur Bey and Osman?",
+    "prompt": "Within the family tree of the Kayı leadership, what is the exact familial relationship between Aktemur Bey and Osman?",
     "answer": "Aktemur is Osman's nephew (son of Gündüz Bey)",
     "pointValue": 200,
     "locale": "en",
@@ -42185,7 +42185,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9148",
-    "prompt": "Which noblewoman, tasked by her father to inspect the western borders, inadvertently becomes entangled in the Kay? tribe's internal conflicts?",
+    "prompt": "Which noblewoman, tasked by her father to inspect the western borders, inadvertently becomes entangled in the Kayı tribe's internal conflicts?",
     "answer": "Malhun Hatun",
     "pointValue": 200,
     "locale": "en",
@@ -42203,7 +42203,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9150",
-    "prompt": "What extremist organization does Commander Yannis secretly lead while posing as a humble religious figure in Sö?üt?",
+    "prompt": "What extremist organization does Commander Yannis secretly lead while posing as a humble religious figure in Söğüt?",
     "answer": "The Margarit Monks",
     "pointValue": 200,
     "locale": "en",
@@ -42212,7 +42212,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9151",
-    "prompt": "After discovering the truth about Batur Alp's murder, who personally executes Ali?ar Bey to restore justice to the region?",
+    "prompt": "After discovering the truth about Batur Alp's murder, who personally executes Alişar Bey to restore justice to the region?",
     "answer": "Osman Bey",
     "pointValue": 200,
     "locale": "en",
@@ -42230,7 +42230,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9153",
-    "prompt": "For repeatedly failing to crush the Turkmen threat, which former Tekfur of ?negöl is ruthlessly executed by Aya Nikola?",
+    "prompt": "For repeatedly failing to crush the Turkmen threat, which former Tekfur of İnegöl is ruthlessly executed by Aya Nikola?",
     "answer": "Tekfur Alexis",
     "pointValue": 200,
     "locale": "en",
@@ -42239,7 +42239,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9154",
-    "prompt": "How does Hazal Hatun attempt to manipulate Kay? tribal politics following Ertu?rul's death?",
+    "prompt": "How does Hazal Hatun attempt to manipulate Kayı tribal politics following Ertuğrul's death?",
     "answer": "She actively conspires to have her husband Dündar elected as the new Bey",
     "pointValue": 200,
     "locale": "en",
@@ -42266,7 +42266,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9157",
-    "prompt": "During a tense diplomatic period in Yeni?ehir, who accidentally consumes the fatal poison that was intended for Elçim Hatun?",
+    "prompt": "During a tense diplomatic period in Yenişehir, who accidentally consumes the fatal poison that was intended for Elçim Hatun?",
     "answer": "Ayça Hatun",
     "pointValue": 200,
     "locale": "en",
@@ -42285,7 +42285,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9159",
     "prompt": "After renouncing his Byzantine allegiance and embracing Islam, what new name does the former Commander Salvador adopt?",
-    "answer": "S?dd?k Alp",
+    "answer": "Sıddık Alp",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -42293,7 +42293,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9160",
-    "prompt": "In his brutal duel with Bams? Beyrek, what signature weapon does Togay employ to gain a lethal advantage?",
+    "prompt": "In his brutal duel with Bamsı Beyrek, what signature weapon does Togay employ to gain a lethal advantage?",
     "answer": "A specialized garrote wire (or Mongol whip)",
     "pointValue": 200,
     "locale": "en",
@@ -42302,7 +42302,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9161",
-    "prompt": "To gain political leverage and control over the Kay? tribe, whom does the corrupt Ali?ar Bey manipulate into a forced marriage?",
+    "prompt": "To gain political leverage and control over the Kayı tribe, whom does the corrupt Alişar Bey manipulate into a forced marriage?",
     "answer": "Aygül Hatun",
     "pointValue": 200,
     "locale": "en",
@@ -42311,7 +42311,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9162",
-    "prompt": "Where exactly does Osman formally reveal the Kay? tribe's new independent flag following his election as Bey?",
+    "prompt": "Where exactly does Osman formally reveal the Kayı tribe's new independent flag following his election as Bey?",
     "answer": "Inside the main Tribal Marquee (Bey's Tent)",
     "pointValue": 200,
     "locale": "en",
@@ -42347,8 +42347,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9166",
-    "prompt": "Within the generational lineage of the Kay?, what is the exact relationship between the martyred Bayhoca and Osman?",
-    "answer": "Bayhoca is Osman's nephew (son of Savc? Bey)",
+    "prompt": "Within the generational lineage of the Kayı, what is the exact relationship between the martyred Bayhoca and Osman?",
+    "answer": "Bayhoca is Osman's nephew (son of Savcı Bey)",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -42365,8 +42365,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9168",
-    "prompt": "Beyond the physical territory, what specific heirloom does Osman inherit from Ertu?rul that legitimizes his rule over the Alps?",
-    "answer": "Ertu?rul's ancestral sword",
+    "prompt": "Beyond the physical territory, what specific heirloom does Osman inherit from Ertuğrul that legitimizes his rule over the Alps?",
+    "answer": "Ertuğrul's ancestral sword",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -42384,7 +42384,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9170",
     "prompt": "During a tense standoff in the first season, what shocking revelation is made regarding the Mongol warrior Kongar?",
-    "answer": "He is actually Göktu?, the long-lost brother of Konur Alp",
+    "answer": "He is actually Göktuğ, the long-lost brother of Konur Alp",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -42392,8 +42392,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9171",
-    "prompt": "Immediately following the monumental victory at ?negöl, which heavily fortified Byzantine city does Osman capture next?",
-    "answer": "Yeni?ehir",
+    "prompt": "Immediately following the monumental victory at İnegöl, which heavily fortified Byzantine city does Osman capture next?",
+    "answer": "Yenişehir",
     "pointValue": 200,
     "locale": "en",
     "status": "active"
@@ -42410,8 +42410,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9173",
-    "prompt": "To frame Osman and ignite a civil war within the Kay? tribe, who secretly orchestrates the assassination of Batur Alp?",
-    "answer": "Ali?ar Bey",
+    "prompt": "To frame Osman and ignite a civil war within the Kayı tribe, who secretly orchestrates the assassination of Batur Alp?",
+    "answer": "Alişar Bey",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -42428,8 +42428,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9175",
-    "prompt": "Before she married into the Kay? leadership, to which specific Anatolian tribe did the ambitious Hazal Hatun originally belong?",
-    "answer": "The Çobano?lu Tribe",
+    "prompt": "Before she married into the Kayı leadership, to which specific Anatolian tribe did the ambitious Hazal Hatun originally belong?",
+    "answer": "The Çobanoğlu Tribe",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -42446,7 +42446,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9177",
-    "prompt": "What specific disguise does Commander Yannis frequently utilize to move undetected through the Sö?üt marketplace?",
+    "prompt": "What specific disguise does Commander Yannis frequently utilize to move undetected through the Söğüt marketplace?",
     "answer": "He dresses as an old blind beggar or fortune teller",
     "pointValue": 300,
     "locale": "en",
@@ -42500,7 +42500,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9183",
-    "prompt": "Whom do ?mren Tegin and Olivia manipulate into a bitter feud with Holofira using a poisoned water scheme?",
+    "prompt": "Whom do İmren Tegin and Olivia manipulate into a bitter feud with Holofira using a poisoned water scheme?",
     "answer": "Elçim Hatun",
     "pointValue": 300,
     "locale": "en",
@@ -42518,7 +42518,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9185",
-    "prompt": "Serving as a covert meeting ground for Dündar's treason, which specific artisan's shop in Sö?üt hides the Byzantine spies?",
+    "prompt": "Serving as a covert meeting ground for Dündar's treason, which specific artisan's shop in Söğüt hides the Byzantine spies?",
     "answer": "The Potter's Shop",
     "pointValue": 300,
     "locale": "en",
@@ -42572,7 +42572,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9191",
-    "prompt": "As a prominent leader who initially opposes the Kay?'s rise, what is the full name of Hazal Hatun's powerful brother?",
+    "prompt": "As a prominent leader who initially opposes the Kayı's rise, what is the full name of Hazal Hatun's powerful brother?",
     "answer": "Muzaffereddin Yavlak Arslan",
     "pointValue": 300,
     "locale": "en",
@@ -42581,7 +42581,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9192",
-    "prompt": "During the assassination plot in Yeni?ehir, who inadvertently consumes the toxic water that Olivia's spy had prepared for Elçim?",
+    "prompt": "During the assassination plot in Yenişehir, who inadvertently consumes the toxic water that Olivia's spy had prepared for Elçim?",
     "answer": "Ayça Hatun",
     "pointValue": 300,
     "locale": "en",
@@ -42599,7 +42599,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9194",
-    "prompt": "Where exactly does Commander Kalanoz orchestrate the tragic ambush that claims Savc? Bey's life?",
+    "prompt": "Where exactly does Commander Kalanoz orchestrate the tragic ambush that claims Savcı Bey's life?",
     "answer": "The Domaniç Pass",
     "pointValue": 300,
     "locale": "en",
@@ -42608,7 +42608,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9195",
-    "prompt": "When Osman is unjustly imprisoned by Vizier Alemshah, who controversially assumes emergency leadership of the Kay? tribe?",
+    "prompt": "When Osman is unjustly imprisoned by Vizier Alemshah, who controversially assumes emergency leadership of the Kayı tribe?",
     "answer": "Gündüz Bey",
     "pointValue": 300,
     "locale": "en",
@@ -42618,7 +42618,7 @@
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9196",
     "prompt": "What vital intelligence does Targun Hatun steal from Osman's tent to deliver to Aya Nikola?",
-    "answer": "The secret maps detailing the Kay? conquest plans",
+    "answer": "The secret maps detailing the Kayı conquest plans",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -42635,7 +42635,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9198",
-    "prompt": "While Ertu?rul is incapacitated in Konya for an extended period, what official title does Dündar Bey use to govern the tribe?",
+    "prompt": "While Ertuğrul is incapacitated in Konya for an extended period, what official title does Dündar Bey use to govern the tribe?",
     "answer": "The Substitute Bey (Vekil Bey)",
     "pointValue": 300,
     "locale": "en",
@@ -42653,8 +42653,8 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9200",
-    "prompt": "Before sacrificing his life to protect the sacred trusts, what highest military rank does Bams? Beyrek hold among the Kay? warriors?",
-    "answer": "Head Alp (Alpba??)",
+    "prompt": "Before sacrificing his life to protect the sacred trusts, what highest military rank does Bamsı Beyrek hold among the Kayı warriors?",
+    "answer": "Head Alp (Alpbaşı)",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -42671,7 +42671,7 @@
   {
     "categorySlug": "kurulu-osman",
     "canonicalKey": "q9202",
-    "prompt": "To spiritually and culturally solidify Yeni?ehir as the new Islamic capital, what major architectural conversion does Osman complete?",
+    "prompt": "To spiritually and culturally solidify Yenişehir as the new Islamic capital, what major architectural conversion does Osman complete?",
     "answer": "He converts the city's central Byzantine church into a grand Mosque",
     "pointValue": 300,
     "locale": "en",
@@ -43994,7 +43994,7 @@
   {
     "categorySlug": "20th-century",
     "canonicalKey": "q3764",
-    "prompt": "Which popular 3D puzzle was invented by Hungarian architect and design professor Ern? Rubik in 1974?",
+    "prompt": "Which popular 3D puzzle was invented by Hungarian architect and design professor Ernő Rubik in 1974?",
     "answer": "Rubik's Cube",
     "pointValue": 100,
     "locale": "en",
@@ -44616,7 +44616,7 @@
     "categorySlug": "20th-century",
     "canonicalKey": "q3832",
     "prompt": "On what date did East German authorities announce new travel rules, leading crowds to breach the Berlin Wall?",
-    "answer": "32821",
+    "answer": "9 November 1989",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -44634,7 +44634,7 @@
     "categorySlug": "20th-century",
     "canonicalKey": "q3834",
     "prompt": "In Ridley Scott's 1982 film Blade Runner, what month and year is the story set in?",
-    "answer": "43770",
+    "answer": "November 2019",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -45201,7 +45201,7 @@
     "categorySlug": "21st-century",
     "canonicalKey": "q3561",
     "prompt": "What was the final score of the 2014 FIFA World Cup semi-final between Germany and Brazil, with Germanys score listed first?",
-    "answer": "46029",
+    "answer": "7-1",
     "pointValue": 100,
     "locale": "en",
     "status": "active"
@@ -80454,7 +80454,7 @@
     "categorySlug": "uefa-champions-league",
     "canonicalKey": "q2982",
     "prompt": "Which Romanian team won the European Cup in 1986, becoming the first Eastern European club to do so?",
-    "answer": "Steaua Bucure?ti",
+    "answer": "Steaua București",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -80517,7 +80517,7 @@
     "categorySlug": "uefa-champions-league",
     "canonicalKey": "q2990",
     "prompt": "Which defender scored a brace for Chelsea against Liverpool in the 2008-09 Champions League quarter-finals?",
-    "answer": "Branislav Ivanovi?",
+    "answer": "Branislav Ivanović",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
@@ -80526,7 +80526,7 @@
     "categorySlug": "uefa-champions-league",
     "canonicalKey": "q2991",
     "prompt": "Who scored a halfway line goal for Inter Milan against Schalke in the opening minute in the 2011 Champions League quarter-finals?",
-    "answer": "Dejan Stankovi?",
+    "answer": "Dejan Stanković",
     "pointValue": 300,
     "locale": "en",
     "status": "active"
