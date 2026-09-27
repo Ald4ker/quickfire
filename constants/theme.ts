@@ -4,6 +4,13 @@
  */
 
 import { Platform } from 'react-native';
+import {
+  STUDIO_DIRECTIONS,
+  getActiveStudioDirection,
+  studioLift,
+  type StudioDirection,
+  type StudioDirectionId,
+} from './studio';
 
 /**
  * PostScript keys registered in app/_layout.tsx via expo-font.
@@ -296,7 +303,14 @@ export function getChromeTopPaddingWithInsets(safeAreaTop: number, isWeb = false
   return Math.max(0, safeAreaTop) + getStandardChromeTopPadding(isWeb);
 }
 
-export type ThemePaletteId = 'default' | 'warm' | 'cool' | 'green' | 'red' | 'dark';
+export type ThemePaletteId =
+  | 'default'
+  | 'warm'
+  | 'cool'
+  | 'green'
+  | 'red'
+  | 'dark'
+  | StudioDirectionId;
 
 export const FONT_SIZES = {
   xs: TYPE_SCALE.labelCap.fontSize,
@@ -307,6 +321,32 @@ export const FONT_SIZES = {
   xxl: TYPE_SCALE.h2.fontSize,
   xxxl: TYPE_SCALE.h1.fontSize,
 };
+
+/** Maps a studio direction onto the legacy palette shape used by useTheme(). */
+function studioPalette(d: StudioDirection) {
+  const c = d.colors;
+  return {
+    primary: c.cta,
+    secondary: c.turn,
+    tertiary: COLORS.tertiary,
+    success: COLORS.success,
+    warning: COLORS.warning,
+    error: COLORS.error,
+    background: c.canvas,
+    backgroundSecondary: c.surfaceAlt,
+    text: c.text,
+    textSecondary: c.textMuted,
+    textOnBackground: c.text,
+    textSecondaryOnBackground: c.textMuted,
+    border: c.hairline,
+    cardBackground: c.surface,
+    boardCell: c.tile,
+    boardCellActive: c.cta,
+    boardCellActiveText: c.ctaText,
+    boardCellUsed: c.tileSpent,
+    shadow: d.depth.shadowColor,
+  };
+}
 
 export const PALETTES = {
   default: {
@@ -435,6 +475,9 @@ export const PALETTES = {
     boardCellUsed: '#22334A',
     shadow: 'rgba(0, 5, 15, 0.58)',
   },
+  atelier: studioPalette(STUDIO_DIRECTIONS.atelier),
+  primetime: studioPalette(STUDIO_DIRECTIONS.primetime),
+  highroller: studioPalette(STUDIO_DIRECTIONS.highroller),
 } as const satisfies Record<ThemePaletteId, Record<string, string>>;
 
 /** sRGB luminance in 0–1; used for status bar and contrast heuristics */
@@ -474,6 +517,10 @@ export function softSurfaceLift(): Pick<ReturnType<typeof import('react-native')
   shadowRadius: number;
   elevation: number;
 } {
+  const direction = getActiveStudioDirection();
+  if (direction) {
+    return studioLift(direction) as ReturnType<typeof softSurfaceLift>;
+  }
   return {
     shadowColor: 'transparent',
     shadowOffset: { width: 0, height: 0 },

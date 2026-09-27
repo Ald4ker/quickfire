@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { STUDIO_DIRECTION_IDS } from '@/constants/studio';
 import { Pressable } from '@/components/ui/Pressable';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,7 +19,22 @@ import { HOME_SOFT_UI } from '@/themes';
 
 const T = HOME_SOFT_UI;
 
-const ALL_PALETTES: ThemePaletteId[] = ['dark', 'default', 'warm', 'cool', 'green', 'red'];
+const SHIPPED_PALETTES: ThemePaletteId[] = ['dark', 'default', 'warm', 'cool', 'green', 'red'];
+
+/**
+ * Studio directions (TASK-040) are a preview: listed only in development builds or
+ * when EXPO_PUBLIC_STUDIO_THEMES=1, so shipped builds show the same picker as before.
+ */
+const SHOW_STUDIO_THEMES =
+  (typeof __DEV__ !== 'undefined' && __DEV__) || process.env.EXPO_PUBLIC_STUDIO_THEMES === '1';
+const STUDIO_LABELS: Partial<Record<ThemePaletteId, string>> = {
+  atelier: 'Studio: Atelier',
+  primetime: 'Studio: Prime Time',
+  highroller: 'Studio: High Roller',
+};
+const ALL_PALETTES: ThemePaletteId[] = SHOW_STUDIO_THEMES
+  ? [...SHIPPED_PALETTES, ...STUDIO_DIRECTION_IDS]
+  : SHIPPED_PALETTES;
 
 /** Flat lift — no hard gray strip under theme cards. */
 function neumorphicLift3D(_shadowColor: string, _tier: 'header' | 'card'): any {
@@ -98,7 +114,7 @@ export default function ThemePickerModal() {
                 </View>
                 <View style={styles.labelBlock}>
                   <Text style={[styles.paletteName, { color: textPrimary }]}>
-                    {id.charAt(0).toUpperCase() + id.slice(1)}
+                    {STUDIO_LABELS[id] ?? id.charAt(0).toUpperCase() + id.slice(1)}
                   </Text>
                   <Text style={[styles.paletteMeta, { color: textMuted }]}>
                     {isSelected ? 'Active palette' : 'Tap to apply'}

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useThemeStore } from '@/store/theme';
 import { PALETTES, type ThemePaletteId } from '@/constants/theme';
+import { isDarkPaletteId } from '@/constants/studio';
 
 export type ThemePalette = (typeof PALETTES)[ThemePaletteId];
 
@@ -11,7 +12,7 @@ const DARK_MODE_FLAT_TOP = {
 
 /** Removes light raised-surface highlights while preserving light-mode styling. */
 export function useDarkModeFlatTop() {
-  return useThemeStore((state) => state.paletteId === 'dark')
+  return useThemeStore((state) => isDarkPaletteId(state.paletteId))
     ? DARK_MODE_FLAT_TOP
     : undefined;
 }

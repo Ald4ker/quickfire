@@ -24,6 +24,11 @@ import {
   getRumblePartySlots,
 } from '@/features/play/rumble';
 import { PlayAnswerPanel } from '@/features/play/components/PlayAnswerPanel';
+import { StudioBackdrop } from '@/components/studio/StudioBackdrop';
+import { StudioReveal } from '@/components/studio/StudioReveal';
+import { useStudio } from '@/components/studio/useStudio';
+import { studioRim } from '@/constants/studio';
+import { softSurfaceLift } from '@/features/play/styles/softSurface';
 import { QuestionReportControl } from '@/features/play/components/QuestionReportModal';
 import { WagerInfoModal } from '@/features/play/components/WagerInfoModal';
 import { getRowDirection } from '@/lib/i18n/direction';
@@ -240,6 +245,9 @@ export default function PlayQuestionScreen() {
   const rowDirection = getRowDirection(direction);
   const darkModeFlatTop = useDarkModeFlatTop();
   const theme = useTheme();
+  const studio = useStudio();
+  /** Studio directions set the question larger, on a lit card (TASK-040). */
+  const studioQuestionScale = studio ? 1.18 : 1;
   const playTextScale = usePlayTextScale();
   const surfaceColors = getPlaySurfaceColors();
   const BRAND = {
@@ -652,6 +660,7 @@ export default function PlayQuestionScreen() {
 
   return (
     <View style={[styles.canvas, { backgroundColor: surfaceColors.canvas }]}>
+      <StudioBackdrop />
       {usePillHeader ? (
         <View
           style={[
@@ -982,14 +991,31 @@ export default function PlayQuestionScreen() {
                     contentFit="contain"
                   />
                 ) : null}
+                <StudioReveal
+                  revealKey={q.id}
+                  duration={380}
+                  rise={14}
+                  from={0.95}
+                  style={
+                    studio
+                      ? [
+                          styles.studioQuestionCard,
+                          softSurfaceLift(),
+                          studioRim(studio),
+                          { backgroundColor: studio.colors.surface, maxWidth: promptLayoutWidth + 64 },
+                        ]
+                      : undefined
+                  }
+                >
                 <Text
                   style={[
                     styles.questionText,
                     getTextStyle(q.locale, 'display', 'center', q.prompt),
                     {
                       color: T.textPrimary,
-                      fontSize: unrevealedActiveQuestionTypography.fontSize,
-                      lineHeight: unrevealedActiveQuestionTypography.lineHeight,
+                      fontSize: Math.round(unrevealedActiveQuestionTypography.fontSize * studioQuestionScale),
+                      lineHeight: Math.round(unrevealedActiveQuestionTypography.lineHeight * studioQuestionScale),
+                      ...(studio ? { letterSpacing: studio.type.displayTracking } : null),
                       maxWidth: promptLayoutWidth,
                       width: '100%',
                       alignSelf: 'center',
@@ -1007,6 +1033,7 @@ export default function PlayQuestionScreen() {
                 >
                   {q.prompt}
                 </Text>
+                </StudioReveal>
 
                 <Pressable
                   onPress={() => {
@@ -1026,7 +1053,7 @@ export default function PlayQuestionScreen() {
                     SOFT_SURFACE_STYLES.face,
                     darkModeFlatTop,
                     {
-                      backgroundColor: theme.cardBackground,
+                      backgroundColor: studio ? studio.colors.cta : theme.cardBackground,
                       transform: [{ scale: pressed ? 0.98 : 1 }],
                       opacity: !canShowAnswer ? 0.45 : pressed ? 0.95 : 1,
                     },
@@ -1037,7 +1064,7 @@ export default function PlayQuestionScreen() {
                     style={[
                       styles.answerButtonText,
                       {
-                        color: BRAND.charcoal,
+                        color: studio ? studio.colors.ctaText : BRAND.charcoal,
                         fontSize: Math.round(15 * UNREVEALED_QA_DISPLAY_SCALE * questionViewportScale),
                         lineHeight: Math.round(19 * UNREVEALED_QA_DISPLAY_SCALE * questionViewportScale),
                         letterSpacing: 1.2 * UNREVEALED_QA_DISPLAY_SCALE * questionViewportScale,
@@ -1518,6 +1545,14 @@ const styles = StyleSheet.create({
   promptImage: {
     width: '100%',
     height: 200,
+  },
+  studioQuestionCard: {
+    alignSelf: 'center',
+    width: '94%',
+    marginBottom: SPACING.sm,
+    borderRadius: 28,
+    paddingHorizontal: SPACING.xl,
+    paddingVertical: SPACING.xl,
   },
   questionText: {
     textAlign: 'center',

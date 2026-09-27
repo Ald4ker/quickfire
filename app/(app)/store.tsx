@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
+import { isDarkPaletteId } from '@/constants/studio';
 import {
   View,
   Text,
@@ -223,7 +224,7 @@ export default function StoreScreen() {
   const { paddingLeft, paddingRight } = topicCardScreenPadding(width, insets, Platform.OS === 'web');
   const horizontalPad = { paddingLeft, paddingRight };
   const darkModeFlatTop = useDarkModeFlatTop();
-  const isDarkTheme = useThemeStore((s) => s.paletteId) === 'dark';
+  const isDarkTheme = isDarkPaletteId(useThemeStore((s) => s.paletteId));
   const isCompactViewport = height < 740 || width < 390;
   const isTightViewport = height < 660;
   const viewportScale = Platform.OS === 'web' ? getStoreViewportScale(width, height) : 1;

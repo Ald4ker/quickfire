@@ -1,6 +1,12 @@
 import homeSoftUi from './home-soft-ui.json';
 import { PALETTES, relativeLuminance } from '@/constants/theme';
 import { useThemeStore } from '@/store/theme';
+import { getStudioDirection, type StudioDirection } from '@/constants/studio';
+
+/** The studio direction for the selected palette, or null for shipped palettes. */
+export function getCurrentStudioDirection(): StudioDirection | null {
+  return getStudioDirection(useThemeStore.getState().paletteId);
+}
 
 export type HomeSoftUiTheme = typeof homeSoftUi;
 
@@ -26,6 +32,25 @@ function getSoftUiColors(): HomeSoftUiColors {
   const paletteId = useThemeStore.getState().paletteId;
   if (paletteId === 'default') {
     return homeSoftUi.colors;
+  }
+
+  const studio = getStudioDirection(paletteId);
+  if (studio) {
+    const c = studio.colors;
+    return {
+      ...homeSoftUi.colors,
+      canvas: c.canvas,
+      surface: c.surface,
+      textPrimary: c.text,
+      textMuted: c.textMuted,
+      accentGlow: c.cta,
+      accentGlowMid: c.turn,
+      accentGlowTransparent: rgba(c.cta.startsWith('#') ? c.cta : '#000000', 0.24),
+      shadow: studio.depth.shadowColor,
+      shadowStrong: studio.depth.shadowColor,
+      resumeAccent: c.cta,
+      resumeAccentSoft: c.hairline,
+    };
   }
 
   const palette = PALETTES[paletteId] ?? PALETTES.default;

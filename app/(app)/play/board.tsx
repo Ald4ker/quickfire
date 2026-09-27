@@ -40,6 +40,7 @@ import { PlayMatchTopBar } from '@/features/play/components/PlayMatchTopBar';
 import { PlayScaffold } from '@/features/play/components/PlayScaffold';
 import { WagerInfoModal } from '@/features/play/components/WagerInfoModal';
 import { getPlaySurfaceColors } from '@/features/play/playSurfaceColors';
+import { StudioReveal } from '@/components/studio/StudioReveal';
 import { SOFT_SURFACE_FACE, softSurfaceLift } from '@/features/play/styles/softSurface';
 import { hapticSuccess, hapticTick } from '@/lib/haptics';
 import { useI18n } from '@/lib/i18n/useI18n';
@@ -785,6 +786,7 @@ export default function PlayBoardScreen() {
 
     return (
       <View key={column.categoryId} style={[styles.categoryGridCell, topicCellBox]}>
+        <StudioReveal delay={70 * Math.max(0, grouped.indexOf(column))} duration={420} rise={12} from={0.96}>
         <View
           testID={`board-category-card-${column.categoryId}`}
           style={[
@@ -794,7 +796,7 @@ export default function PlayBoardScreen() {
               height: fittedBoardRowHeight,
               padding: metrics.cardInset,
               backgroundColor: surfaceColors.boardCardBackground,
-              borderColor: surfaceColors.boardAccent,
+              borderColor: surfaceColors.boardFrameBorder,
               shadowOpacity: surfaceColors.isDark ? 0.4 : 0.06,
               shadowRadius: surfaceColors.isDark ? 40 : 35,
               elevation: surfaceColors.isDark ? 8 : 4,
@@ -948,6 +950,7 @@ export default function PlayBoardScreen() {
           </View>
           </View>
         </View>
+        </StudioReveal>
       </View>
     );
   };

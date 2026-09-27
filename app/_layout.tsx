@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react';
+import { isDarkPaletteId } from '@/constants/studio';
 import { AppState, Platform, StatusBar as RNStatusBar } from 'react-native';
 import { Stack } from 'expo-router';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
@@ -66,7 +67,7 @@ export default function RootLayout() {
   // Soft-UI canvas (cream / dark) — not palette.background white, which flashes under fade pushes.
   const backgroundColor = HOME_SOFT_UI.colors.canvas;
   const navigationTheme = useMemo(() => {
-    const baseTheme = paletteId === 'dark' ? DarkTheme : DefaultTheme;
+    const baseTheme = isDarkPaletteId(paletteId) ? DarkTheme : DefaultTheme;
     return {
       ...baseTheme,
       colors: {

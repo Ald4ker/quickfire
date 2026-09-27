@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useStudio } from '@/components/studio/useStudio';
+import { isDarkPaletteId } from '@/constants/studio';
 import {
   View,
   Text,
@@ -110,6 +112,7 @@ function hotSeatRoundsFromConfig(team: GameSessionState['config']): number {
 }
 
 export default function TeamSetupScreen() {
+  const studio = useStudio();
   const router = useRouter();
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
   const viewport = useViewportLayout();
@@ -785,12 +788,14 @@ export default function TeamSetupScreen() {
           styles.continueBtn,
           themedStyles.continueBtn,
           isWebLayout && styles.webContinueBtn,
+          studio ? { backgroundColor: studio.colors.cta, borderColor: studio.colors.cta } : null,
           !canContinue && { opacity: 0.5 },
         ])}
         textStyle={StyleSheet.flatten([
           styles.continueBtnText,
           themedStyles.continueBtnText,
           getTextStyle(undefined, 'displayBold', 'center'),
+          studio ? { color: studio.colors.ctaText, letterSpacing: studio.type.capsTracking } : null,
         ])}
       />
       {!canContinue && (
@@ -1093,7 +1098,7 @@ export default function TeamSetupScreen() {
 }
 
 function makeThemedStyles(paletteId: string) {
-  const flatTop = paletteId === 'dark'
+  const flatTop = isDarkPaletteId(paletteId)
     ? { borderTopWidth: 0, borderTopColor: 'transparent' as const }
     : undefined;
   return StyleSheet.create({
@@ -1130,7 +1135,7 @@ function makeThemedStyles(paletteId: string) {
     // Theme-adaptive surface fill + primary label (light in light mode, dark in dark mode).
     addPlayerAction: {
       backgroundColor: T.surface,
-      borderColor: paletteId === 'dark' ? 'rgba(255,255,255,0.12)' : 'rgba(51,51,51,0.14)',
+      borderColor: isDarkPaletteId(paletteId) ? 'rgba(255,255,255,0.12)' : 'rgba(51,51,51,0.14)',
     },
     removePlayerAction: {
       backgroundColor: 'rgba(0,0,0,0.03)',

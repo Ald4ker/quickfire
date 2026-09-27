@@ -10,6 +10,7 @@ import { useI18n } from '@/lib/i18n/useI18n';
 import type { GameSessionState, TeamState } from '@/features/shared';
 import { getLeadingTeamId } from '@/features/play/categorySections';
 import { getPlaySurfaceColors } from '@/features/play/playSurfaceColors';
+import { TickingNumber } from '@/components/studio/TickingNumber';
 import { getMatchScorePillMetrics } from '@/features/play/scorePillLayout';
 import { usePlayTextScale } from '@/store/display';
 import { usePlayStore } from '@/store/play';
@@ -418,7 +419,7 @@ export function PlayMatchTopBar({
             // Keep full digits visible; never ellipsize a score number mid-value.
             ellipsizeMode="clip"
           >
-            {team.score}
+            <TickingNumber value={team.score} />
           </Text>
         </View>
         <Pressable

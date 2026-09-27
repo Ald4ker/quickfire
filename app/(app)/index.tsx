@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { isDarkPaletteId } from '@/constants/studio';
 import {
   Platform,
   View,
@@ -24,6 +25,8 @@ import {
   softSurfaceLift,
 } from '@/constants';
 import { ScreenContent } from '@/components/ScreenContent';
+import { StudioBackdrop } from '@/components/studio/StudioBackdrop';
+import { getActiveStudioDirection } from '@/constants/studio';
 import { GameHeader } from '@/components/GameHeader';
 import { HubTokenChip } from '@/components/HubTokenChip';
 import { OutboundPlatformLinks } from '@/components/OutboundPlatformLinks';
@@ -86,6 +89,8 @@ const HOME_MODES: ModeDef[] = [
 
 /** Flat card face — no hard gray strip / bevel lift under cards. */
 function brandRaisedSurfaceShadow(_tier: 'hero' | 'header' | 'pill'): ViewStyle {
+  // Studio directions (TASK-040) restore real depth; shipped palettes stay flat.
+  if (getActiveStudioDirection()) return softSurfaceLift();
   return {
     shadowColor: 'transparent',
     shadowOffset: { width: 0, height: 0 },
@@ -132,7 +137,7 @@ export default function AppHubScreen() {
   const authDisabled = isAuthDisabled();
   const { direction, t, uiLocale } = useI18n();
   const paletteId = useThemeStore((state) => state.paletteId);
-  const isDarkTheme = paletteId === 'dark';
+  const isDarkTheme = isDarkPaletteId(paletteId);
   const tokens = useDisplayTokenBalance();
   const session = usePlayStore((state) => state.session);
   const startModeSession = usePlayStore((state) => state.startModeSession);
@@ -284,6 +289,7 @@ export default function AppHubScreen() {
 
   return (
     <View style={[styles.rootContainer, { backgroundColor: canvas }]}>
+      <StudioBackdrop />
       <SafeAreaView
         collapsable={false}
         // Vertical only — horizontal insets applied as max(safe, gutter) on the content frame.

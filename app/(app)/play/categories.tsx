@@ -33,6 +33,8 @@ import {
   type CategorySection,
 } from '@/features/play/categorySections';
 import { getPlaySurfaceColors } from '@/features/play/playSurfaceColors';
+import { useStudio } from '@/components/studio/useStudio';
+import { softSurfaceLift } from '@/features/play/styles/softSurface';
 import { showThemedAlert } from '@/store/themedAlert';
 import { getRowDirection } from '@/lib/i18n/direction';
 import { useI18n } from '@/lib/i18n/useI18n';
@@ -305,6 +307,7 @@ const CategoryCard = memo(function CategoryCard({
 });
 
 export default function CategorySelectionScreen() {
+  const studio = useStudio();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const categoryListRef = useRef<FlatList<CategoryListItem> | null>(null);
@@ -995,12 +998,19 @@ export default function CategorySelectionScreen() {
               darkModeFlatTop,
               SOFT_SURFACE_STYLES.raised,
               {
-                backgroundColor: surface,
+                backgroundColor: studio ? studio.colors.cta : surface,
                 opacity: pressed ? 0.92 : 1,
               },
+              studio ? softSurfaceLift() : null,
             ]}
           >
-            <Text style={[styles.startBtnText, { color: textPrimary }]}>
+            <Text
+              style={[
+                styles.startBtnText,
+                { color: studio ? studio.colors.ctaText : textPrimary },
+                studio ? { letterSpacing: studio.type.capsTracking } : null,
+              ]}
+            >
               {t('play.startBoard').toUpperCase()}
             </Text>
           </Pressable>

@@ -29,8 +29,9 @@ export function useQuery(ref: unknown, args?: unknown) {
   const name = nameOf(ref);
   return name in FIXTURES ? FIXTURES[name] : null;
 }
+/** Wallet-style mutations resolve as successful so the play flow can proceed. */
 export function useMutation(_ref: unknown) {
-  return async () => null;
+  return async () => ({ ok: true, reservationId: 'res_preview', balance: 24 });
 }
 export function useAction(_ref: unknown) {
   return async () => null;

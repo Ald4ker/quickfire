@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { isDarkPaletteId } from '@/constants/studio';
 import {
   ActivityIndicator,
   Image,
@@ -95,7 +96,7 @@ export default function SettingsScreen() {
   const loadDebugWinnerSession = usePlayStore((state) => state.loadDebugWinnerSession);
   const tokens = useDisplayTokenBalance();
 
-  const isDarkTheme = paletteId === 'dark';
+  const isDarkTheme = isDarkPaletteId(paletteId);
   const themeSummary = t(isDarkTheme ? 'settings.palette.dark' : 'settings.palette.default');
   const selectedContentLocaleValues = contentLocalePriorityToArray(contentLocales);
   const selectedContentLocales = selectedContentLocaleValues

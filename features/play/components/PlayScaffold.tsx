@@ -25,6 +25,7 @@ import { useTheme } from '@/lib/hooks/useTheme';
 import type { GameSessionState } from '@/features/shared';
 import { ScoreHud } from './ScoreHud';
 import { PlayStackHeader } from './PlayStackHeader';
+import { StudioBackdrop } from '@/components/studio/StudioBackdrop';
 import type { HeaderBackButtonVariant } from '@/components/HeaderBackButton';
 
 interface PlayScaffoldProps {
@@ -285,6 +286,7 @@ export function PlayScaffold({
       style={[styles.safeArea, { backgroundColor: shellBackground }]}
       edges={resolvedSafeAreaEdges}
     >
+      <StudioBackdrop />
       <ScreenContent fullWidth style={styles.screenInner}>
         <View style={styles.fitRoot}>
           <View style={[paddedColumnStyles, chromeColumnStyle]}>

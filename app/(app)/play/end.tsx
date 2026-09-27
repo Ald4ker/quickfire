@@ -36,6 +36,11 @@ import { HOME_SOFT_UI } from '@/themes';
 import type { GameSessionState, TeamState } from '@/features/shared';
 import { getRowDirection } from '@/lib/i18n/direction';
 import { usePlayTextScale } from '@/store/display';
+import { Ionicons } from '@expo/vector-icons';
+import { useStudio } from '@/components/studio/useStudio';
+import { StudioReveal } from '@/components/studio/StudioReveal';
+import { useCountUp } from '@/components/studio/useCountUp';
+import type { StudioDirection } from '@/constants/studio';
 
 /** Display label under the Web promo tile only (Android / iOS omit the URL). */
 const PROMO_WEB_URL_LABEL = 'PlaybackFire.com';
@@ -49,6 +54,23 @@ const ACTION_COLORS = {
   another: '#35C759',
   home: '#FF2435',
 } as const;
+
+/** Studio directions: one filled primary action, quiet secondaries (TASK-040). */
+function studioAction(studio: StudioDirection | null, kind: 'primary' | 'secondary') {
+  if (!studio) return null;
+  const c = studio.colors;
+  return kind === 'primary'
+    ? { backgroundColor: c.cta }
+    : { backgroundColor: c.ctaSecondary, borderWidth: 1, borderColor: c.hairline };
+}
+
+function studioActionText(studio: StudioDirection | null, kind: 'primary' | 'secondary') {
+  if (!studio) return null;
+  return {
+    color: kind === 'primary' ? studio.colors.ctaText : studio.colors.ctaSecondaryText,
+    letterSpacing: studio.type.capsTracking * 0.5,
+  };
+}
 
 function teamColor(rank: number, teamCount: number): string {
   if (teamCount === 2) return rank === 0 ? TEAM_COLORS[0]! : '#F7C5C9';
@@ -134,8 +156,13 @@ function TeamCard({ team, rank, teamCount, compact, tiny }: {
   tiny: boolean;
 }) {
   const textScale = usePlayTextScale();
+  const studio = useStudio();
+  const isWinner = rank === 0;
+  // Studio directions: winner owns the accent, the rest stay neutral; scores tick up.
   const teamNameSize = (compact ? 13 : 18) * textScale;
-  const teamScoreSize = (tiny ? 22 : compact ? 29 : 46) * textScale;
+  const teamScoreSize = (tiny ? 22 : compact ? 29 : 46) * textScale * (studio && isWinner ? 1.25 : 1);
+  const shownScore = useCountUp(team.score, 900, studio ? 0 : undefined);
+  const studioText = studio ? { color: isWinner ? studio.colors.winnerText : studio.colors.loserText } : null;
 
   return (
     <View
@@ -144,14 +171,18 @@ function TeamCard({ team, rank, teamCount, compact, tiny }: {
         teamCount === 2
           ? [styles.teamCardVersus, compact && styles.teamCardVersusCompact, tiny && styles.teamCardTiny]
           : [styles.teamCardGrid, compact && styles.teamCardGridCompact, tiny && styles.teamCardTiny],
-        { backgroundColor: teamColor(rank, teamCount) },
+        { backgroundColor: studio ? (isWinner ? studio.colors.winner : studio.colors.loser) : teamColor(rank, teamCount) },
       ]}
     >
+      {studio && isWinner ? (
+        <Ionicons name="trophy" size={Math.round(teamNameSize * 1.1)} color={studio.colors.winnerText} />
+      ) : null}
       <Text
         style={[
           styles.teamName,
           compact && styles.teamNameCompact,
           { fontSize: Math.round(teamNameSize), lineHeight: Math.round(teamNameSize * 1.25) },
+          studioText,
         ]}
         numberOfLines={1}
         adjustsFontSizeToFit
@@ -165,12 +196,13 @@ function TeamCard({ team, rank, teamCount, compact, tiny }: {
           compact && styles.teamScoreCompact,
           tiny && styles.teamScoreTiny,
           { fontSize: Math.round(teamScoreSize), lineHeight: Math.round(teamScoreSize * 1.13) },
+          studioText,
         ]}
         numberOfLines={1}
         adjustsFontSizeToFit
         minimumFontScale={0.65}
       >
-        {team.score}
+        {shownScore}
       </Text>
     </View>
   );
@@ -297,6 +329,7 @@ export default function PlayEndScreen() {
   const { t } = useI18n();
   const { width, height } = useLandscapeDimensions();
   const textScale = usePlayTextScale();
+  const studio = useStudio();
   const promoLayout = getWinnerPromoLayout({
     windowWidth: width,
     windowHeight: height,
@@ -381,7 +414,9 @@ export default function PlayEndScreen() {
       contentMaxWidth={LAYOUT.playWideMaxWidth}
     >
       <View style={[styles.endColumn, compact && styles.endColumnCompact, tiny && styles.endColumnTiny]}>
-        <Scoreboard session={session} compact={compact} tiny={tiny} />
+        <StudioReveal duration={480} rise={18} from={0.94} style={studio ? { width: '100%' } : undefined}>
+          <Scoreboard session={session} compact={compact} tiny={tiny} />
+        </StudioReveal>
 
         <View style={[styles.promoBlock, compact && styles.promoBlockCompact]}>
           <View style={[styles.promoRow, { gap: promoGap }]}>
@@ -430,21 +465,21 @@ export default function PlayEndScreen() {
                 reopenLastResolvedTurn();
                 router.replace('/play/question');
               }}
-              style={[styles.actionButton, compact && styles.actionButtonCompact, tiny && styles.actionButtonTiny, { backgroundColor: ACTION_COLORS.review }]}
-              textStyle={[styles.actionText, { fontSize: actionLabelSize, lineHeight: Math.round(actionLabelSize * 1.2) }]}
+              style={[styles.actionButton, compact && styles.actionButtonCompact, tiny && styles.actionButtonTiny, studioAction(studio, 'secondary') ?? { backgroundColor: ACTION_COLORS.review }]}
+              textStyle={[styles.actionText, { fontSize: actionLabelSize, lineHeight: Math.round(actionLabelSize * 1.2) }, studioActionText(studio, 'secondary')]}
             />
           ) : null}
           <Button
             title={t('play.startAnotherMatch')}
             onPress={handleAnotherMatch}
-            style={[styles.actionButton, compact && styles.actionButtonCompact, tiny && styles.actionButtonTiny, { backgroundColor: ACTION_COLORS.another }]}
-            textStyle={[styles.actionText, { fontSize: actionLabelSize, lineHeight: Math.round(actionLabelSize * 1.2) }]}
+            style={[styles.actionButton, compact && styles.actionButtonCompact, tiny && styles.actionButtonTiny, studioAction(studio, 'primary') ?? { backgroundColor: ACTION_COLORS.another }]}
+            textStyle={[styles.actionText, { fontSize: actionLabelSize, lineHeight: Math.round(actionLabelSize * 1.2) }, studioActionText(studio, 'primary')]}
           />
           <Button
             title={t('play.backToHome')}
             onPress={handleHome}
-            style={[styles.actionButton, compact && styles.actionButtonCompact, tiny && styles.actionButtonTiny, { backgroundColor: ACTION_COLORS.home }]}
-            textStyle={[styles.actionText, { fontSize: actionLabelSize, lineHeight: Math.round(actionLabelSize * 1.2) }]}
+            style={[styles.actionButton, compact && styles.actionButtonCompact, tiny && styles.actionButtonTiny, studioAction(studio, 'secondary') ?? { backgroundColor: ACTION_COLORS.home }]}
+            textStyle={[styles.actionText, { fontSize: actionLabelSize, lineHeight: Math.round(actionLabelSize * 1.2) }, studioActionText(studio, 'secondary')]}
           />
         </View>
       </View>

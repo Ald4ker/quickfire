@@ -1,4 +1,4 @@
-import { HOME_SOFT_UI } from '@/themes';
+import { HOME_SOFT_UI, getCurrentStudioDirection } from '@/themes';
 import { relativeLuminance } from '@/constants/theme';
 
 const T = HOME_SOFT_UI.colors;
@@ -19,6 +19,8 @@ export function getPlaySurfaceColors() {
     boardCardBackground: isDark ? '#1E293B' : '#FFFFFF',
     boardInnerFrame: isDark ? '#0B1120' : '#FFF7F0',
     boardAccent: activeTurnAccent,
+    /** Category card outline on the board (the turn colour on shipped palettes). */
+    boardFrameBorder: activeTurnAccent,
     boardTileBackground: isDark ? '#334155' : '#F9FAFB',
     boardTileBorder: isDark ? '#475569' : '#D1D5DB',
     boardTileText: isDark ? '#F8FAFC' : '#111827',
@@ -65,6 +67,37 @@ export function getPlaySurfaceColors() {
     activeTurnNestedFill: isDark ? '#163749' : '#FFF3EC',
     /** Award-tile “neither” dashed outline. */
     dashedBorder: isDark ? 'rgba(255, 255, 255, 0.22)' : 'rgba(51, 51, 51, 0.22)',
+    ...studioPlaySurfaceOverrides(),
+  };
+}
+
+/** Studio direction tokens layered over the play surface (TASK-040 preview). */
+function studioPlaySurfaceOverrides() {
+  const studio = getCurrentStudioDirection();
+  if (!studio) return {};
+  const c = studio.colors;
+  return {
+    // Transparent so the StudioBackdrop stage light shows through the board.
+    boardCanvas: 'transparent',
+    boardCardBackground: c.boardFrame,
+    boardInnerFrame: c.boardPanel,
+    boardAccent: c.turn,
+    boardFrameBorder: c.hairline,
+    boardTileBackground: c.tile,
+    boardTileBorder: c.tileBorder,
+    boardTileText: c.tileText,
+    boardSpentBackground: c.tileSpent,
+    boardSpentText: c.tileSpentText,
+    topicLabelBackground: c.surface,
+    topicLabelText: c.text,
+    topicLabelBorder: c.hairline,
+    hairlineBorder: c.hairline,
+    selectedBorder: c.turn,
+    activeTurnFace: c.turnFace,
+    activeTurnAccent: c.turn,
+    activeTurnOnFace: c.turn,
+    activeTurnNestedFill: c.turnFace,
+    hoverSurface: c.surfaceAlt,
   };
 }
 

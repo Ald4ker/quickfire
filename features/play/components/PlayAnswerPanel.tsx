@@ -25,6 +25,8 @@ import { usePlayStore } from '@/store/play';
 import { usePlayTextScale } from '@/store/display';
 import { abandonGameEntry } from '@/lib/wallet/gameEntry';
 import { getPlaySurfaceColors } from '@/features/play/playSurfaceColors';
+import { useStudio } from '@/components/studio/useStudio';
+import { StudioReveal } from '@/components/studio/StudioReveal';
 import { HOME_SOFT_UI } from '@/themes';
 import type { GameSessionState, TeamState } from '@/features/shared';
 
@@ -288,6 +290,9 @@ export function PlayAnswerPanel({
   const colors = useTheme();
   const darkModeFlatTop = useDarkModeFlatTop();
   const surfaceColors = getPlaySurfaceColors();
+  const studio = useStudio();
+  /** Studio directions stage the answer as the hero of the round (TASK-040). */
+  const answerHeroScale = studio ? 1.7 : 1;
   const { direction, getTextStyle, t } = useI18n();
   const playTextScale = usePlayTextScale();
   const session = usePlayStore((state) => state.session);
@@ -880,7 +885,8 @@ export function PlayAnswerPanel({
       <Text
         style={[
           styles.referenceAnswerLabel,
-          { color: colors.textSecondaryOnBackground },
+          { color: studio ? studio.colors.revealText : colors.textSecondaryOnBackground },
+          studio ? { opacity: 0.72, letterSpacing: studio.type.capsTracking } : null,
           combinedCardLayoutScale < 1
             ? {
                 fontSize: Math.max(8, Math.round(12 * combinedCardLayoutScale * answerCardOnlyScale)),
@@ -896,17 +902,23 @@ export function PlayAnswerPanel({
         style={[
           styles.referenceAnswerMain,
           {
-            color: colors.textOnBackground,
+            color: studio ? studio.colors.revealText : colors.textOnBackground,
             fontSize: Math.max(
               10,
               Math.round(
-                layoutDensity.answerFontSize * (scrollChain ? 0.95 : 1.2) * answerCardOnlyScale
+                layoutDensity.answerFontSize *
+                  (scrollChain ? 0.95 : 1.2) *
+                  answerCardOnlyScale *
+                  answerHeroScale
               )
             ),
             lineHeight: Math.max(
               14,
               Math.round(
-                layoutDensity.answerLineHeight * (scrollChain ? 0.95 : 1.2) * answerCardOnlyScale
+                layoutDensity.answerLineHeight *
+                  (scrollChain ? 0.95 : 1.2) *
+                  answerCardOnlyScale *
+                  answerHeroScale
               )
             ),
             marginTop: Math.max(
@@ -1029,12 +1041,20 @@ export function PlayAnswerPanel({
                 </View>
               ) : (
                 <View style={[styles.answerCardAndScoringColumn, { gap: sectionGap }]}>
+                  <StudioReveal
+                    revealKey={currentQuestion.id}
+                    duration={420}
+                    rise={16}
+                    from={0.92}
+                    style={studio && !scrollChain ? { flex: 1, minHeight: 0 } : undefined}
+                  >
                   <View
                     style={[
                       styles.combinedAnswerScoringCard,
                       darkModeFlatTop,
+                      studio ? softSurfaceLift() : null,
                       {
-                        backgroundColor: colors.cardBackground,
+                        backgroundColor: studio ? studio.colors.reveal : colors.cardBackground,
                         borderRadius: Math.max(
                           14,
                           Math.round(cardRadiusScaled * combinedCardLayoutScale * answerCardOnlyScale)
@@ -1069,6 +1089,7 @@ export function PlayAnswerPanel({
                       {answerTextBlockCombined}
                     </View>
                   </View>
+                  </StudioReveal>
                   {!isTimedOut && (session.phase === 'scoring' || (session.phase === 'answerLock' && !session.reviewingUsedQuestion)) ? (
                   <View
                     style={[

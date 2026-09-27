@@ -1,4 +1,5 @@
 import { StyleSheet, type ViewStyle } from 'react-native';
+import { getActiveStudioDirection, studioLift } from '@/constants/studio';
 
 /** Flat face — no bevel lips / gray strips; depth comes from `softSurfaceLift` only. */
 export const SOFT_SURFACE_FACE: ViewStyle = {
@@ -13,6 +14,9 @@ export const SOFT_SURFACE_FACE: ViewStyle = {
  * Call sites stay stable if soft depth is reintroduced later.
  */
 export function softSurfaceLift(): ViewStyle {
+  // Studio directions (TASK-040) restore soft depth; shipped palettes stay flat.
+  const studio = getActiveStudioDirection();
+  if (studio) return studioLift(studio);
   return {
     shadowColor: 'transparent',
     shadowOffset: { width: 0, height: 0 },

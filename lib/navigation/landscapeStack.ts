@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { immersiveStatusBarScreenOptions } from '@/lib/navigation/statusBar';
 import { HOME_SOFT_UI } from '@/themes';
+import { getActiveStudioDirection } from '@/constants/studio';
 
 const webSafeStack: NativeStackNavigationOptions =
   Platform.OS === 'web'
@@ -36,6 +37,10 @@ export function getLandscapeStackScreenOptions(
     // Standalone/dev-client: keep system bar hidden on every native-stack push.
     ...immersiveStatusBarScreenOptions(),
     ...webSafeStack,
+    // Studio directions (TASK-040) may choose a different native transition.
+    ...(Platform.OS !== 'web' && getActiveStudioDirection()
+      ? { animation: getActiveStudioDirection()!.motion.stackAnimation }
+      : null),
     contentStyle: {
       flex: 1,
       backgroundColor,
