@@ -24,6 +24,8 @@ import {
   getRumblePartySlots,
 } from '@/features/play/rumble';
 import { PlayAnswerPanel } from '@/features/play/components/PlayAnswerPanel';
+import { SecondaryLanguageText } from '@/features/play/components/SecondaryLanguageText';
+import { useQuestionVariants } from '@/features/play/useQuestionVariants';
 import { QuestionReportControl } from '@/features/play/components/QuestionReportModal';
 import { WagerInfoModal } from '@/features/play/components/WagerInfoModal';
 import { getRowDirection } from '@/lib/i18n/direction';
@@ -346,7 +348,9 @@ export default function PlayQuestionScreen() {
     return Math.max(SPACING.md, Math.min(SPACING.xl, Math.round(short * 0.042)));
   }, [windowWidth, windowHeight]);
 
-  const promptText = session?.currentQuestion?.prompt ?? '';
+  /** Primary (and optional secondary) content-language text for the chosen question. */
+  const questionVariants = useQuestionVariants(session?.currentQuestion);
+  const promptText = questionVariants?.primary.prompt ?? '';
 
   /**
    * Base sizing for the prompt in the answer/reveal flow (and shared caps).
@@ -401,6 +405,52 @@ export default function PlayQuestionScreen() {
   }
 
   const q = session.currentQuestion;
+  const primaryVariant = questionVariants?.primary ?? {
+    locale: q.locale,
+    prompt: q.prompt,
+    answer: q.answer,
+    fellBackToEnglish: false,
+  };
+  const secondaryVariant = questionVariants?.secondary ?? null;
+  const secondaryPrompt = secondaryVariant ? (
+    <SecondaryLanguageText
+      testID="question-secondary-prompt"
+      variant={secondaryVariant}
+      field="prompt"
+      primaryFontSize={unrevealedActiveQuestionTypography.fontSize}
+      primaryLineHeight={unrevealedActiveQuestionTypography.lineHeight}
+      color={T.textPrimary}
+      maxWidth={promptLayoutWidth}
+    />
+  ) : null;
+  const questionBoxPrompt = (
+    <Text
+      testID="question-primary-prompt"
+      style={[
+        styles.questionText,
+        getTextStyle(primaryVariant.locale, 'display', 'center', primaryVariant.prompt),
+        {
+          color: T.textPrimary,
+          fontSize: unrevealedActiveQuestionTypography.fontSize,
+          lineHeight: unrevealedActiveQuestionTypography.lineHeight,
+          maxWidth: promptLayoutWidth,
+          width: '100%',
+          alignSelf: 'center',
+        },
+        Platform.OS === 'web' ? styles.questionTextWeb : null,
+      ]}
+      {...(Platform.OS === 'web'
+        ? {}
+        : {
+            numberOfLines: 3,
+            adjustsFontSizeToFit: true,
+            minimumFontScale: 0.72,
+            maxFontSizeMultiplier: 1.2,
+          })}
+    >
+      {primaryVariant.prompt}
+    </Text>
+  );
   const promptImageSource =
     (q.promptImageKey ? getQuestionImageSource(q.promptImageKey) : null) ??
     (q.promptImageUrl ? { uri: q.promptImageUrl } : null);
@@ -623,9 +673,10 @@ export default function PlayQuestionScreen() {
         />
       ) : null}
       <Text
+        testID="question-primary-prompt"
         style={[
           styles.questionTextReveal,
-          getTextStyle(q.locale, 'display', 'center', q.prompt),
+          getTextStyle(primaryVariant.locale, 'display', 'center', primaryVariant.prompt),
           {
             color: T.textPrimary,
             fontSize: unrevealedActiveQuestionTypography.fontSize,
@@ -645,8 +696,9 @@ export default function PlayQuestionScreen() {
               maxFontSizeMultiplier: 1.2,
             })}
       >
-        {q.prompt}
+        {primaryVariant.prompt}
       </Text>
+      {secondaryPrompt}
     </View>
   );
 
@@ -982,31 +1034,14 @@ export default function PlayQuestionScreen() {
                     contentFit="contain"
                   />
                 ) : null}
-                <Text
-                  style={[
-                    styles.questionText,
-                    getTextStyle(q.locale, 'display', 'center', q.prompt),
-                    {
-                      color: T.textPrimary,
-                      fontSize: unrevealedActiveQuestionTypography.fontSize,
-                      lineHeight: unrevealedActiveQuestionTypography.lineHeight,
-                      maxWidth: promptLayoutWidth,
-                      width: '100%',
-                      alignSelf: 'center',
-                    },
-                    Platform.OS === 'web' ? styles.questionTextWeb : null,
-                  ]}
-                  {...(Platform.OS === 'web'
-                    ? {}
-                    : {
-                        numberOfLines: 3,
-                        adjustsFontSizeToFit: true,
-                        minimumFontScale: 0.72,
-                        maxFontSizeMultiplier: 1.2,
-                      })}
-                >
-                  {q.prompt}
-                </Text>
+                {secondaryPrompt ? (
+                  <View style={styles.bilingualPromptStack}>
+                    {questionBoxPrompt}
+                    {secondaryPrompt}
+                  </View>
+                ) : (
+                  questionBoxPrompt
+                )}
 
                 <Pressable
                   onPress={() => {
@@ -1522,6 +1557,12 @@ const styles = StyleSheet.create({
   questionText: {
     textAlign: 'center',
     width: '100%',
+  },
+  /** Primary prompt with the secondary language beneath it (two content languages set). */
+  bilingualPromptStack: {
+    width: '100%',
+    alignItems: 'center',
+    gap: SPACING.sm,
   },
   answerButton: {
     width: Math.round(286 * UNREVEALED_QA_DISPLAY_SCALE),

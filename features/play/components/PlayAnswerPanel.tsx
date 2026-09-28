@@ -20,6 +20,8 @@ import { PlayScaffold } from '@/features/play/components/PlayScaffold';
 import { SOFT_SURFACE_FACE, softSurfaceLift } from '@/features/play/styles/softSurface';
 import { getRowDirection } from '@/lib/i18n/direction';
 import { useI18n } from '@/lib/i18n/useI18n';
+import { SecondaryLanguageText } from '@/features/play/components/SecondaryLanguageText';
+import { useQuestionVariants } from '@/features/play/useQuestionVariants';
 import { useDarkModeFlatTop, useTheme } from '@/lib/hooks/useTheme';
 import { usePlayStore } from '@/store/play';
 import { usePlayTextScale } from '@/store/display';
@@ -29,6 +31,9 @@ import { HOME_SOFT_UI } from '@/themes';
 import type { GameSessionState, TeamState } from '@/features/shared';
 
 const T = HOME_SOFT_UI.colors;
+/** `styles.questionPromptText` size, shared with the secondary-language prompt beneath it. */
+const QUESTION_PROMPT_FONT_SIZE = 16;
+const QUESTION_PROMPT_LINE_HEIGHT = 24;
 
 /** Deeper drop shadow - reads as a raised plastic tile (tier scales with control size). */
 function neumorphicLift(
@@ -291,6 +296,8 @@ export function PlayAnswerPanel({
   const { direction, getTextStyle, t } = useI18n();
   const playTextScale = usePlayTextScale();
   const session = usePlayStore((state) => state.session);
+  /** Primary (and optional secondary) content-language text for the chosen question. */
+  const questionVariants = useQuestionVariants(session?.currentQuestion);
   const resetSession = usePlayStore((state) => state.resetSession);
   const refundEntryMutation = useMutation(api.wallet.refundEntry);
   const awardStandardQuestion = usePlayStore((state) => state.awardStandardQuestion);
@@ -436,11 +443,18 @@ export function PlayAnswerPanel({
   }
 
   const currentQuestion = session.currentQuestion;
+  const primaryVariant = questionVariants?.primary ?? {
+    locale: currentQuestion.locale,
+    prompt: currentQuestion.prompt,
+    answer: currentQuestion.answer,
+    fellBackToEnglish: false,
+  };
+  const secondaryVariant = questionVariants?.secondary ?? null;
   const questionTextStyle = (
     role: 'body' | 'bodyMedium' | 'bodySemibold' | 'bodyBold' | 'display' | 'displayBold',
     edge: 'start' | 'center' | 'end',
     content?: string
-  ) => getTextStyle(currentQuestion.locale, role, edge, content);
+  ) => getTextStyle(primaryVariant.locale, role, edge, content);
   const wager = session.wager;
   const isTimedOut = session.timedOutQuestionId === currentQuestion.id;
   const showPostScoreActions = !wager && session.phase === 'scoring';
@@ -798,6 +812,8 @@ export function PlayAnswerPanel({
     );
   };
 
+  const wagerAnswerFontSize = Math.max(12, Math.round(layoutDensity.answerFontSize * 1.25));
+  const wagerAnswerLineHeight = Math.max(16, Math.round(layoutDensity.answerLineHeight * 1.25));
   const answerTextBlockWager = (
     <>
       {currentQuestion.answerImageUrl ? (
@@ -826,22 +842,41 @@ export function PlayAnswerPanel({
           {
             color: T.textPrimary,
             // Density already includes playTextScale; hard floors used to cancel TV/phone sizing.
-            fontSize: Math.max(12, Math.round(layoutDensity.answerFontSize * 1.25)),
-            lineHeight: Math.max(16, Math.round(layoutDensity.answerLineHeight * 1.25)),
+            fontSize: wagerAnswerFontSize,
+            lineHeight: wagerAnswerLineHeight,
             marginTop: layoutDensity.answerEyebrowMarginBottom,
           },
-          questionTextStyle('displayBold', 'center', currentQuestion.answer),
+          questionTextStyle('displayBold', 'center', primaryVariant.answer),
         ]}
         maxFontSizeMultiplier={1.25}
         numberOfLines={6}
         adjustsFontSizeToFit
         minimumFontScale={0.5}
       >
-        {currentQuestion.answer}
+        {primaryVariant.answer}
       </Text>
+      {secondaryVariant ? (
+        <SecondaryLanguageText
+          testID="answer-secondary-answer"
+          variant={secondaryVariant}
+          field="answer"
+          primaryFontSize={wagerAnswerFontSize}
+          primaryLineHeight={wagerAnswerLineHeight}
+          color={T.textPrimary}
+          marginTop={SPACING.xs}
+        />
+      ) : null}
     </>
   );
 
+  const combinedAnswerFontSize = Math.max(
+    10,
+    Math.round(layoutDensity.answerFontSize * (scrollChain ? 0.95 : 1.2) * answerCardOnlyScale)
+  );
+  const combinedAnswerLineHeight = Math.max(
+    14,
+    Math.round(layoutDensity.answerLineHeight * (scrollChain ? 0.95 : 1.2) * answerCardOnlyScale)
+  );
   /** Centered “correct answer + solution” (reference: single white panel, no green chrome). */
   const answerTextBlockCombined = (
     <>
@@ -897,32 +932,33 @@ export function PlayAnswerPanel({
           styles.referenceAnswerMain,
           {
             color: colors.textOnBackground,
-            fontSize: Math.max(
-              10,
-              Math.round(
-                layoutDensity.answerFontSize * (scrollChain ? 0.95 : 1.2) * answerCardOnlyScale
-              )
-            ),
-            lineHeight: Math.max(
-              14,
-              Math.round(
-                layoutDensity.answerLineHeight * (scrollChain ? 0.95 : 1.2) * answerCardOnlyScale
-              )
-            ),
+            fontSize: combinedAnswerFontSize,
+            lineHeight: combinedAnswerLineHeight,
             marginTop: Math.max(
               SPACING.xs,
               Math.round(SPACING.md * combinedCardLayoutScale * answerCardOnlyScale)
             ),
           },
-          questionTextStyle('displayBold', 'center', currentQuestion.answer),
+          questionTextStyle('displayBold', 'center', primaryVariant.answer),
         ]}
         maxFontSizeMultiplier={1.25}
         numberOfLines={4}
         adjustsFontSizeToFit
         minimumFontScale={0.5}
       >
-        {currentQuestion.answer}
+        {primaryVariant.answer}
       </Text>
+      {secondaryVariant ? (
+        <SecondaryLanguageText
+          testID="answer-secondary-answer"
+          variant={secondaryVariant}
+          field="answer"
+          primaryFontSize={combinedAnswerFontSize}
+          primaryLineHeight={combinedAnswerLineHeight}
+          color={colors.textOnBackground}
+          marginTop={SPACING.xs}
+        />
+      ) : null}
     </>
   );
 
@@ -997,11 +1033,21 @@ export function PlayAnswerPanel({
                     style={[
                       styles.questionPromptText,
                       { color: colors.textOnBackground },
-                      questionTextStyle('displayBold', 'center', currentQuestion.prompt),
+                      questionTextStyle('displayBold', 'center', primaryVariant.prompt),
                     ]}
                   >
-                    {currentQuestion.prompt}
+                    {primaryVariant.prompt}
                   </Text>
+                  {secondaryVariant ? (
+                    <SecondaryLanguageText
+                      testID="answer-secondary-prompt"
+                      variant={secondaryVariant}
+                      field="prompt"
+                      primaryFontSize={QUESTION_PROMPT_FONT_SIZE}
+                      primaryLineHeight={QUESTION_PROMPT_LINE_HEIGHT}
+                      color={colors.textOnBackground}
+                    />
+                  ) : null}
                 </>
               ) : null}
 
@@ -1295,8 +1341,8 @@ const styles = StyleSheet.create({
     marginHorizontal: SPACING.md,
   },
   questionPromptText: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: QUESTION_PROMPT_FONT_SIZE,
+    lineHeight: QUESTION_PROMPT_LINE_HEIGHT,
     textAlign: 'center',
     paddingHorizontal: SPACING.md,
   },

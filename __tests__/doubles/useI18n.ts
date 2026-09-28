@@ -1,8 +1,9 @@
 /** Default English `useI18n` double with real message catalog (no LocaleProvider needed). */
 import enMessages from '@/lib/i18n/messages/en';
 import {
+  getDirection,
   getLocaleLabel,
-  isSupportedLocale,
+  isContentLocale,
 } from '@/lib/i18n/config';
 
 type TranslationParams = Record<string, string | number | undefined | null>;
@@ -11,6 +12,8 @@ let direction: 'ltr' | 'rtl' = 'ltr';
 let uiLocale = 'en';
 let messages = { ...enMessages } satisfies typeof enMessages & Record<string, string>;
 let textStyle: { fontFamily?: string; [key: string]: string | number | undefined } = { fontFamily: 'System' };
+/** When on, getTextStyle adds the locale's writingDirection (for per-block RTL assertions). */
+let localeAwareTextStyle = false;
 
 function interpolate(message: string, params?: TranslationParams) {
   if (!params) return message;
@@ -44,15 +47,22 @@ export function useI18n() {
       locale: string,
       format: 'native' | 'english' | 'both' = 'native'
     ) => {
-      if (!isSupportedLocale(locale)) return locale;
+      if (!isContentLocale(locale)) return locale;
       return getLocaleLabel(locale, format);
     },
     getTextStyle: (
-      _locale?: string,
+      locale?: string,
       _role?: string,
       _edge?: string,
       _content?: string
-    ) => textStyle,
+    ) => {
+      if (!localeAwareTextStyle) return textStyle;
+      const resolved = locale ?? uiLocale;
+      return {
+        ...textStyle,
+        writingDirection: isContentLocale(resolved) ? getDirection(resolved) : 'ltr',
+      };
+    },
   };
 }
 
@@ -72,7 +82,12 @@ export function __setI18nTextStyle(next: { fontFamily?: string; [key: string]: s
   textStyle = { fontFamily: 'System', ...next };
 }
 
+export function __setI18nLocaleAwareTextStyle(enabled: boolean): void {
+  localeAwareTextStyle = enabled;
+}
+
 export function __resetUseI18nDouble(): void {
+  localeAwareTextStyle = false;
   direction = 'ltr';
   uiLocale = 'en';
   messages = { ...enMessages };
