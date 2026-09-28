@@ -37,7 +37,7 @@ export function useI18n() {
     direction,
     uiLocale,
     isRTL: direction === 'rtl',
-    contentLocales: { primary: null, secondary: null, tertiary: null },
+    contentLocales: { primary: null, secondary: null },
     contentLocaleChain: ['en'] as const,
     t: (key: string, params?: TranslationParams) => interpolate(lookupMessage(key), params),
     getLocaleName: (

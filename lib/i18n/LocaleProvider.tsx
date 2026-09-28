@@ -11,6 +11,7 @@ import {
   getDirection,
   getLocaleLabel,
   getResolvedContentLocaleChain,
+  type ContentLocale,
   type ContentLocalePriority,
   type Direction,
   type SupportedLocale,
@@ -59,16 +60,16 @@ type TranslationParams = Record<string, string | number | undefined | null>;
 interface I18nContextValue {
   uiLocale: SupportedLocale;
   contentLocales: ContentLocalePriority;
-  contentLocaleChain: SupportedLocale[];
+  contentLocaleChain: ContentLocale[];
   direction: Direction;
   isRTL: boolean;
   t: (key: TranslationKey, params?: TranslationParams) => string;
   getLocaleName: (
-    locale: SupportedLocale,
+    locale: ContentLocale,
     format?: 'native' | 'english' | 'both'
   ) => string;
   getTextStyle: (
-    locale?: SupportedLocale,
+    locale?: ContentLocale,
     role?: 'body' | 'bodyMedium' | 'bodySemibold' | 'bodyBold' | 'display' | 'displayBold',
     edge?: 'start' | 'center' | 'end',
     content?: string

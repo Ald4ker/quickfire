@@ -2,7 +2,7 @@ import { mark } from '@/lib/startupTiming';
 import rawQuestions from '@/constants/questions.json';
 import { groupRumbleQuestionsByValueBucket, normalizeRumbleTopicCount } from '@/features/play/rumble';
 import type { CategoryOption, GameMode, QuestionCard } from '@/features/shared';
-import type { SupportedLocale } from '@/lib/i18n/config';
+import type { ContentLocale } from '@/lib/i18n/config';
 import { questionCanonicalKey } from '@/features/play/canonicalKey';
 import { normalizeQuickPlayTopicCount } from '@/features/play/tokenCosts';
 
@@ -48,9 +48,9 @@ mark('play data module evaluating (questions.json already parsed)');
 // SAFETY: constants/questions.json is authored to the SourceGroup schema and validated by import tooling.
 const QUESTION_GROUPS = dedupeQuestionGroups(rawQuestions as SourceGroup[]);
 mark('questions deduped');
-const CATEGORY_TRANSLATIONS: Partial<Record<SupportedLocale, Record<string, string>>> = {};
+const CATEGORY_TRANSLATIONS: Partial<Record<ContentLocale, Record<string, string>>> = {};
 const QUESTION_TRANSLATIONS: Partial<
-  Record<SupportedLocale, Record<string, LocalizedQuestion>>
+  Record<ContentLocale, Record<string, LocalizedQuestion>>
 > = {};
 
 function slugify(name: string): string {
@@ -84,7 +84,7 @@ function getCanonicalKey(group: SourceGroup, slug: string, index: number) {
 function resolveCategoryTranslation(
   slug: string,
   englishTitle: string,
-  localeChain: SupportedLocale[]
+  localeChain: ContentLocale[]
 ) {
   for (const locale of localeChain) {
     const translatedTitle = CATEGORY_TRANSLATIONS[locale]?.[slug];
@@ -116,7 +116,7 @@ function resolveCategoryTranslation(
 function resolveQuestionTranslation(
   canonicalKey: string,
   englishQuestion: SourceQA,
-  localeChain: SupportedLocale[]
+  localeChain: ContentLocale[]
 ) {
   for (const locale of localeChain) {
     const translatedQuestion = QUESTION_TRANSLATIONS[locale]?.[canonicalKey];
@@ -149,7 +149,7 @@ function resolveQuestionTranslation(
 }
 
 export function getPlayableCategories(
-  localeChain: SupportedLocale[] = ['en']
+  localeChain: ContentLocale[] = ['en']
 ): CategoryOption[] {
   const grouped = new Map<string, CategoryOption>();
 
@@ -196,7 +196,7 @@ function pickGroupsForBoard(categoryGroups: SourceGroup[]): SourceGroup[] {
 
 export function buildBoard(
   categorySlugs: string[],
-  localeChain: SupportedLocale[] = ['en'],
+  localeChain: ContentLocale[] = ['en'],
   askedCanonicalKeys: ReadonlySet<string> = new Set()
 ): QuestionCard[] {
   const board: QuestionCard[] = [];
@@ -250,7 +250,7 @@ export function buildBoard(
 export function getBonusQuestion(
   categorySlugs: string[],
   usedQuestionIds: Set<string>,
-  localeChain: SupportedLocale[] = ['en'],
+  localeChain: ContentLocale[] = ['en'],
   askedCanonicalKeys: ReadonlySet<string> = new Set()
 ): QuestionCard | null {
   const candidates: QuestionCard[] = [];

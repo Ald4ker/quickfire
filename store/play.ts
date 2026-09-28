@@ -40,7 +40,7 @@ import type {
   TeamState,
   WagerState,
 } from '@/features/shared';
-import { getResolvedContentLocaleChain, type SupportedLocale } from '@/lib/i18n/config';
+import { getResolvedContentLocaleChain, type ContentLocale } from '@/lib/i18n/config';
 import {
   deserializeGameSession,
   deserializeRapidFire,
@@ -128,7 +128,7 @@ function buildScores(teams: TeamState[]): Record<string, number> {
 function getDefaultConfig(
   mode: GameMode = 'classic',
   teams: TeamState[] = DEFAULT_TEAMS,
-  contentLocaleChain: SupportedLocale[] = ['en']
+  contentLocaleChain: ContentLocale[] = ['en']
 ): GameConfig {
   const topicCount = defaultTopicCountForMode(mode);
   const normalizedTeams = normalizeTeamsForMode(mode, teams, topicCount);

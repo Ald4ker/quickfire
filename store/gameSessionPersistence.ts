@@ -17,21 +17,10 @@ import type {
   TurnPhase,
   WagerState,
 } from '@/features/shared';
-import type { SupportedLocale } from '@/lib/i18n/config';
+import { CONTENT_LOCALES, type ContentLocale } from '@/lib/i18n/config';
 
-const supportedLocaleSchema = z.enum([
-  'en',
-  'ar',
-  'es',
-  'fr',
-  'ur',
-  'hi',
-  'zh-Hans',
-  'pt-BR',
-  'ru',
-  'id',
-  'bn',
-]);
+/** English plus the 17 content locales; a superset of the old UI-derived list, so saved sessions still parse. */
+const contentLocaleSchema = z.enum(['en', ...CONTENT_LOCALES]);
 
 const gameModeSchema = z.enum(['classic', 'quickPlay', 'random', 'rumble', 'rapidFire']);
 
@@ -111,7 +100,7 @@ const questionCardSchema = z.object({
   promptImageKey: z.string().optional(),
   answerImageUrl: z.string().optional(),
   pointValue: z.number(),
-  locale: supportedLocaleSchema,
+  locale: contentLocaleSchema,
   resolvedFromFallback: z.boolean(),
   used: z.boolean(),
   boardSide: z.enum(['left', 'right']).optional(),
@@ -125,7 +114,7 @@ const categoryOptionSchema = z.object({
   slug: z.string().min(1),
   title: z.string(),
   questionCount: z.number(),
-  resolvedLocale: supportedLocaleSchema,
+  resolvedLocale: contentLocaleSchema,
   fellBackToEnglish: z.boolean(),
 });
 
@@ -151,7 +140,7 @@ const gameConfigSchema = z.object({
   mode: gameModeSchema,
   teams: z.array(teamConfigSchema),
   categories: z.array(z.string()),
-  contentLocaleChain: z.array(supportedLocaleSchema),
+  contentLocaleChain: z.array(contentLocaleSchema),
   quickPlayTopicCount: z.number().optional(),
   wagersPerTeam: z.number().optional(),
   lifelines: lifelineConfigSchema.optional(),
@@ -231,7 +220,7 @@ const persistedGameSessionSchema = z.object({
   id: z.string().min(1),
   mode: gameModeSchema,
   config: gameConfigSchema,
-  contentLocaleChain: z.array(supportedLocaleSchema),
+  contentLocaleChain: z.array(contentLocaleSchema),
   step: playRouteStepSchema,
   phase: turnPhaseSchema,
   availableCategories: z.array(categoryOptionSchema),
@@ -260,7 +249,7 @@ export interface PersistedGameSessionState {
   id: string;
   mode: GameMode;
   config: GameConfig;
-  contentLocaleChain: SupportedLocale[];
+  contentLocaleChain: ContentLocale[];
   step: PlayRouteStep;
   phase: TurnPhase;
   availableCategories: CategoryOption[];
@@ -435,7 +424,7 @@ export function deserializeGameSession(
 
   return {
     ...session,
-    contentLocaleChain: session.contentLocaleChain as SupportedLocale[],
+    contentLocaleChain: session.contentLocaleChain as ContentLocale[],
     availableCategories: session.availableCategories as CategoryOption[],
     currentQuestion: session.currentQuestion as QuestionCard | undefined,
     board: session.board as QuestionCard[],

@@ -7,7 +7,7 @@
  * needs a script font — so hardcoded StyleSheet fontFamily values work too.
  */
 import { StyleSheet } from 'react-native';
-import type { SupportedLocale } from './config';
+import type { ContentLocale } from './config';
 import { usesSystemFonts } from './config';
 import { FONTS } from '@/constants/theme';
 
@@ -35,7 +35,7 @@ const BRAND_FACE = {
 } as const;
 
 /** Locales that use Arabic-script UI type (Noto Sans Arabic). */
-const ARABIC_SCRIPT_LOCALES = new Set<SupportedLocale>(['ar', 'ur']);
+const ARABIC_SCRIPT_LOCALES = new Set<ContentLocale>(['ar', 'ur']);
 
 /** Arabic + presentation forms blocks used for mixed-script question content. */
 const ARABIC_SCRIPT_RE =
@@ -58,11 +58,11 @@ const BRAND_TO_ARABIC: Record<string, string> = {
   [BRAND_FACE.uiBold]: ARABIC_FONTS.uiBold,
 };
 
-let activeUiLocale: SupportedLocale = 'en';
+let activeUiLocale: ContentLocale = 'en';
 let flattenPatched = false;
 let originalFlatten: typeof StyleSheet.flatten | null = null;
 
-export function usesArabicScriptFont(locale: SupportedLocale): boolean {
+export function usesArabicScriptFont(locale: ContentLocale): boolean {
   return ARABIC_SCRIPT_LOCALES.has(locale);
 }
 
@@ -75,17 +75,17 @@ export function containsArabicScript(text: string | null | undefined): boolean {
 
 /** True when locale or visible copy needs Noto Sans Arabic (ar/ur UI or Arabic letters in text). */
 export function contentUsesArabicScriptFont(
-  locale: SupportedLocale,
+  locale: ContentLocale,
   content?: string | null
 ): boolean {
   return usesArabicScriptFont(locale) || containsArabicScript(content);
 }
 
-export function setActiveUiFontLocale(locale: SupportedLocale): void {
+export function setActiveUiFontLocale(locale: ContentLocale): void {
   activeUiLocale = locale;
 }
 
-export function getActiveUiFontLocale(): SupportedLocale {
+export function getActiveUiFontLocale(): ContentLocale {
   return activeUiLocale;
 }
 
@@ -133,7 +133,7 @@ export function getBrandFontFamily(role: FontRole = 'body'): string {
  */
 export function remapFontFamilyForLocale(
   fontFamily: string | undefined,
-  locale: SupportedLocale
+  locale: ContentLocale
 ): string | undefined {
   if (!fontFamily) {
     return fontFamily;
@@ -232,7 +232,7 @@ export function getPlatformSystemFontFamily(
 }
 
 export function resolveLocaleFontFamily(
-  locale: SupportedLocale,
+  locale: ContentLocale,
   role: FontRole = 'body',
   platformOS: string
 ): string | undefined {
@@ -248,7 +248,7 @@ export function resolveLocaleFontFamily(
 }
 
 export function resolveContentFontFamily(
-  locale: SupportedLocale,
+  locale: ContentLocale,
   content: string | null | undefined,
   role: FontRole = 'body',
   platformOS: string

@@ -3,7 +3,7 @@
  * Game engine, wallet, and content interfaces.
  */
 
-import type { SupportedLocale } from '@/lib/i18n/config';
+import type { ContentLocale } from '@/lib/i18n/config';
 
 export type GameMode =
   | 'classic'
@@ -57,7 +57,7 @@ export interface GameConfig {
   mode: GameMode;
   teams: TeamConfig[];
   categories: string[];
-  contentLocaleChain: SupportedLocale[];
+  contentLocaleChain: ContentLocale[];
   quickPlayTopicCount?: number;
   wagersPerTeam?: number;
   /** Legacy: single lifeline config. Prefer teamLifelines for per-team. */
@@ -86,7 +86,7 @@ export interface QuestionCard {
   promptImageKey?: string;
   answerImageUrl?: string;
   pointValue: number;
-  locale: SupportedLocale;
+  locale: ContentLocale;
   resolvedFromFallback: boolean;
   used: boolean;
   /** Jeopardy board column (TriviaApp q_ / w_ parity). */
@@ -104,7 +104,7 @@ export interface CategoryOption {
   slug: string;
   title: string;
   questionCount: number;
-  resolvedLocale: SupportedLocale;
+  resolvedLocale: ContentLocale;
   fellBackToEnglish: boolean;
 }
 
@@ -291,7 +291,7 @@ export interface GameSessionState {
   id: string;
   mode: GameMode;
   config: GameConfig;
-  contentLocaleChain: SupportedLocale[];
+  contentLocaleChain: ContentLocale[];
   step: PlayRouteStep;
   phase: TurnPhase;
   availableCategories: CategoryOption[];

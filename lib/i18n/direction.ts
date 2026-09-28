@@ -1,5 +1,5 @@
 import { Platform, type TextStyle, type ViewStyle } from 'react-native';
-import type { Direction, SupportedLocale } from './config';
+import type { ContentLocale, Direction } from './config';
 import { getDirection } from './config';
 import {
   type FontRole,
@@ -12,14 +12,14 @@ import {
 export type { FontRole };
 
 export function getLocaleFontFamily(
-  locale: SupportedLocale,
+  locale: ContentLocale,
   role: FontRole = 'body'
 ): string | undefined {
   return resolveLocaleFontFamily(locale, role, Platform.OS);
 }
 
 export function getContentFontFamily(
-  locale: SupportedLocale,
+  locale: ContentLocale,
   content: string | null | undefined,
   role: FontRole = 'body'
 ): string | undefined {
@@ -27,13 +27,13 @@ export function getContentFontFamily(
 }
 
 export function getWritingDirection(
-  locale: SupportedLocale
+  locale: ContentLocale
 ): TextStyle['writingDirection'] {
   return getDirection(locale);
 }
 
 export function getContentWritingDirection(
-  locale: SupportedLocale,
+  locale: ContentLocale,
   content?: string | null
 ): TextStyle['writingDirection'] {
   const firstLetter = content?.match(/\p{L}/u)?.[0];

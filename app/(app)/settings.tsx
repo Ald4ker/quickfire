@@ -27,9 +27,10 @@ import {
 } from '@/constants';
 import { SHOW_LANGUAGE_SETTINGS_UI } from '@/constants/featureFlags';
 import {
+  CONTENT_LOCALES,
+  MAX_CONTENT_LOCALES,
   SUPPORTED_LOCALES,
   contentLocalePriorityToArray,
-  isNonEnglishContentLocale,
   type NonEnglishContentLocale,
 } from '@/lib/i18n/config';
 import { getRowDirection } from '@/lib/i18n/direction';
@@ -43,7 +44,7 @@ import { OutboundPlatformLinks } from '@/components/OutboundPlatformLinks';
 import { WebAwareModal } from '@/components/WebAwareModal';
 import { api } from '@/convex/_generated/api';
 import { logOutRevenueCat } from '@/lib/payments/revenueCat';
-import { useLocaleStore } from '@/store/locale';
+import { useLocaleStore, type ContentLocaleSlot } from '@/store/locale';
 import { usePlayStore } from '@/store/play';
 import { useThemeStore } from '@/store/theme';
 import {
@@ -58,9 +59,8 @@ import { getWebViewportScale } from '@/lib/layout/webViewportScale';
 
 const T = HOME_SOFT_UI;
 
-const SELECTABLE_CONTENT_LOCALES = SUPPORTED_LOCALES.filter((locale) =>
-  isNonEnglishContentLocale(locale)
-);
+/** All 17 translated content languages, independent of the 11 UI languages. */
+const SELECTABLE_CONTENT_LOCALES = CONTENT_LOCALES;
 
 function formatTokens(n: number, locale: string) {
   return new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(n);
@@ -131,7 +131,7 @@ export default function SettingsScreen() {
       return;
     }
 
-    if (selectedContentLocaleValues.length >= 3) {
+    if (selectedContentLocaleValues.length >= MAX_CONTENT_LOCALES) {
       return;
     }
 
@@ -862,7 +862,7 @@ export default function SettingsScreen() {
                     </View>
                     <View style={styles.priorityActions}>
                       <Pressable
-                        onPress={() => index > 0 && moveContentLocale(index as 0 | 1 | 2, (index - 1) as 0 | 1 | 2)}
+                        onPress={() => index > 0 && moveContentLocale(index as ContentLocaleSlot, (index - 1) as ContentLocaleSlot)}
                         disabled={index === 0}
                       >
                         <Ionicons name="arrow-up" size={18} color={index === 0 ? 'rgba(51,51,51,0.32)' : textMuted} />
@@ -870,7 +870,7 @@ export default function SettingsScreen() {
                       <Pressable
                         onPress={() =>
                           index < selectedContentLocaleValues.length - 1 &&
-                          moveContentLocale(index as 0 | 1 | 2, (index + 1) as 0 | 1 | 2)
+                          moveContentLocale(index as ContentLocaleSlot, (index + 1) as ContentLocaleSlot)
                         }
                         disabled={index === selectedContentLocaleValues.length - 1}
                       >
@@ -888,13 +888,13 @@ export default function SettingsScreen() {
 
             <View style={styles.contentLanguageHeader}>
               <Text style={[styles.themePaletteName, { color: textPrimary }]}>{t('common.languages')}</Text>
-              <Text style={[styles.themePaletteMeta, { color: textMuted }]}>{selectedContentLocaleValues.length}/3</Text>
+              <Text style={[styles.themePaletteMeta, { color: textMuted }]}>{selectedContentLocaleValues.length}/{MAX_CONTENT_LOCALES}</Text>
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.themePaletteGrid}>
               {SELECTABLE_CONTENT_LOCALES.map((locale) => {
                 const isSelected = selectedContentLocaleValues.includes(locale);
-                const disabled = !isSelected && selectedContentLocaleValues.length >= 3;
+                const disabled = !isSelected && selectedContentLocaleValues.length >= MAX_CONTENT_LOCALES;
                 return (
                   <Pressable
                     key={locale}

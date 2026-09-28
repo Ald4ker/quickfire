@@ -5,7 +5,7 @@ import * as SecureStore from 'expo-secure-store';
 import {
   DEFAULT_UI_LOCALE,
   EMPTY_CONTENT_LOCALES,
-  getResolvedContentLocaleChain,
+  contentLocalePriorityToArray,
   isSupportedLocale,
   normalizeContentLocales,
   type ContentLocalePriority,
@@ -31,6 +31,16 @@ async function setStoredLocaleItem(key: string, value: string): Promise<void> {
   await SecureStore.setItemAsync(key, value);
 }
 
+/** Index of a content language slot: 0 = primary (shown first), 1 = secondary (shown beneath). */
+export type ContentLocaleSlot = 0 | 1;
+
+/**
+ * Stored content preferences from older builds may carry a third `tertiary` slot and locale codes
+ * that were UI-derived. Read every slot back in order; `normalizeContentLocales` keeps the first
+ * two valid content locales, so nothing valid is lost from the two slots that are shown.
+ */
+type StoredContentLocales = Partial<Record<'primary' | 'secondary' | 'tertiary', string | null>>;
+
 interface LocaleStore {
   uiLocale: SupportedLocale;
   contentLocales: ContentLocalePriority;
@@ -38,7 +48,7 @@ interface LocaleStore {
   hasExplicitContentSelection: boolean;
   setUiLocale: (locale: SupportedLocale) => void;
   setContentLocales: (locales: NonEnglishContentLocale[]) => void;
-  moveContentLocale: (from: 0 | 1 | 2, to: 0 | 1 | 2) => void;
+  moveContentLocale: (from: ContentLocaleSlot, to: ContentLocaleSlot) => void;
   hydrate: () => Promise<void>;
 }
 
@@ -71,8 +81,7 @@ export const useLocaleStore = create<LocaleStore>((set, get) => ({
 
   moveContentLocale: (from, to) => {
     const current = get().contentLocales;
-    // SAFETY: getResolvedContentLocaleChain always puts 'en' last; filtering it leaves only NonEnglishContentLocale values.
-    const next = getResolvedContentLocaleChain(current).filter((locale) => locale !== 'en') as NonEnglishContentLocale[];
+    const next = contentLocalePriorityToArray(current);
     const [item] = next.splice(from, 1);
 
     if (!item) {
@@ -99,17 +108,16 @@ export const useLocaleStore = create<LocaleStore>((set, get) => ({
 
       if (storedContentLocales) {
         // SAFETY: payload shape is re-validated by normalizeContentLocales.
-        const parsed = JSON.parse(storedContentLocales) as Partial<ContentLocalePriority>;
-        const candidates = [parsed.primary, parsed.secondary, parsed.tertiary].flatMap((locale) =>
-          locale ? [locale] : []
-        );
-        const normalized = normalizeContentLocales(candidates);
+        const parsed = JSON.parse(storedContentLocales) as StoredContentLocales;
+        const normalized = normalizeContentLocales([
+          parsed.primary,
+          parsed.secondary,
+          parsed.tertiary,
+        ]);
 
         set({
           contentLocales: normalized,
-          hasExplicitContentSelection: Boolean(
-            normalized.primary || normalized.secondary || normalized.tertiary
-          ),
+          hasExplicitContentSelection: Boolean(normalized.primary || normalized.secondary),
         });
       }
     } catch {

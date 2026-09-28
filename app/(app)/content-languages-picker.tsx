@@ -4,21 +4,20 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { BORDER_RADIUS, FONTS, LAYOUT, SPACING } from '@/constants';
 import {
-  SUPPORTED_LOCALES,
+  CONTENT_LOCALES,
+  MAX_CONTENT_LOCALES,
   contentLocalePriorityToArray,
-  isNonEnglishContentLocale,
   type NonEnglishContentLocale,
 } from '@/lib/i18n/config';
 import { getChevronName } from '@/lib/i18n/direction';
 import { useI18n } from '@/lib/i18n/useI18n';
 import { useDarkModeFlatTop } from '@/lib/hooks/useTheme';
-import { useLocaleStore } from '@/store/locale';
+import { useLocaleStore, type ContentLocaleSlot } from '@/store/locale';
 import { Screen } from '@/components/ScreenContent';
 import { HOME_SOFT_UI } from '@/themes';
 
-const SELECTABLE_CONTENT_LOCALES = SUPPORTED_LOCALES.filter((locale) =>
-  isNonEnglishContentLocale(locale)
-);
+/** All 17 translated content languages, independent of the 11 UI languages. */
+const SELECTABLE_CONTENT_LOCALES = CONTENT_LOCALES;
 const T = HOME_SOFT_UI;
 
 /** Flat lift — no gray strip under language cards. */
@@ -58,7 +57,7 @@ export default function ContentLanguagesPickerScreen() {
       return;
     }
 
-    if (selected.length >= 3) {
+    if (selected.length >= MAX_CONTENT_LOCALES) {
       return;
     }
 
@@ -139,10 +138,10 @@ export default function ContentLanguagesPickerScreen() {
                   <Pressable
                     onPress={() => {
                       if (index <= 0) return;
-                      // SAFETY: selected content locales are at most 3 entries (indices 0..2).
-                      const from = index as 0 | 1 | 2;
-                      // SAFETY: from > 0 so from - 1 is still 0..2.
-                      const to = (index - 1) as 0 | 1 | 2;
+                      // SAFETY: selected content locales are at most MAX_CONTENT_LOCALES (2) entries (indices 0..1).
+                      const from = index as ContentLocaleSlot;
+                      // SAFETY: from > 0 so from - 1 is still 0..1.
+                      const to = (index - 1) as ContentLocaleSlot;
                       moveContentLocale(from, to);
                     }}
                     disabled={index === 0}
@@ -152,10 +151,10 @@ export default function ContentLanguagesPickerScreen() {
                   <Pressable
                     onPress={() => {
                       if (index >= selected.length - 1) return;
-                      // SAFETY: selected content locales are at most 3 entries (indices 0..2).
-                      const from = index as 0 | 1 | 2;
-                      // SAFETY: from < last so from + 1 is still 0..2.
-                      const to = (index + 1) as 0 | 1 | 2;
+                      // SAFETY: selected content locales are at most MAX_CONTENT_LOCALES (2) entries (indices 0..1).
+                      const from = index as ContentLocaleSlot;
+                      // SAFETY: from < last so from + 1 is still 0..1.
+                      const to = (index + 1) as ContentLocaleSlot;
                       moveContentLocale(from, to);
                     }}
                     disabled={index === selected.length - 1}
@@ -189,7 +188,7 @@ export default function ContentLanguagesPickerScreen() {
               getTextStyle(),
             ]}
           >
-            {selected.length}/3
+            {selected.length}/{MAX_CONTENT_LOCALES}
           </Text>
         </View>
 
@@ -200,7 +199,7 @@ export default function ContentLanguagesPickerScreen() {
         >
           {SELECTABLE_CONTENT_LOCALES.map((locale) => {
             const isSelected = selected.includes(locale);
-            const disabled = !isSelected && selected.length >= 3;
+            const disabled = !isSelected && selected.length >= MAX_CONTENT_LOCALES;
 
             return (
               <Pressable
