@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { STUDIO_DIRECTION_IDS } from '@/constants/studio';
+import { ROUND2_DIRECTION_IDS, ROUND2_ENABLED, ROUND2_LABELS, useRound2Store } from '@/features/round2/direction';
 import { Pressable } from '@/components/ui/Pressable';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -51,6 +52,8 @@ export default function ThemePickerModal() {
   const router = useRouter();
   const { direction, t } = useI18n();
   const { paletteId, setPalette } = useThemePicker();
+  const round2Id = useRound2Store((state) => state.directionId);
+  const setRound2 = useRound2Store((state) => state.setDirection);
   const darkModeFlatTop = useDarkModeFlatTop();
   const surface = T.colors.surface;
   const textPrimary = T.colors.textPrimary;
@@ -124,12 +127,44 @@ export default function ThemePickerModal() {
               </Pressable>
             );
           })}
+          {ROUND2_ENABLED ? (
+            <View style={styles.round2Block} testID="theme-picker-round2">
+              <Text style={[styles.subtitle, { color: textMuted, marginBottom: SPACING.sm }]}>
+                Layout (UI round 2 preview, development builds only)
+              </Text>
+              <View style={styles.round2Row}>
+                {([null, ...ROUND2_DIRECTION_IDS] as const).map((id) => {
+                  const selected = round2Id === id;
+                  return (
+                    <Pressable
+                      key={id ?? 'off'}
+                      testID={`round2-${id ?? 'off'}`}
+                      accessibilityRole="button"
+                      accessibilityState={{ selected }}
+                      onPress={() => setRound2(id)}
+                      style={[
+                        styles.round2Chip,
+                        { backgroundColor: surface, borderColor: selected ? textPrimary : 'transparent' },
+                      ]}
+                    >
+                      <Text style={[styles.paletteName, { color: textPrimary }]}>
+                        {id ? ROUND2_LABELS[id] : 'Shipped'}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            </View>
+          ) : null}
         </ScrollView>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  round2Block: { width: '100%', marginTop: SPACING.md },
+  round2Row: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.sm },
+  round2Chip: { paddingHorizontal: SPACING.lg, paddingVertical: SPACING.md, borderRadius: 14, borderWidth: 2 },
   plasticFace: {
     borderTopWidth: 0,
     borderTopColor: 'transparent',

@@ -20,6 +20,7 @@ import { COLORS, FONT_SIZES, FONTS, SPACING, getStandardChromeTopPadding } from 
 import { SHOW_HOT_SEAT_UI } from '@/constants/featureFlags';
 import { PlayScaffold } from '@/features/play/components/PlayScaffold';
 import { WagerInfoModal } from '@/features/play/components/WagerInfoModal';
+import { R2Lobby, useRound2Direction } from '@/features/round2';
 import { WebAwareModal } from '@/components/WebAwareModal';
 import { isActiveMatchStep, routeForPlayStep } from '@/features/play/sessionRouting';
 import {
@@ -159,6 +160,7 @@ export default function TeamSetupScreen() {
   const setTopicCount = usePlayStore((state) => state.setTopicCount);
   const setWagersPerTeam = usePlayStore((state) => state.setWagersPerTeam);
   const setHotSeatRounds = usePlayStore((state) => state.setHotSeatRounds);
+  const round2Direction = useRound2Direction();
 
   // Browser/history back can reopen setup while a match is live - return to the leave-capable match UI.
   useEffect(() => {
@@ -909,6 +911,29 @@ export default function TeamSetupScreen() {
       )}
     </View>
   );
+
+  // UI round 2 preview (TASK-040): dev-only layout directions; null for players.
+  if (round2Direction) {
+    return (
+      <>
+        <R2Lobby
+          direction={round2Direction}
+          session={session}
+          canContinue={canContinue}
+          wagerEnabled={wagerEnabled}
+          onBack={handleBack}
+          onContinue={() => router.push('/play/categories')}
+          onWagerInfo={() => setWagerInfoOpen(true)}
+          updateTeamName={updateTeamName}
+          addTeamMember={addTeamMember}
+          removeTeamMember={removeTeamMember}
+          updateTeamMemberName={updateTeamMemberName}
+          setWagersPerTeam={setWagersPerTeam}
+        />
+        <WagerInfoModal visible={wagerInfoOpen} onClose={() => setWagerInfoOpen(false)} />
+      </>
+    );
+  }
 
   return (
     <PlayScaffold

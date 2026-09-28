@@ -1,5 +1,7 @@
 import { HOME_SOFT_UI, getCurrentStudioDirection } from '@/themes';
 import { relativeLuminance } from '@/constants/theme';
+import { getRound2Direction } from '@/features/round2/direction';
+import { getR2Colors } from '@/features/round2/theme';
 
 const T = HOME_SOFT_UI.colors;
 
@@ -68,7 +70,15 @@ export function getPlaySurfaceColors() {
     /** Award-tile “neither” dashed outline. */
     dashedBorder: isDark ? 'rgba(255, 255, 255, 0.22)' : 'rgba(51, 51, 51, 0.22)',
     ...studioPlaySurfaceOverrides(),
+    ...round2PlaySurfaceOverrides(isDark),
   };
+}
+
+/** UI round 2 preview: neutral canvas under play screens so transitions never flash cream. */
+function round2PlaySurfaceOverrides(isDark: boolean) {
+  if (!getRound2Direction()) return {};
+  const c = getR2Colors(isDark);
+  return { canvas: c.bg, boardCanvas: c.bg };
 }
 
 /** Studio direction tokens layered over the play surface (TASK-040 preview). */

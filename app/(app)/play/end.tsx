@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
+import { R2Results, useRound2Direction } from '@/features/round2';
 import {
   Platform,
   StyleSheet,
@@ -349,6 +350,7 @@ export default function PlayEndScreen() {
   } = usePlayStore();
   const consumeEntryMutation = useMutation(api.wallet.consumeEntry);
   const consumedRef = useRef(false);
+  const round2Direction = useRound2Direction();
 
   const consumeCurrentEntry = useCallback(async () => {
     if (consumedRef.current) return;
@@ -403,6 +405,22 @@ export default function PlayEndScreen() {
       router.replace('/play/mode');
     });
   };
+
+  // UI round 2 preview (TASK-040): dev-only layout directions; null for players.
+  if (round2Direction) {
+    return (
+      <R2Results
+        direction={round2Direction}
+        session={session}
+        onHome={handleHome}
+        onAnotherMatch={handleAnotherMatch}
+        onReviewBoard={() => {
+          usePlayStore.getState().reviewCompletedBoard();
+          router.replace('/play/board');
+        }}
+      />
+    );
+  }
 
   return (
     <PlayScaffold

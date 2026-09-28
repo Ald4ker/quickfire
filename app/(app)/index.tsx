@@ -44,6 +44,7 @@ import { useThemeStore } from '@/store/theme';
 import { HOME_SOFT_UI } from '@/themes';
 import { isResumableSessionStep, routeForPlayStep } from '@/features/play/sessionRouting';
 import { getGameTokenCost, getHomeModeTokenCostLabel } from '@/features/play/tokenCosts';
+import { R2Home, useRound2Direction } from '@/features/round2';
 import type { GameMode } from '@/features/shared';
 import type { TranslationKey } from '@/lib/i18n/messages/en';
 import { markOnce } from '@/lib/startupTiming';
@@ -144,6 +145,7 @@ export default function AppHubScreen() {
   const refundEntryMutation = useMutation(api.wallet.refundEntry);
   const [activeModeInfo, setActiveModeInfo] = useState<GameMode | null>(null);
   const [pendingMode, setPendingMode] = useState<GameMode | null>(null);
+  const round2Direction = useRound2Direction();
 
   // Decode play art into expo-image cache while the user is still on home.
   useEffect(() => {
@@ -284,6 +286,40 @@ export default function AppHubScreen() {
   const surface = T.colors.surface;
   const textPrimary = T.colors.textPrimary;
   const textMuted = T.colors.textMuted;
+
+  // UI round 2 preview (TASK-040): dev-only layout directions; null for players.
+  if (round2Direction) {
+    return (
+      <R2Home
+        direction={round2Direction}
+        modes={HOME_MODES.map((mode) => ({
+          id: mode.id,
+          title: t(mode.titleKey),
+          copy: t(mode.copyKey),
+          cost: getHomeModeTokenCostLabel(mode.id),
+          icon: mode.icon,
+        }))}
+        tokens={formattedTokens}
+        tokensLabel={t('common.tokens')}
+        onSelectMode={onSelectMode}
+        onOpenSettings={() => router.push('/(app)/settings')}
+        onOpenStore={() => router.push('/(app)/store')}
+        resume={
+          pendingMode
+            ? {
+                title: t('home.resumeModalTitle'),
+                body: t('home.resumeModalBody'),
+                continueLabel: t('home.continueGame'),
+                newLabel: t('home.newGame'),
+                onContinue: continueCurrentGame,
+                onNewGame: startPendingModeNewGame,
+                onClose: closeResumeChoice,
+              }
+            : null
+        }
+      />
+    );
+  }
 
   return (
     <View style={[styles.rootContainer, { backgroundColor: canvas }]}>

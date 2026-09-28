@@ -41,6 +41,7 @@ import { PlayScaffold } from '@/features/play/components/PlayScaffold';
 import { WagerInfoModal } from '@/features/play/components/WagerInfoModal';
 import { getPlaySurfaceColors } from '@/features/play/playSurfaceColors';
 import { StudioReveal } from '@/components/studio/StudioReveal';
+import { R2Board, useRound2Direction } from '@/features/round2';
 import { SOFT_SURFACE_FACE, softSurfaceLift } from '@/features/play/styles/softSurface';
 import { hapticSuccess, hapticTick } from '@/lib/haptics';
 import { useI18n } from '@/lib/i18n/useI18n';
@@ -321,6 +322,7 @@ export default function PlayBoardScreen() {
   const [wagerInfoOpen, setWagerInfoOpen] = useState(false);
   const [hotSeatInfoOpen, setHotSeatInfoOpen] = useState(false);
   const [gridViewport, setGridViewport] = useState({ width: 0, height: 0 });
+  const round2Direction = useRound2Direction();
 
   // Notch detection retained for layout; blank side currently unused after board simplification.
   useEffect(() => {
@@ -967,6 +969,50 @@ export default function PlayBoardScreen() {
       />
     </View>
   );
+
+  // UI round 2 preview (TASK-040): dev-only layout directions; null for players.
+  if (round2Direction) {
+    const handleRound2Tile = (question: QuestionCard) => {
+      const used = session.usedQuestionIds.has(question.id) || question.used;
+      if (used) {
+        if (randomPick) return;
+        reviewBoardQuestion(question);
+        router.replace('/play/question');
+        return;
+      }
+      if (randomPick) {
+        if (randomPick.phase === 'locked' && randomPick.question.id === question.id) {
+          openLockedRandomPick();
+        }
+        return;
+      }
+      selectQuestion(question);
+      router.replace('/play/question');
+    };
+    return (
+      <View style={{ flex: 1 }}>
+        <StatusBar hidden />
+        <R2Board
+          direction={round2Direction}
+          session={session}
+          columns={grouped}
+          isUsed={(question) => session.usedQuestionIds.has(question.id) || question.used}
+          onTilePress={handleRound2Tile}
+          flashingId={randomPick?.phase === 'flashing' ? randomPick.flashingId : null}
+          lockedId={randomPick?.phase === 'locked' ? randomPick.question.id : null}
+          onMenu={openMatchMenu}
+          onBack={leaveMatch}
+          art={getCategoryPictureSource}
+        />
+        <PlayMatchMenuModal
+          visible={matchMenuOpen}
+          onClose={closeMatchMenu}
+          onSettings={openSettingsFromMenu}
+          onExitGame={exitGameFromMenu}
+        />
+      </View>
+    );
+  }
 
   return (
     <View style={[styles.rootContainer, { backgroundColor: surfaceColors.boardCanvas }]}>

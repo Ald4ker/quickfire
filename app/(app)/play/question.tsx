@@ -24,6 +24,7 @@ import {
   getRumblePartySlots,
 } from '@/features/play/rumble';
 import { PlayAnswerPanel } from '@/features/play/components/PlayAnswerPanel';
+import { R2Question, useRound2Direction } from '@/features/round2';
 import { StudioBackdrop } from '@/components/studio/StudioBackdrop';
 import { StudioReveal } from '@/components/studio/StudioReveal';
 import { useStudio } from '@/components/studio/useStudio';
@@ -265,6 +266,10 @@ export default function PlayQuestionScreen() {
   const continueAfterStandardQuestion = usePlayStore((state) => state.continueAfterStandardQuestion);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [wagerInfoOpen, setWagerInfoOpen] = useState(false);
+  const round2Direction = useRound2Direction();
+  const [round2ReportOpen, setRound2ReportOpen] = useState(false);
+  const awardStandardQuestion = usePlayStore((state) => state.awardStandardQuestion);
+  const resolveWager = usePlayStore((state) => state.resolveWager);
 
 
   const currentTeam = useMemo(() => {
@@ -656,6 +661,55 @@ export default function PlayQuestionScreen() {
       </Text>
     </View>
   );
+
+  // UI round 2 preview (TASK-040): dev-only layout directions; null for players.
+  if (round2Direction) {
+    return (
+      <View style={{ flex: 1 }}>
+        <R2Question
+          direction={round2Direction}
+          session={session}
+          question={q}
+          isAnswerPhase={isAnswerPhase}
+          elapsedSeconds={displaySeconds}
+          maxSeconds={QUESTION_MAX_SECONDS}
+          timeLabel={timeStr}
+          hasTimedOut={hasTimedOut}
+          canShowAnswer={canShowAnswer}
+          guide={rumbleTimingGuide}
+          promptImage={promptImageSource}
+          onBack={onBackToBoard}
+          onShowAnswer={() => {
+            revealAnswer();
+          }}
+          onAward={awardStandardQuestion}
+          onResolveWager={(correct) => {
+            resolveWager(correct);
+            router.replace('/play/board');
+          }}
+          onNext={() => {
+            continueAfterStandardQuestion();
+            router.replace('/play/board');
+          }}
+          onReport={() => setRound2ReportOpen(true)}
+          canWager={answerPhaseCanWager}
+          onWager={() => {
+            const result = initiateWager();
+            if (result.ok) router.replace('/play/board');
+          }}
+        />
+        <QuestionReportControl
+          question={q}
+          sessionId={session.id}
+          offsetRight={0}
+          offsetBottom={0}
+          hideTrigger
+          open={round2ReportOpen}
+          onOpenChange={setRound2ReportOpen}
+        />
+      </View>
+    );
+  }
 
   return (
     <View style={[styles.canvas, { backgroundColor: surfaceColors.canvas }]}>

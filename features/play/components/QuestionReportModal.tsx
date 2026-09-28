@@ -364,19 +364,32 @@ export function QuestionReportControl({
   sessionId,
   offsetRight,
   offsetBottom,
+  hideTrigger = false,
+  open: controlledOpen,
+  onOpenChange,
 }: {
   question: QuestionCard;
   sessionId?: string;
   offsetRight: number;
   offsetBottom: number;
+  /** UI round 2 preview: the screen draws its own trigger and controls `open`. */
+  hideTrigger?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }) {
   const { t, getTextStyle } = useI18n();
-  const [open, setOpen] = useState(false);
+  const [localOpen, setLocalOpen] = useState(false);
+  const open = controlledOpen ?? localOpen;
+  const setOpen = (next: boolean) => {
+    setLocalOpen(next);
+    onOpenChange?.(next);
+  };
   const submitReport = useMutation(api.content.submitQuestionReport);
   const submitting = useRef(false);
 
   return (
     <>
+      {hideTrigger ? null : (
       <View style={[styles.reportFab, { right: offsetRight, bottom: offsetBottom }]}>
         <Pressable
           testID="question-report-button"
@@ -398,6 +411,7 @@ export function QuestionReportControl({
           </Text>
         </Pressable>
       </View>
+      )}
       <QuestionReportModal
         visible={open}
         question={question}
