@@ -23,6 +23,7 @@
     "seed:import": "tsx scripts/import-questions-from-csv.ts && tsx scripts/merge-picture-topics.ts && tsx scripts/normalize-questions.ts",
     "seed:normalize": "tsx scripts/normalize-questions.ts",
     "seed:translations:check": "tsx scripts/check-translations.ts",
+    "packs:build": "tsx scripts/build-locale-packs.ts",
     "topics:picture:prepare": "python3 scripts/prepare-picture-topic-assets.py",
     "topics:picture:merge": "tsx scripts/merge-picture-topics.ts && tsx scripts/normalize-questions.ts",
     "seed:push": "tsx scripts/push-seed-to-convex.ts",
