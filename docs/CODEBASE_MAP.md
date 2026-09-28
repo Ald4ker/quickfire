@@ -267,7 +267,8 @@ graph TB
 │   ├── normalize-questions.ts    # Normalize questions.json → convex/seed/ (keys q<UserID>, questionCount)
 │   ├── check-translations.ts     # Verify constants/translations/questions-long.csv.gz against the English seed
 │   ├── push-seed-to-convex.ts    # Seed categories, English questions and the translation pack
-│   └── lib/                      # csv.ts (parser), questionsLong.ts (translation pack reader)
+│   ├── build-locale-packs.ts     # Translation pack → constants/translations/<locale>.json (gitignored build output)
+│   └── lib/                      # csv.ts (parser), questionsLong.ts (translation pack reader), localePacks.ts
 │
 ├── patches/
 │   └── expo-modules-core@55.0.22.patch
@@ -507,7 +508,7 @@ overtimeCheck -> completed
 - Categories seeded by slug (skips if exists); `questionCount` is written at seed time and read by `listPlayableCategories` (no per-query counting)
 - Questions with invalid `categorySlug` silently skipped
 - Question identity is `canonicalKey = q<UserID>` (the spreadsheet's permanent ID, `features/play/canonicalKey.ts`), the same in every locale; `device_question_history` keys on it
-- Content queries read only the caller's locale chain through `by_category_locale_status`; 17 locales are seeded but a player pays for at most three
+- Content queries read only the caller's locale chain through `by_category_locale_status`; 17 locales are seeded but a player pays for at most three (two content languages plus English)
 - Must set `CLERK_JWT_ISSUER_DOMAIN` in Convex dashboard
 
 ---
@@ -689,7 +690,9 @@ overtimeCheck -> completed
 | `useI18n.ts` | i18n hook |
 | `messages/` | Translation catalogs |
 
-**Supported locales**: en, es, fr, pt-BR, ar, bn, hi, id, ru, ur, zh-Hans
+**Supported locales** (UI, `SUPPORTED_LOCALES`): en, es, fr, pt-BR, ar, bn, hi, id, ru, ur, zh-Hans
+
+**Content locales** (`CONTENT_LOCALES`, independent of the UI list): zh-Hans, es, ar, hi, fr, pt-BR, ur, bn, id, ru, ja, ko, sw, de, pt-PT, it, tr. Players pick up to two (`MAX_CONTENT_LOCALES`): primary and secondary. The question is chosen by `canonicalKey`; the question and answer views show the primary variant and, when a secondary is set, the secondary beneath it (`resolveQuestionVariants` in `features/play/data.ts`, `useQuestionVariants`, `SecondaryLanguageText`). Each slot falls back to English on its own; each block takes its own direction and font from its locale. English lives in the bundled `questions.json`; translated variants go into `QUESTION_TRANSLATIONS` through `registerQuestionTranslations(locale, pack)`, with packs built by `bun run packs:build` (runtime loading of packs is not wired yet).
 
 ---
 

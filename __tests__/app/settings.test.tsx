@@ -45,7 +45,7 @@ describe('SettingsScreen', () => {
 
     expect(screen.getByText('Theme selection')).toBeTruthy();
     expect(screen.getByText('App Language')).toBeTruthy();
-    expect(screen.getByText('Languages (up to 3)')).toBeTruthy();
+    expect(screen.getByText('Languages (up to 2)')).toBeTruthy();
     expect(screen.getByText('No trivia languages selected')).toBeTruthy();
     expect(screen.queryByText('WIN RATE')).toBeNull();
     expect(screen.queryByText('BEST STREAK')).toBeNull();
@@ -133,10 +133,10 @@ describe('SettingsScreen', () => {
   it('opens trivia language choices inline as a modal instead of navigating away', () => {
     render(<SettingsScreen />);
 
-    fireEvent.press(screen.getByText('Languages (up to 3)'));
+    fireEvent.press(screen.getByText('Languages (up to 2)'));
 
     expect(router.push).not.toHaveBeenCalled();
-    expect(screen.getByText('Pick up to 3 preferred trivia languages. English is always the fallback.')).toBeTruthy();
+    expect(screen.getByText('Pick up to 2 trivia languages to show together. English is always the fallback.')).toBeTruthy();
     expect(screen.getByText('Languages')).toBeTruthy();
   });
 

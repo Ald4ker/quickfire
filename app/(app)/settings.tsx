@@ -456,7 +456,7 @@ export default function SettingsScreen() {
                     {/* Content languages */}
                     <Pressable
                       accessibilityRole="button"
-                      accessibilityLabel={t('settings.languagesUpToThreeTitle')}
+                      accessibilityLabel={t('settings.languagesUpToTwoTitle')}
                       onPress={() => setContentLanguagesModalVisible(true)}
                       style={({ pressed }) => [
                         styles.prefRow,
@@ -472,7 +472,7 @@ export default function SettingsScreen() {
                               numberOfLines={1}
                               ellipsizeMode="tail"
                             >
-                              {t('settings.languagesUpToThreeTitle')}
+                              {t('settings.languagesUpToTwoTitle')}
                             </Text>
                             <Text
                               style={[styles.prefMeta, { color: textMuted }]}

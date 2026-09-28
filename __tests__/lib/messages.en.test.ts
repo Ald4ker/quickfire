@@ -20,7 +20,7 @@ const SETTINGS_UI_KEYS = [
   'common.theme',
   'settings.accountAuthTitle',
   'settings.themeSelectionTitle',
-  'settings.languagesUpToThreeTitle',
+  'settings.languagesUpToTwoTitle',
   'settings.noTriviaLanguagesSelected',
   'settings.themePickerDescription',
   'settings.appLanguagePickerDescription',
