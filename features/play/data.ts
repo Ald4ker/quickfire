@@ -2,7 +2,11 @@ import { mark } from '@/lib/startupTiming';
 import rawQuestions from '@/constants/questions.json';
 import { groupRumbleQuestionsByValueBucket, normalizeRumbleTopicCount } from '@/features/play/rumble';
 import type { CategoryOption, GameMode, QuestionCard } from '@/features/shared';
-import type { ContentLocale } from '@/lib/i18n/config';
+import type {
+  ContentLocale,
+  ContentLocalePriority,
+  NonEnglishContentLocale,
+} from '@/lib/i18n/config';
 import { questionCanonicalKey } from '@/features/play/canonicalKey';
 import { normalizeQuickPlayTopicCount } from '@/features/play/tokenCosts';
 
@@ -22,7 +26,11 @@ interface SourceGroup {
   points: number;
 }
 
-type LocalizedQuestion = Pick<QuestionCard, 'prompt' | 'answer'>;
+/** One translated question variant, as stored in `constants/translations/<locale>.json`. */
+export type LocalizedQuestion = Pick<QuestionCard, 'prompt' | 'answer'>;
+
+/** A per-locale pack: canonical key (`q<UserID>`) to translated prompt and answer. */
+export type QuestionTranslationPack = Record<string, LocalizedQuestion>;
 
 function getGroupSignature(group: SourceGroup) {
   const entries = group.questionAndanswer
@@ -49,9 +57,45 @@ mark('play data module evaluating (questions.json already parsed)');
 const QUESTION_GROUPS = dedupeQuestionGroups(rawQuestions as SourceGroup[]);
 mark('questions deduped');
 const CATEGORY_TRANSLATIONS: Partial<Record<ContentLocale, Record<string, string>>> = {};
-const QUESTION_TRANSLATIONS: Partial<
-  Record<ContentLocale, Record<string, LocalizedQuestion>>
-> = {};
+/**
+ * Translated question variants by content locale, keyed by canonical key. English is not stored
+ * here: it always comes from the bundled `questions.json`. Packs are generated per locale by
+ * `scripts/build-locale-packs.ts` into `constants/translations/<locale>.json` (gitignored) and
+ * handed to `registerQuestionTranslations`; loading them at runtime is a separate change.
+ */
+const QUESTION_TRANSLATIONS: Partial<Record<NonEnglishContentLocale, QuestionTranslationPack>> = {};
+
+let englishByCanonicalKey: Map<string, SourceQA> | null = null;
+
+/** Bundled English question for a canonical key (built once, on first use). */
+function getEnglishQuestion(canonicalKey: string): SourceQA | undefined {
+  if (!englishByCanonicalKey) {
+    englishByCanonicalKey = new Map();
+    for (const group of QUESTION_GROUPS) {
+      const slug = slugify(group.name);
+      group.questionAndanswer.forEach((qa, index) => {
+        const key = getCanonicalKey(group, slug, index);
+        if (!englishByCanonicalKey!.has(key)) englishByCanonicalKey!.set(key, qa);
+      });
+    }
+  }
+  return englishByCanonicalKey.get(canonicalKey);
+}
+
+/** Add (or replace) the translated variants for one content locale. */
+export function registerQuestionTranslations(
+  locale: NonEnglishContentLocale,
+  pack: QuestionTranslationPack
+): void {
+  QUESTION_TRANSLATIONS[locale] = { ...QUESTION_TRANSLATIONS[locale], ...pack };
+}
+
+/** Test helper: drop every registered translation pack. */
+export function clearQuestionTranslations(): void {
+  for (const locale of Object.keys(QUESTION_TRANSLATIONS)) {
+    delete QUESTION_TRANSLATIONS[locale as NonEnglishContentLocale];
+  }
+}
 
 function slugify(name: string): string {
   return name
@@ -119,7 +163,8 @@ function resolveQuestionTranslation(
   localeChain: ContentLocale[]
 ) {
   for (const locale of localeChain) {
-    const translatedQuestion = QUESTION_TRANSLATIONS[locale]?.[canonicalKey];
+    const translatedQuestion =
+      locale === 'en' ? undefined : QUESTION_TRANSLATIONS[locale]?.[canonicalKey];
 
     if (translatedQuestion) {
       return {
@@ -146,6 +191,89 @@ function resolveQuestionTranslation(
     locale: 'en' as const,
     resolvedFromFallback: localeChain[0] !== 'en',
   };
+}
+
+/** One language's text for a question, as shown on the question and answer views. */
+export interface QuestionVariant {
+  locale: ContentLocale;
+  prompt: string;
+  answer: string;
+  /** True when the requested language had no variant and English is shown in its place. */
+  fellBackToEnglish: boolean;
+}
+
+export interface QuestionVariants {
+  primary: QuestionVariant;
+  /** Present only when a secondary content language is set and differs from what primary shows. */
+  secondary: QuestionVariant | null;
+}
+
+type VariantSource = Pick<QuestionCard, 'canonicalKey' | 'prompt' | 'answer' | 'locale'>;
+
+function variantForLocale(question: VariantSource, locale: ContentLocale): QuestionVariant {
+  if (locale !== 'en') {
+    const translated = QUESTION_TRANSLATIONS[locale]?.[question.canonicalKey];
+    if (translated) {
+      return {
+        locale,
+        prompt: translated.prompt.trim(),
+        answer: translated.answer.trim(),
+        fellBackToEnglish: false,
+      };
+    }
+  }
+
+  if (question.locale === locale) {
+    return {
+      locale,
+      prompt: question.prompt.trim(),
+      answer: question.answer.trim(),
+      fellBackToEnglish: false,
+    };
+  }
+
+  const english = getEnglishQuestion(question.canonicalKey);
+  if (english) {
+    return {
+      locale: 'en',
+      prompt: english.text.trim(),
+      answer: english.answer.trim(),
+      fellBackToEnglish: locale !== 'en',
+    };
+  }
+
+  // Not in the bundle (for example a question served by Convex): show the card as it came.
+  return {
+    locale: question.locale,
+    prompt: question.prompt.trim(),
+    answer: question.answer.trim(),
+    fellBackToEnglish: question.locale === 'en' && locale !== 'en',
+  };
+}
+
+/**
+ * Resolve the chosen question (by canonical key) into the variants to show on screen: the primary
+ * content language, and the secondary one beneath it when set. Each slot falls back to English on
+ * its own when its language has no variant. With no content language set, primary is English.
+ * The secondary slot is dropped when it would repeat exactly what primary shows (for example both
+ * fell back to English), so the screen never shows the same text twice.
+ */
+export function resolveQuestionVariants(
+  question: VariantSource,
+  contentLocales: ContentLocalePriority
+): QuestionVariants {
+  const primary = variantForLocale(question, contentLocales.primary ?? 'en');
+  if (!contentLocales.secondary || contentLocales.secondary === contentLocales.primary) {
+    return { primary, secondary: null };
+  }
+
+  const secondary = variantForLocale(question, contentLocales.secondary);
+  const repeatsPrimary =
+    secondary.locale === primary.locale &&
+    secondary.prompt === primary.prompt &&
+    secondary.answer === primary.answer;
+
+  return { primary, secondary: repeatsPrimary ? null : secondary };
 }
 
 export function getPlayableCategories(
