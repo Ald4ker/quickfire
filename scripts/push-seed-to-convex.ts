@@ -9,7 +9,7 @@
  *   bun run seed:push -- --translations-only   # skip categories and English rows
  *   bun run seed:push -- --dry-run-legacy-migration      # report the migration only
  *   bun run seed:push -- --skip-legacy-migration         # leave legacy rows alone
- *   bun run seed:push -- --legacy-history-cursor=<cursor> # resume an interrupted walk
+ *   bun run seed:push -- --legacy-checkpoint='<token>'   # resume an interrupted walk
  *
  * Translation rows come from constants/translations/questions-long.csv.gz (see
  * scripts/lib/questionsLong.ts). A row is pushed only if its canonical key exists in the
@@ -28,16 +28,24 @@
  * playable. Seeding upserts by key and retirement only flips a status, so re-running is
  * always safe.
  *
- * An interrupted history walk exits non-zero and prints the exact
- * `--legacy-history-cursor=<cursor>` to resume from. Only confirmed pages advance the
- * cursor, so a retry never skips the page that failed. The cursor is only meaningful against
- * the deployment that produced it and the frozen map version this checkout ships; both are
- * checked on every call.
+ * An interrupted history walk exits non-zero and prints a `--legacy-checkpoint='<token>'`
+ * command to resume with. The token carries the target selector, the frozen map version, the
+ * mode (dry run or write) and the last confirmed cursor, and it is decoded and validated
+ * before this script deploys, seeds or calls a migration. A token from another target,
+ * another snapshot or the other mode is refused, and an empty or missing checkpoint means an
+ * explicit restart instead of an empty cursor. Only confirmed pages advance the cursor, so a
+ * retry never skips the page that failed. Every migration call also sends the expected
+ * frozen map version, which the handler checks before it reads or writes.
+ *
+ * The target selector separates this script's two targets (the named dev deployment and
+ * prod). It does not independently prove the underlying account or environment identity, so
+ * confirming which deployment a shell is pointed at is still the operator's job.
  *
  * `--dry-run-legacy-migration` is reporting only: it does not deploy, seed, retire or write.
- * The migration functions must therefore already be deployed to the target (run a normal
- * push, or `npx convex deploy`, first). If they are not, the run fails with that explanation
- * instead of deploying.
+ * The migration functions must therefore already be deployed to the target, code only
+ * (`npx convex dev --once` for dev, `npx convex deploy -y` for prod). Do not use a full
+ * seed:push as the preflight: it already runs the retirement. A dry run against a catalog
+ * whose replacement rows are not seeded yet honestly reports them as missing.
  */
 
 import { spawnSync } from 'node:child_process';
@@ -69,15 +77,99 @@ const localesArg = argv.find((arg) => arg.startsWith('--locales='));
 const onlyLocales = localesArg
   ? new Set(localesArg.slice('--locales='.length).split(',').map((s) => s.trim()).filter(Boolean))
   : null;
-const historyCursorArg = argv.find((arg) => arg.startsWith('--legacy-history-cursor='));
-const historyCursor = historyCursorArg
-  ? historyCursorArg.slice('--legacy-history-cursor='.length)
-  : undefined;
+const checkpointArg = argv.find((arg) => arg.startsWith('--legacy-checkpoint='));
 const target = prod ? 'production (energized-hummingbird-439)' : `development (${DEV_DEPLOYMENT})`;
+
+/**
+ * A resume checkpoint, so an interrupted walk cannot be resumed against the wrong target,
+ * the wrong frozen snapshot or the wrong mode. `target` distinguishes this script's prod
+ * deployment from its named dev deployment; it does not independently prove the underlying
+ * account or environment identity, which stays the operator's responsibility.
+ */
+interface LegacyCheckpoint {
+  version: 1;
+  target: string;
+  mapVersion: string;
+  mode: 'dry-run' | 'write';
+  cursor: string;
+}
+
+const CHECKPOINT_MAX_LENGTH = 1024;
+const CURSOR_MAX_LENGTH = 512;
+/** base64url alphabet only, so the emitted command needs no escaping beyond quotes. */
+const CHECKPOINT_ALPHABET = /^[A-Za-z0-9_-]+$/;
+
+function encodeCheckpoint(checkpoint: LegacyCheckpoint): string {
+  return Buffer.from(JSON.stringify(checkpoint), 'utf8').toString('base64url');
+}
+
+function decodeCheckpoint(raw: string): LegacyCheckpoint {
+  if (raw.length > CHECKPOINT_MAX_LENGTH || !CHECKPOINT_ALPHABET.test(raw)) {
+    throw new Error(
+      `--legacy-checkpoint is not a bounded base64url token (max ${CHECKPOINT_MAX_LENGTH} characters)`
+    );
+  }
+
+  let payload: unknown;
+  try {
+    payload = JSON.parse(Buffer.from(raw, 'base64url').toString('utf8'));
+  } catch {
+    throw new Error('--legacy-checkpoint could not be decoded; copy it from a previous run');
+  }
+
+  const candidate = payload as Partial<LegacyCheckpoint> | null;
+  if (
+    typeof candidate !== 'object' ||
+    candidate === null ||
+    candidate.version !== 1 ||
+    typeof candidate.target !== 'string' ||
+    typeof candidate.mapVersion !== 'string' ||
+    (candidate.mode !== 'dry-run' && candidate.mode !== 'write') ||
+    typeof candidate.cursor !== 'string'
+  ) {
+    throw new Error('--legacy-checkpoint is malformed; copy it from a previous run');
+  }
+  if (candidate.cursor.length === 0 || candidate.cursor.length > CURSOR_MAX_LENGTH) {
+    throw new Error(
+      `--legacy-checkpoint has an unusable cursor (1 to ${CURSOR_MAX_LENGTH} characters expected). ` +
+        'Omit the checkpoint to restart the walk from the beginning.'
+    );
+  }
+
+  const expectedMode = dryRunLegacyMigration ? 'dry-run' : 'write';
+  const mismatches: string[] = [];
+  if (candidate.target !== target) {
+    mismatches.push(`target: checkpoint ${candidate.target}, this run ${target}`);
+  }
+  if (candidate.mapVersion !== LEGACY_QUESTION_KEY_VERSION) {
+    mismatches.push(
+      `frozen map version: checkpoint ${candidate.mapVersion}, this checkout ${LEGACY_QUESTION_KEY_VERSION}`
+    );
+  }
+  if (candidate.mode !== expectedMode) {
+    mismatches.push(`mode: checkpoint ${candidate.mode}, this run ${expectedMode}`);
+  }
+  if (mismatches.length) {
+    throw new Error(
+      `--legacy-checkpoint does not belong to this run:\n  ${mismatches.join('\n  ')}\n` +
+        'Omit the checkpoint to restart the walk from the beginning.'
+    );
+  }
+
+  return candidate as LegacyCheckpoint;
+}
+
+const checkpoint = checkpointArg
+  ? decodeCheckpoint(checkpointArg.slice('--legacy-checkpoint='.length))
+  : null;
+const resumeCursor = checkpoint?.cursor;
 
 (function validateFlags() {
   if (dryRunLegacyMigration && skipLegacyMigration) {
     throw new Error('--dry-run-legacy-migration and --skip-legacy-migration cannot be combined');
+  }
+  if (checkpoint && skipLegacyMigration) {
+    throw new Error('--legacy-checkpoint cannot be combined with --skip-legacy-migration');
   }
 })();
 
@@ -287,6 +379,12 @@ function emptyCounters(): Counter {
   };
 }
 
+/**
+ * The prerequisite for a dry run is deployed code only. A full seed:push is not a valid
+ * preflight: it already runs the retirement. A dry run against a catalog where the
+ * replacements were not seeded yet will honestly report them as missing rather than invent
+ * anything.
+ */
 function callMigration(functionName: string, args: ConvexCliArgs, dryRun: boolean): string {
   try {
     return runConvex(functionName, args);
@@ -294,20 +392,41 @@ function callMigration(functionName: string, args: ConvexCliArgs, dryRun: boolea
     if (!dryRun) throw error;
     throw new Error(
       `${functionName} is not available on ${target}. A dry run never deploys, so the migration ` +
-        `functions must already be deployed there (run a normal seed:push or npx convex deploy first).\n` +
+        `functions must already be deployed there: deploy code only (` +
+        `${prod ? 'npx convex deploy -y' : 'npx convex dev --once'}) and do not seed.\n` +
         `${error instanceof Error ? error.message : String(error)}`
     );
   }
 }
 
+/** Consistency guard on the response; the handler already refuses a mismatched caller. */
 function assertMapVersion(functionName: string, deployed: string) {
   if (deployed !== LEGACY_QUESTION_KEY_VERSION) {
     throw new Error(
       `${functionName} on ${target} reports frozen map version ${deployed}, but this checkout ships ` +
-        `${LEGACY_QUESTION_KEY_VERSION}. Deploy before migrating, and only resume a cursor against the ` +
-        `deployment that produced it.`
+        `${LEGACY_QUESTION_KEY_VERSION}. Deploy the snapshot you mean to migrate with.`
     );
   }
+}
+
+/**
+ * Quote-safe, bounded resume instruction. A missing confirmed position is an explicit
+ * restart, never an empty Convex cursor, and the mode is preserved so following the
+ * instruction cannot turn a dry run into a write.
+ */
+function resumeInstruction(dryRun: boolean, cursor: string | null): string {
+  if (!cursor) {
+    return 'no page has been confirmed yet; restart the walk by omitting --legacy-checkpoint';
+  }
+  const token = encodeCheckpoint({
+    version: 1,
+    target,
+    mapVersion: LEGACY_QUESTION_KEY_VERSION,
+    mode: dryRun ? 'dry-run' : 'write',
+    cursor,
+  });
+  const mode = dryRun ? ' --dry-run-legacy-migration' : '';
+  return `bun run seed:push --${prod ? ' --prod' : ''}${mode} --legacy-checkpoint='${token}'`;
 }
 
 function retireLegacyQuestions(dryRun: boolean): Counter {
@@ -318,7 +437,12 @@ function retireLegacyQuestions(dryRun: boolean): Counter {
   while (!done) {
     const raw = callMigration(
       'seed:retireLegacyQuestionKeys',
-      { offset, batchSize: LEGACY_KEY_BATCH_SIZE, dryRun },
+      {
+        expectedMapVersion: LEGACY_QUESTION_KEY_VERSION,
+        offset,
+        batchSize: LEGACY_KEY_BATCH_SIZE,
+        dryRun,
+      },
       dryRun
     );
     // SAFETY: seed:retireLegacyQuestionKeys returns the counters declared in RetireBatch.
@@ -356,11 +480,13 @@ function retireLegacyQuestions(dryRun: boolean): Counter {
 
 function remapLegacyQuestionHistory(
   dryRun: boolean,
-  resumeCursor: string | undefined
+  startCursor: string | undefined
 ): Counter & { pages: number; done: boolean; resumeCursor: string | null } {
   const totals = emptyCounters();
-  let cursor = resumeCursor;
-  let confirmedCursor: string | null = null;
+  let cursor = startCursor;
+  // Seeded from the validated checkpoint, so a failure on the first resumed page still
+  // reports the position that checkpoint was confirmed at.
+  let confirmedCursor: string | null = startCursor ?? null;
   let pages = 0;
   let done = false;
 
@@ -368,7 +494,12 @@ function remapLegacyQuestionHistory(
     while (!done && pages < HISTORY_MAX_PAGES) {
       const raw = callMigration(
         'seed:remapLegacyQuestionHistory',
-        { cursor, batchSize: HISTORY_PAGE_SIZE, dryRun },
+        {
+          expectedMapVersion: LEGACY_QUESTION_KEY_VERSION,
+          cursor,
+          batchSize: HISTORY_PAGE_SIZE,
+          dryRun,
+        },
         dryRun
       );
       // SAFETY: seed:remapLegacyQuestionHistory returns the counters declared in RemapPage.
@@ -405,7 +536,7 @@ function remapLegacyQuestionHistory(
   } catch (error) {
     console.error(
       `History walk stopped after ${pages} confirmed pages. Resume with:\n` +
-        `  bun run seed:push${prod ? ' --prod' : ''} --legacy-history-cursor=${confirmedCursor ?? ''}\n` +
+        `  ${resumeInstruction(dryRun, confirmedCursor)}\n` +
         `  (frozen map version ${LEGACY_QUESTION_KEY_VERSION}, target ${target})`
     );
     throw error;
@@ -422,7 +553,7 @@ function remapLegacyQuestionHistory(
 function runLegacyMigration(dryRun: boolean): string[] {
   const dryRunLabel = dryRun ? ' [dry run, nothing written]' : '';
   const retire = retireLegacyQuestions(dryRun);
-  const history = remapLegacyQuestionHistory(dryRun, historyCursor);
+  const history = remapLegacyQuestionHistory(dryRun, resumeCursor);
 
   console.log(
     `Legacy rows${dryRunLabel}: ${retire.retired} ${dryRun ? 'retirable' : 'retired'}, ` +
@@ -460,13 +591,14 @@ function runLegacyMigration(dryRun: boolean): string[] {
   if (history.unmappedLegacyKeys) {
     problems.push(
       `${history.unmappedLegacyKeys} history records hold position keys absent from the frozen snapshot ` +
-        `(convex/seed/legacyQuestionKeys.ts); regenerate the snapshot or accept them with --skip-legacy-migration`
+        `(convex/seed/legacyQuestionKeys.ts). Inspect their provenance and land a separately reviewed mapping ` +
+        `for them; this pinned snapshot is not regenerated to guess`
     );
   }
   if (!history.done) {
     problems.push(
       `history walk incomplete after ${history.pages} pages; resume with ` +
-        `--legacy-history-cursor=${history.resumeCursor ?? ''}`
+        resumeInstruction(dryRun, history.resumeCursor)
     );
   }
 

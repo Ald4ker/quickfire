@@ -20,6 +20,49 @@ function functionArgs(cliArgs: string[]): Record<string, unknown> {
   return last.startsWith('{') ? (JSON.parse(last) as Record<string, unknown>) : {};
 }
 
+const DEV_TARGET = 'development (successful-wildcat-165)';
+
+function checkpointToken(
+  overrides: Partial<{
+    version: number;
+    target: string;
+    mapVersion: string;
+    mode: string;
+    cursor: string;
+  }> = {}
+): string {
+  return Buffer.from(
+    JSON.stringify({
+      version: 1,
+      target: DEV_TARGET,
+      mapVersion: LEGACY_QUESTION_KEY_VERSION,
+      mode: 'write',
+      cursor: 'confirmed-1',
+      ...overrides,
+    }),
+    'utf8'
+  ).toString('base64url');
+}
+
+function emittedInstruction(errors: string): string {
+  const match = /bun run seed:push [^\n]*/.exec(errors);
+  if (!match) throw new Error(`no resume instruction in: ${errors}`);
+  return match[0];
+}
+
+function emittedToken(errors: string): string {
+  const match = /--legacy-checkpoint='([A-Za-z0-9_-]+)'/.exec(errors);
+  if (!match) throw new Error(`no checkpoint token in: ${errors}`);
+  return match[1]!;
+}
+
+function emittedCheckpoint(errors: string): Record<string, unknown> {
+  return JSON.parse(Buffer.from(emittedToken(errors), 'base64url').toString('utf8')) as Record<
+    string,
+    unknown
+  >;
+}
+
 function ok(payload: unknown): SpawnResult {
   return { status: 0, stdout: JSON.stringify(payload), stderr: '' };
 }
@@ -171,7 +214,10 @@ describe('seed:push legacy key migration', () => {
     });
 
     expect(messageOf(result.thrown)).toContain('is not available on development');
-    expect(messageOf(result.thrown)).toContain('must already be deployed');
+    expect(messageOf(result.thrown)).toContain('deploy code only');
+    expect(messageOf(result.thrown)).toContain('npx convex dev --once');
+    // The underlying failure is preserved verbatim, not paraphrased.
+    expect(messageOf(result.thrown)).toContain('Could not find function seed:retireLegacyQuestionKeys');
     expect(result.deployCalls).toEqual([]);
     expect(result.exitCode).toBe(0);
   });
@@ -274,9 +320,9 @@ describe('seed:push legacy key migration', () => {
     expect(result.exitCode).toBe(1);
   });
 
-  it('prints the confirmed resume cursor when a history page fails', async () => {
+  it('prints a dry-run preserving checkpoint when a history page fails', async () => {
     let page = 0;
-    const result = await runScript(['--skip-translations'], {
+    const result = await runScript(['--dry-run-legacy-migration'], {
       'seed:remapLegacyQuestionHistory': (args) => {
         page += 1;
         if (page === 1) {
@@ -298,18 +344,157 @@ describe('seed:push legacy key migration', () => {
     });
 
     expect(messageOf(result.thrown)).toContain('transient failure');
-    expect(result.errors).toContain('--legacy-history-cursor=confirmed-cursor');
     expect(
       result.calls.filter((call) => call.name === 'seed:remapLegacyQuestionHistory')
     ).toHaveLength(2);
+
+    const emitted = emittedCheckpoint(result.errors);
+    expect(emittedInstruction(result.errors)).toContain('--dry-run-legacy-migration');
+    expect(emitted).toMatchObject({
+      mode: 'dry-run',
+      target: DEV_TARGET,
+      mapVersion: LEGACY_QUESTION_KEY_VERSION,
+      cursor: 'confirmed-cursor',
+    });
+
+    // Following the emitted instruction is still reporting only, and keeps the confirmed
+    // position instead of restarting the walk.
+    const retry = await runScript([
+      '--dry-run-legacy-migration',
+      `--legacy-checkpoint=${emittedToken(result.errors)}`,
+    ]);
+    expect(retry.deployCalls).toEqual([]);
+    expect(retry.calls.map((call) => call.name)).toEqual(MIGRATION_FUNCTIONS);
+    expect(retry.calls.every((call) => call.args.dryRun === true)).toBe(true);
+    const retryRemap = retry.calls.find(
+      (call) => call.name === 'seed:remapLegacyQuestionHistory'
+    );
+    expect(retryRemap?.args.cursor).toBe('confirmed-cursor');
   });
 
-  it('resumes the history walk from --legacy-history-cursor', async () => {
-    const result = await runScript(['--skip-translations', '--legacy-history-cursor=resume-from-here']);
+  it('keeps the checkpointed position when the first resumed page fails', async () => {
+    const result = await runScript(
+      ['--skip-translations', `--legacy-checkpoint=${checkpointToken({ cursor: 'from-checkpoint' })}`],
+      {
+        'seed:remapLegacyQuestionHistory': () => ({
+          status: 1,
+          stdout: '',
+          stderr: 'still failing',
+        }),
+      }
+    );
+
+    expect(messageOf(result.thrown)).toContain('still failing');
+    expect(result.deployCalls).toEqual([]);
+    expect(emittedCheckpoint(result.errors)).toMatchObject({
+      mode: 'write',
+      cursor: 'from-checkpoint',
+    });
+  });
+
+  it('restarts explicitly when no page was confirmed', async () => {
+    const result = await runScript(['--skip-translations'], {
+      'seed:remapLegacyQuestionHistory': () => ({
+        status: 1,
+        stdout: '',
+        stderr: 'failed on page one',
+      }),
+    });
+
+    expect(result.errors).toContain('restart the walk by omitting --legacy-checkpoint');
+    expect(result.errors).not.toContain('--legacy-checkpoint=');
+  });
+
+  it('resumes the history walk from a checkpoint token', async () => {
+    const result = await runScript([
+      '--skip-translations',
+      `--legacy-checkpoint=${checkpointToken({ cursor: 'resume-from-here' })}`,
+    ]);
 
     expect(result.thrown).toBeUndefined();
     const remapCall = result.calls.find((call) => call.name === 'seed:remapLegacyQuestionHistory');
     expect(remapCall?.args.cursor).toBe('resume-from-here');
+  });
+
+  it('sends the expected frozen map version on every migration call', async () => {
+    const result = await runScript(['--skip-translations']);
+
+    expect(result.thrown).toBeUndefined();
+    const migrationCalls = result.calls.filter((call) => MIGRATION_FUNCTIONS.includes(call.name));
+    expect(migrationCalls.length).toBeGreaterThan(0);
+    for (const call of migrationCalls) {
+      expect(call.args.expectedMapVersion).toBe(LEGACY_QUESTION_KEY_VERSION);
+    }
+  });
+
+  it('sends the expected frozen map version on dry runs too', async () => {
+    const result = await runScript(['--dry-run-legacy-migration']);
+
+    expect(result.calls.map((call) => call.name)).toEqual(MIGRATION_FUNCTIONS);
+    for (const call of result.calls) {
+      expect(call.args.expectedMapVersion).toBe(LEGACY_QUESTION_KEY_VERSION);
+      expect(call.args.dryRun).toBe(true);
+    }
+  });
+
+  it('refuses a checkpoint from another target before running anything', async () => {
+    const result = await runScript([
+      `--legacy-checkpoint=${checkpointToken({ target: 'production (energized-hummingbird-439)' })}`,
+    ]);
+
+    expect(messageOf(result.thrown)).toContain('does not belong to this run');
+    expect(messageOf(result.thrown)).toContain('target: checkpoint production');
+    expect(result.spawnSync).not.toHaveBeenCalled();
+  });
+
+  it('refuses a checkpoint from another frozen snapshot', async () => {
+    const result = await runScript([
+      `--legacy-checkpoint=${checkpointToken({ mapVersion: 'deadbeef1234' })}`,
+    ]);
+
+    expect(messageOf(result.thrown)).toContain('frozen map version: checkpoint deadbeef1234');
+    expect(result.spawnSync).not.toHaveBeenCalled();
+  });
+
+  it('refuses a checkpoint from the other mode', async () => {
+    const asDryRun = await runScript([
+      '--dry-run-legacy-migration',
+      `--legacy-checkpoint=${checkpointToken({ mode: 'write' })}`,
+    ]);
+    expect(messageOf(asDryRun.thrown)).toContain('mode: checkpoint write, this run dry-run');
+
+    const asWrite = await runScript([
+      `--legacy-checkpoint=${checkpointToken({ mode: 'dry-run' })}`,
+    ]);
+    expect(messageOf(asWrite.thrown)).toContain('mode: checkpoint dry-run, this run write');
+    expect(asWrite.spawnSync).not.toHaveBeenCalled();
+  });
+
+  it('refuses a malformed or unusable checkpoint', async () => {
+    const malformed = await runScript(['--legacy-checkpoint=not base64!']);
+    expect(messageOf(malformed.thrown)).toContain('bounded base64url token');
+
+    const undecodable = await runScript(['--legacy-checkpoint=bm90anNvbg']);
+    expect(messageOf(undecodable.thrown)).toContain('could not be decoded');
+
+    const emptyCursor = await runScript([
+      `--legacy-checkpoint=${checkpointToken({ cursor: '' })}`,
+    ]);
+    expect(messageOf(emptyCursor.thrown)).toContain('unusable cursor');
+    expect(messageOf(emptyCursor.thrown)).toContain('restart the walk');
+
+    const oversized = await runScript([`--legacy-checkpoint=${'a'.repeat(2000)}`]);
+    expect(messageOf(oversized.thrown)).toContain('bounded base64url token');
+    expect(malformed.spawnSync).not.toHaveBeenCalled();
+  });
+
+  it('refuses a checkpoint combined with --skip-legacy-migration', async () => {
+    const result = await runScript([
+      '--skip-legacy-migration',
+      `--legacy-checkpoint=${checkpointToken()}`,
+    ]);
+
+    expect(messageOf(result.thrown)).toContain('cannot be combined with --skip-legacy-migration');
   });
 
   it('refuses a frozen map version that does not match this checkout', async () => {

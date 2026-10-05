@@ -172,6 +172,20 @@ const CANONICAL_KEY_SHAPE = /^q\d+$/;
 const CANONICAL_BY_LEGACY_KEY = new Map<string, string>(LEGACY_QUESTION_KEY_PAIRS);
 
 /**
+ * Fence the deployment before it touches data. The caller must name the frozen snapshot it
+ * expects; a deployment running a different one refuses the call instead of rewriting rows
+ * against the wrong map. Checked before any query or write.
+ */
+function assertFrozenMap(expectedMapVersion: string) {
+  if (expectedMapVersion !== LEGACY_QUESTION_KEY_VERSION) {
+    throw new Error(
+      `frozen_question_key_map_mismatch: this deployment carries ${LEGACY_QUESTION_KEY_VERSION}, ` +
+        `the caller expects ${expectedMapVersion}. Deploy the code for the snapshot you mean to migrate with.`
+    );
+  }
+}
+
+/**
  * Retire the position-keyed rows (`<slug>:<points>:<index>`) that the `q<UserID>` seed
  * replaced. Without this, a deployment seeded before the key change keeps both the old and
  * the new copy of every question active, and players see each question twice.
@@ -196,14 +210,19 @@ const CANONICAL_BY_LEGACY_KEY = new Map<string, string>(LEGACY_QUESTION_KEY_PAIR
  * Bounded: one call walks `batchSize` pairs and writes at most that many rows. Each call is
  * atomic on its own; the whole migration is not, so both copies can be playable until the
  * retirement catches up.
+ *
+ * `expectedMapVersion` is required and checked at entry, so a mismatched deployment rejects
+ * the call before reading or writing anything.
  */
 export const retireLegacyQuestionKeys = internalMutation({
   args: {
+    expectedMapVersion: v.string(),
     offset: v.number(),
     batchSize: v.number(),
     dryRun: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
+    assertFrozenMap(args.expectedMapVersion);
     const start = Math.max(0, Math.floor(args.offset));
     const end = Math.min(
       LEGACY_QUESTION_KEY_PAIRS.length,
@@ -301,14 +320,20 @@ export const retireLegacyQuestionKeys = internalMutation({
  * questionId and categoryId exactly as they were (`questionId` keeps pointing at the
  * retired row, which is deliberately still present), and the skip is counted so the caller
  * can report it instead of claiming success.
+ *
+ * `expectedMapVersion` is required and checked at entry, so a mismatched deployment rejects
+ * the call before reading or writing anything.
  */
 export const remapLegacyQuestionHistory = internalMutation({
   args: {
+    expectedMapVersion: v.string(),
     dryRun: v.optional(v.boolean()),
     batchSize: v.number(),
     cursor: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    assertFrozenMap(args.expectedMapVersion);
+
     const page = await ctx.db.query('device_question_history').paginate({
       cursor: args.cursor ?? null,
       numItems: Math.max(1, Math.floor(args.batchSize)),

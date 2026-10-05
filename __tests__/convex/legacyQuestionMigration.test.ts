@@ -13,7 +13,12 @@ import {
 import { getConvexHandler } from '../helpers/convexHandler';
 import { createConvexTestCtx, type ConvexDoc } from '../helpers/convexTestCtx';
 
-type RetireArgs = { offset: number; batchSize: number; dryRun?: boolean };
+type RetireArgs = {
+  expectedMapVersion: string;
+  offset: number;
+  batchSize: number;
+  dryRun?: boolean;
+};
 type RetireResult = {
   retired: number;
   alreadyRetired: number;
@@ -29,7 +34,7 @@ type RetireResult = {
   mapVersion: string;
   dryRun: boolean;
 };
-type RemapArgs = { batchSize: number; cursor?: string; dryRun?: boolean };
+type RemapArgs = { expectedMapVersion: string; batchSize: number; cursor?: string; dryRun?: boolean };
 type RemapResult = {
   remapped: number;
   missingTarget: number;
@@ -67,6 +72,15 @@ const UNOWNED_LEGACY_KEY = 'not-in-the-snapshot:100:0';
 
 const retire = getConvexHandler<TestCtx, RetireArgs, RetireResult>(retireLegacyQuestionKeys);
 const remap = getConvexHandler<TestCtx, RemapArgs, RemapResult>(remapLegacyQuestionHistory);
+
+/** Every call must name the frozen snapshot it expects; only the mismatch tests vary it. */
+function runRetire(ctx: TestCtx, args: Omit<RetireArgs, 'expectedMapVersion'>) {
+  return retire(ctx, { expectedMapVersion: LEGACY_QUESTION_KEY_VERSION, ...args });
+}
+
+function runRemap(ctx: TestCtx, args: Omit<RemapArgs, 'expectedMapVersion'>) {
+  return remap(ctx, { expectedMapVersion: LEGACY_QUESTION_KEY_VERSION, ...args });
+}
 
 function questionDoc(args: {
   id: string;
@@ -134,7 +148,7 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL }),
     ]);
 
-    const result = await retire(ctx, { offset: 0, batchSize: 1 });
+    const result = await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     expect(result).toMatchObject({
       retired: 1,
@@ -158,7 +172,7 @@ describe('retireLegacyQuestionKeys', () => {
   it('keeps the legacy row playable when the replacement is missing', async () => {
     const ctx = questionsCtx([questionDoc({ id: 'legacy', canonicalKey: FIRST_LEGACY })]);
 
-    const result = await retire(ctx, { offset: 0, batchSize: 1 });
+    const result = await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     expect(result.missingCanonical).toBe(1);
     expect(result.retired).toBe(0);
@@ -172,7 +186,7 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL, status: 'retired' }),
     ]);
 
-    const result = await retire(ctx, { offset: 0, batchSize: 1 });
+    const result = await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     expect(result.inactiveCanonical).toBe(1);
     expect(result.retired).toBe(0);
@@ -185,7 +199,7 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL, categoryId: 'categories_2' }),
     ]);
 
-    const result = await retire(ctx, { offset: 0, batchSize: 1 });
+    const result = await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     expect(result.categoryMismatch).toBe(1);
     expect(result.retired).toBe(0);
@@ -198,7 +212,7 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL }),
     ]);
 
-    const result = await retire(ctx, { offset: 0, batchSize: 1 });
+    const result = await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     expect(result.alreadyRetired).toBe(1);
     expect(result.retired).toBe(0);
@@ -211,8 +225,8 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL }),
     ]);
 
-    await retire(ctx, { offset: 0, batchSize: 1 });
-    const second = await retire(ctx, { offset: 0, batchSize: 1 });
+    await runRetire(ctx, { offset: 0, batchSize: 1 });
+    const second = await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     expect(second.retired).toBe(0);
     expect(second.alreadyRetired).toBe(1);
@@ -224,7 +238,7 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'second', canonicalKey: SECOND_LEGACY }),
     ]);
 
-    const result = await retire(ctx, { offset: 1, batchSize: 1 });
+    const result = await runRetire(ctx, { offset: 1, batchSize: 1 });
 
     expect(result.offset).toBe(1);
     expect(result.processed).toBe(1);
@@ -239,7 +253,7 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL }),
     ]);
 
-    const result = await retire(ctx, { offset: 0, batchSize: 1, dryRun: true });
+    const result = await runRetire(ctx, { offset: 0, batchSize: 1, dryRun: true });
 
     expect(result.retired).toBe(1);
     expect(result.dryRun).toBe(true);
@@ -254,7 +268,7 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'unowned', canonicalKey: UNOWNED_LEGACY_KEY }),
     ]);
 
-    await retire(ctx, { offset: 0, batchSize: 1 });
+    await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     expect(questionRows(ctx, 'unowned')?.status).toBe('active');
   });
@@ -265,7 +279,7 @@ describe('retireLegacyQuestionKeys', () => {
       questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL }),
     ]);
 
-    const result = await retire(ctx, { offset: 0, batchSize: 1 });
+    const result = await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     expect(result.missingLegacy).toBe(1);
     expect(questionRows(ctx, 'legacy_fr')?.status).toBe('active');
@@ -285,7 +299,7 @@ describe('retireLegacyQuestionKeys', () => {
       }),
     ]);
 
-    const result = await retire(ctx, { offset: PICTURE_INDEX, batchSize: 1 });
+    const result = await runRetire(ctx, { offset: PICTURE_INDEX, batchSize: 1 });
 
     expect(result.retired).toBe(1);
     expect(questionRows(ctx, 'canonical')).toMatchObject({
@@ -304,7 +318,7 @@ describe('retireLegacyQuestionKeys', () => {
 
     expect(playablePool(rows, ['en'])).toHaveLength(2);
 
-    await retire(ctx, { offset: 0, batchSize: 1 });
+    await runRetire(ctx, { offset: 0, batchSize: 1 });
 
     const after = playablePool(ctx.tables.questions as QuestionRow[], ['en']);
     expect(after).toHaveLength(1);
@@ -345,7 +359,7 @@ describe('remapLegacyQuestionHistory', () => {
   it('remaps a record once its replacement is active and in the same category', async () => {
     const ctx = await historyWithReplacement({});
 
-    const result = await remap(ctx, { batchSize: 10 });
+    const result = await runRemap(ctx, { batchSize: 10 });
 
     expect(result).toMatchObject({
       remapped: 1,
@@ -369,7 +383,7 @@ describe('remapLegacyQuestionHistory', () => {
   it('leaves the record untouched when the replacement is missing', async () => {
     const ctx = await historyWithReplacement({ missing: true });
 
-    const result = await remap(ctx, { batchSize: 10 });
+    const result = await runRemap(ctx, { batchSize: 10 });
 
     expect(result.missingTarget).toBe(1);
     expect(result.remapped).toBe(0);
@@ -384,7 +398,7 @@ describe('remapLegacyQuestionHistory', () => {
   it('leaves the record untouched when the replacement is not active', async () => {
     const ctx = await historyWithReplacement({ status: 'retired' });
 
-    const result = await remap(ctx, { batchSize: 10 });
+    const result = await runRemap(ctx, { batchSize: 10 });
 
     expect(result.inactiveTarget).toBe(1);
     expect(result.remapped).toBe(0);
@@ -394,7 +408,7 @@ describe('remapLegacyQuestionHistory', () => {
   it('leaves the record untouched when the replacement sits in another category', async () => {
     const ctx = await historyWithReplacement({ categoryId: 'categories_2' });
 
-    const result = await remap(ctx, { batchSize: 10 });
+    const result = await runRemap(ctx, { batchSize: 10 });
 
     expect(result.categoryMismatch).toBe(1);
     expect(result.remapped).toBe(0);
@@ -406,7 +420,7 @@ describe('remapLegacyQuestionHistory', () => {
       historyDoc({ id: 'h1', deviceId: 'd1', canonicalKey: UNOWNED_LEGACY_KEY }),
     ]);
 
-    const result = await remap(ctx, { batchSize: 10 });
+    const result = await runRemap(ctx, { batchSize: 10 });
 
     expect(result.unmappedLegacyKeys).toBe(1);
     expect(result.remapped).toBe(0);
@@ -417,8 +431,8 @@ describe('remapLegacyQuestionHistory', () => {
   it('is idempotent', async () => {
     const ctx = await historyWithReplacement({});
 
-    await remap(ctx, { batchSize: 10 });
-    const second = await remap(ctx, { batchSize: 10 });
+    await runRemap(ctx, { batchSize: 10 });
+    const second = await runRemap(ctx, { batchSize: 10 });
 
     expect(second.remapped).toBe(0);
     expect(second.isDone).toBe(true);
@@ -430,7 +444,7 @@ describe('remapLegacyQuestionHistory', () => {
     let cursor: string | undefined;
 
     for (let i = 0; i < 5; i += 1) {
-      const page = await remap(ctx, { batchSize: 1, cursor });
+      const page = await runRemap(ctx, { batchSize: 1, cursor });
       pages.push(page);
       if (page.cursor === null) break;
       cursor = page.cursor;
@@ -449,7 +463,7 @@ describe('remapLegacyQuestionHistory', () => {
   it('reports a dry run without writing', async () => {
     const ctx = await historyWithReplacement({});
 
-    const result = await remap(ctx, { batchSize: 10, dryRun: true });
+    const result = await runRemap(ctx, { batchSize: 10, dryRun: true });
 
     expect(result.remapped).toBe(1);
     expect(result.dryRun).toBe(true);
@@ -472,8 +486,8 @@ describe('device history still suppresses repeats when the migration skips', () 
       },
     });
 
-    const retired = await retire(ctx, { offset: 0, batchSize: 1 });
-    const remapped = await remap(ctx, { batchSize: 10 });
+    const retired = await runRetire(ctx, { offset: 0, batchSize: 1 });
+    const remapped = await runRemap(ctx, { batchSize: 10 });
 
     expect(retired.inactiveCanonical).toBe(1);
     expect(remapped.inactiveTarget).toBe(1);
@@ -500,8 +514,8 @@ describe('device history still suppresses repeats when the migration skips', () 
       },
     });
 
-    await retire(ctx, { offset: 0, batchSize: 1 });
-    const remapped = await remap(ctx, { batchSize: 10 });
+    await runRetire(ctx, { offset: 0, batchSize: 1 });
+    const remapped = await runRemap(ctx, { batchSize: 10 });
 
     expect(remapped).toMatchObject({ remapped: 1, missingTarget: 0, inactiveTarget: 0 });
     const asked = new Set(
@@ -522,5 +536,52 @@ describe('device history still suppresses repeats when the migration skips', () 
     const askedAfterABadRemap = new Set([FIRST_CANONICAL]);
 
     expect(filterExcludingCanonicalKeys(pool, askedAfterABadRemap)).toHaveLength(1);
+  });
+});
+
+describe('frozen map fencing', () => {
+  it('retirement refuses a mismatched snapshot before reading or writing', async () => {
+    const ctx = questionsCtx([
+      questionDoc({ id: 'legacy', canonicalKey: FIRST_LEGACY }),
+      questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL }),
+    ]);
+
+    await expect(
+      retire(ctx, { expectedMapVersion: 'deadbeef1234', offset: 0, batchSize: 1 })
+    ).rejects.toThrow(/frozen_question_key_map_mismatch/);
+
+    expect(ctx.db.query).not.toHaveBeenCalled();
+    expect(ctx.patches).toEqual([]);
+    expect(questionRows(ctx, 'legacy')?.status).toBe('active');
+  });
+
+  it('history remap refuses a mismatched snapshot before reading or writing', async () => {
+    const ctx = createConvexTestCtx({
+      tables: {
+        questions: [questionDoc({ id: 'canonical', canonicalKey: FIRST_CANONICAL })],
+        device_question_history: [
+          historyDoc({ id: 'h1', deviceId: 'd1', canonicalKey: FIRST_LEGACY }),
+        ],
+      },
+    });
+
+    await expect(
+      remap(ctx, { expectedMapVersion: 'deadbeef1234', batchSize: 10 })
+    ).rejects.toThrow(/frozen_question_key_map_mismatch/);
+
+    expect(ctx.db.query).not.toHaveBeenCalled();
+    expect(ctx.patches).toEqual([]);
+    expect(ctx.tables.device_question_history[0]?.canonicalKey).toBe(FIRST_LEGACY);
+  });
+
+  it('names both the deployment and the caller snapshot in the refusal', async () => {
+    const ctx = questionsCtx([]);
+
+    await expect(
+      retire(ctx, { expectedMapVersion: 'deadbeef1234', offset: 0, batchSize: 1 })
+    ).rejects.toThrow(new RegExp(LEGACY_QUESTION_KEY_VERSION));
+    await expect(
+      remap(ctx, { expectedMapVersion: 'deadbeef1234', batchSize: 10 })
+    ).rejects.toThrow(/deadbeef1234/);
   });
 });
