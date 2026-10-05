@@ -156,6 +156,118 @@ export const seedQuestions = internalMutation({
   },
 });
 
+/**
+ * Retire the position-keyed rows (`<slug>:<points>:<index>`) that the `q<UserID>` seed
+ * replaced. Without this, a deployment seeded before the key change keeps both the old and
+ * the new copy of every question active, and players see each question twice.
+ *
+ * Rows are patched to `retired`, never deleted, so every `_id` reference
+ * (`device_question_history.questionId`, reports, score events) stays valid and the change
+ * is undone by patching the status back.
+ *
+ * Safe by construction:
+ * - a legacy row is retired only when its canonical twin already exists, so a question is
+ *   never hidden without its replacement;
+ * - keys absent from `questions` and rows that are already retired are counted and left
+ *   alone, so unrelated or newer content is never touched;
+ * - re-running is a no-op and each call writes at most `questions.length` rows.
+ */
+export const retireLegacyQuestionKeys = internalMutation({
+  args: {
+    locale: v.string(),
+    dryRun: v.optional(v.boolean()),
+    questions: v.array(v.object({ legacyKey: v.string(), canonicalKey: v.string() })),
+  },
+  handler: async (ctx, args) => {
+    let retired = 0;
+    let alreadyRetired = 0;
+    let missingLegacy = 0;
+    let missingCanonical = 0;
+
+    for (const { legacyKey, canonicalKey } of args.questions) {
+      const legacy = await ctx.db
+        .query('questions')
+        .withIndex('by_canonical_locale', (q) =>
+          q.eq('canonicalKey', legacyKey).eq('locale', args.locale)
+        )
+        .unique();
+      if (!legacy) {
+        missingLegacy += 1;
+        continue;
+      }
+      if (legacy.status !== 'active') {
+        alreadyRetired += 1;
+        continue;
+      }
+
+      const canonical = await ctx.db
+        .query('questions')
+        .withIndex('by_canonical_locale', (q) =>
+          q.eq('canonicalKey', canonicalKey).eq('locale', args.locale)
+        )
+        .unique();
+      if (!canonical) {
+        missingCanonical += 1;
+        continue;
+      }
+
+      if (!args.dryRun) {
+        await ctx.db.patch(legacy._id, { status: 'retired' });
+      }
+      retired += 1;
+    }
+
+    return { retired, alreadyRetired, missingLegacy, missingCanonical };
+  },
+});
+
+/**
+ * Rewrite `device_question_history.canonicalKey` from a retired position key to its
+ * `q<UserID>` key, so a question a player has already been asked is not offered again under
+ * its new identity. Without this the only effect of the key change is that history written
+ * under the old keys no longer filters anything, which costs players one round of repeats.
+ *
+ * The table is walked with Convex's opaque pagination (`cursor`), so the caller can stop
+ * between calls and resume later: each call reads at most `batchSize` rows and writes only
+ * the ones named in `mapping`. `canonicalKey` is not the pagination key, so patching rows
+ * mid-walk cannot skip or double-visit anything, and re-running is a no-op.
+ */
+export const remapLegacyQuestionHistory = internalMutation({
+  args: {
+    dryRun: v.optional(v.boolean()),
+    batchSize: v.number(),
+    cursor: v.optional(v.string()),
+    mapping: v.array(v.object({ legacyKey: v.string(), canonicalKey: v.string() })),
+  },
+  handler: async (ctx, args) => {
+    const canonicalByLegacyKey = new Map(
+      args.mapping.map(({ legacyKey, canonicalKey }) => [legacyKey, canonicalKey])
+    );
+
+    const page = await ctx.db.query('device_question_history').paginate({
+      cursor: args.cursor ?? null,
+      numItems: args.batchSize,
+    });
+
+    let remapped = 0;
+    for (const row of page.page) {
+      const canonicalKey = canonicalByLegacyKey.get(row.canonicalKey);
+      if (!canonicalKey) continue;
+      if (!args.dryRun) {
+        await ctx.db.patch(row._id, { canonicalKey });
+      }
+      remapped += 1;
+    }
+
+    return {
+      remapped,
+      scanned: page.page.length,
+      isDone: page.isDone,
+      cursor: page.isDone ? null : page.continueCursor,
+    };
+  },
+});
+
 /** Disable categories whose slugs are not in the current seed import. */
 export const retireCategoriesNotInSeed = internalMutation({
   args: {

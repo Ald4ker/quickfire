@@ -507,6 +507,7 @@ overtimeCheck -> completed
 - Categories seeded by slug (skips if exists); `questionCount` is written at seed time and read by `listPlayableCategories` (no per-query counting)
 - Questions with invalid `categorySlug` silently skipped
 - Question identity is `canonicalKey = q<UserID>` (the spreadsheet's permanent ID, `features/play/canonicalKey.ts`), the same in every locale; `device_question_history` keys on it
+- Rows seeded under the old position keys are retired by `seed:push` (`seed:retireLegacyQuestionKeys`, canonically-twin-guarded, status flipped to `retired`, never deleted) and `device_question_history` is moved onto the new keys in bounded pages (`seed:remapLegacyQuestionHistory`); both are idempotent and re-runnable, and `--dry-run-legacy-migration` reports counts without writing
 - Content queries read only the caller's locale chain through `by_category_locale_status`; 17 locales are seeded but a player pays for at most three
 - Must set `CLERK_JWT_ISSUER_DOMAIN` in Convex dashboard
 
@@ -968,7 +969,7 @@ npx convex dev       # Start Convex dev
 bun run seed:import    # CSV → questions.json → convex/seed (run after editing constants/source-questions.csv)
 bun run seed:normalize # Normalize questions
 bun run seed:translations:check # Translation pack vs English seed (must pass before seed:push)
-bun run seed:push      # Categories, English questions, then all translation locales (--skip-translations, --locales=ar,fr, --prod)
+bun run seed:push      # Categories, English questions, then all translation locales (--skip-translations, --locales=ar,fr, --prod); also retires legacy position keys (--dry-run-legacy-migration, --skip-legacy-migration)
 
 # Assets
 bun run topics:transparent # Generate transparency topic images

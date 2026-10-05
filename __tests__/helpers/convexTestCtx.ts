@@ -166,6 +166,17 @@ export function createConvexTestDb(initial: TableData = {}) {
       },
       filter: () => buildQuery(table, []),
       collect: async () => rowsOf(table),
+      // Bounded-walk fake for handlers that use Convex's opaque pagination. The cursor is
+      // the offset into the table; `continueCursor` is "" once the walk is done, matching
+      // Convex's PaginationResult shape.
+      paginate: async ({ cursor, numItems }: { cursor: string | null; numItems: number }) => {
+        const rows = rowsOf(table);
+        const start = cursor ? Number(cursor) : 0;
+        const page = rows.slice(start, start + numItems);
+        const next = start + page.length;
+        const isDone = next >= rows.length;
+        return { page, isDone, continueCursor: isDone ? '' : String(next) };
+      },
       order: () => ({
         take: async (n: number) => rowsOf(table).slice(0, n),
         collect: async () => rowsOf(table),
