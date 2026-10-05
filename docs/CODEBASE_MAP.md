@@ -264,6 +264,7 @@ graph TB
 ├── scripts/
 │   ├── import-questions-from-csv.ts # constants/source-questions.csv → constants/questions.json (keeps UserID)
 │   ├── merge-picture-topics.ts   # Adds picture topics (flags, jerseys) to questions.json
+│   ├── build-legacy-question-keys.ts # Freezes the pre-q<UserID> key snapshot (convex/seed/legacyQuestionKeys.ts)
 │   ├── normalize-questions.ts    # Normalize questions.json → convex/seed/ (keys q<UserID>, questionCount)
 │   ├── check-translations.ts     # Verify constants/translations/questions-long.csv.gz against the English seed
 │   ├── push-seed-to-convex.ts    # Seed categories, English questions and the translation pack
@@ -507,7 +508,7 @@ overtimeCheck -> completed
 - Categories seeded by slug (skips if exists); `questionCount` is written at seed time and read by `listPlayableCategories` (no per-query counting)
 - Questions with invalid `categorySlug` silently skipped
 - Question identity is `canonicalKey = q<UserID>` (the spreadsheet's permanent ID, `features/play/canonicalKey.ts`), the same in every locale; `device_question_history` keys on it
-- Rows seeded under the old position keys are retired by `seed:push` (`seed:retireLegacyQuestionKeys`, canonically-twin-guarded, status flipped to `retired`, never deleted) and `device_question_history` is moved onto the new keys in bounded pages (`seed:remapLegacyQuestionHistory`); both are idempotent and re-runnable, and `--dry-run-legacy-migration` reports counts without writing
+- Rows seeded under the old position keys are retired by `seed:push`. The pairs come from the frozen `convex/seed/legacyQuestionKeys.ts` snapshot (`scripts/build-legacy-question-keys.ts`, generated `questions.json@1992d4d` -> `@6291744`), never from current source data, so a later reorder, rename or addition cannot move an old key onto another question. `seed:retireLegacyQuestionKeys` flips the legacy row to `retired` (never deletes, so `_id` references stay valid) only when the replacement exists, is `active` and sits in the same category; `seed:remapLegacyQuestionHistory` moves device history onto the new keys in bounded pages that verify the same guards and leave a record untouched when it cannot. Each call is atomic, the migration as a whole is not, so both copies can be playable until it finishes; unexpected skips or an incomplete walk print `Legacy key migration INCOMPLETE` and exit non-zero, and an interrupted walk resumes with `--legacy-history-cursor=<cursor>`
 - Content queries read only the caller's locale chain through `by_category_locale_status`; 17 locales are seeded but a player pays for at most three
 - Must set `CLERK_JWT_ISSUER_DOMAIN` in Convex dashboard
 
@@ -969,7 +970,7 @@ npx convex dev       # Start Convex dev
 bun run seed:import    # CSV → questions.json → convex/seed (run after editing constants/source-questions.csv)
 bun run seed:normalize # Normalize questions
 bun run seed:translations:check # Translation pack vs English seed (must pass before seed:push)
-bun run seed:push      # Categories, English questions, then all translation locales (--skip-translations, --locales=ar,fr, --prod); also retires legacy position keys (--dry-run-legacy-migration, --skip-legacy-migration)
+bun run seed:push      # Categories, English questions, legacy key migration, then all translation locales (--skip-translations, --locales=ar,fr, --prod, --skip-legacy-migration, --legacy-history-cursor=<cursor>); --dry-run-legacy-migration reports the migration only and never deploys, seed or write, so the migration functions must already be deployed
 
 # Assets
 bun run topics:transparent # Generate transparency topic images

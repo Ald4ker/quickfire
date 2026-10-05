@@ -7,37 +7,58 @@
  *   bun run seed:push -- --skip-translations   # English only
  *   bun run seed:push -- --locales=ar,fr       # only these translation locales
  *   bun run seed:push -- --translations-only   # skip categories and English rows
- *   bun run seed:push -- --dry-run-legacy-migration  # report what the migration would do
- *   bun run seed:push -- --skip-legacy-migration     # leave legacy rows alone
+ *   bun run seed:push -- --dry-run-legacy-migration      # report the migration only
+ *   bun run seed:push -- --skip-legacy-migration         # leave legacy rows alone
+ *   bun run seed:push -- --legacy-history-cursor=<cursor> # resume an interrupted walk
  *
  * Translation rows come from constants/translations/questions-long.csv.gz (see
  * scripts/lib/questionsLong.ts). A row is pushed only if its canonical key exists in the
  * English seed, so translations can never outrun the English catalog.
  *
- * After the English rows are seeded, the push retires the position-keyed rows
- * (`<slug>:<points>:<index>`) that the `q<UserID>` keys replaced, and remaps device
- * history onto the new keys. Both steps are idempotent and batched; see
- * scripts/lib/legacyQuestionKeys.ts and convex/seed.ts. Run with `--dry-run-legacy-migration`
- * against production first.
+ * Legacy key migration
+ * --------------------
+ * After the English rows are seeded, the push retires the `<slug>:<points>:<index>` rows
+ * that the `q<UserID>` keys replaced and moves device history onto the new keys. The pairs
+ * come from the frozen snapshot in convex/seed/legacyQuestionKeys.ts (generated from
+ * 1992d4d -> 6291744 by scripts/build-legacy-question-keys.ts); nothing here recomputes them
+ * from current source data.
+ *
+ * Each migration call is atomic and bounded. The migration as a whole is not: while it runs,
+ * and while English seeding and retirement overlap, both copies of a question can be
+ * playable. Seeding upserts by key and retirement only flips a status, so re-running is
+ * always safe.
+ *
+ * An interrupted history walk exits non-zero and prints the exact
+ * `--legacy-history-cursor=<cursor>` to resume from. Only confirmed pages advance the
+ * cursor, so a retry never skips the page that failed. The cursor is only meaningful against
+ * the deployment that produced it and the frozen map version this checkout ships; both are
+ * checked on every call.
+ *
+ * `--dry-run-legacy-migration` is reporting only: it does not deploy, seed, retire or write.
+ * The migration functions must therefore already be deployed to the target (run a normal
+ * push, or `npx convex deploy`, first). If they are not, the run fails with that explanation
+ * instead of deploying.
  */
 
 import { spawnSync } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { buildLegacyQuestionKeyMap } from './lib/legacyQuestionKeys';
+import {
+  LEGACY_QUESTION_KEY_VERSION,
+} from '../convex/seed/legacyQuestionKeys';
 import { localesInPack, readQuestionsLong } from './lib/questionsLong';
 
 const seedDir = path.join(process.cwd(), 'convex', 'seed');
 const QUESTION_BATCH_SIZE = 200;
 const TRANSLATION_BATCH_SIZE = 400;
 const DEV_DEPLOYMENT = 'successful-wildcat-165';
-/** Legacy position keys only ever existed for the English rows. */
-const LEGACY_LOCALE = 'en';
 const LEGACY_KEY_BATCH_SIZE = 250;
-const LEGACY_MAPPING_CHUNK_SIZE = 2_000;
 const HISTORY_PAGE_SIZE = 500;
-/** Safety valve: 2,000 pages x 500 rows is far more device history than this app has. */
-const HISTORY_MAX_PAGES_PER_CHUNK = 2_000;
+/**
+ * Runaway guard for the history walk, which otherwise ends on `isDone`. Hitting it is
+ * reported as incomplete with a resume cursor, so nothing is lost.
+ */
+const HISTORY_MAX_PAGES = 20_000;
 const argv = process.argv.slice(2);
 const prod = argv.includes('--prod');
 const skipTranslations = argv.includes('--skip-translations');
@@ -48,6 +69,17 @@ const localesArg = argv.find((arg) => arg.startsWith('--locales='));
 const onlyLocales = localesArg
   ? new Set(localesArg.slice('--locales='.length).split(',').map((s) => s.trim()).filter(Boolean))
   : null;
+const historyCursorArg = argv.find((arg) => arg.startsWith('--legacy-history-cursor='));
+const historyCursor = historyCursorArg
+  ? historyCursorArg.slice('--legacy-history-cursor='.length)
+  : undefined;
+const target = prod ? 'production (energized-hummingbird-439)' : `development (${DEV_DEPLOYMENT})`;
+
+(function validateFlags() {
+  if (dryRunLegacyMigration && skipLegacyMigration) {
+    throw new Error('--dry-run-legacy-migration and --skip-legacy-migration cannot be combined');
+  }
+})();
 
 function deploymentArgs(): string[] {
   if (prod) {
@@ -151,140 +183,6 @@ function seedQuestionBatches(rows: SeedQuestion[], batchSize: number, label: str
   return { inserted, updated, skipped };
 }
 
-interface LegacyKeyPair {
-  legacyKey: string;
-  canonicalKey: string;
-}
-
-/**
- * Position key → `q<UserID>` for every English source row. Pairs whose canonical key is not
- * in the seed being pushed are dropped: the migration never guesses a target.
- */
-function loadLegacyKeyPairs(englishKeys: Set<string>): LegacyKeyPair[] {
-  const groups = JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), 'constants', 'questions.json'), 'utf8')
-  );
-  const categories = JSON.parse(
-    fs.readFileSync(path.join(seedDir, 'categories.json'), 'utf8')
-  );
-  const { mapping, unresolvedThemes, rowsWithoutUserId } = buildLegacyQuestionKeyMap(
-    groups,
-    categories
-  );
-  if (unresolvedThemes.length) {
-    console.warn(
-      `Legacy keys: no seed category for themeGroup(s) ${unresolvedThemes.join(', ')}; nothing inferred for them`
-    );
-  }
-
-  const pairs: LegacyKeyPair[] = [];
-  let droppedUnknownCanonical = 0;
-  for (const [legacyKey, canonicalKey] of mapping) {
-    if (!englishKeys.has(canonicalKey)) {
-      droppedUnknownCanonical += 1;
-      continue;
-    }
-    pairs.push({ legacyKey, canonicalKey });
-  }
-
-  console.log(
-    `Legacy keys: ${pairs.length} position-keyed rows to migrate (${rowsWithoutUserId} source rows without a UserID, ` +
-      `${droppedUnknownCanonical} without a matching seed row)`
-  );
-  return pairs;
-}
-
-function retireLegacyQuestions(pairs: LegacyKeyPair[]) {
-  const batches = chunk(pairs, LEGACY_KEY_BATCH_SIZE);
-  let retired = 0;
-  let alreadyRetired = 0;
-  let missingLegacy = 0;
-  let missingCanonical = 0;
-
-  console.log(`Migrating ${pairs.length} legacy question rows in ${batches.length} batches...`);
-  for (let i = 0; i < batches.length; i += 1) {
-    const result = runConvex('seed:retireLegacyQuestionKeys', {
-      locale: LEGACY_LOCALE,
-      dryRun: dryRunLegacyMigration,
-      // SAFETY: LegacyKeyPair rows are plain JSON matching the validator.
-      questions: batches[i].map((pair) => ({ ...pair })) as ConvexCliJson[],
-    });
-    // SAFETY: seed:retireLegacyQuestionKeys returns those four counters.
-    const parsed = JSON.parse(result) as {
-      retired: number;
-      alreadyRetired: number;
-      missingLegacy: number;
-      missingCanonical: number;
-    };
-    retired += parsed.retired;
-    alreadyRetired += parsed.alreadyRetired;
-    missingLegacy += parsed.missingLegacy;
-    missingCanonical += parsed.missingCanonical;
-    if ((i + 1) % 10 === 0 || i + 1 === batches.length) {
-      console.log(
-        `  legacy batch ${i + 1}/${batches.length}: ${retired} retired, ${alreadyRetired} already retired, ` +
-          `${missingLegacy} absent, ${missingCanonical} skipped so far`
-      );
-    }
-  }
-
-  return { retired, alreadyRetired, missingLegacy, missingCanonical };
-}
-
-/**
- * Walk device history once per mapping chunk, resuming from the cursor each call. A chunk
- * that cannot finish within the page budget is reported and skipped, so one stalled chunk
- * never blocks the rest.
- */
-function remapLegacyQuestionHistory(pairs: LegacyKeyPair[]) {
-  const chunks = chunk(pairs, LEGACY_MAPPING_CHUNK_SIZE);
-  let remapped = 0;
-  let scanned = 0;
-  let incompleteChunks = 0;
-
-  for (let i = 0; i < chunks.length; i += 1) {
-    const mapping = chunks[i];
-    let cursor: string | undefined;
-    let done = false;
-
-    for (let page = 0; page < HISTORY_MAX_PAGES_PER_CHUNK; page += 1) {
-      const result = runConvex('seed:remapLegacyQuestionHistory', {
-        dryRun: dryRunLegacyMigration,
-        batchSize: HISTORY_PAGE_SIZE,
-        cursor,
-        // SAFETY: LegacyKeyPair rows are plain JSON matching the validator.
-        mapping: mapping.map((pair) => ({ ...pair })) as ConvexCliJson[],
-      });
-      // SAFETY: seed:remapLegacyQuestionHistory returns those counters and a cursor.
-      const parsed = JSON.parse(result) as {
-        remapped: number;
-        scanned: number;
-        isDone: boolean;
-        cursor: string | null;
-      };
-      remapped += parsed.remapped;
-      scanned += parsed.scanned;
-      if (parsed.isDone || parsed.cursor === null) {
-        done = true;
-        break;
-      }
-      cursor = parsed.cursor;
-    }
-
-    if (!done) {
-      incompleteChunks += 1;
-      console.warn(
-        `  history chunk ${i + 1}/${chunks.length} hit the page cap after ${HISTORY_MAX_PAGES_PER_CHUNK} pages; re-run to continue`
-      );
-    }
-    console.log(
-      `  history chunk ${i + 1}/${chunks.length}: ${remapped} keys remapped, ${scanned} rows scanned so far`
-    );
-  }
-
-  return { remapped, scanned, incompleteChunks };
-}
-
 function loadTranslationRows(englishKeys: Set<string>, categorySlugs: Set<string>): SeedQuestion[] {
   const pack = readQuestionsLong();
   const locales = localesInPack(pack).filter((locale) => locale !== 'en');
@@ -339,6 +237,242 @@ function loadTranslationRows(englishKeys: Set<string>, categorySlugs: Set<string
   return rows;
 }
 
+type Counter = {
+  retired: number;
+  alreadyRetired: number;
+  missingLegacy: number;
+  missingCanonical: number;
+  inactiveCanonical: number;
+  categoryMismatch: number;
+  invalidPair: number;
+
+  remapped: number;
+  missingTarget: number;
+  inactiveTarget: number;
+  unmappedLegacyKeys: number;
+  scanned: number;
+};
+
+type RetireBatch = Pick<
+  Counter,
+  'retired' | 'alreadyRetired' | 'missingLegacy' | 'missingCanonical' | 'inactiveCanonical' | 'categoryMismatch' | 'invalidPair'
+> & {
+  offset: number;
+  processed: number;
+  total: number;
+  nextOffset: number | null;
+  mapVersion: string;
+};
+
+type RemapPage = Pick<Counter, 'remapped' | 'missingTarget' | 'inactiveTarget' | 'categoryMismatch' | 'unmappedLegacyKeys' | 'scanned'> & {
+  isDone: boolean;
+  cursor: string | null;
+  mapVersion: string;
+};
+
+function emptyCounters(): Counter {
+  return {
+    retired: 0,
+    alreadyRetired: 0,
+    missingLegacy: 0,
+    missingCanonical: 0,
+    inactiveCanonical: 0,
+    categoryMismatch: 0,
+    invalidPair: 0,
+    remapped: 0,
+    missingTarget: 0,
+    inactiveTarget: 0,
+    unmappedLegacyKeys: 0,
+    scanned: 0,
+  };
+}
+
+function callMigration(functionName: string, args: ConvexCliArgs, dryRun: boolean): string {
+  try {
+    return runConvex(functionName, args);
+  } catch (error) {
+    if (!dryRun) throw error;
+    throw new Error(
+      `${functionName} is not available on ${target}. A dry run never deploys, so the migration ` +
+        `functions must already be deployed there (run a normal seed:push or npx convex deploy first).\n` +
+        `${error instanceof Error ? error.message : String(error)}`
+    );
+  }
+}
+
+function assertMapVersion(functionName: string, deployed: string) {
+  if (deployed !== LEGACY_QUESTION_KEY_VERSION) {
+    throw new Error(
+      `${functionName} on ${target} reports frozen map version ${deployed}, but this checkout ships ` +
+        `${LEGACY_QUESTION_KEY_VERSION}. Deploy before migrating, and only resume a cursor against the ` +
+        `deployment that produced it.`
+    );
+  }
+}
+
+function retireLegacyQuestions(dryRun: boolean): Counter {
+  const totals = emptyCounters();
+  let offset = 0;
+  let done = false;
+
+  while (!done) {
+    const raw = callMigration(
+      'seed:retireLegacyQuestionKeys',
+      { offset, batchSize: LEGACY_KEY_BATCH_SIZE, dryRun },
+      dryRun
+    );
+    // SAFETY: seed:retireLegacyQuestionKeys returns the counters declared in RetireBatch.
+    const batch = JSON.parse(raw) as RetireBatch;
+    assertMapVersion('seed:retireLegacyQuestionKeys', batch.mapVersion);
+
+    for (const key of [
+      'retired',
+      'alreadyRetired',
+      'missingLegacy',
+      'missingCanonical',
+      'inactiveCanonical',
+      'categoryMismatch',
+      'invalidPair',
+    ] as const) {
+      totals[key] += batch[key];
+    }
+
+    console.log(
+      `  legacy rows ${batch.offset + batch.processed}/${batch.total}: ` +
+        `${totals.retired} ${dryRun ? 'retirable' : 'retired'}, ${totals.alreadyRetired} already retired, ` +
+        `${totals.missingLegacy} absent, ` +
+        `${totals.missingCanonical + totals.inactiveCanonical + totals.categoryMismatch + totals.invalidPair} skipped`
+    );
+
+    if (batch.nextOffset === null) {
+      done = true;
+    } else {
+      offset = batch.nextOffset;
+    }
+  }
+
+  return totals;
+}
+
+function remapLegacyQuestionHistory(
+  dryRun: boolean,
+  resumeCursor: string | undefined
+): Counter & { pages: number; done: boolean; resumeCursor: string | null } {
+  const totals = emptyCounters();
+  let cursor = resumeCursor;
+  let confirmedCursor: string | null = null;
+  let pages = 0;
+  let done = false;
+
+  try {
+    while (!done && pages < HISTORY_MAX_PAGES) {
+      const raw = callMigration(
+        'seed:remapLegacyQuestionHistory',
+        { cursor, batchSize: HISTORY_PAGE_SIZE, dryRun },
+        dryRun
+      );
+      // SAFETY: seed:remapLegacyQuestionHistory returns the counters declared in RemapPage.
+      const page = JSON.parse(raw) as RemapPage;
+      assertMapVersion('seed:remapLegacyQuestionHistory', page.mapVersion);
+
+      for (const key of [
+        'remapped',
+        'missingTarget',
+        'inactiveTarget',
+        'categoryMismatch',
+        'unmappedLegacyKeys',
+        'scanned',
+      ] as const) {
+        totals[key] += page[key];
+      }
+      pages += 1;
+
+      if (page.isDone) {
+        done = true;
+        break;
+      }
+      if (!page.cursor) {
+        throw new Error('seed:remapLegacyQuestionHistory returned no cursor and is not done');
+      }
+      cursor = page.cursor;
+      confirmedCursor = page.cursor;
+      if (pages % 10 === 0) {
+        console.log(
+          `  history page ${pages}: ${totals.remapped} keys remapped across ${totals.scanned} scanned rows`
+        );
+      }
+    }
+  } catch (error) {
+    console.error(
+      `History walk stopped after ${pages} confirmed pages. Resume with:\n` +
+        `  bun run seed:push${prod ? ' --prod' : ''} --legacy-history-cursor=${confirmedCursor ?? ''}\n` +
+        `  (frozen map version ${LEGACY_QUESTION_KEY_VERSION}, target ${target})`
+    );
+    throw error;
+  }
+
+  return { ...totals, pages, done, resumeCursor: done ? null : confirmedCursor };
+}
+
+/**
+ * Runs both migration steps and returns the list of reasons the migration is not
+ * provisionally complete. `missingLegacy` and `alreadyRetired` are expected on a fresh or
+ * repeated run and are never problems.
+ */
+function runLegacyMigration(dryRun: boolean): string[] {
+  const dryRunLabel = dryRun ? ' [dry run, nothing written]' : '';
+  const retire = retireLegacyQuestions(dryRun);
+  const history = remapLegacyQuestionHistory(dryRun, historyCursor);
+
+  console.log(
+    `Legacy rows${dryRunLabel}: ${retire.retired} ${dryRun ? 'retirable' : 'retired'}, ` +
+      `${retire.alreadyRetired} already retired, ${retire.missingLegacy} absent, ` +
+      `${retire.missingCanonical} replacement missing, ${retire.inactiveCanonical} replacement not active, ` +
+      `${retire.categoryMismatch} category mismatch, ${retire.invalidPair} invalid pair`
+  );
+  console.log(
+    `Device history${dryRunLabel}: ${history.remapped} keys remapped across ${history.scanned} scanned rows ` +
+      `(${history.pages} pages${history.done ? '' : ', incomplete'})`
+  );
+
+  const problems: string[] = [];
+  if (retire.missingCanonical) {
+    problems.push(`${retire.missingCanonical} legacy rows kept active because the replacement row is missing`);
+  }
+  if (retire.inactiveCanonical) {
+    problems.push(`${retire.inactiveCanonical} legacy rows kept active because the replacement row is not active`);
+  }
+  if (retire.categoryMismatch) {
+    problems.push(`${retire.categoryMismatch} legacy rows kept active because the replacement sits in another category`);
+  }
+  if (retire.invalidPair) {
+    problems.push(`${retire.invalidPair} frozen pairs failed key-shape validation`);
+  }
+  if (history.missingTarget) {
+    problems.push(`${history.missingTarget} history records left unchanged because the replacement row is missing`);
+  }
+  if (history.inactiveTarget) {
+    problems.push(`${history.inactiveTarget} history records left unchanged because the replacement row is not active`);
+  }
+  if (history.categoryMismatch) {
+    problems.push(`${history.categoryMismatch} history records left unchanged because the replacement sits in another category`);
+  }
+  if (history.unmappedLegacyKeys) {
+    problems.push(
+      `${history.unmappedLegacyKeys} history records hold position keys absent from the frozen snapshot ` +
+        `(convex/seed/legacyQuestionKeys.ts); regenerate the snapshot or accept them with --skip-legacy-migration`
+    );
+  }
+  if (!history.done) {
+    problems.push(
+      `history walk incomplete after ${history.pages} pages; resume with ` +
+        `--legacy-history-cursor=${history.resumeCursor ?? ''}`
+    );
+  }
+
+  return problems;
+}
+
 function main() {
   const categories = JSON.parse(
     fs.readFileSync(path.join(seedDir, 'categories.json'), 'utf8')
@@ -352,8 +486,17 @@ function main() {
 
   const englishKeys = new Set(questions.map((q) => q.canonicalKey));
 
-  const target = prod ? 'production (energized-hummingbird-439)' : `development (${DEV_DEPLOYMENT})`;
   console.log(`Pushing seed to ${target}...`);
+
+  if (dryRunLegacyMigration) {
+    console.log(
+      'Dry run: reporting the legacy key migration only. Nothing is deployed, seeded, retired or written, ' +
+        'and the migration functions must already be deployed to this target.'
+    );
+    const problems = runLegacyMigration(true);
+    reportMigrationProblems(problems);
+    return;
+  }
 
   console.log('Deploying Convex functions...');
   pushCode();
@@ -382,21 +525,7 @@ function main() {
     if (skipLegacyMigration) {
       console.log('Skipping legacy key migration (--skip-legacy-migration).');
     } else {
-      const dryRunLabel = dryRunLegacyMigration ? ' (dry run, nothing written)' : '';
-      const legacyPairs = loadLegacyKeyPairs(englishKeys);
-      if (legacyPairs.length === 0) {
-        console.log(`No legacy position keys to migrate${dryRunLabel}.`);
-      } else {
-        const retired = retireLegacyQuestions(legacyPairs);
-        console.log(
-          `Legacy rows${dryRunLabel}: ${retired.retired} retired, ${retired.alreadyRetired} already retired, ` +
-            `${retired.missingLegacy} absent, ${retired.missingCanonical} left active (canonical row missing)`
-        );
-        const history = remapLegacyQuestionHistory(legacyPairs);
-        console.log(
-          `Device history${dryRunLabel}: ${history.remapped} keys remapped across ${history.scanned} scanned rows`
-        );
-      }
+      reportMigrationProblems(runLegacyMigration(false));
     }
 
     console.log('Seeding token products...');
@@ -414,6 +543,18 @@ function main() {
     `Done (${target}): English ${englishResult.inserted} inserted, ${englishResult.updated} updated, ${englishResult.skipped} skipped; ` +
       `translations ${translationResult.inserted} inserted, ${translationResult.updated} updated, ${translationResult.skipped} skipped`
   );
+}
+
+function reportMigrationProblems(problems: string[]) {
+  if (problems.length === 0) {
+    console.log('Legacy key migration complete.');
+    return;
+  }
+  console.error('Legacy key migration INCOMPLETE:');
+  for (const problem of problems) {
+    console.error(`  - ${problem}`);
+  }
+  process.exitCode = 1;
 }
 
 main();

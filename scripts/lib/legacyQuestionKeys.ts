@@ -1,73 +1,131 @@
 /**
- * Legacy (`<slug>:<points>:<index>`) → canonical (`q<UserID>`) question key map.
+ * Composes the frozen pre-`q<UserID>` question key snapshot.
  *
- * Before question keys became the spreadsheet's permanent `UserID`, a question's canonical
- * key was its position inside its source spreadsheet group. Deployments seeded before the
- * switch still hold those rows, so pushing the new seed left two playable copies of every
- * question. This map is what lets the seed push retire the old copy.
+ * The snapshot is built once, from the seed that the key change replaced, and committed
+ * (see scripts/build-legacy-question-keys.ts and convex/seed/legacyQuestionKeys.ts).
+ * Nothing at runtime rebuilds it from current source data: reordering, adding or renaming
+ * questions later must never change where an old key points.
  *
- * It is rebuilt from the same inputs the old seed came from: `constants/questions.json`
- * (group order, which is what `<index>` counted) and `convex/seed/categories.json` (the
- * historical `slug` for each topic, including topics that were renamed later). It never
- * reads the live database and never depends on the order rows come back in.
+ * The composition is deliberately dumb about text: an entry is only accepted when the
+ * historical row's prompt and answer match the row now holding that position. Anything
+ * else is reported as a mismatch instead of being written, so a moved or swapped question
+ * can never be silently paired with the wrong `q<UserID>`. Text that the key change
+ * intentionally fixed is listed in `corrections`, and each listed correction must still
+ * actually differ, so a stale entry is loud rather than quietly permissive.
  */
 
-import { canonicalKeyForUserId, legacyCanonicalKey } from '../../features/play/canonicalKey';
-
-export interface LegacyKeyMapSourceGroup {
-  categoryId: string;
-  points: number;
-  questionAndanswer: { userId?: string | null }[];
+export interface LegacyQuestionKeyRow {
+  categorySlug: string;
+  canonicalKey: string;
+  pointValue: number;
+  locale: string;
+  prompt: string;
+  answer: string;
 }
 
-export interface LegacyKeyMapSourceCategory {
-  slug: string;
-  themeGroup?: string;
+export type LegacyKeyMismatchReason =
+  | 'unexpected-legacy-key'
+  | 'unexpected-canonical-key'
+  | 'missing-current-row'
+  | 'unverified-text';
+
+export interface LegacyKeyMismatch {
+  legacyKey: string;
+  reason: LegacyKeyMismatchReason;
+  detail: string;
 }
 
-export interface LegacyQuestionKeyMap {
-  /** Old position key → `q<UserID>`, for every source row that has a UserID. */
-  mapping: Map<string, string>;
-  /** Topic ids with no seed category; nothing is inferred for them. */
-  unresolvedThemes: string[];
-  /** Source rows with no spreadsheet UserID; those keep their legacy key. */
-  rowsWithoutUserId: number;
+export interface LegacyQuestionKeyComposition {
+  /** [legacyKey, canonicalKey] in historical seed order. */
+  pairs: [string, string][];
+  mismatches: LegacyKeyMismatch[];
+  correctionsApplied: string[];
+  correctionsStale: string[];
 }
 
-export function buildLegacyQuestionKeyMap(
-  groups: readonly LegacyKeyMapSourceGroup[],
-  categories: readonly LegacyKeyMapSourceCategory[]
-): LegacyQuestionKeyMap {
-  const slugByThemeGroup = new Map<string, string>();
-  for (const category of categories) {
-    if (category.themeGroup && !slugByThemeGroup.has(category.themeGroup)) {
-      slugByThemeGroup.set(category.themeGroup, category.slug);
+function groupByTopic(
+  rows: readonly LegacyQuestionKeyRow[]
+): Map<string, LegacyQuestionKeyRow[]> {
+  const byTopic = new Map<string, LegacyQuestionKeyRow[]>();
+  for (const row of rows) {
+    const topicKey = `${row.categorySlug}|${row.pointValue}`;
+    const bucket = byTopic.get(topicKey);
+    if (bucket) {
+      bucket.push(row);
+    } else {
+      byTopic.set(topicKey, [row]);
     }
   }
+  return byTopic;
+}
 
-  const mapping = new Map<string, string>();
-  const unresolvedThemes = new Set<string>();
-  let rowsWithoutUserId = 0;
+export function composeLegacyQuestionKeyPairs(
+  historical: readonly LegacyQuestionKeyRow[],
+  current: readonly LegacyQuestionKeyRow[],
+  corrections: ReadonlySet<string>
+): LegacyQuestionKeyComposition {
+  const currentByTopic = groupByTopic(current);
+  const pairs: [string, string][] = [];
+  const mismatches: LegacyKeyMismatch[] = [];
+  const correctionsApplied: string[] = [];
+  const correctionsStale: string[] = [];
 
-  for (const group of groups) {
-    const slug = slugByThemeGroup.get(group.categoryId);
-    if (!slug) {
-      unresolvedThemes.add(group.categoryId);
-      continue;
-    }
+  for (const [topicKey, historicalRows] of groupByTopic(historical)) {
+    const currentRows = currentByTopic.get(topicKey) ?? [];
 
-    for (const [index, qa] of group.questionAndanswer.entries()) {
-      const userId = qa.userId;
-      if (userId === undefined || userId === null || String(userId).trim() === '') {
-        rowsWithoutUserId += 1;
+    for (const [index, row] of historicalRows.entries()) {
+      const expectedLegacyKey = `${row.categorySlug}:${row.pointValue}:${index}`;
+      if (row.canonicalKey !== expectedLegacyKey) {
+        mismatches.push({
+          legacyKey: row.canonicalKey,
+          reason: 'unexpected-legacy-key',
+          detail: `expected ${expectedLegacyKey}`,
+        });
         continue;
       }
-      mapping.set(
-        legacyCanonicalKey(slug, group.points, index),
-        canonicalKeyForUserId(userId)
-      );
+
+      const replacement = currentRows[index];
+      if (!replacement) {
+        mismatches.push({
+          legacyKey: row.canonicalKey,
+          reason: 'missing-current-row',
+          detail: `${topicKey} has ${currentRows.length} rows`,
+        });
+        continue;
+      }
+      if (!/^q\d+$/.test(replacement.canonicalKey)) {
+        mismatches.push({
+          legacyKey: row.canonicalKey,
+          reason: 'unexpected-canonical-key',
+          detail: `expected q<UserID>, got ${replacement.canonicalKey}`,
+        });
+        continue;
+      }
+
+      const textMatches =
+        row.prompt === replacement.prompt && row.answer === replacement.answer;
+      if (corrections.has(row.canonicalKey)) {
+        if (textMatches) {
+          correctionsStale.push(row.canonicalKey);
+        } else {
+          correctionsApplied.push(row.canonicalKey);
+        }
+        pairs.push([row.canonicalKey, replacement.canonicalKey]);
+        continue;
+      }
+
+      if (!textMatches) {
+        mismatches.push({
+          legacyKey: row.canonicalKey,
+          reason: 'unverified-text',
+          detail: `would map to ${replacement.canonicalKey}`,
+        });
+        continue;
+      }
+
+      pairs.push([row.canonicalKey, replacement.canonicalKey]);
     }
   }
 
-  return { mapping, unresolvedThemes: [...unresolvedThemes], rowsWithoutUserId };
+  return { pairs, mismatches, correctionsApplied, correctionsStale };
 }

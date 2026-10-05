@@ -7,6 +7,11 @@
 import { internalMutation } from './_generated/server';
 import { v } from 'convex/values';
 import { DEFAULT_TOKEN_PRODUCTS } from './lib/paymentCatalog';
+import {
+  LEGACY_QUESTION_KEY_PAIRS,
+  LEGACY_QUESTION_KEY_VERSION,
+  LEGACY_SEED_LOCALE,
+} from './seed/legacyQuestionKeys';
 
 export const seedCategories = internalMutation({
   args: {
@@ -157,38 +162,75 @@ export const seedQuestions = internalMutation({
 });
 
 /**
+ * Position keys are `<slug>:<points>:<index>`; canonical keys are `q<UserID>`.
+ * Both handlers fail closed on anything that does not match its namespace.
+ */
+const LEGACY_KEY_SHAPE = /^[a-z0-9-]+:(100|200|300):\d+$/;
+const CANONICAL_KEY_SHAPE = /^q\d+$/;
+
+/** Built once per isolate from the frozen snapshot; nothing rebuilds it from live content. */
+const CANONICAL_BY_LEGACY_KEY = new Map<string, string>(LEGACY_QUESTION_KEY_PAIRS);
+
+/**
  * Retire the position-keyed rows (`<slug>:<points>:<index>`) that the `q<UserID>` seed
  * replaced. Without this, a deployment seeded before the key change keeps both the old and
  * the new copy of every question active, and players see each question twice.
+ *
+ * The pairs come from the frozen snapshot generated at the transition
+ * (convex/seed/legacyQuestionKeys.ts), never from current source data, so a later reorder,
+ * rename or addition cannot move an old key onto a different question.
  *
  * Rows are patched to `retired`, never deleted, so every `_id` reference
  * (`device_question_history.questionId`, reports, score events) stays valid and the change
  * is undone by patching the status back.
  *
- * Safe by construction:
- * - a legacy row is retired only when its canonical twin already exists, so a question is
- *   never hidden without its replacement;
- * - keys absent from `questions` and rows that are already retired are counted and left
- *   alone, so unrelated or newer content is never touched;
- * - re-running is a no-op and each call writes at most `questions.length` rows.
+ * Fail closed. A legacy row is retired only when all of this holds:
+ * - both keys match their own namespace (a corrupted snapshot retires nothing);
+ * - the replacement row exists, is `active`, and sits in the same category;
+ * - the legacy row itself is still `active`.
+ * Anything else is counted and left untouched, so a question is never hidden without a live
+ * replacement and unrelated content is never swept up. `missingLegacy` and `alreadyRetired`
+ * are the expected states of a fresh deployment and a repeated run; the other counters are
+ * reported as failures by the push script.
+ *
+ * Bounded: one call walks `batchSize` pairs and writes at most that many rows. Each call is
+ * atomic on its own; the whole migration is not, so both copies can be playable until the
+ * retirement catches up.
  */
 export const retireLegacyQuestionKeys = internalMutation({
   args: {
-    locale: v.string(),
+    offset: v.number(),
+    batchSize: v.number(),
     dryRun: v.optional(v.boolean()),
-    questions: v.array(v.object({ legacyKey: v.string(), canonicalKey: v.string() })),
   },
   handler: async (ctx, args) => {
+    const start = Math.max(0, Math.floor(args.offset));
+    const end = Math.min(
+      LEGACY_QUESTION_KEY_PAIRS.length,
+      start + Math.max(0, Math.floor(args.batchSize))
+    );
+
     let retired = 0;
     let alreadyRetired = 0;
     let missingLegacy = 0;
     let missingCanonical = 0;
+    let inactiveCanonical = 0;
+    let categoryMismatch = 0;
+    let invalidPair = 0;
 
-    for (const { legacyKey, canonicalKey } of args.questions) {
+    for (let index = start; index < end; index += 1) {
+      const pair = LEGACY_QUESTION_KEY_PAIRS[index]!;
+      const legacyKey = pair[0];
+      const canonicalKey = pair[1];
+      if (!LEGACY_KEY_SHAPE.test(legacyKey) || !CANONICAL_KEY_SHAPE.test(canonicalKey)) {
+        invalidPair += 1;
+        continue;
+      }
+
       const legacy = await ctx.db
         .query('questions')
         .withIndex('by_canonical_locale', (q) =>
-          q.eq('canonicalKey', legacyKey).eq('locale', args.locale)
+          q.eq('canonicalKey', legacyKey).eq('locale', LEGACY_SEED_LOCALE)
         )
         .unique();
       if (!legacy) {
@@ -203,11 +245,19 @@ export const retireLegacyQuestionKeys = internalMutation({
       const canonical = await ctx.db
         .query('questions')
         .withIndex('by_canonical_locale', (q) =>
-          q.eq('canonicalKey', canonicalKey).eq('locale', args.locale)
+          q.eq('canonicalKey', canonicalKey).eq('locale', LEGACY_SEED_LOCALE)
         )
         .unique();
       if (!canonical) {
         missingCanonical += 1;
+        continue;
+      }
+      if (canonical.status !== 'active') {
+        inactiveCanonical += 1;
+        continue;
+      }
+      if (canonical.categoryId !== legacy.categoryId) {
+        categoryMismatch += 1;
         continue;
       }
 
@@ -217,7 +267,21 @@ export const retireLegacyQuestionKeys = internalMutation({
       retired += 1;
     }
 
-    return { retired, alreadyRetired, missingLegacy, missingCanonical };
+    return {
+      retired,
+      alreadyRetired,
+      missingLegacy,
+      missingCanonical,
+      inactiveCanonical,
+      categoryMismatch,
+      invalidPair,
+      offset: start,
+      processed: end - start,
+      total: LEGACY_QUESTION_KEY_PAIRS.length,
+      nextOffset: end < LEGACY_QUESTION_KEY_PAIRS.length ? end : null,
+      mapVersion: LEGACY_QUESTION_KEY_VERSION,
+      dryRun: Boolean(args.dryRun),
+    };
   },
 });
 
@@ -225,34 +289,64 @@ export const retireLegacyQuestionKeys = internalMutation({
  * Rewrite `device_question_history.canonicalKey` from a retired position key to its
  * `q<UserID>` key, so a question a player has already been asked is not offered again under
  * its new identity. Without this the only effect of the key change is that history written
- * under the old keys no longer filters anything, which costs players one round of repeats.
+ * under the old keys stops filtering, which costs players one round of repeats.
  *
- * The table is walked with Convex's opaque pagination (`cursor`), so the caller can stop
- * between calls and resume later: each call reads at most `batchSize` rows and writes only
- * the ones named in `mapping`. `canonicalKey` is not the pagination key, so patching rows
- * mid-walk cannot skip or double-visit anything, and re-running is a no-op.
+ * The table is walked with Convex's opaque pagination, so the caller can stop between calls
+ * and resume from `cursor`: each call reads at most `batchSize` rows. `canonicalKey` is not
+ * the pagination key, so patching mid-walk cannot skip or double-visit anything, and a
+ * repeated run is a no-op because remapped rows no longer match the snapshot.
+ *
+ * A record is rewritten only when its mapped replacement exists, is `active`, and sits in
+ * the same category as the history record. Skipped records keep their canonicalKey,
+ * questionId and categoryId exactly as they were (`questionId` keeps pointing at the
+ * retired row, which is deliberately still present), and the skip is counted so the caller
+ * can report it instead of claiming success.
  */
 export const remapLegacyQuestionHistory = internalMutation({
   args: {
     dryRun: v.optional(v.boolean()),
     batchSize: v.number(),
     cursor: v.optional(v.string()),
-    mapping: v.array(v.object({ legacyKey: v.string(), canonicalKey: v.string() })),
   },
   handler: async (ctx, args) => {
-    const canonicalByLegacyKey = new Map(
-      args.mapping.map(({ legacyKey, canonicalKey }) => [legacyKey, canonicalKey])
-    );
-
     const page = await ctx.db.query('device_question_history').paginate({
       cursor: args.cursor ?? null,
-      numItems: args.batchSize,
+      numItems: Math.max(1, Math.floor(args.batchSize)),
     });
 
     let remapped = 0;
+    let missingTarget = 0;
+    let inactiveTarget = 0;
+    let categoryMismatch = 0;
+    let unmappedLegacyKeys = 0;
+
     for (const row of page.page) {
-      const canonicalKey = canonicalByLegacyKey.get(row.canonicalKey);
-      if (!canonicalKey) continue;
+      const canonicalKey = CANONICAL_BY_LEGACY_KEY.get(row.canonicalKey);
+      if (!canonicalKey) {
+        // History written before the frozen snapshot cannot be mapped; report, never guess.
+        if (LEGACY_KEY_SHAPE.test(row.canonicalKey)) unmappedLegacyKeys += 1;
+        continue;
+      }
+
+      const target = await ctx.db
+        .query('questions')
+        .withIndex('by_canonical_locale', (q) =>
+          q.eq('canonicalKey', canonicalKey).eq('locale', LEGACY_SEED_LOCALE)
+        )
+        .unique();
+      if (!target) {
+        missingTarget += 1;
+        continue;
+      }
+      if (target.status !== 'active') {
+        inactiveTarget += 1;
+        continue;
+      }
+      if (target.categoryId !== row.categoryId) {
+        categoryMismatch += 1;
+        continue;
+      }
+
       if (!args.dryRun) {
         await ctx.db.patch(row._id, { canonicalKey });
       }
@@ -261,9 +355,15 @@ export const remapLegacyQuestionHistory = internalMutation({
 
     return {
       remapped,
+      missingTarget,
+      inactiveTarget,
+      categoryMismatch,
+      unmappedLegacyKeys,
       scanned: page.page.length,
       isDone: page.isDone,
       cursor: page.isDone ? null : page.continueCursor,
+      mapVersion: LEGACY_QUESTION_KEY_VERSION,
+      dryRun: Boolean(args.dryRun),
     };
   },
 });
