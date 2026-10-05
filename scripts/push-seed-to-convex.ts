@@ -37,6 +37,11 @@
  * retry never skips the page that failed. Every migration call also sends the expected
  * frozen map version, which the handler checks before it reads or writes.
  *
+ * The cursor travels as opaque data inside one 16 KiB encoded-token budget, shared by the
+ * encoder and the decoder, so nothing here assumes a cursor length and no emitted token is
+ * one this script would refuse. A cursor too large for that budget is reported with an
+ * accurate restart instruction instead of a token.
+ *
  * The target selector separates this script's two targets (the named dev deployment and
  * prod). It does not independently prove the underlying account or environment identity, so
  * confirming which deployment a shell is pointed at is still the operator's job.
@@ -94,21 +99,35 @@ interface LegacyCheckpoint {
   cursor: string;
 }
 
-const CHECKPOINT_MAX_LENGTH = 1024;
-const CURSOR_MAX_LENGTH = 512;
+const CHECKPOINT_MAX_ENCODED_BYTES = 16 * 1024;
 /** base64url alphabet only, so the emitted command needs no escaping beyond quotes. */
 const CHECKPOINT_ALPHABET = /^[A-Za-z0-9_-]+$/;
 
+/**
+ * Shared by the encoder and the decoder, so a token this script emits is always one its own
+ * decoder accepts. One budget covers the whole token: a cursor is opaque here, so no cursor
+ * length is assumed, and base64url plus JSON escaping are already paid for by the time the
+ * finished token is measured. 16 KiB stays far below the per-argument limits of shells and
+ * Convex.
+ */
+function assertCheckpointTokenShape(token: string) {
+  if (!CHECKPOINT_ALPHABET.test(token)) {
+    throw new Error('--legacy-checkpoint is not base64url encoded');
+  }
+  const bytes = Buffer.byteLength(token, 'utf8');
+  if (bytes > CHECKPOINT_MAX_ENCODED_BYTES) {
+    throw new Error(`--legacy-checkpoint is ${bytes} bytes, over the ${CHECKPOINT_MAX_ENCODED_BYTES} byte checkpoint budget`);
+  }
+}
+
 function encodeCheckpoint(checkpoint: LegacyCheckpoint): string {
-  return Buffer.from(JSON.stringify(checkpoint), 'utf8').toString('base64url');
+  const token = Buffer.from(JSON.stringify(checkpoint), 'utf8').toString('base64url');
+  assertCheckpointTokenShape(token);
+  return token;
 }
 
 function decodeCheckpoint(raw: string): LegacyCheckpoint {
-  if (raw.length > CHECKPOINT_MAX_LENGTH || !CHECKPOINT_ALPHABET.test(raw)) {
-    throw new Error(
-      `--legacy-checkpoint is not a bounded base64url token (max ${CHECKPOINT_MAX_LENGTH} characters)`
-    );
-  }
+  assertCheckpointTokenShape(raw);
 
   let payload: unknown;
   try {
@@ -129,9 +148,9 @@ function decodeCheckpoint(raw: string): LegacyCheckpoint {
   ) {
     throw new Error('--legacy-checkpoint is malformed; copy it from a previous run');
   }
-  if (candidate.cursor.length === 0 || candidate.cursor.length > CURSOR_MAX_LENGTH) {
+  if (candidate.cursor.length === 0) {
     throw new Error(
-      `--legacy-checkpoint has an unusable cursor (1 to ${CURSOR_MAX_LENGTH} characters expected). ` +
+      '--legacy-checkpoint has an unusable cursor (it must not be empty). ' +
         'Omit the checkpoint to restart the walk from the beginning.'
     );
   }
@@ -418,13 +437,25 @@ function resumeInstruction(dryRun: boolean, cursor: string | null): string {
   if (!cursor) {
     return 'no page has been confirmed yet; restart the walk by omitting --legacy-checkpoint';
   }
-  const token = encodeCheckpoint({
-    version: 1,
-    target,
-    mapVersion: LEGACY_QUESTION_KEY_VERSION,
-    mode: dryRun ? 'dry-run' : 'write',
-    cursor,
-  });
+
+  let token: string;
+  try {
+    token = encodeCheckpoint({
+      version: 1,
+      target,
+      mapVersion: LEGACY_QUESTION_KEY_VERSION,
+      mode: dryRun ? 'dry-run' : 'write',
+      cursor,
+    });
+  } catch {
+    // Never present a token the decoder would refuse: state the limit and restart instead.
+    return (
+      `the confirmed cursor is ${Buffer.byteLength(cursor, 'utf8')} bytes, over the ` +
+      `${CHECKPOINT_MAX_ENCODED_BYTES} byte resumable checkpoint budget, so no resume token can be emitted. ` +
+      'Restart the walk by omitting --legacy-checkpoint; pages are idempotent, so a restart only costs time'
+    );
+  }
+
   const mode = dryRun ? ' --dry-run-legacy-migration' : '';
   return `bun run seed:push --${prod ? ' --prod' : ''}${mode} --legacy-checkpoint='${token}'`;
 }

@@ -85,19 +85,27 @@ function retirePayload(args: Record<string, unknown>): SpawnResult {
   });
 }
 
-function remapPayload(args: Record<string, unknown>): SpawnResult {
-  return ok({
+function remapPagePayload(
+  args: Record<string, unknown>,
+  overrides: Record<string, unknown> = {}
+): Record<string, unknown> {
+  return {
     remapped: 0,
     missingTarget: 0,
     inactiveTarget: 0,
     categoryMismatch: 0,
     unmappedLegacyKeys: 0,
-    scanned: 0,
+    scanned: 500,
     isDone: true,
     cursor: null,
     mapVersion: LEGACY_QUESTION_KEY_VERSION,
     dryRun: Boolean(args.dryRun),
-  });
+    ...overrides,
+  };
+}
+
+function remapPayload(args: Record<string, unknown>): SpawnResult {
+  return ok(remapPagePayload(args));
 }
 
 const DEFAULT_RESPONSES: Record<string, Override> = {
@@ -472,7 +480,7 @@ describe('seed:push legacy key migration', () => {
 
   it('refuses a malformed or unusable checkpoint', async () => {
     const malformed = await runScript(['--legacy-checkpoint=not base64!']);
-    expect(messageOf(malformed.thrown)).toContain('bounded base64url token');
+    expect(messageOf(malformed.thrown)).toContain('is not base64url encoded');
 
     const undecodable = await runScript(['--legacy-checkpoint=bm90anNvbg']);
     expect(messageOf(undecodable.thrown)).toContain('could not be decoded');
@@ -483,8 +491,8 @@ describe('seed:push legacy key migration', () => {
     expect(messageOf(emptyCursor.thrown)).toContain('unusable cursor');
     expect(messageOf(emptyCursor.thrown)).toContain('restart the walk');
 
-    const oversized = await runScript([`--legacy-checkpoint=${'a'.repeat(2000)}`]);
-    expect(messageOf(oversized.thrown)).toContain('bounded base64url token');
+    const oversized = await runScript([`--legacy-checkpoint=${'a'.repeat(64 * 1024)}`]);
+    expect(messageOf(oversized.thrown)).toContain('checkpoint budget');
     expect(malformed.spawnSync).not.toHaveBeenCalled();
   });
 
@@ -495,6 +503,79 @@ describe('seed:push legacy key migration', () => {
     ]);
 
     expect(messageOf(result.thrown)).toContain('cannot be combined with --skip-legacy-migration');
+  });
+
+  it('round-trips a long opaque cursor through the emitted checkpoint', async () => {
+    const longCursor = 'x'.repeat(2048);
+    let page = 0;
+    const result = await runScript(['--dry-run-legacy-migration'], {
+      'seed:remapLegacyQuestionHistory': (args) => {
+        page += 1;
+        if (page === 1) {
+          return ok(remapPagePayload(args, { isDone: false, cursor: longCursor }));
+        }
+        return { status: 1, stdout: '', stderr: 'transient failure' };
+      },
+    });
+
+    expect(messageOf(result.thrown)).toContain('transient failure');
+    const token = emittedToken(result.errors);
+    expect(emittedCheckpoint(result.errors)).toMatchObject({
+      mode: 'dry-run',
+      cursor: longCursor,
+    });
+
+    // Following the emitted instruction works with this script's own decoder.
+    const retry = await runScript(['--dry-run-legacy-migration', `--legacy-checkpoint=${token}`]);
+    expect(retry.thrown).toBeUndefined();
+    expect(retry.deployCalls).toEqual([]);
+    expect(retry.calls.map((call) => call.name)).toEqual(MIGRATION_FUNCTIONS);
+    expect(retry.calls.every((call) => call.args.dryRun === true)).toBe(true);
+    expect(
+      retry.calls.find((call) => call.name === 'seed:remapLegacyQuestionHistory')?.args.cursor
+    ).toBe(longCursor);
+  });
+
+  it('round-trips unicode and JSON-escaped cursor characters', async () => {
+    const trickyCursor = 'cur-"\\\n\t\u00e9\u4e2d\ud83d\ude00-' + 'y'.repeat(32);
+    let page = 0;
+    const result = await runScript(['--skip-translations'], {
+      'seed:remapLegacyQuestionHistory': (args) => {
+        page += 1;
+        if (page === 1) {
+          return ok(remapPagePayload(args, { isDone: false, cursor: trickyCursor }));
+        }
+        return { status: 1, stdout: '', stderr: 'transient failure' };
+      },
+    });
+
+    const token = emittedToken(result.errors);
+    expect(emittedCheckpoint(result.errors)).toMatchObject({ mode: 'write', cursor: trickyCursor });
+
+    const retry = await runScript(['--skip-translations', `--legacy-checkpoint=${token}`]);
+    expect(retry.thrown).toBeUndefined();
+    expect(
+      retry.calls.find((call) => call.name === 'seed:remapLegacyQuestionHistory')?.args.cursor
+    ).toBe(trickyCursor);
+  });
+
+  it('never emits a token when the cursor exceeds the checkpoint budget', async () => {
+    const oversizedCursor = 'x'.repeat(64 * 1024);
+    let page = 0;
+    const result = await runScript(['--dry-run-legacy-migration'], {
+      'seed:remapLegacyQuestionHistory': (args) => {
+        page += 1;
+        if (page === 1) {
+          return ok(remapPagePayload(args, { isDone: false, cursor: oversizedCursor }));
+        }
+        return { status: 1, stdout: '', stderr: 'transient failure' };
+      },
+    });
+
+    expect(messageOf(result.thrown)).toContain('transient failure');
+    expect(result.errors).toContain('resumable checkpoint budget');
+    expect(result.errors).toContain('Restart the walk by omitting --legacy-checkpoint');
+    expect(result.errors).not.toMatch(/--legacy-checkpoint='/);
   });
 
   it('refuses a frozen map version that does not match this checkout', async () => {
